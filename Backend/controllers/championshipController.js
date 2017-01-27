@@ -38,10 +38,8 @@ class ChampionshipController {
      					model: 'Player'
      				}]
      			}).exec().then((championship) => {
-     		console.log(championship);
 			return this._prepareToSend(championship);
 		}).catch((error) => {
-			console.log(error);
 			return error;
 		});
 	}
@@ -56,6 +54,8 @@ class ChampionshipController {
 
 	update(id, championship) {
 		return this.mongo.update(document, id, championship).then((championshipSaved) => {
+			return this.getById(id);
+		}).bind(this).then((championshipSaved) => {
 			return this._prepareToSend(championshipSaved);
 		}).bind(this).catch((error) => {
 			return error;
@@ -71,7 +71,7 @@ class ChampionshipController {
 	}
 
 	_prepareToSend(championshipSaved) {
-		if (championshipSaved.length > 1) {
+		if (Array.isArray(championshipSaved)) {
 			var championships = util.copyObject(championshipSaved);
 			for (var championship in championships) {
 				championships[championship].date = util.formatDate(new Date(championships[championship].date));

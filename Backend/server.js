@@ -15,3 +15,5 @@ console.log("Listening at port: " + app.get("port"));
 
 const routes = require('./routes');
 routes.set(app, mongo);
+
+module.exports = app;

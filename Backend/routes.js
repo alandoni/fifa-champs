@@ -5,6 +5,7 @@ const bodyParser  = require('body-parser');
 
 const URL_CHAMPIONSHIPS = "/championships";
 const URL_PLAYERS = "/players";
+const URL_LOGIN = "/login";
 const URL_MATCHES = "/matches";
 
 const ChampionshipController = require('./controllers/championshipController');
@@ -17,6 +18,15 @@ exports.set = function(app, mongo) {
 	const championshipController = new ChampionshipController(mongo);
 	const playerController = new PlayerController(mongo);
 	const matchController = new MatchController(mongo);
+
+	//LOGIN
+	app.post(URL_LOGIN, (request, response) => {
+		playerController.login().then((result) => {
+			response.send(result);
+		}).catch((error) => {
+			response.status(500).send(error);
+		});
+	});
 
 	//Championships
 	app.get(URL_CHAMPIONSHIPS, (request, response) => {
@@ -38,7 +48,6 @@ exports.set = function(app, mongo) {
 
 	app.post(URL_CHAMPIONSHIPS, (request, response) => {
 		championshipController.insert(request.body).then((championship) => {
-			console.log("SAVED: " + championship);
 			response.send(championship);
 		}).catch((error) => {
 			response.status(500).send(error);
@@ -91,6 +100,7 @@ exports.set = function(app, mongo) {
 
 	app.delete(URL_PLAYERS + "/:id", (request, response) => {
 		var id = request.params.id;
+
 		playerController.delete(id).then((result) => {
 			response.send(result);
 		}).catch((error) => {
