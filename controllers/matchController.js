@@ -17,18 +17,12 @@ class MatchController {
 	getAll() {
 		return this.mongo.selectAll(document).populate("player1 player2 player3 player4").exec().then((matches) => {
 			return this._prepareToSend(matches);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
 	getById(id) {
 		return this.mongo.selectById(document, id).populate("player1 player2 player3 player4").exec().then((match) => {
 			return this._prepareToSend(match);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
@@ -36,9 +30,6 @@ class MatchController {
 		var id = new ObjectId(championshipId)
 		return this.mongo.selectByCriteria(document, {championship: id}).populate("player1 player2 player3 player4").exec().then((match) => {
 			return this._prepareToSend(match);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
@@ -47,8 +38,6 @@ class MatchController {
 			return this.getById(matchSaved._id);
 		}).bind(this).then((matchSaved) => {
 			return this._prepareToSend(matchSaved);
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
@@ -57,16 +46,12 @@ class MatchController {
 			return this.getById(matchSaved._id);
 		}).bind(this).then((matchSaved) => {
 			return this._prepareToSend(matchSaved);
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
 	delete(id) {
 		return this.mongo.delete(document, id).then((result) => {
 			return result;
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 

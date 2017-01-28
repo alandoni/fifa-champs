@@ -9,5 +9,9 @@ module.exports = {
 
 	getWrongLogin: function() {
 		return {error: 3, description: "Login ou senha inválidos"};
+	},
+
+	getUnauthorized: function() {
+		return {error: 4, description: "Acesso não autorizado."};
 	}
 }

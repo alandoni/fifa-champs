@@ -2,6 +2,13 @@
 
 const util = require('./utils');
 const bodyParser  = require('body-parser');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const uuid = require('uid-safe');
+
+const errors = require('./errors');
+const utils = require('./utils');
 
 const URL_CHAMPIONSHIPS = "/championships";
 const URL_PLAYERS = "/players";
@@ -13,20 +20,74 @@ const PlayerController = require('./controllers/playerController');
 const MatchController = require('./controllers/matchController');
 
 exports.set = function(app, mongo) {
-	app.use(bodyParser.json());
-
+	
 	const championshipController = new ChampionshipController(mongo);
 	const playerController = new PlayerController(mongo);
 	const matchController = new MatchController(mongo);
+	
+	require('./passport')(passport, playerController);
+
+	app.use(bodyParser.urlencoded({
+	  extended: true
+	}));
+
+	app.use(bodyParser.json());
+
+	app.use((request, response, next) => {
+		response.header("Access-Control-Allow-Origin", "http://localhost:4200");
+		response.header("Access-Control-Allow-Headers", "connect.sid, Authorization, Origin, X-Requested-With, Content-Type, Accept");
+		response.header("Access-Control-Allow-Credentials", true);
+
+		next();
+	});
+
+	app.use(cookieParser());
+
+	app.use(
+		session({secret: 'SEKR37',
+			resave: false,
+			saveUninitialized: true,
+			cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24, secure: false }
+		})
+	);
+
+	app.use(passport.initialize());
+	app.use(passport.session());
+
+	function isLoggedIn(req, res, next) {
+
+	    if (req.isAuthenticated()) {
+	        return next();
+	    }
+
+	    res.status(401).send(errors.getUnauthorized());
+	}
 
 	//LOGIN
-	app.post(URL_LOGIN, (request, response) => {
-		playerController.login().then((result) => {
-			response.send(result);
-		}).catch((error) => {
-			response.status(500).send(error);
-		});
+	app.post(URL_LOGIN, (request, response, next) => {
+		passport.authenticate('local-login', (error, user, info) => {
+			
+			if (error) {
+				response.status(401).send(error);
+				return;
+			}
+
+			request.login(user, (error) => {
+				
+				if (error) {
+					response.status(401).send(error);
+					return;
+				}
+				response.send(user);
+				next();
+			});
+		})(request, response, next);
 	});
+
+	app.get('/logout', (req, res) => {
+        req.logout();
+        res.send(true);
+    });
 
 	//Championships
 	app.get(URL_CHAMPIONSHIPS, (request, response) => {
@@ -46,7 +107,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.post(URL_CHAMPIONSHIPS, (request, response) => {
+	app.post(URL_CHAMPIONSHIPS, isLoggedIn, (request, response) => {
 		championshipController.insert(request.body).then((championship) => {
 			response.send(championship);
 		}).catch((error) => {
@@ -54,7 +115,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.post(URL_CHAMPIONSHIPS + "/:id", (request, response) => {
+	app.post(URL_CHAMPIONSHIPS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
 		championshipController.update(id, request.body).then((championship) => {
 			response.send(championship);
@@ -63,7 +124,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.delete(URL_CHAMPIONSHIPS + "/:id", (request, response) => {
+	app.delete(URL_CHAMPIONSHIPS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
 		championshipController.delete(id).then((result) => {
 			response.send(result);
@@ -81,7 +142,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.post(URL_PLAYERS, (request, response) => {
+	app.post(URL_PLAYERS, isLoggedIn, (request, response) => {
 		playerController.insert(request.body).then((player) => {
 			response.send(player);
 		}).catch((error) => {
@@ -89,7 +150,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.post(URL_PLAYERS + "/:id", (request, response) => {
+	app.post(URL_PLAYERS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
 		playerController.update(id, request.body).then((player) => {
 			response.send(player);
@@ -98,7 +159,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.delete(URL_PLAYERS + "/:id", (request, response) => {
+	app.delete(URL_PLAYERS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
 
 		playerController.delete(id).then((result) => {
@@ -126,7 +187,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.post(URL_MATCHES, (request, response) => {
+	app.post(URL_MATCHES, isLoggedIn, (request, response) => {
 		matchController.insert(request.body).then((match) => {
 			response.send(match);
 		}).catch((error) => {
@@ -134,7 +195,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.post(URL_MATCHES + "/:id", (request, response) => {
+	app.post(URL_MATCHES + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
 		matchController.update(id, request.body).then((match) => {
 			response.send(match);
@@ -143,7 +204,7 @@ exports.set = function(app, mongo) {
 		});
 	});
 
-	app.delete(URL_MATCHES + "/:id", (request, response) => {
+	app.delete(URL_MATCHES + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
 		matchController.delete(id).then((result) => {
 			response.send(result);
