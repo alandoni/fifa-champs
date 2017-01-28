@@ -15,9 +15,6 @@ class ChampionshipController {
 	getAll() {
 		return this.mongo.selectAll(document).then((championships) => {
 			return this._prepareToSend(championships);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
@@ -39,16 +36,12 @@ class ChampionshipController {
      				}]
      			}).exec().then((championship) => {
 			return this._prepareToSend(championship);
-		}).catch((error) => {
-			return error;
 		});
 	}
 
 	insert(championship) {
 		return this.mongo.insert(new document(championship)).then((championshipSaved) => {
 			return this._prepareToSend(championshipSaved);
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
@@ -57,16 +50,12 @@ class ChampionshipController {
 			return this.getById(id);
 		}).bind(this).then((championshipSaved) => {
 			return this._prepareToSend(championshipSaved);
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
 	delete(id) {
 		return this.mongo.delete(document, id).then((result) => {
 			return result;
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 

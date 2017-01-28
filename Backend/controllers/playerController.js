@@ -15,26 +15,18 @@ class PlayerController {
 	getAll() {
 		return this.mongo.selectAll(document).then((players) => {
 			return this._prepareToSend(players);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
 	getById(id) {
 		return this.mongo.selectById(document, id).then((player) => {
 			return this._prepareToSend(player);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
 	insert(player) {
 		return this.mongo.insert(new document(player)).then((playerSaved) => {
 			return this._prepareToSend(playerSaved);
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
@@ -43,16 +35,12 @@ class PlayerController {
 			return this.getById(id);
 		}).bind(this).then((playerSaved) => {
 			return this._prepareToSend(playerSaved);
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
 	delete(id) {
 		return this.mongo.delete(document, id).then((result) => {
 			return result;
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
@@ -67,6 +55,20 @@ class PlayerController {
 
 		playerSaved.password = undefined;
 		return playerSaved;
+	}
+
+	login(loginObj) {
+		return this.mongo.selectByCriteria(document, {nickname:loginObj.nickname}).then((players) => {
+			if (players.length == 0) {
+				throw errors.getWrongLogin();
+			}
+			if (players[0].password !== loginObj.password) {
+				throw errors.getWrongLogin();	
+			}
+			return players[0];
+		}).then((result) => {
+			return this._prepareToSend(result);
+		});
 	}
 };
 
