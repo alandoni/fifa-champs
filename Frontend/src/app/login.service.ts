@@ -17,10 +17,11 @@ export class LoginService {
 
 	login(nickname, password) : Observable<Player> {
 	  var passwordHash = Md5.hashStr(password);
-			return this.http.post(this.url, {nickname: nickname, password: passwordHash}, {withCredentials: true}).map((response) => { 
+		return this.http.post(this.url, {nickname: nickname, password: passwordHash}).map((response) => { 
 			return response.json();
-		}).catch((response: Response | any) => {
-			return Observable.throw(response.json());
+		}).catch((error: Response | any) => {
+			console.log(error);
+			return Observable.throw(error.json());
 		});
 	}
 }

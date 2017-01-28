@@ -21,13 +21,15 @@ export class LoginComponent implements OnInit {
 		this.login.login(this.nickname, this.password).subscribe(
 			(result) => this.loginSuccess(result),
 			(error) => {
-				console.log(error);
-				this.error = error;
+				console.log(<any>error);
+				this.error = <any>error;
 			}
 		);
 	}
 
 	loginSuccess(result: Player) {
+		console.log(result);
+
 		this.onLoginSuccess.emit(result);
 	}
 
