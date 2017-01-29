@@ -8,11 +8,18 @@ import { ApiRequestService } from './api-request.service';
 export class LoginService {
 
 	private url = '/login';
+	private isLogged;
 
 	constructor(private api: ApiRequestService) { }
 
 	login(nickname, password) : Observable<Player> {
 		var passwordHash = Md5.hashStr(password);
-		return this.api.post(this.url, {nickname: nickname, password: passwordHash});
+		var result = this.api.post(this.url, {nickname: nickname, password: passwordHash});
+		result.subscribe((result) => this.isLogged = true, (error) => this.isLogged = false);
+		return result;
+	}
+
+	public isLoggedIn() {
+		return this.isLogged;
 	}
 }
