@@ -2,24 +2,17 @@
 
 const LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function(passport, playerController) {
+module.exports = function(passport, adminController) {
 
 	passport.serializeUser(function(user, done) {
-
-		//console.log("Trying to serialize user " + user);
-
         done(null, user._id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-
-    	//console.log("Trying to deserialize user " + id);
-
-        playerController.getById(id).then((user) => {
+        adminController.getById(id).then((user) => {
             done(null, user);
         }).catch((error) => {
-            //console.log(error);
         	done(error);
         });
     });
@@ -32,10 +25,9 @@ module.exports = function(passport, playerController) {
     }, (req, nickname, password, done) => {
 		const loginObj = {nickname: nickname, password: password};
     	
-        playerController.login(loginObj).then((result) => {
+        adminController.login(loginObj).then((result) => {
     		return done(null, result);
     	}).catch((error) => {
-            //console.log(error);
     		return done(error);
     	});
     }));

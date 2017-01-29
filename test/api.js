@@ -21,7 +21,7 @@ describe('API Test', () => {
         console.log('Removing previous test data');
         Championship.remove({}, (err) => {
             Match.remove({}, (err) => { 
-                Player.remove({password:{$ne:"71e3401a5fdf0203d345362e003636b8"}}, (err) => { 
+                Player.remove({}, (err) => { 
                     console.log('Removing previous test data with success');
                     done();         
                 });        
@@ -32,9 +32,9 @@ describe('API Test', () => {
     describe('/POST wrong login', () => {
         it('it should not LOGIN', (done) => {
 
-            const invalidPlayer = {nickname: "AlanDoni", password:"123456"};
+            const invalidAdmin = {nickname: "AlanDoni", password:"123456"};
 
-            post('/login', invalidPlayer).then((res) => {
+            post('/login', invalidAdmin).then((res) => {
                 done(res);
             }).catch((error) => {
                 done();
@@ -58,7 +58,7 @@ describe('API Test', () => {
             get('/players').then((res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
-                res.body.length.should.be.eql(1);
+                res.body.length.should.be.eql(0);
                 done();
             }).catch((error) => {
                 done(error);
@@ -70,8 +70,7 @@ describe('API Test', () => {
         it('it should POST a player ', (done) => {
             const player = {
                 nickname: 'joao',
-                picture: 'http://i.imgur.com/61hqH6f.jpg',
-                password: '123456'
+                picture: 'http://i.imgur.com/61hqH6f.jpg'
             }
 
             post('/login', {nickname: 'admin', password: '71e3401a5fdf0203d345362e003636b8'}).then((res) => {
@@ -99,8 +98,7 @@ describe('API Test', () => {
         it('it should NOT POST a player ', (done) => {
             const player = {
                 nickname: 'alan',
-                picture: 'http://i.imgur.com/61hqH6f.jpg',
-                password: '123456'
+                picture: 'http://i.imgur.com/61hqH6f.jpg'
             }
             var agent = chai.request.agent(server);
 
@@ -119,9 +117,9 @@ describe('API Test', () => {
             get('/players').then((res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
-                res.body.length.should.be.eql(2);
-                res.body[1].should.have.property('nickname').eql('joao');
-                res.body[1].should.not.have.property('password');
+                res.body.length.should.be.eql(1);
+                res.body[0].should.have.property('nickname').eql('joao');
+                res.body[0].should.not.have.property('password');
                 done();
             }).catch((error) => {
                 done(error);
@@ -385,10 +383,10 @@ describe('API Test', () => {
 
 function createPlayers() {
     const players = [];
-    players.push({nickname: 'alan', picture: 'http://i.imgur.com/61hqH6f.jpg', password: '123456'});
-    players.push({nickname: 'rodrigo', password: ''});
-    players.push({nickname: 'sergio', password: ''});
-    players.push({nickname: 'lauro', password: '123456'});
+    players.push({nickname: 'alan', picture: 'http://i.imgur.com/61hqH6f.jpg'});
+    players.push({nickname: 'rodrigo'});
+    players.push({nickname: 'sergio'});
+    players.push({nickname: 'lauro'});
 
     return createPlayer(players[0]).then((res) => {
         res.should.have.status(200);
@@ -445,11 +443,11 @@ function createMatch(players) {
 }
 
 function login() {
-    const player = {
+    const admin = {
             nickname : 'admin',
             password : '71e3401a5fdf0203d345362e003636b8'
         }
-    return post('/login', player);
+    return post('/login', admin);
 }
 
 function post(url, object) {
