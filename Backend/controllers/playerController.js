@@ -14,7 +14,7 @@ class PlayerController {
 	
 	getAll() {
 		return this.mongo.selectAll(document).then((players) => {
-			return players;
+			return this._prepareToSend(players);
 		}).catch((error) => {
 			console.log(error);
 			return error;
@@ -23,7 +23,7 @@ class PlayerController {
 
 	getById(id) {
 		return this.mongo.selectById(document, id).then((player) => {
-			return player;
+			return this._prepareToSend(player);
 		}).catch((error) => {
 			console.log(error);
 			return error;
@@ -32,7 +32,7 @@ class PlayerController {
 
 	insert(player) {
 		return this.mongo.insert(new document(player)).then((playerSaved) => {
-			return playerSaved;
+			return this._prepareToSend(playerSaved);
 		}).bind(this).catch((error) => {
 			return error;
 		});
@@ -40,7 +40,9 @@ class PlayerController {
 
 	update(id, player) {
 		return this.mongo.update(document, id, player).then((playerSaved) => {
-			return playerSaved;
+			return this.getById(id);
+		}).bind(this).then((playerSaved) => {
+			return this._prepareToSend(playerSaved);
 		}).bind(this).catch((error) => {
 			return error;
 		});
@@ -52,6 +54,19 @@ class PlayerController {
 		}).bind(this).catch((error) => {
 			return error;
 		});
+	}
+
+	_prepareToSend(playerSaved) {
+		if (Array.isArray(playerSaved)) {
+			var players = util.copyObject(playerSaved);
+			for (var player in players) {
+				players[player].password = undefined;
+			}
+			return players;
+		}
+
+		playerSaved.password = undefined;
+		return playerSaved;
 	}
 };
 

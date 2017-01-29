@@ -9,15 +9,12 @@ Mongoose.Promise = Promise;
 
 class MongoController {
 	constructor(databaseAddress) {
+		console.log('Connecting to MongoDB.')
 		Mongoose.connect(databaseAddress);
 		db.on('error', console.error);
 		db.once('open', function() {
-		  console.log('Connecting to MongoDB.')
+		  console.log("Connected to MongoDB. We're ready to go");
 		});
-	}
-
-	getDataBaseString() {
-		return databaseAddress;
 	}
 
 	select(document, criteria, order, limit, offset) {
