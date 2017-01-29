@@ -59,18 +59,10 @@ class MatchController {
 		if (Array.isArray(matchSaved)) {
 			for (var match in matchSaved) {
 				matchSaved[match].date = util.formatDate(new Date(matchSaved[match].date));
-				matchSaved[match].player1.password = undefined;
-				matchSaved[match].player2.password = undefined;
-				matchSaved[match].player3.password = undefined;
-				matchSaved[match].player4.password = undefined;
 			}
 			return matchSaved;
 		}
 		matchSaved.date = util.formatDate(new Date(matchSaved.date));
-		matchSaved.player1.password = undefined;
-		matchSaved.player2.password = undefined;
-		matchSaved.player3.password = undefined;
-		matchSaved.player4.password = undefined;
 		return matchSaved;
 	}
 };

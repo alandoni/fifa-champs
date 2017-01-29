@@ -3,7 +3,6 @@ var Schema   = Mongoose.Schema;
 
 var playerSchema = new Schema({
 	nickname: String,
-	password: String,
 	picture: String
 });
 

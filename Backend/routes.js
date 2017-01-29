@@ -18,14 +18,16 @@ const URL_MATCHES = "/matches";
 const ChampionshipController = require('./controllers/championshipController');
 const PlayerController = require('./controllers/playerController');
 const MatchController = require('./controllers/matchController');
+const AdminController = require('./controllers/adminController');
 
 exports.set = function(app, mongo) {
 	
 	const championshipController = new ChampionshipController(mongo);
 	const playerController = new PlayerController(mongo);
 	const matchController = new MatchController(mongo);
+	const adminController = new AdminController(mongo);
 	
-	require('./passport')(passport, playerController);
+	require('./passport')(passport, adminController);
 
 	app.use(bodyParser.urlencoded({
 	  extended: true
