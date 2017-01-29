@@ -13,6 +13,8 @@ const Promise = require("bluebird");
 
 chai.use(chaiHttp);
 
+var agent = chai.request.agent(server);
+
 describe('API Test', () => {
 
     after((done) => {
@@ -23,6 +25,30 @@ describe('API Test', () => {
                     console.log('Removing previous test data with success');
                     done();         
                 });        
+            });
+        });
+    });
+
+    describe('/POST wrong login', () => {
+        it('it should not LOGIN', (done) => {
+
+            const invalidAdmin = {nickname: "AlanDoni", password:"123456"};
+
+            post('/login', invalidAdmin).then((res) => {
+                done(res);
+            }).catch((error) => {
+                done();
+            });
+        });
+    });
+
+    describe('/POST login', () => {
+        it('it should LOGIN', (done) => {
+            login().then((res) => {
+                res.should.have.status(200);
+                done();
+            }).catch((error) => {
+                done(error);
             });
         });
     });
@@ -43,20 +69,45 @@ describe('API Test', () => {
     describe('/POST player', () => {
         it('it should POST a player ', (done) => {
             const player = {
-                nickname: 'alan',
-                picture: 'http://i.imgur.com/61hqH6f.jpg',
-                password: '123456'
+                nickname: 'joao',
+                picture: 'http://i.imgur.com/61hqH6f.jpg'
             }
-            createPlayer(player).then((res) => {
+
+            post('/login', {nickname: 'admin', password: '71e3401a5fdf0203d345362e003636b8'}).then((res) => {
                 res.should.have.status(200);
+                var sessionID = res.body.session;
 
-                res.body.should.be.a('object');
-                res.body.should.have.property('nickname').eql('alan');
-                res.body.should.not.have.property('password');
+                return agent.post('/players').send(player).then((res2) => {
+                    res2.should.have.status(200);
 
+                    res2.body.should.be.a('object');
+                    res2.body.should.have.property('nickname').eql('joao');
+                    res2.body.should.not.have.property('password');
+
+                    done();
+                }).catch((res) => {
+                    done(res);
+                });
+            }).catch((res) => {
+                done(res);
+            });
+        });
+    });
+
+    describe('/POST unauthorized player', () => {
+        it('it should NOT POST a player ', (done) => {
+            const player = {
+                nickname: 'alan',
+                picture: 'http://i.imgur.com/61hqH6f.jpg'
+            }
+            var agent = chai.request.agent(server);
+
+            agent.post('/players').send(player).then((res) => {
+                res.should.have.status(401);
+                done(res.status);
+            }).catch((res) => {
+                res.should.have.status(401);
                 done();
-            }).catch((error) => {
-                done(error);
             });
         });
     });
@@ -67,7 +118,7 @@ describe('API Test', () => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.length.should.be.eql(1);
-                res.body[0].should.have.property('nickname').eql('alan');
+                res.body[0].should.have.property('nickname').eql('joao');
                 res.body[0].should.not.have.property('password');
                 done();
             }).catch((error) => {
@@ -332,10 +383,10 @@ describe('API Test', () => {
 
 function createPlayers() {
     const players = [];
-    players.push({nickname: 'alan', picture: 'http://i.imgur.com/61hqH6f.jpg', password: '123456'});
-    players.push({nickname: 'rodrigo', password: ''});
-    players.push({nickname: 'sergio', password: ''});
-    players.push({nickname: 'lauro', password: '123456'});
+    players.push({nickname: 'alan', picture: 'http://i.imgur.com/61hqH6f.jpg'});
+    players.push({nickname: 'rodrigo'});
+    players.push({nickname: 'sergio'});
+    players.push({nickname: 'lauro'});
 
     return createPlayer(players[0]).then((res) => {
         res.should.have.status(200);
@@ -391,38 +442,22 @@ function createMatch(players) {
     return post('/matches', match);
 }
 
+function login() {
+    const admin = {
+            nickname : 'admin',
+            password : '71e3401a5fdf0203d345362e003636b8'
+        }
+    return post('/login', admin);
+}
+
 function post(url, object) {
-    return new Promise((resolve, reject) => {
-        chai.request(server).post(url).send(object).end((err, res) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(res);
-            }
-        });
-    });
+    return agent.post(url).send(object);
 }
 
 function get(url) {
-    return new Promise((resolve, reject) => {
-        chai.request(server).get(url).end((err, res) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(res);
-            }
-        });
-    });
+    return agent.get(url);
 }
 
 function del(url) {
-    return new Promise((resolve, reject) => {
-        chai.request(server).delete(url).end((err, res) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(res);
-            }
-        });
-    });
+    return agent.delete(url);
 }

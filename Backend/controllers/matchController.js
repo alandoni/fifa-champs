@@ -17,18 +17,12 @@ class MatchController {
 	getAll() {
 		return this.mongo.selectAll(document).populate("player1 player2 player3 player4").exec().then((matches) => {
 			return this._prepareToSend(matches);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
 	getById(id) {
 		return this.mongo.selectById(document, id).populate("player1 player2 player3 player4").exec().then((match) => {
 			return this._prepareToSend(match);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
@@ -36,9 +30,6 @@ class MatchController {
 		var id = new ObjectId(championshipId)
 		return this.mongo.selectByCriteria(document, {championship: id}).populate("player1 player2 player3 player4").exec().then((match) => {
 			return this._prepareToSend(match);
-		}).catch((error) => {
-			console.log(error);
-			return error;
 		});
 	}
 
@@ -47,8 +38,6 @@ class MatchController {
 			return this.getById(matchSaved._id);
 		}).bind(this).then((matchSaved) => {
 			return this._prepareToSend(matchSaved);
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
@@ -57,16 +46,12 @@ class MatchController {
 			return this.getById(matchSaved._id);
 		}).bind(this).then((matchSaved) => {
 			return this._prepareToSend(matchSaved);
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
 	delete(id) {
 		return this.mongo.delete(document, id).then((result) => {
 			return result;
-		}).bind(this).catch((error) => {
-			return error;
 		});
 	}
 
@@ -74,18 +59,10 @@ class MatchController {
 		if (Array.isArray(matchSaved)) {
 			for (var match in matchSaved) {
 				matchSaved[match].date = util.formatDate(new Date(matchSaved[match].date));
-				matchSaved[match].player1.password = undefined;
-				matchSaved[match].player2.password = undefined;
-				matchSaved[match].player3.password = undefined;
-				matchSaved[match].player4.password = undefined;
 			}
 			return matchSaved;
 		}
 		matchSaved.date = util.formatDate(new Date(matchSaved.date));
-		matchSaved.player1.password = undefined;
-		matchSaved.player2.password = undefined;
-		matchSaved.player3.password = undefined;
-		matchSaved.player4.password = undefined;
 		return matchSaved;
 	}
 };

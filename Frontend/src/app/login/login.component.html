@@ -1,0 +1,6 @@
+<div>
+	<div *ngIf="error != null"><p>{{error.description}}</p></div>
+  	<div><input name="nickname" placeholder="Nickname" [(ngModel)]="nickname" /></div>
+  	<div><input name="password" type="password" placeholder="Password" [(ngModel)]="password" /></div>
+  	<div><input name="submit" type="button" value="Login" (click)="tryLogin();" /></div>
+</div>
