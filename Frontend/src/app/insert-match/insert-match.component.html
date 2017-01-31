@@ -1,0 +1,13 @@
+<div>
+	<h1>Insert Match</h1>
+	<div *ngIf="error != null"><p>{{error.description}}</p></div>
+	<form>
+  	<app-dropdown-player name="player1"></app-dropdown-player>
+  	<app-dropdown-player name="player2"></app-dropdown-player>
+  	<div><input type="number" name="score1" placeholder="Score Team 1"/></div>
+  	<div><input type="number" name="score1" placeholder="Score Team 1"/></div>
+  	<app-dropdown-player name="player3"></app-dropdown-player>
+  	<app-dropdown-player name="player4"></app-dropdown-player>
+  	<div><input name="submit" type="button" value="Insert Match" (click)="tryInsertMatch();" /></div>
+  	</form>
+</div>
