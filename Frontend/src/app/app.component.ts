@@ -12,4 +12,8 @@ export class AppComponent {
 	loginSuccess(user: Player) {
 		//TODO handle login success here
 	}
+
+	createPlayerSuccess(user: Player) {
+		//TODO handle login success here
+	}
 }
