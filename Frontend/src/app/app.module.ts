@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import {MaterializeDirective} from "angular2-materialize";
+import {MaterializeModule} from 'angular2-materialize';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -16,12 +16,12 @@ import { ApiRequestService } from './api-request.service';
 
 @NgModule({
   declarations: [
-    MaterializeDirective,
     AppComponent,
     LoginComponent,
     CreatePlayerComponent
   ],
   imports: [
+    MaterializeModule,
     BrowserModule,
     FormsModule,
     HttpModule
