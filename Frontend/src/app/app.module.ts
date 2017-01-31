@@ -8,7 +8,8 @@ import {MaterializeModule} from 'angular2-materialize';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { CreatePlayerComponent } from './create-player/create-player.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
+import { StandingTableComponent } from './standing-table/standing-table.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { LoginService } from './login.service';
 import { PlayerService } from './player.service';
@@ -16,13 +17,16 @@ import { ApiRequestService } from './api-request.service';
 
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './routes.ts';
+import { SeasonComponent } from './season/season.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
-    CreatePlayerComponent,
-		PageNotFoundComponent
+		CreatePlayerComponent,
+		StandingTableComponent,
+		PageNotFoundComponent,
+		SeasonComponent
 	],
 	imports: [
 		BrowserModule,
