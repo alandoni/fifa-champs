@@ -10,10 +10,10 @@ const uuid = require('uid-safe');
 const errors = require('./errors');
 const utils = require('./utils');
 
-const URL_CHAMPIONSHIPS = "/championships";
-const URL_PLAYERS = "/players";
-const URL_LOGIN = "/login";
-const URL_MATCHES = "/matches";
+const URL_CHAMPIONSHIPS = "/api/championships";
+const URL_PLAYERS = "/api/players";
+const URL_LOGIN = "/api/login";
+const URL_MATCHES = "/api/matches";
 
 const ChampionshipController = require('./controllers/championshipController');
 const PlayerController = require('./controllers/playerController');

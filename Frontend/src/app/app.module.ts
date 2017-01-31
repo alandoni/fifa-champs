@@ -5,19 +5,24 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { CreatePlayerComponent } from './create-player/create-player.component';
+
 import { LoginService } from './login.service';
+import { PlayerService } from './player.service';
+import { ApiRequestService } from './api-request.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    CreatePlayerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, PlayerService, ApiRequestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
