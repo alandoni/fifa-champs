@@ -150,7 +150,9 @@ export class StandingTableComponent implements OnInit {
 
 	getColorForIndex(index) {
 		if (index < 4) {
-			return this.classifiedColor;
+			console.log("#" + this.classifiedColor);
+			//return this.classifiedColor;
+			return "#e3f9e6";
 		}
 		return "";
 	}

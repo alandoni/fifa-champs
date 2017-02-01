@@ -4,6 +4,7 @@
 
 <table *ngIf="hasPlayers()">
 	<tr>
+		<th>Pos</th>
 		<th>Nome</th>
 		<th>J</th>
 		<th>V</th>
@@ -17,7 +18,8 @@
 		<th>Pontos</th>
 		<th>%</th>
 	</tr>
-	<tr *ngFor="let statistic of statisticsList; let i = index" class="getClassForIndex(i)" [style.backgroundColor]="getColorForIndex(i)">
+	<tr *ngFor="let statistic of statisticsList; let i = index" [class]="getClassForIndex(i)" [style.background-color]="getColorForIndex(i)">
+		<td>{{ (i + 1) }}</td>
 		<td>{{ statistic.player.nickname }}</td>
 		<td>{{ statistic.matches }}</td>
 		<td>{{ statistic.victories }}</td>
