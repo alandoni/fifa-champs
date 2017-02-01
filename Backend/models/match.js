@@ -9,7 +9,8 @@ var matchSchema = new Schema({
 	team1score: Number,
 	team2score: Number,
 	date: Date,
-	championship: {type: Schema.Types.ObjectId, ref: 'Championship'}
+	championship: {type: Schema.Types.ObjectId, ref: 'Championship'},
+	isFinal: Boolean
 });
 
 var Match = Mongoose.model('Match', matchSchema);
