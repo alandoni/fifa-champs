@@ -13,9 +13,6 @@ export class StandingTableComponent implements OnInit {
 	@Input() matches : Array<Match>;
 	@Input() players : Array<Player>;
 
-	@Input() classifiedColor : String;
-	@Input() classifiedClass : String;
-
 	statisticsList : Array<Statistics>;
 	days;
 	numberOfMatches;
@@ -24,7 +21,12 @@ export class StandingTableComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() {
+
+	}
+	
+	ngOnChanges() {
 		if (!this.hasPlayers()) {
+			console.error("No players found to mount standing-table");
 			return;
 		}
 		this.setLimit();
@@ -141,18 +143,12 @@ export class StandingTableComponent implements OnInit {
 		return this.players != null && this.players.length > 0;
 	}
 
-	getClassForIndex(index) {
-		if (index < 4) {
-			return this.classifiedClass;
-		}
-		return "";
-	}
-
-	getColorForIndex(index) {
-		if (index < 4) {
-			console.log("#" + this.classifiedColor);
-			//return this.classifiedColor;
+	getColor(position, statistic) {
+		if (position < 4) {
 			return "#e3f9e6";
+		}
+		if (statistic.matches < this.limit) {
+			return "#ffd5d5";
 		}
 		return "";
 	}

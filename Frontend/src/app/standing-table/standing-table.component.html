@@ -18,7 +18,7 @@
 		<th>Pontos</th>
 		<th>%</th>
 	</tr>
-	<tr *ngFor="let statistic of statisticsList; let i = index" [class]="getClassForIndex(i)" [style.background-color]="getColorForIndex(i)">
+	<tr *ngFor="let statistic of statisticsList; let i = index" [style.background-color]="getColor(i, statistic)">
 		<td>{{ (i + 1) }}</td>
 		<td>{{ statistic.player.nickname }}</td>
 		<td>{{ statistic.matches }}</td>

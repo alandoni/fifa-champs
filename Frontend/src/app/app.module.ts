@@ -20,6 +20,7 @@ import { ApiRequestService } from './api-request.service';
 import { RouterModule, Routes } from '@angular/router';
 import { SeasonComponent } from './season/season.component';
 import { appRoutes } from './routes';
+import { SeasonSelectorComponent } from './season-selector/season-selector.component';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,8 @@ import { appRoutes } from './routes';
 		CreatePlayerComponent,
 		StandingTableComponent,
 		PageNotFoundComponent,
-		SeasonComponent
+		SeasonComponent,
+		SeasonSelectorComponent
 	],
 	imports: [
 		BrowserModule,

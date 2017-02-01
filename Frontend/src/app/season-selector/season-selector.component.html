@@ -1,0 +1,8 @@
+<div>
+	<div (click)="previousMonth()"> &lt; </div> {{ this.getCurrentMonth() }} <div (click)="nextMonth()"> &gt; </div>
+	<input type="checkbox" (click)="noFilterSelectionChanged()" name="filter" value="filtered" /> Sem filtro
+
+	<hr />
+
+	<app-season [matches]="matches" [players]="players"></app-season>
+</div>

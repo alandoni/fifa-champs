@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SeasonComponent } from './season/season.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SeasonSelectorComponent } from './season-selector/season-selector.component';
 
 export const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent},
@@ -13,10 +14,10 @@ export const appRoutes: Routes = [
 	{path: 'season/results/:month/:year', component: ResultsComponent},
 	{path: 'season/results/current', component: ResultsComponent},
 	{path: 'season/results/alltime', component: CreateMatchComponent},*/
-	{path: 'season/classification/:id', component: SeasonComponent},
-	{path: 'season/classification/current', component: SeasonComponent},
-	{path: 'season/classification/:month/:year', component: SeasonComponent},
-	{path: 'season/classification/alltime', component: SeasonComponent},
+	{path: 'season/classification/:id', component: SeasonSelectorComponent},
+	{path: 'season/classification/current', component: SeasonSelectorComponent},
+	{path: 'season/classification/:month/:year', component: SeasonSelectorComponent},
+	{path: 'season/classification/alltime', component: SeasonSelectorComponent},
 	//{path: 'hall', component: CreateMatchComponent},
 	{path: '', redirectTo: 'season/classification/current', pathMatch: 'full'},
 	{path: '**', component: PageNotFoundComponent}
