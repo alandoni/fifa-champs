@@ -12,10 +12,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { LoginService } from './login.service';
 import { PlayerService } from './player.service';
+import { MatchService } from './match.service';
+
 import { ApiRequestService } from './api-request.service';
 
 import { RouterModule, Routes } from '@angular/router';
-import { appRoutes } from './routes.ts';
+import { appRoutes } from './routes';
 
 @NgModule({
 	declarations: [
@@ -30,7 +32,7 @@ import { appRoutes } from './routes.ts';
 		HttpModule,
 		RouterModule.forRoot(appRoutes)
 	],
-	providers: [LoginService, PlayerService, ApiRequestService],
+	providers: [LoginService, PlayerService, MatchService, ApiRequestService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
