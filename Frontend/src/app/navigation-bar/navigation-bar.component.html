@@ -1,0 +1,34 @@
+<nav style="background-color: blue; color: white">
+	<div *ngIf="!isLoggedIn">
+		<a routerLink="/season/classification/current" routerLinkActive="active-class">
+			Temporada
+		</a>
+		<a routerLink="/hall" routerLinkActive="active-class">
+			Hall of fame
+		</a>
+		<a (click)="openLoginModal()">
+			Login
+		</a>
+	</div>
+	<div *ngIf="isLoggedIn">
+		<a routerLink="/season/classification/current" routerLinkActive="active-class">
+			Fifa Champs
+		</a>
+		<a (click)="createMatch()" >
+			Adicionar Jogo
+		</a>
+		<a routerLink="/players" routerLinkActive="active-class">
+			Jogadores
+		</a>
+		<a (click)="logout()" routerLinkActive="active-class">
+			Logout
+		</a>
+	</div>
+</nav>
+
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+	<div class="modal-content">
+	  	<h4>Login</h4>
+	</div>
+	<app-login (onLoginSuccess)="closeLoginModal(result)"></app-login>
+</div>
