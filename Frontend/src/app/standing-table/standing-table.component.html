@@ -1,0 +1,42 @@
+<p *ngIf="!hasPlayers()">
+	Nenhum jogador encontrado
+</p>
+
+<table *ngIf="hasPlayers()">
+	<tr>
+		<th>Pos</th>
+		<th>Nome</th>
+		<th>J</th>
+		<th>V</th>
+		<th>E</th>
+		<th>D</th>
+		<th>GP</th>
+		<th>GC</th>
+		<th>GP/J</th>
+		<th>GC/J</th>
+		<th>SG</th>
+		<th>Pontos</th>
+		<th>%</th>
+	</tr>
+	<tr *ngFor="let statistic of statisticsList; let i = index" [style.background-color]="getColor(i, statistic)">
+		<td>{{ (i + 1) }}</td>
+		<td>{{ statistic.player.nickname }}</td>
+		<td>{{ statistic.matches }}</td>
+		<td>{{ statistic.victories }}</td>
+		<td>{{ statistic.ties }}</td>
+		<td>{{ statistic.defeats }}</td>
+		<td>{{ statistic.goals }}</td>
+		<td>{{ statistic.concededGoals }}</td>
+		<td>{{ statistic.goalBalance }}</td>
+		<td>{{ formatNumber(statistic.goalsPerMatch) }}</td>
+		<td>{{ formatNumber(statistic.concededGoalsPerMatch) }}</td>
+		<td>{{ statistic.score }}</td>
+		<td>{{ formatNumber(statistic.percent) }}%</td>
+	</tr>
+</table>
+
+<div>
+	<div>Total: {{numberOfMatches}}</div>
+	<div>Dias: {{days}}</div>
+	<div>Avg: {{limit}}</div>
+</div>
