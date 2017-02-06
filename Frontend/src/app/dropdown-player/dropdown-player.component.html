@@ -1,3 +1,4 @@
-<p>
-  dropdown-player works!
-</p>
+<select materialize="material_select" id="{{this.name}}" name="{{this.name}}" (change)="playerSelected($event.target.value);">
+	<option *ngFor="let player of players;" [value]="player._id">{{player.nickname}}</option>
+</select>
+<label [attr.for]="this.name">{{this.name}}</label>

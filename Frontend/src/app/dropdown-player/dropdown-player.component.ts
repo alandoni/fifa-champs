@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from "./../player.service";
 import { Player } from './../models/Player';
+import { PlayerDropdownSelected } from './../models/PlayerDropdownSelected';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/filter';
 @Component({
   selector: 'app-dropdown-player',
   templateUrl: './dropdown-player.component.html',
@@ -10,16 +10,21 @@ import 'rxjs/add/operator/filter';
 })
 export class DropdownPlayerComponent implements OnInit {
 
-@Output() onSelectedPlayer: EventEmitter<Player> = new EventEmitter();
+	@Output() onSelectedPlayer: EventEmitter<PlayerDropdownSelected> = new EventEmitter();
+	@Input() name : string;
 
-	nickname = "";
-	error = null;
+	players;
+	selected;
+	error;
 
 	constructor(private playerService: PlayerService) { }
 
 	getDropdownValues(filter? : string) { 
+
 		this.playerService.getAll().subscribe(
-			(result) => result,
+			(result) => {
+				this.players = result;
+				},
 			(error) => {
 				console.log(<any>error);
 				this.error = <any>error;
@@ -27,12 +32,12 @@ export class DropdownPlayerComponent implements OnInit {
 		);
 	}
 
-	playerCreatedSuccess(result: Player) {
-		console.log(result);
-
-		this.onSelectedPlayer.emit(result);
+	playerSelected(_id: string) {
+		console.log(_id);
+		this.selected = _id;
+		this.onSelectedPlayer.emit({inputName: this.name, selectedValue: _id});
 	}
 
-	ngOnInit() { }
+	ngOnInit() { this.getDropdownValues(); }
 
 }

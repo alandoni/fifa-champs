@@ -15,6 +15,7 @@ export const appRoutes: Routes = [
 	{path: 'season/results/:month/:year', component: ResultsComponent},
 	{path: 'season/results/current', component: ResultsComponent},
 	{path: 'season/results/alltime', component: CreateMatchComponent},*/
+	{path: 'create-player', component: CreatePlayerComponent},
 	{path: 'insert-match', component: InsertMatchComponent},
 	{path: 'season/classification/:id', component: SeasonSelectorComponent},
 	{path: 'season/classification/current', component: SeasonSelectorComponent},
