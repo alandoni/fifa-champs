@@ -11,8 +11,8 @@ export class InsertMatchComponent implements OnInit {
 
 	@Output() onCreateMatchSuccess: EventEmitter<Match> = new EventEmitter();
 
-	match = new Match();
-	error;
+	match: Match = new Match();
+	error: any;
 
 	constructor(private matchService: MatchService) { }
 
@@ -20,9 +20,9 @@ export class InsertMatchComponent implements OnInit {
 		console.log(this.match);
 		this.matchService.insert(this.match).subscribe(
 			(result) => this.matchCreatedSuccess(result),
-			(error) => {
-				console.log(<any>error);
-				this.error = <any>error;
+			(error : any) => {
+				console.log(error);
+				this.error = error;
 			}
 		);
 	}

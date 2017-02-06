@@ -1,4 +1,4 @@
 export class PlayerDropdownSelected {
-	inputName;
-	selectedValue;
+	inputName: string;
+	selectedValue: string;
 }

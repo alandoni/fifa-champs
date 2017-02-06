@@ -13,9 +13,9 @@ export class DropdownPlayerComponent implements OnInit {
 	@Output() onSelectedPlayer: EventEmitter<PlayerDropdownSelected> = new EventEmitter();
 	@Input() name : string;
 
-	players;
-	selected;
-	error;
+	players: Array<Player>;
+	selected: string;
+	error: any;
 
 	constructor(private playerService: PlayerService) { }
 
@@ -25,9 +25,9 @@ export class DropdownPlayerComponent implements OnInit {
 			(result) => {
 				this.players = result;
 				},
-			(error) => {
-				console.log(<any>error);
-				this.error = <any>error;
+			(error: any) => {
+				console.log(error);
+				this.error = error;
 			}
 		);
 	}
