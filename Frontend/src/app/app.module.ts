@@ -21,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SeasonComponent } from './season/season.component';
 import { appRoutes } from './routes';
 import { SeasonSelectorComponent } from './season-selector/season-selector.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
 @NgModule({
 	declarations: [
@@ -30,12 +31,14 @@ import { SeasonSelectorComponent } from './season-selector/season-selector.compo
 		StandingTableComponent,
 		PageNotFoundComponent,
 		SeasonComponent,
-		SeasonSelectorComponent
+		SeasonSelectorComponent,
+		NavigationBarComponent
 	],
 	imports: [
 		BrowserModule,
 		FormsModule,
 		HttpModule,
+		MaterializeModule,
 		RouterModule.forRoot(appRoutes)
 	],
 	providers: [LoginService, PlayerService, MatchService, ApiRequestService],

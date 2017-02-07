@@ -12,8 +12,9 @@ const utils = require('./utils');
 
 const URL_CHAMPIONSHIPS = "/api/championships";
 const URL_PLAYERS = "/api/players";
-const URL_LOGIN = "/api/login";
 const URL_MATCHES = "/api/matches";
+const URL_LOGIN = "/api/login";
+const URL_LOGOUT = '/api/logout';
 
 const ChampionshipController = require('./controllers/championshipController');
 const PlayerController = require('./controllers/playerController');
@@ -86,7 +87,7 @@ exports.set = function(app, mongo) {
 		})(request, response, next);
 	});
 
-	app.get('/logout', (req, res) => {
+	app.post(URL_LOGOUT, (req, res) => {
         req.logout();
         res.send(true);
     });
