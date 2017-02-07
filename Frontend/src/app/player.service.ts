@@ -22,7 +22,7 @@ export class PlayerService {
 		return this.api.delete(this.url + '/' + id);
 	}
 
-	getAll() : Observable<Player> {
+	getAll() : Observable<Player[]> {
 		return this.api.get(this.url);
 	}
 }

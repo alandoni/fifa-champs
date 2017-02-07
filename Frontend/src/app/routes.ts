@@ -5,9 +5,11 @@ import { LoginComponent } from './login/login.component';
 import { SeasonComponent } from './season/season.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SeasonSelectorComponent } from './season-selector/season-selector.component';
+import { PlayersListComponent } from './players-list/players-list.component';
 
 export const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent},
+	{path: 'players', component: PlayersListComponent},
 	/*{path: 'create-player', component: CreatePlayerComponent},
 	{path: 'create-match', component: CreateMatchComponent},
 	{path: 'season/results/:id', component: ResultsComponent},

@@ -1,0 +1,25 @@
+<table *ngIf="players != null && players.length > 0">
+	<tr>
+		<th>Nome</th>
+		<th>Ações</th>
+	</tr>
+	<tr *ngFor="let player of players; let i = index">
+		<td>{{player.nickname}}</td>
+		<td>
+			<span (click)="updateUser(i)">Atualizar</span>
+			<span (click)="deleteUser(i)">Remover</span>
+		</td>
+	</tr>
+</table>
+
+<p *ngIf="players == null || players.length == 0">Nenhum jogador encontrado</p>
+
+<a (click)="addUser()">Adicionar Jogador</a>
+
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+	<div class="modal-content">
+	  	<h4 *ngIf="selectedPlayer">Atualizar Jogador</h4>
+	  	<h4 *ngIf="!selectedPlayer">Criar Jogador</h4>
+	</div>
+	<app-create-player (onCreatePlayerSuccess)="closeModal($event)" [player]="selectedPlayer"></app-create-player>
+</div>

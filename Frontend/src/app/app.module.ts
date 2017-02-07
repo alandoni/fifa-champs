@@ -22,6 +22,7 @@ import { SeasonComponent } from './season/season.component';
 import { appRoutes } from './routes';
 import { SeasonSelectorComponent } from './season-selector/season-selector.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { PlayersListComponent } from './players-list/players-list.component';
 
 @NgModule({
 	declarations: [
@@ -32,7 +33,8 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 		PageNotFoundComponent,
 		SeasonComponent,
 		SeasonSelectorComponent,
-		NavigationBarComponent
+		NavigationBarComponent,
+		PlayersListComponent
 	],
 	imports: [
 		BrowserModule,
