@@ -77,6 +77,6 @@ export class PlayersListComponent implements OnInit {
 	}
 
 	private get hasPlayers() {
-		return players != null && players.length > 0;
+		return this.players != null && this.players.length > 0;
 	}
 }

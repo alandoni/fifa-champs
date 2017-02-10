@@ -35,7 +35,7 @@ import { appRoutes } from './routes';
 		SeasonComponent,
 		SeasonSelectorComponent,
 		NavigationBarComponent,
-		PlayersListComponent
+		PlayersListComponent,
 		DropdownPlayerComponent,
 		NavigationBarComponent
 	],
