@@ -1,4 +1,4 @@
-<table *ngIf="players != null && players.length > 0">
+<table *ngIf="hasPlayers">
 	<tr>
 		<th>Nome</th>
 		<th>Ações</th>
@@ -12,7 +12,7 @@
 	</tr>
 </table>
 
-<p *ngIf="players == null || players.length == 0">Nenhum jogador encontrado</p>
+<p *ngIf="!hasPlayers">Nenhum jogador encontrado</p>
 
 <a (click)="addUser()">Adicionar Jogador</a>
 
