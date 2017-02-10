@@ -1,6 +1,8 @@
 import { Routes }  from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { InsertMatchComponent } from './insert-match/insert-match.component';
+import { CreatePlayerComponent } from './create-player/create-player.component';
 import { LoginComponent } from './login/login.component';
 import { SeasonComponent } from './season/season.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -11,11 +13,12 @@ export const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent},
 	{path: 'players', component: PlayersListComponent},
 	/*{path: 'create-player', component: CreatePlayerComponent},
-	{path: 'create-match', component: CreateMatchComponent},
 	{path: 'season/results/:id', component: ResultsComponent},
 	{path: 'season/results/:month/:year', component: ResultsComponent},
 	{path: 'season/results/current', component: ResultsComponent},
 	{path: 'season/results/alltime', component: CreateMatchComponent},*/
+	{path: 'create-player', component: CreatePlayerComponent},
+	{path: 'insert-match', component: InsertMatchComponent},
 	{path: 'season/classification/:id', component: SeasonSelectorComponent},
 	{path: 'season/classification/current', component: SeasonSelectorComponent},
 	{path: 'season/classification/:month/:year', component: SeasonSelectorComponent},

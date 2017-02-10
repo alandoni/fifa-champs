@@ -1,0 +1,18 @@
+<div>
+	<h1>Insert Match</h1>
+	<div *ngIf="error != null"><p>{{error.description}}</p></div>
+	<form>
+  	<div class="input-field col s12"><app-dropdown-player [name]="'player1'" (onSelectedPlayer)="handlePlayerSelection($event)"></app-dropdown-player></div>
+  	<div class="input-field col s12"><app-dropdown-player [name]="'player2'" (onSelectedPlayer)="handlePlayerSelection($event)"></app-dropdown-player></div>
+  	<div class="input-field col s12"><input type="number" name="score1" placeholder="Score Team 1" [(ngModel)]="match.score1"/></div>
+  	<div class="input-field col s12"><input type="number" name="score1" placeholder="Score Team 2" [(ngModel)]="match.score2"/></div>
+  	<div class="input-field col s12"><app-dropdown-player [name]="'player3'" (onSelectedPlayer)="handlePlayerSelection($event)"></app-dropdown-player></div>
+  	<div class="input-field col s12"><app-dropdown-player [name]="'player4'" (onSelectedPlayer)="handlePlayerSelection($event)"></app-dropdown-player></div>
+  	<div class="input-field col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action" (click)="tryCreateMatch();">
+          Insert Match
+          <i class="material-icons right">send</i>
+        </button>
+    </div>
+	</form>
+</div>
