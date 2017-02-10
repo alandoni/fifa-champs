@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { PlayerService } from "./../player.service";
 import { Player } from './../models/Player';
 
@@ -7,17 +7,33 @@ import { Player } from './../models/Player';
 	templateUrl: './create-player.component.html',
 	styleUrls: ['./create-player.component.css']
 })
-export class CreatePlayerComponent implements OnInit {
+export class CreatePlayerComponent implements OnInit, OnChanges {
 
 	@Output() onCreatePlayerSuccess: EventEmitter<Player> = new EventEmitter();
+	@Input() player: Player;
 
 	nickname = "";
 	error = null;
 
 	constructor(private playerService: PlayerService) { }
 
-	tryCreatePlayer() { 
+	tryCreatePlayer() {
+		if (this.player) {
+			this.tryUpdatePlayer();
+			return;
+		}
+
 		this.playerService.insert(this.nickname).subscribe(
+			(result) => this.playerCreatedSuccess(result),
+			(error) => {
+				console.log(<any>error);
+				this.error = <any>error;
+			}
+		);
+	}
+
+	tryUpdatePlayer() {
+		this.playerService.update(this.player._id, this.nickname, null).subscribe(
 			(result) => this.playerCreatedSuccess(result),
 			(error) => {
 				console.log(<any>error);
@@ -28,10 +44,18 @@ export class CreatePlayerComponent implements OnInit {
 
 	playerCreatedSuccess(result: Player) {
 		console.log(result);
-
 		this.onCreatePlayerSuccess.emit(result);
 	}
 
 	ngOnInit() { }
+
+	ngOnChanges(changes: SimpleChanges) {
+		console.log(changes['player'].currentValue);
+		if (changes['player'].currentValue) {
+			this.nickname = changes['player'].currentValue.nickname;
+		} else {
+			this.nickname = "";
+		}
+	}
 }
 

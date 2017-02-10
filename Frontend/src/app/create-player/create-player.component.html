@@ -1,6 +1,5 @@
 <div>
-	<h1>Create Player</h1>
 	<div *ngIf="error != null"><p>{{error.description}}</p></div>
   	<div><input name="nickname" placeholder="Nickname" [(ngModel)]="nickname" /></div>
-  	<div><input name="submit" type="button" value="Login" (click)="tryCreatePlayer();" /></div>
+  	<div><input name="submit" type="button" value="Salvar" (click)="tryCreatePlayer();" /></div>
 </div>
