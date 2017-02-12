@@ -39,8 +39,7 @@ exports.set = function(app, mongo) {
 	app.use((request, response, next) => {
 		response.header("Access-Control-Allow-Origin", "*");
 		response.header("Access-Control-Allow-Headers", "connect.sid, Authorization, Origin, X-Requested-With, Content-Type, Accept, Options");
-		response.header("Access-Control-Allow-Credentials", true);
-
+		response.header("Access-Control-Allow-Methods", "POST, UPDATE, DELETE, GET");
 		next();
 	});
 
@@ -164,6 +163,8 @@ exports.set = function(app, mongo) {
 
 	app.delete(URL_PLAYERS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
+
+		console.log("Removing Player by ID " + id);
 
 		playerController.delete(id).then((result) => {
 			response.send(result);
