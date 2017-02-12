@@ -37,8 +37,8 @@ exports.set = function(app, mongo) {
 	app.use(bodyParser.json());
 
 	app.use((request, response, next) => {
-		response.header("Access-Control-Allow-Origin", "http://localhost:4200");
-		response.header("Access-Control-Allow-Headers", "connect.sid, Authorization, Origin, X-Requested-With, Content-Type, Accept");
+		response.header("Access-Control-Allow-Origin", "*");
+		response.header("Access-Control-Allow-Headers", "connect.sid, Authorization, Origin, X-Requested-With, Content-Type, Accept, Options");
 		response.header("Access-Control-Allow-Credentials", true);
 
 		next();
@@ -174,7 +174,15 @@ exports.set = function(app, mongo) {
 
 	//Matches
 	app.get(URL_MATCHES, (request, response) => {
-		matchController.getAll().then((matchesList) => {
+
+		var promise = null;
+		if (request.query) {
+			promise = matchController.getByCriteria(request.query);
+		} else {
+			promise = matchController.getAll()
+		}
+
+		promise.then((matchesList) => {
 			response.send(matchesList);
 		}).catch((error) => {
 			response.status(500).send(error);
@@ -209,6 +217,7 @@ exports.set = function(app, mongo) {
 
 	app.delete(URL_MATCHES + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
+
 		matchController.delete(id).then((result) => {
 			response.send(result);
 		}).catch((error) => {

@@ -17,7 +17,7 @@ var agent = chai.request.agent(server);
 
 describe('API Test', () => {
 
-    after((done) => {
+    before((done) => {
         console.log('Removing previous test data');
         Championship.remove({}, (err) => {
             Match.remove({}, (err) => { 
@@ -34,7 +34,7 @@ describe('API Test', () => {
 
             const invalidAdmin = {nickname: "AlanDoni", password:"123456"};
 
-            post('/login', invalidAdmin).then((res) => {
+            post('/api/login', invalidAdmin).then((res) => {
                 done(res);
             }).catch((error) => {
                 done();
@@ -55,7 +55,7 @@ describe('API Test', () => {
 
     describe('/GET Players', () => {
         it('it should GET all the players', (done) => {
-            get('/players').then((res) => {
+            get('/api/players').then((res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.length.should.be.eql(0);
@@ -73,23 +73,19 @@ describe('API Test', () => {
                 picture: 'http://i.imgur.com/61hqH6f.jpg'
             }
 
-            post('/login', {nickname: 'admin', password: '71e3401a5fdf0203d345362e003636b8'}).then((res) => {
+            login().then((res) => {
                 res.should.have.status(200);
-                var sessionID = res.body.session;
+                return post('/api/players', player);
+            }).then((res2) => {
+                res2.should.have.status(200);
 
-                return agent.post('/players').send(player).then((res2) => {
-                    res2.should.have.status(200);
+                res2.body.should.be.a('object');
+                res2.body.should.have.property('nickname').eql('joao');
+                res2.body.should.not.have.property('password');
 
-                    res2.body.should.be.a('object');
-                    res2.body.should.have.property('nickname').eql('joao');
-                    res2.body.should.not.have.property('password');
-
-                    done();
-                }).catch((res) => {
-                    done(res);
-                });
-            }).catch((res) => {
-                done(res);
+                done();
+            }).catch((error) => {
+                done(error);
             });
         });
     });
@@ -102,7 +98,7 @@ describe('API Test', () => {
             }
             var agent = chai.request.agent(server);
 
-            agent.post('/players').send(player).then((res) => {
+            agent.post('/api/players').send(player).then((res) => {
                 res.should.have.status(401);
                 done(res.status);
             }).catch((res) => {
@@ -114,7 +110,7 @@ describe('API Test', () => {
 
     describe('/GET Players', () => {
         it('it should GET all the players', (done) => {
-            get('/players').then((res) => {
+            get('/api/players').then((res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.length.should.be.eql(1);
@@ -135,7 +131,7 @@ describe('API Test', () => {
             }
             createPlayer(player).then((res) => {
                 var newPlayer = {picture: 'http://i.imgur.com/61hqH6f.jpg'};
-                return post('/players/' + res.body._id, newPlayer);
+                return post('/api/players/' + res.body._id, newPlayer);
             }).then((res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
@@ -153,17 +149,17 @@ describe('API Test', () => {
         it('it should DELETE a player', (done) => {
             var size = 0;
 
-            get('/players').then((res) => {
+            get('/api/players').then((res) => {
                 res.should.have.status(200);
                 size = res.body.length;
                 var player = {nickname: 'chris'};
                 return createPlayer(player);
             }).then((res) => {
                 res.should.have.status(200);
-                return del('/players/' + res.body._id);
+                return del('/api/players/' + res.body._id);
             }).then((res) => {
                 res.should.have.status(200);
-                return get('/players');
+                return get('/api/players');
             }).then((res) => {
                 res.should.have.status(200);
                 res.body.length.should.be.eql(size);
@@ -181,7 +177,7 @@ describe('API Test', () => {
 
     describe('/GET Championships', () => {
         it('it should GET all the championships', (done) => {
-            get('/championships').then((res) => {
+            get('/api/championships').then((res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.length.should.be.eql(0);
@@ -215,7 +211,7 @@ describe('API Test', () => {
 
     describe('/GET Championships', () => {
         it('it should GET all the Championships', (done) => {
-            get('/championships').then((res) => {
+            get('/api/championships').then((res) => {
                 res.should.have.status(200);
 
                 res.body.should.be.a('array');
@@ -236,7 +232,7 @@ describe('API Test', () => {
                 return createChampionship(players);
             }).then((res) => {
                 var championshipUpdate = {isCurrent: true};
-                return post('/championships/' + res.body._id, championshipUpdate);
+                return post('/api/championships/' + res.body._id, championshipUpdate);
             }).then((res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('isCurrent').eql(true);
@@ -251,7 +247,7 @@ describe('API Test', () => {
         it('it should DELETE a championship', (done) => {
             var size = 0;
 
-            get('/championships').then((res) => {
+            get('/api/championships').then((res) => {
                 res.should.have.status(200);
                 size = res.body.length;
                 return createPlayers();
@@ -259,10 +255,10 @@ describe('API Test', () => {
                 return createChampionship(players);
             }).then((res) => {
                 res.should.have.status(200);
-                return del('/championships/' + res.body._id);
+                return del('/api/championships/' + res.body._id);
             }).then((res) => {
                 res.should.have.status(200);
-                return get('/championships');
+                return get('/api/championships');
             }).then((res) => {
                 res.should.have.status(200);
                 res.body.length.should.be.eql(size);
@@ -281,7 +277,7 @@ describe('API Test', () => {
 
     describe('/GET Matches', () => {
         it('it should GET all the matches', (done) => {
-            get('/matches').then((res) => {
+            get('/api/matches').then((res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.length.should.be.eql(0);
@@ -313,7 +309,7 @@ describe('API Test', () => {
 
     describe('/GET Matches', () => {
         it('it should GET all the matches', (done) => {
-            get('/matches').then((res) => {
+            get('/api/matches').then((res) => {
                 res.should.have.status(200);
 
                 res.body.should.be.a('array');
@@ -336,7 +332,7 @@ describe('API Test', () => {
             }).then((res) => {
                 res.should.have.status(200);
                 var newMatch = {team2score: 1};
-                return post('/matches/' + res.body._id, newMatch);
+                return post('/api/matches/' + res.body._id, newMatch);
             }).then((res) => {
                 res.should.have.status(200);
 
@@ -354,11 +350,60 @@ describe('API Test', () => {
         });
     });
 
+    describe('/GET Matches with limit and offset', () => {
+        it('it should GET all the matches', (done) => {
+            var playersSaved = null;
+            createPlayers().then((players) => {
+                playersSaved = players;
+                return createMatch(playersSaved);
+            }).then((match) => {
+                return createMatch(playersSaved);
+            }).then((match) => {
+                return get('/api/matches?limit=1&offset=1');
+            }).then((res) => {
+                res.should.have.status(200);
+
+                res.body.should.be.a('array');
+                res.body.length.should.be.eql(1);
+                res.body[0].should.have.property('player1');
+                res.body[0].player1.should.have.property('nickname').eql('alan');
+                res.body[0].player1.should.not.have.property('password');
+                done();
+            }).catch((error) => {
+                done(error);
+            });
+        });
+    });
+
+    describe('/GET Final Matches with limit and offset', () => {
+        it('it should GET all the matches', (done) => {
+            var playersSaved = null;
+            createPlayers().then((players) => {
+                playersSaved = players;
+                return createMatch(playersSaved);
+            }).then((match) => {
+                return createFinalMatch(playersSaved, true);
+            }).then((match) => {
+                return get('/api/matches?isFinal=true&limit=1&offset=0');
+            }).then((res) => {
+                res.should.have.status(200);
+
+                res.body.should.be.a('array');
+                res.body.length.should.be.eql(1);
+                res.body[0].should.have.property('isFinal');
+                res.body[0].isFinal.should.be.eql(true);
+                done();
+            }).catch((error) => {
+                done(error);
+            });
+        });
+    });
+
     describe('/DELETE/:id Match', () => {
         it('it should DELETE a Match', (done) => {
             var size = 0;
 
-            get('/matches').then((res) => {
+            get('/api/matches').then((res) => {
                 res.should.have.status(200);
                 size = res.body.length;
                 return createPlayers();
@@ -366,10 +411,10 @@ describe('API Test', () => {
                 return createMatch(players);
             }).then((res) => {
                 res.should.have.status(200);
-                return del('/matches/' + res.body._id);
+                return del('/api/matches/' + res.body._id);
             }).then((res) => {
                 res.should.have.status(200);
-                return get('/matches');
+                return get('/api/matches');
             }).then((res) => {
                 res.should.have.status(200);
                 res.body.length.should.be.eql(size);
@@ -408,7 +453,7 @@ function createPlayers() {
 }
 
 function createPlayer(player) {
-    return post('/Players', player);
+    return post('/api/players', player);
 }
 
 function createChampionship(players) {
@@ -424,10 +469,10 @@ function createChampionship(players) {
         finalMatch: null,
         isCurrent: false
     }
-    return post('/championships', championship);
+    return post('/api/championships', championship);
 }
 
-function createMatch(players) {
+function createFinalMatch(players, isFinal) {
     const match = {
         player1: players[0]._id,
         player2: players[1]._id,
@@ -436,10 +481,15 @@ function createMatch(players) {
         team1score: 3,
         team2score: 0,
         date: new Date(),
-        championship: null
+        championship: null,
+        isFinal: isFinal
     };
 
-    return post('/matches', match);
+    return post('/api/matches', match);
+}
+
+function createMatch(players) {
+    return createFinalMatch(players, false);
 }
 
 function login() {
@@ -447,7 +497,7 @@ function login() {
             nickname : 'admin',
             password : '71e3401a5fdf0203d345362e003636b8'
         }
-    return post('/login', admin);
+    return post('/api/login', admin);
 }
 
 function post(url, object) {
