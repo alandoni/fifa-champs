@@ -17,7 +17,7 @@ var agent = chai.request.agent(server);
 
 describe('API Test', () => {
 
-    before((done) => {
+    after((done) => {
         console.log('Removing previous test data');
         Championship.remove({}, (err) => {
             Match.remove({}, (err) => { 
