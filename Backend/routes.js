@@ -53,13 +53,12 @@ exports.set = function(app, mongo) {
 
 	app.use(cookieParser());
 
-	app.use(
-		session({secret: 'SEKR37',
-			resave: false,
-			saveUninitialized: true,
-			cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24, secure: false }
-		})
-	);
+	app.use(session({
+		secret: 'SEKR37',
+		resave: false,
+		saveUninitialized: true,
+		cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24, secure: false }
+	}));
 
 	app.use(passport.initialize());
 	app.use(passport.session());
@@ -171,9 +170,6 @@ exports.set = function(app, mongo) {
 
 	app.delete(URL_PLAYERS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
-
-		console.log("Removing Player by ID " + id);
-
 		playerController.delete(id).then((result) => {
 			response.send(result);
 		}).catch((error) => {
@@ -183,7 +179,6 @@ exports.set = function(app, mongo) {
 
 	//Matches
 	app.get(URL_MATCHES, (request, response) => {
-
 		var promise = null;
 		if (request.query) {
 			promise = matchController.getByCriteria(request.query);

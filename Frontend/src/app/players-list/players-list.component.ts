@@ -47,7 +47,7 @@ export class PlayersListComponent implements OnInit {
 				(result) => { 
 					console.log(result);
 					this.players = this.players.filter((el) => {
-					    return el.nickname !== this.players[this.selectedIndex].nickname;
+					    return el._id !== this.players[this.selectedIndex]._id;
 					});
 					console.log(this.selectedIndex);
 				},
