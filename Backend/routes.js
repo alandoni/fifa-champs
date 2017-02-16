@@ -6,6 +6,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const uuid = require('uid-safe');
+const cors = require('cors');
 
 const errors = require('./errors');
 const utils = require('./utils');
@@ -36,12 +37,19 @@ exports.set = function(app, mongo) {
 
 	app.use(bodyParser.json());
 
-	app.use((request, response, next) => {
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Headers", "connect.sid, Authorization, Origin, X-Requested-With, Content-Type, Accept, Options");
-		response.header("Access-Control-Allow-Methods", "POST, UPDATE, DELETE, GET");
-		next();
-	});
+	app.use(cors({
+		origin: function (origin, callback) {
+		    callback(null, true); //bypass
+		},
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+		preflightContinue: false,
+		credentials: true,
+		optionsSuccessStatus: 204,
+		allowedHeaders: ['set-cookie', 'Content-Type', 'cookie', 'cookies', 'connect.sid'],
+		exposedHeaders: ['set-cookie', 'Content-Type', 'cookie', 'cookies', 'connect.sid']
+	}));
+	
+	app.options('*', cors());
 
 	app.use(cookieParser());
 
