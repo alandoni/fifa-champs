@@ -20,11 +20,11 @@ export class DropdownPlayerComponent implements OnInit {
 	constructor(private playerService: PlayerService) { }
 
 	getDropdownValues(filter? : string) { 
-
 		this.playerService.getAll().subscribe(
 			(result) => {
 				this.players = result;
-				},
+				this.playerSelected(this.players[0]._id);
+			},
 			(error: any) => {
 				console.log(error);
 				this.error = error;
@@ -33,7 +33,6 @@ export class DropdownPlayerComponent implements OnInit {
 	}
 
 	playerSelected(_id: string) {
-		console.log(_id);
 		this.selected = _id;
 		this.onSelectedPlayer.emit({inputName: this.name, selectedValue: _id});
 	}

@@ -14,6 +14,9 @@
 		<a routerLink="/season/classification/current" routerLinkActive="active-class">
 			Temporada
 		</a>
+		<a (click)="createSeason()" >
+			Criar Nova Temporada
+		</a>
 		<a routerLink="/hall" routerLinkActive="active-class">
 			Hall of fame
 		</a>
@@ -33,5 +36,12 @@
 	<div class="modal-content">
 	  	<h4>Login</h4>
 	</div>
-	<app-login (onLoginSuccess)="closeLoginModal(result)"></app-login>
+	<app-login (onLoginSuccess)="closeLoginModal($event)"></app-login>
+</div>
+
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="matchModalActions">
+	<div class="modal-content">
+	  	<h4>Inserir Jogo</h4>
+	</div>
+	<app-insert-match (onCreateMatchSuccess)="closeMatchModal($event)"></app-insert-match>
 </div>

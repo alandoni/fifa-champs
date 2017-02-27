@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { MatchService } from './../match.service';
+import { Player } from './../models/player';
+import { Match } from './../models/match';
+import { ChampionshipService } from './../championship.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-season-selector',
@@ -7,14 +11,55 @@ import { MatchService } from './../match.service';
 	styleUrls: ['./season-selector.component.css']
 })
 export class SeasonSelectorComponent implements OnInit {
-
-	players;
-	matches;
+	
+	matches : Array<Match>;
 	date = new Date();
-	isLoading;
+	isLoading = false;
+	tab = 0;
+	noChampionships = false;
+	noFilterSelected = false;
 
-	constructor(private matchService: MatchService) {
-		
+	constructor(private matchService: MatchService, private championshipService: ChampionshipService, 
+		private route: ActivatedRoute, private router: Router) {
+	}
+
+	ngOnInit() {
+		this.isLoading = true;
+
+		if (!this.championshipService.getCurrentChampionship()) {
+			this.championshipService.getCurrent().subscribe((championships) => {
+				if (championships.length == 0) {
+					this.noChampionships = true;
+					return;
+				}
+				this.championshipService.setCurrentChampionship(championships[0]);
+			});
+		}
+
+		this.route.params.subscribe(params => {
+
+			console.log("Getting new data");
+
+			if (params['id'] === 'current') {
+				this.requestCurrentMatches();
+				return;
+			}
+
+			if (params['id'] === 'alltime') {
+				this.requestAllMatches();
+				return;
+			}
+
+			if (params['id']) {
+				this.requestMatchesByChampionship(params['id']);
+			}
+
+			if (params['month'] && params['year']) {
+				console.log(params);
+				this.requestMatchesByMonth(+params['month'], +params['year']);
+				return;
+			}
+		});
 	}
 
 	getCurrentMonth() {
@@ -24,12 +69,12 @@ export class SeasonSelectorComponent implements OnInit {
 
 	previousMonth() {
 		this.date = this.sumMonth(this.date, -1)
-		this.requestMatches();
+		this.router.navigateByUrl('season/classification/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 	}
 
 	nextMonth() {
 		this.date = this.sumMonth(this.date, 1)
-		this.requestMatches();
+		this.router.navigateByUrl('season/classification/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 	}
 
 	sumMonth(date, numberOfMonths) {
@@ -38,41 +83,96 @@ export class SeasonSelectorComponent implements OnInit {
 		return newDate;
 	}
 
-	requestMatches() {
-		console.log("Requesting matches");
+	requestMatchesByMonth(month, year) {
+		console.log("Requesting championship for " + month + "/" + year);
+		this.date = new Date(year, month - 1, 1);
 		this.isLoading = true;
-		this.matchService.getAll().subscribe((matches) => {
-			console.log("Requested matches");
-			this.matches = matches;
-			this.getPlayersFromMatches();
-			this.isLoading = false;
-		}, (error) => console.log(error));
+		this.championshipService.getByMonth(month, year).subscribe(
+			(championships) => {
+				if (championships.length > 0) {
+					this.requestMatchesByChampionship(championships[0]._id);
+				} else {
+					console.log("No championship found");
+					this.matches = [];
+				}
+				this.isLoading = false;
+			},
+			(error) => console.log(error));
 	}
 
-	getPlayersFromMatches() {
-		this.players = [];
-		for (var match in this.matches) {
-			if (this.players.indexOf(this.matches[match].player1) < 0) {
-				this.players.push(this.matches[match].player1);
-			}
-			if (this.players.indexOf(this.matches[match].player2) < 0) {
-				this.players.push(this.matches[match].player2);
-			}
-			if (this.players.indexOf(this.matches[match].player3) < 0) {
-				this.players.push(this.matches[match].player3);
-			}
-			if (this.players.indexOf(this.matches[match].player4) < 0) {
-				this.players.push(this.matches[match].player4);
-			}
+	requestMatchesByChampionship(championshipId) {
+		console.log("Requesting matches from championship " + championshipId);
+		this.isLoading = true;
+		this.matchService.getByChampionship(championshipId).subscribe(
+			(matches) => this.processMatches(matches),
+			(error) => console.log(error));
+
+		this.championshipService.getById(championshipId).subscribe(
+			(championship) => {
+				console.log(championship);
+				if (championship) {
+					this.noChampionships = false;
+				}
+				this.date = new Date(championship.year, championship.month - 1, 1);
+			});
+	}
+
+	requestAllMatches() {
+		this.isLoading = true;
+		console.log("Requesting all matches");
+		this.matchService.getAll().subscribe(
+			(matches) => this.processMatches(matches),
+			(error) => console.log(error));
+	}
+
+	requestCurrentMatches() {
+		if (this.championshipService.getCurrentChampionship()) {
+			console.log("Already has a current championship loaded");
+			this.requestMatchesByChampionship(this.championshipService.getCurrentChampionship()._id);
+			return;
 		}
+
+		console.log("Loading new current championship");
+
+		this.championshipService.getCurrent().subscribe((championships) => {
+			if (championships.length == 0) {
+				console.log("No current championship, create a new one");
+				this.isLoading = false;
+				return;
+			}
+			console.log("New current championship loaded");
+
+			this.championshipService.setCurrentChampionship(championships[0]);
+			this.requestMatchesByChampionship(championships[0]._id);
+		});
+	}
+
+	processMatches(matches: Array<Match>) {
+		this.matches = matches;
+		this.isLoading = false;
 	}
 
 	formatDate(date) {
-		return (date.getDate() < 9 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 9 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear();
+		return (date.getDate() < 9 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 9 ? "0" : "") 
+			+ (date.getMonth() + 1) + "/" + date.getFullYear();
 	}
 
-	ngOnInit() {
-		this.requestMatches();
+	dateFromString(str) {
+		var parts = str.split('/');
+		return new Date(+parts[2], +parts[1] - 1, +parts[0]);
 	}
 
+	changeTab(tab) {
+		this.tab = tab;
+	}
+
+	noFilterSelectionChanged() {
+		this.noFilterSelected = !this.noFilterSelected;
+
+		if (this.noFilterSelected) {
+			this.requestAllMatches();
+		} else {
+			this.requestMatchesByMonth(this.date.getMonth() + 1, this.date.getFullYear());
+		}
+	}
 }

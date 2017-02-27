@@ -14,12 +14,12 @@ import { DropdownPlayerComponent } from './dropdown-player/dropdown-player.compo
 import { SeasonSelectorComponent } from './season-selector/season-selector.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { PlayersListComponent } from './players-list/players-list.component';
-import { SeasonComponent } from './season/season.component';
 import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 
 import { LoginService } from './login.service';
 import { PlayerService } from './player.service';
 import { MatchService } from './match.service';
+import { ChampionshipService } from './championship.service';
 import { ApiRequestService } from './api-request.service';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -33,7 +33,6 @@ import { appRoutes } from './routes';
 	    InsertMatchComponent,
 		StandingTableComponent,
 		PageNotFoundComponent,
-		SeasonComponent,
 		SeasonSelectorComponent,
 		NavigationBarComponent,
 		PlayersListComponent,
@@ -48,7 +47,7 @@ import { appRoutes } from './routes';
 		MaterializeModule,
 		RouterModule.forRoot(appRoutes)
 	],
-	providers: [LoginService, PlayerService, MatchService, ApiRequestService],
+	providers: [LoginService, PlayerService, MatchService, ChampionshipService, ApiRequestService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

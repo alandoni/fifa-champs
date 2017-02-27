@@ -26,6 +26,14 @@ export class MatchService {
 		return this.api.get(this.url);
 	}
 
+	getByDates(minDate, maxDate) : Observable<Match[]> {
+		return this.api.get(this.url + '?minDate=' + minDate + '&maxDate=' + maxDate);
+	}
+
+	getByChampionship(championshipId) : Observable<Match[]> {
+		return this.api.get(this.url + '/' + championshipId);
+	}
+
 	getFinals() : Observable<Match[]> {
 		return this.api.get(this.url + '?isFinal=true');
 	}

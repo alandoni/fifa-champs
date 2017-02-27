@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
 
 	loginSuccess(result: Player) {
 		console.log(result);
-		console.log(this.login.isLoggedIn());
 		this.onLoginSuccess.emit(result);
 	}
 

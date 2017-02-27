@@ -21,8 +21,6 @@ export class ApiRequestService {
 
 	public post(url, data) : Observable<any> {
 		return this.http.post(this.baseUrl + url, data, { withCredentials: true }).map((response) => { 
-			console.log(response.headers.values());
-
 			return response.json();
 		}).catch((error: Response | any) => {
 			return this.handleError(error);
