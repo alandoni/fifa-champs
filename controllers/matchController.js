@@ -15,33 +15,42 @@ class MatchController {
 	}
 	
 	getAll() {
-		return this.mongo.selectAll(document).populate("player1 player2 player3 player4").exec().then((matches) => {
+		return this.mongo.selectAll(document).populate("player1 player2 player3 player4 championship").exec().then((matches) => {
 			return this._prepareToSend(matches);
 		});
 	}
 
 	getById(id) {
-		return this.mongo.selectById(document, id).populate("player1 player2 player3 player4").exec().then((match) => {
+		return this.mongo.selectById(document, id).populate("player1 player2 player3 player4 championship").exec().then((match) => {
 			return this._prepareToSend(match);
 		});
 	}
 
 	getByCriteria(criteria) {
+		if (criteria.minDate || criteria.maxDate) {
+			var minDate = criteria.minDate;
+			var maxDate = criteria.maxDate;
+
+			criteria.minDate = undefined;
+			criteria.maxDate = undefined;
+			
+			criteria.date = {$gte: minDate, $lte: maxDate};
+		}
 
 		if (criteria.offset && criteria.limit) {
 			var limit = parseInt(criteria.limit);
 			criteria.limit = undefined;
 			var offset = parseInt(criteria.offset);
 			criteria.offset = undefined;
-			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate("player1 player2 player3 player4").exec();
+			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate("player1 player2 player3 player4 championship").exec();
 		} else {
-			return this.mongo.selectByCriteria(document, criteria).populate("player1 player2 player3 player4").exec();
+			return this.mongo.selectByCriteria(document, criteria).populate("player1 player2 player3 player4 championship").exec();
 		}
 	}
 
 	getByChampionship(championshipId) {
 		var id = new ObjectId(championshipId)
-		return this.mongo.selectByCriteria(document, {championship: id}).populate("player1 player2 player3 player4").exec().then((match) => {
+		return this.mongo.selectByCriteria(document, {championship: id}).populate("player1 player2 player3 player4 championship").exec().then((match) => {
 			return this._prepareToSend(match);
 		});
 	}

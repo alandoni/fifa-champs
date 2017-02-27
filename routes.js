@@ -100,7 +100,15 @@ exports.set = function(app, mongo) {
 
 	//Championships
 	app.get(URL_CHAMPIONSHIPS, (request, response) => {
-		championshipController.getAll().then((championshipsList) => {
+
+		var promise = null;
+		if (request.query) {
+			promise = championshipController.getByCriteria(request.query);
+		} else {
+			promise = championshipController.getAll()
+		}
+		
+		promise.then((championshipsList) => {
 			response.send(championshipsList);
 		}).catch((error) => {
 			response.status(500).send(error);
@@ -126,6 +134,10 @@ exports.set = function(app, mongo) {
 
 	app.post(URL_CHAMPIONSHIPS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
+
+		console.log(id);
+		console.log(request.body);
+
 		championshipController.update(id, request.body).then((championship) => {
 			response.send(championship);
 		}).catch((error) => {
