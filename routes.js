@@ -63,6 +63,16 @@ exports.set = function(app, mongo) {
 	app.use(passport.initialize());
 	app.use(passport.session());
 
+	adminController.getAll().then((admins) => {
+		if (admins.length == 0) {
+			return adminController.insert({nickname: 'Admin', password: '71e3401a5fdf0203d345362e003636b8'});
+		}
+	}).then((admin) => {
+		if (admin) {
+			console.log("Created Admin: " + admin.nickname);
+		}
+	});
+
 	function isLoggedIn(req, res, next) {
 
 	    if (req.isAuthenticated()) {
