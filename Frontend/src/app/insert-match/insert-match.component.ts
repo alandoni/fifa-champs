@@ -27,6 +27,14 @@ export class InsertMatchComponent implements OnInit {
 			this.error = {description: "Verifique se há jogadores repetidos."};
 			return;
 		}
+		if (this.match.team1score == null || this.match.team1score == undefined) {
+			this.error = {description: "Verifique a pontuação dos times."};
+			return;
+		}
+		if (this.match.team2score == null || this.match.team2score == undefined) {
+			this.error = {description: "Verifique a pontuação dos times."};
+			return;
+		}
 
 		this.match.championship = this.championshipService.getCurrentChampionship();
 		this.match.isFinal = this.selected;
@@ -63,6 +71,7 @@ export class InsertMatchComponent implements OnInit {
 	}
 
 	matchCreatedSuccess(result: Match) {
+		this.ngOnInit();
 		this.onCreateMatchSuccess.emit(result);
 	}
 
@@ -70,5 +79,10 @@ export class InsertMatchComponent implements OnInit {
 		this.match[playerSelection.inputName] = playerSelection.selectedValue;
 	}
 
-	ngOnInit() { }
+	ngOnInit() {
+		this.match = {_id: undefined, player1: undefined, player2: undefined, player3: undefined, player4: undefined,
+					team1score: undefined, team2score: undefined, isFinal: false, championship: undefined, date: undefined};
+		this.error = null;
+		this.selected = false;
+	}
 }
