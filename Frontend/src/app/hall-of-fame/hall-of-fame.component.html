@@ -1,0 +1,18 @@
+<div>
+
+	<div *ngIf="error">{{error.description}}</div>
+
+	<div class="champions">
+		<p *ngFor="let champion of champions">
+			{{ champion.name }} foi campeão {{ champion.times }} vezes
+		</p>
+	</div>
+
+	<div class="matches">
+		<div *ngFor="let match of matches">
+			{{ match.player1.nickname }} / {{ match.player2.nickname }}
+			{{ match.team1score}} x {{ match.team2score }}
+			{{ match.player3.nickname }} / {{ match.player4.nickname }}
+		</div>
+	</div>
+</div>

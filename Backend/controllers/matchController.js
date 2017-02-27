@@ -26,6 +26,19 @@ class MatchController {
 		});
 	}
 
+	getByCriteria(criteria) {
+
+		if (criteria.offset && criteria.limit) {
+			var limit = parseInt(criteria.limit);
+			criteria.limit = undefined;
+			var offset = parseInt(criteria.offset);
+			criteria.offset = undefined;
+			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate("player1 player2 player3 player4").exec();
+		} else {
+			return this.mongo.selectByCriteria(document, criteria).populate("player1 player2 player3 player4").exec();
+		}
+	}
+
 	getByChampionship(championshipId) {
 		var id = new ObjectId(championshipId)
 		return this.mongo.selectByCriteria(document, {championship: id}).populate("player1 player2 player3 player4").exec().then((match) => {

@@ -12,7 +12,10 @@
 	</div>
 	<div *ngIf="isLoggedIn">
 		<a routerLink="/season/classification/current" routerLinkActive="active-class">
-			Fifa Champs
+			Temporada
+		</a>
+		<a routerLink="/hall" routerLinkActive="active-class">
+			Hall of fame
 		</a>
 		<a (click)="createMatch()" >
 			Adicionar Jogo

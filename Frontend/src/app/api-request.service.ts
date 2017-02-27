@@ -20,7 +20,9 @@ export class ApiRequestService {
 	}
 
 	public post(url, data) : Observable<any> {
-		return this.http.post(this.baseUrl + url, data, {withCredentials: true}).map((response) => { 
+		return this.http.post(this.baseUrl + url, data, { withCredentials: true }).map((response) => { 
+			console.log(response.headers.values());
+
 			return response.json();
 		}).catch((error: Response | any) => {
 			return this.handleError(error);
@@ -36,7 +38,7 @@ export class ApiRequestService {
 	}
 
 	public delete(url) : Observable<any> {
-		return this.http.delete(this.baseUrl + url, {withCredentials: true}).map((response) => { 
+		return this.http.delete(this.baseUrl + url, { withCredentials: true }).map((response) => { 
 			return response.json();
 		}).catch((error: Response | any) => {
 			return this.handleError(error);

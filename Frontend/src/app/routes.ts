@@ -8,6 +8,7 @@ import { SeasonComponent } from './season/season.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SeasonSelectorComponent } from './season-selector/season-selector.component';
 import { PlayersListComponent } from './players-list/players-list.component';
+import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 
 export const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent},
@@ -23,7 +24,7 @@ export const appRoutes: Routes = [
 	{path: 'season/classification/current', component: SeasonSelectorComponent},
 	{path: 'season/classification/:month/:year', component: SeasonSelectorComponent},
 	{path: 'season/classification/alltime', component: SeasonSelectorComponent},
-	//{path: 'hall', component: CreateMatchComponent},
+	{path: 'hall', component: HallOfFameComponent},
 	{path: '', redirectTo: 'season/classification/current', pathMatch: 'full'},
 	{path: '**', component: PageNotFoundComponent}
 ];

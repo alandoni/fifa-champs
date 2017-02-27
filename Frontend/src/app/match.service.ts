@@ -25,4 +25,8 @@ export class MatchService {
 	getAll() : Observable<Match[]> {
 		return this.api.get(this.url);
 	}
+
+	getFinals() : Observable<Match[]> {
+		return this.api.get(this.url + '?isFinal=true');
+	}
 }

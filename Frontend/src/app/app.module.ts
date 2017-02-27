@@ -15,6 +15,7 @@ import { SeasonSelectorComponent } from './season-selector/season-selector.compo
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { PlayersListComponent } from './players-list/players-list.component';
 import { SeasonComponent } from './season/season.component';
+import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 
 import { LoginService } from './login.service';
 import { PlayerService } from './player.service';
@@ -37,7 +38,8 @@ import { appRoutes } from './routes';
 		NavigationBarComponent,
 		PlayersListComponent,
 		DropdownPlayerComponent,
-		NavigationBarComponent
+		NavigationBarComponent,
+		HallOfFameComponent
 	],
 	imports: [
 		BrowserModule,

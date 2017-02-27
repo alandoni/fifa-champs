@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
 	tryLogin() { 
 		this.login.login(this.nickname, this.password).subscribe(
 			(result) => this.loginSuccess(result),
-			(error) => {
-				console.log(<any>error);
-				this.error = <any>error;
+			(error : any) => {
+				console.log(error);
+				this.error = error;
 			}
 		);
 	}

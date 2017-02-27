@@ -6,6 +6,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const uuid = require('uid-safe');
+const cors = require('cors');
 
 const errors = require('./errors');
 const utils = require('./utils');
@@ -36,24 +37,28 @@ exports.set = function(app, mongo) {
 
 	app.use(bodyParser.json());
 
-	app.use((request, response, next) => {
-		response.header("Access-Control-Allow-Origin", "http://localhost:4200");
-		response.header("Access-Control-Allow-Headers", "connect.sid, Authorization, Origin, X-Requested-With, Content-Type, Accept");
-		response.header("Access-Control-Allow-Methods", "POST, UPDATE, DELETE, GET");
-		response.header("Access-Control-Allow-Credentials", true);
-
-		next();
-	});
+	app.use(cors({
+		origin: function (origin, callback) {
+		    callback(null, true); //bypass
+		},
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+		preflightContinue: false,
+		credentials: true,
+		optionsSuccessStatus: 204,
+		allowedHeaders: ['set-cookie', 'Content-Type', 'cookie', 'cookies', 'connect.sid'],
+		exposedHeaders: ['set-cookie', 'Content-Type', 'cookie', 'cookies', 'connect.sid']
+	}));
+	
+	app.options('*', cors());
 
 	app.use(cookieParser());
 
-	app.use(
-		session({secret: 'SEKR37',
-			resave: false,
-			saveUninitialized: true,
-			cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24, secure: false }
-		})
-	);
+	app.use(session({
+		secret: 'SEKR37',
+		resave: false,
+		saveUninitialized: true,
+		cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24, secure: false }
+	}));
 
 	app.use(passport.initialize());
 	app.use(passport.session());
@@ -165,9 +170,6 @@ exports.set = function(app, mongo) {
 
 	app.delete(URL_PLAYERS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
-
-		console.log("Removing Player by ID " + id);
-
 		playerController.delete(id).then((result) => {
 			response.send(result);
 		}).catch((error) => {
@@ -177,7 +179,14 @@ exports.set = function(app, mongo) {
 
 	//Matches
 	app.get(URL_MATCHES, (request, response) => {
-		matchController.getAll().then((matchesList) => {
+		var promise = null;
+		if (request.query) {
+			promise = matchController.getByCriteria(request.query);
+		} else {
+			promise = matchController.getAll()
+		}
+
+		promise.then((matchesList) => {
 			response.send(matchesList);
 		}).catch((error) => {
 			response.status(500).send(error);
@@ -212,6 +221,7 @@ exports.set = function(app, mongo) {
 
 	app.delete(URL_MATCHES + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
+
 		matchController.delete(id).then((result) => {
 			response.send(result);
 		}).catch((error) => {

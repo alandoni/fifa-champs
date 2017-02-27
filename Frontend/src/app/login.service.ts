@@ -16,7 +16,7 @@ export class LoginService {
 	login(nickname, password) : Observable<Player> {
 		var passwordHash = Md5.hashStr(password);
 		var result = this.api.post(this.url, {nickname: nickname, password: passwordHash});
-		result.subscribe((result) => {
+		result.subscribe((res) => {
 			this.isLogged = true;
 			for (var listener in this.listeners) {
 				if (this.listeners[listener]) {
