@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="date col s12">{{match.date}}</div>
+  <div class="team1 col s5" [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0 }">
+  	<div class="player player1">{{match.player1.nickname}}</div>
+  	<div class="player player2">{{match.player2.nickname}}</div>
+  </div>
+  <div class="results col s2 center">
+  	<span [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0 }">
+      {{match.team1score}}</span>
+  	<span> X </span>
+  	<span [ngClass]="{'winner': getWinnerTeamIndex() == 2, 'loser': getWinnerTeamIndex() == 1, 'tie': getWinnerTeamIndex() == 0 }">
+      {{match.team2score}}</span>
+  </div>
+  <div class="team2 col s5" [ngClass]="{'winner': getWinnerTeamIndex() == 2, 'loser': getWinnerTeamIndex() == 1, 'tie': getWinnerTeamIndex() == 0 }">
+  	<div class="player player3">{{match.player3.nickname}}</div>
+  	<div class="player player4">{{match.player4.nickname}}</div>
+  </div>
+</div>

@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { InsertMatchComponent } from './insert-match/insert-match.component';
 import { CreatePlayerComponent } from './create-player/create-player.component';
 import { LoginComponent } from './login/login.component';
-import { SeasonComponent } from './season/season.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SeasonSelectorComponent } from './season-selector/season-selector.component';
 import { PlayersListComponent } from './players-list/players-list.component';

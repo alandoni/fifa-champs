@@ -13,7 +13,6 @@ export class AppComponent {
 	title = 'app works!';
 
 	constructor(private router: Router) {
-
 	}
 
 	loginSuccess(user) {
