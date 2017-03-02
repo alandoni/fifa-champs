@@ -21,7 +21,8 @@ cd Backend
 npm install
 ```
 run mongo 
-```mkdir -p /data/db 
+```
+mkdir -p /data/db 
 ./run_mongo.sh
 ```
 run server
