@@ -1,33 +1,35 @@
 # fifa-champs
 
-#On OSX
+# On OSX
 
-Dependencies:
+Dependencies: 
+```
 node
 brew
+```
 
-#Run Backend
-
-install mongo
-```brew install mongodb
+# Run Backend
+install mongo 
+```
+brew install mongodb
 ```
 
 install dependencies
-```cd fifa-champs
+```
+cd fifa-champs
 cd Backend
 npm install
 ```
-
-run mongo
-```mkdir -p /data/db
+run mongo 
+```mkdir -p /data/db 
 ./run_mongo.sh
 ```
-
 run server
-```npm start
+```
+npm start
 ```
 
-#Run Backend
+# Run Backend
 ```
 cd ../Frontend
 npm install
