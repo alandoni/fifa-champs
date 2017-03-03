@@ -42,9 +42,15 @@ class MatchController {
 			criteria.limit = undefined;
 			var offset = parseInt(criteria.offset);
 			criteria.offset = undefined;
-			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate("player1 player2 player3 player4 championship").exec();
+			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate("player1 player2 player3 player4 championship").exec()
+			.then((matches) => {
+				return this._prepareToSend(matches);
+			});
 		} else {
-			return this.mongo.selectByCriteria(document, criteria).populate("player1 player2 player3 player4 championship").exec();
+			return this.mongo.selectByCriteria(document, criteria).populate("player1 player2 player3 player4 championship").exec()
+			.then((matches) => {
+				return this._prepareToSend(matches);
+			});
 		}
 	}
 
@@ -79,10 +85,11 @@ class MatchController {
 
 	_prepareToSend(matchSaved) {
 		if (Array.isArray(matchSaved)) {
-			for (var match in matchSaved) {
-				matchSaved[match].date = util.formatDate(new Date(matchSaved[match].date));
+			var matches = util.copyObject(matchSaved);
+			for (var match in matches) {
+				matches[match].date = util.formatDate(new Date(matches[match].date));
 			}
-			return matchSaved;
+			return matches;
 		}
 		matchSaved.date = util.formatDate(new Date(matchSaved.date));
 		return matchSaved;
