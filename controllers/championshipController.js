@@ -18,6 +18,46 @@ class ChampionshipController {
 		});
 	}
 
+	getByCriteria(criteria) {
+		var populate = {	
+				path: 'matches',
+				populate: [{ 
+					path:  'player1',
+ 					model: 'Player'
+ 				},{ 
+					path:  'player2',
+ 					model: 'Player'
+ 				},{ 
+					path:  'player3',
+ 					model: 'Player'
+ 				},{ 
+					path:  'player4',
+ 					model: 'Player'
+ 				}]
+ 			};
+
+		if (criteria.minDate || criteria.maxDate) {
+			var minDate = criteria.minDate;
+			var maxDate = criteria.maxDate;
+
+			criteria.minDate = undefined;
+			criteria.maxDate = undefined;
+			
+			criteria.date = {$gte: minDate, $lte: maxDate};
+		}
+
+		if (criteria.offset && criteria.limit) {
+			var limit = parseInt(criteria.limit);
+			criteria.limit = undefined;
+			var offset = parseInt(criteria.offset);
+			criteria.offset = undefined;
+			
+			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate(populate).exec();
+		} else {
+			return this.mongo.selectByCriteria(document, criteria).populate(populate).exec();
+		}
+	}
+
 	getById(id) {
 		return this.mongo.selectById(document, id).populate({	
 					path: 'matches',
