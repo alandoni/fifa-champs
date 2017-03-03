@@ -5,8 +5,10 @@
 		<div (click)="changeTab(0)">Classificação</div>
 		<div (click)="changeTab(1)">Jogos</div>
 
-		<div (click)="previousMonth()"> &lt; </div> {{ this.getCurrentMonth() }} <div (click)="nextMonth()"> &gt; </div>
-
+		<div>
+			<span (click)="previousMonth()"> &lt; </span> {{ this.getCurrentMonth() }} <span (click)="nextMonth()"> &gt; </span>
+		</div>
+		
 		<div>
 	      <input type="checkbox" (click)="noFilterSelectionChanged($event)" id="noFilter"/>
 	      <label for="noFilter"> Sem filtro</label>
@@ -15,5 +17,7 @@
 		<hr />
 
 		<app-standing-table *ngIf="tab == 0" [matches]="matches"></app-standing-table>
+		<app-match-list *ngIf="tab == 1" [matches]="matches" [cols]="3"></app-match-list>
+
 	</div>
 </div>

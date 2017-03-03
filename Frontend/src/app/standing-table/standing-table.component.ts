@@ -163,12 +163,12 @@ export class StandingTableComponent implements OnChanges {
 
 	getColor(position, statistic) {
 		if (position < 4) {
-			return "#e3f9e6";
+			return 1;
 		}
 		if (statistic.matches < this.limit) {
-			return "#ffd5d5";
+			return 2;
 		}
-		return "";
+		return 0;
 	}
 
 	formatNumber(number) {

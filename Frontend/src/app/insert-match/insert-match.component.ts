@@ -38,6 +38,7 @@ export class InsertMatchComponent implements OnInit {
 
 		this.match.championship = this.championshipService.getCurrentChampionship();
 		this.match.isFinal = this.selected;
+		this.match.date = new Date();
 
 		this.matchService.insert(this.match).subscribe(
 			(result) => this.matchCreatedSuccess(result),
