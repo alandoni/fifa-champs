@@ -1,8 +1,19 @@
 <div>
-	<div (click)="previousMonth()"> &lt; </div> {{ this.getCurrentMonth() }} <div (click)="nextMonth()"> &gt; </div>
-	<input type="checkbox" (click)="noFilterSelectionChanged()" name="filter" value="filtered" /> Sem filtro
+	<div *ngIf="noChampionships">Nenhum campeonato criado, inicie criando um.</div>
 
-	<hr />
+	<div *ngIf="!noChampionships">
+		<div (click)="changeTab(0)">Classificação</div>
+		<div (click)="changeTab(1)">Jogos</div>
 
-	<app-season [matches]="matches" [players]="players"></app-season>
+		<div (click)="previousMonth()"> &lt; </div> {{ this.getCurrentMonth() }} <div (click)="nextMonth()"> &gt; </div>
+
+		<div>
+	      <input type="checkbox" (click)="noFilterSelectionChanged($event)" id="noFilter"/>
+	      <label for="noFilter"> Sem filtro</label>
+	    </div>
+
+		<hr />
+
+		<app-standing-table *ngIf="tab == 0" [matches]="matches"></app-standing-table>
+	</div>
 </div>

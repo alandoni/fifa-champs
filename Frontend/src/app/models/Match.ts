@@ -7,5 +7,6 @@ export class Match {
 	team2score;
 	date;
 	championship;
+	isFinal;
 	_id;
 }

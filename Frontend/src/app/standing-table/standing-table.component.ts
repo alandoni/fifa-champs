@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Match } from './../models/match';
 import { Statistics } from './../models/statistics';
 import { Player } from './../models/player';
@@ -8,29 +8,44 @@ import { Player } from './../models/player';
 	templateUrl: './standing-table.component.html',
 	styleUrls: ['./standing-table.component.css']
 })
-export class StandingTableComponent implements OnInit {
+export class StandingTableComponent implements OnChanges {
 
 	@Input() matches : Array<Match>;
-	@Input() players : Array<Player>;
 
 	statisticsList : Array<Statistics>;
-	days;
-	numberOfMatches;
-	limit;
+	days = 0;
+	numberOfMatches = 0;
+	limit = 0;
+	players: Array<Player>;
 
 	constructor() { }
 
-	ngOnInit() {
-
-	}
-	
 	ngOnChanges() {
-		if (!this.hasPlayers()) {
-			console.error("No players found to mount standing-table");
-			return;
-		}
+		console.log("Detected changes");
 		this.setLimit();
+		this.getPlayersFromMatches();
+
+		this.statisticsList = [];
+
 		this.createStatistics();
+	}
+
+	getPlayersFromMatches() {
+		this.players = [];
+		for (var match in this.matches) {
+			if (this.players.indexOf(this.matches[match].player1) < 0) {
+				this.players.push(this.matches[match].player1);
+			}
+			if (this.players.indexOf(this.matches[match].player2) < 0) {
+				this.players.push(this.matches[match].player2);
+			}
+			if (this.players.indexOf(this.matches[match].player3) < 0) {
+				this.players.push(this.matches[match].player3);
+			}
+			if (this.players.indexOf(this.matches[match].player4) < 0) {
+				this.players.push(this.matches[match].player4);
+			}
+		}
 	}
 
 	createStatistics() {
@@ -124,7 +139,10 @@ export class StandingTableComponent implements OnInit {
 	}
 
 	setLimit() {
-		if (!this.matches && this.matches.length == 0) {
+		if (!this.matches || this.matches.length == 0) {
+			this.days = 0;
+			this.numberOfMatches = 0;
+			this.limit = 0;
 			return;
 		}
 

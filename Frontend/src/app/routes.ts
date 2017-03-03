@@ -13,11 +13,10 @@ import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 export const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent},
 	{path: 'players', component: PlayersListComponent},
-	/*{path: 'create-player', component: CreatePlayerComponent},
-	{path: 'season/results/:id', component: ResultsComponent},
-	{path: 'season/results/:month/:year', component: ResultsComponent},
-	{path: 'season/results/current', component: ResultsComponent},
-	{path: 'season/results/alltime', component: CreateMatchComponent},*/
+	{path: 'season/results/:id', component: SeasonSelectorComponent},
+	{path: 'season/results/:month/:year', component: SeasonSelectorComponent},
+	{path: 'season/results/current', component: SeasonSelectorComponent},
+	{path: 'season/results/alltime', component: SeasonSelectorComponent},
 	{path: 'create-player', component: CreatePlayerComponent},
 	{path: 'insert-match', component: InsertMatchComponent},
 	{path: 'season/classification/:id', component: SeasonSelectorComponent},
