@@ -1,18 +1,25 @@
 # fifa-champs
 
-# On OSX
+# Dependencies: 
+Install node
 
-Dependencies: 
+On OSX:
 ```
-node
-brew
+Install brew
+brew install node
 ```
+On Windows:
+* Download and install: https://nodejs.org/en/
+* put [\path\to\node] in PATH (system variable)
 
 # Run Backend
-install mongo 
+Install mongo 
 ```
 brew install mongodb
 ```
+On windows:
+* Download and install: https://www.mongodb.com/download-center#community
+* put [\path\to\mongo]\bin in PATH (system variable)
 
 install dependencies
 ```
@@ -20,20 +27,30 @@ cd fifa-champs
 cd Backend
 npm install
 ```
-run mongo 
+Run mongo 
+On OSX:
 ```
 mkdir -p /data/db 
 ./run_mongo.sh
 ```
-run server
+On Windows:
+```
+mongod --port 27017 --dbpath data/db
+```
+
+Run server
 ```
 npm start
+```
+To run backend tests:
+```
+npm test
 ```
 
 # Run Backend
 ```
 cd ../Frontend
 npm install
-sudo npm install -g angular-cli
+sudo npm install -g @angular/cli
 ng serve
 ```
