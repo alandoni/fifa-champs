@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatchService } from "./../match.service";
-import { Match } from './../models/Match';
+import { Match } from './../models/match';
 import { PlayerDropdownSelected } from './../models/PlayerDropdownSelected';
 import { ChampionshipService } from './../championship.service';
 
