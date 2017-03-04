@@ -27,7 +27,6 @@ export class PlayersListComponent implements OnInit {
 
 		this.playerService.getAll().subscribe(
 			(players: Player[]) => {
-				console.log(players);
 				this.players = players;
 			},
 			(error) => console.log(error)
@@ -67,7 +66,6 @@ export class PlayersListComponent implements OnInit {
 	}
 
 	closeModal(result) {
-		console.log(result);
 		if (this.selectedIndex == -1) {
 			this.players.push(result);
 		} else {
