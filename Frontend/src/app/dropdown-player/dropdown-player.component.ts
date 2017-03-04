@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from "./../player.service";
 import { Player } from './../models/Player';
 import { PlayerDropdownSelected } from './../models/PlayerDropdownSelected';
@@ -19,7 +19,7 @@ export class DropdownPlayerComponent implements OnInit, OnChanges {
 	selected: string;
 	error: any;
 
-	constructor(private cdRef: ChangeDetectorRef, private ngZone: NgZone) { }
+	constructor() { }
 
 	playerSelected(_id: string) {
 		this.selected = _id;
