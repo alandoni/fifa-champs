@@ -1,8 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatchService } from "./../match.service";
 import { Match } from './../models/match';
+import { Player } from './../models/player';
 import { PlayerDropdownSelected } from './../models/PlayerDropdownSelected';
 import { ChampionshipService } from './../championship.service';
+import { PlayerService } from './../player.service';
 
 @Component({
   selector: 'app-insert-match',
@@ -15,8 +17,10 @@ export class InsertMatchComponent implements OnInit {
 	match: Match = new Match();
 	error: any;
 	selected: false;
+	players: Array<Player>;
 
-	constructor(private matchService: MatchService, private championshipService: ChampionshipService) { }
+	constructor(private playerService: PlayerService, private matchService: MatchService, 
+		private championshipService: ChampionshipService) { }
 
 	tryCreateMatch() { 
 		if (!this.championshipService.getCurrentChampionship()) {
@@ -85,5 +89,27 @@ export class InsertMatchComponent implements OnInit {
 					team1score: undefined, team2score: undefined, isFinal: false, championship: undefined, date: undefined};
 		this.error = null;
 		this.selected = false;
+
+		this.requestAllPlayers();
+
+		this.playerService.addListener(this);
+		console.log("Insert-match now will listen any players changes");
+	}
+
+	onPlayersChanged() {
+		this.requestAllPlayers();
+	}
+
+	requestAllPlayers() {
+		this.playerService.getAll().subscribe(
+			(result) => {
+				console.log("Just updated players");
+				this.players = result;
+			},
+			(error: any) => {
+				console.log(error);
+				this.error = error;
+			}
+		);
 	}
 }

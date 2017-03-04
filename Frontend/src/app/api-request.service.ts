@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/share';
 import { AppSettings } from './app-settings';
 
 @Injectable()
@@ -20,30 +21,27 @@ export class ApiRequestService {
 	}
 
 	public post(url, data) : Observable<any> {
-		return this.http.post(this.baseUrl + url, data, { withCredentials: true }).map((response) => { 
-			return response.json();
-		}).catch((error: Response | any) => {
-			return this.handleError(error);
-		});
+		return this.http.post(this.baseUrl + url, data, { withCredentials: true })
+			.map((response) => { return response.json(); })
+			.share()
+			.catch((error: Response | any) => { return this.handleError(error); });
 	}
 
 	public get(url) : Observable<any> {
-		return this.http.get(this.baseUrl + url).map((response) => { 
-			return response.json();
-		}).catch((error: Response | any) => {
-			return this.handleError(error);
-		});
+		return this.http.get(this.baseUrl + url)
+			.map((response) => { return response.json(); })
+			.share()
+			.catch((error: Response | any) => { return this.handleError(error); });
 	}
 
 	public delete(url) : Observable<any> {
-		return this.http.delete(this.baseUrl + url, { withCredentials: true }).map((response) => { 
-			return response.json();
-		}).catch((error: Response | any) => {
-			return this.handleError(error);
-		});
+		return this.http.delete(this.baseUrl + url, { withCredentials: true })
+			.map((response) => { return response.json(); })
+			.share()
+			.catch((error: Response | any) => { return this.handleError(error); });
 	}
 
-	handleError(error: Response | any) {
+	private handleError(error: Response | any) {
 		console.log(error);
 
 		if (error.json().description) {
