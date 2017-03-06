@@ -32,6 +32,9 @@ export class MatchListComponent implements OnChanges {
 		if (mod == 0) {
 			numberOfMatchesPerColumn = Math.floor(this.matches.length / this.cols);
 		}
+		if (numberOfMatchesPerColumn == 0) {
+			numberOfMatchesPerColumn++;
+		}
 
 		var matchIndex = 0;
 		for (var i = 0; i < this.cols; i++) {
