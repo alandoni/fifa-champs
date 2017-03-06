@@ -24,8 +24,6 @@ export class MatchListComponent implements OnChanges {
 			return;
 		}
 
-		console.log(this.matches);
-
 		this.cols = Math.min(Math.max(1, Math.round(Math.abs(this.cols))), 4);
 
 		var mod = this.matches.length % this.cols;
@@ -38,9 +36,6 @@ export class MatchListComponent implements OnChanges {
 		if (numberOfMatchesPerColumn == 0) {
 			numberOfMatchesPerColumn++;
 		}
-
-		console.log("cols: " + this.cols);
-		console.log("numberOfMatchesPerColumn: " + numberOfMatchesPerColumn);
 
 		var matchIndex = 0;
 		for (var i = 0; i < this.cols; i++) {
