@@ -23,6 +23,8 @@ export class MatchListComponent implements OnChanges {
 			return;
 		}
 
+		this.error = null;
+
 		this.cols = Math.min(Math.max(1, Math.round(Math.abs(this.cols))), 4);
 
 		var mod = this.matches.length % this.cols;
