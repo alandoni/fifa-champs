@@ -1,3 +1,17 @@
 nav{
-  background: red;
+  background: #607D8B;
+  position: relative;
+}
+a{
+  float:right;
+  width:auto;
+  padding:0px 25px 0px 25px;
+  cursor: pointer;
+}
+
+a:hover{
+  background: #455A64;
+}
+a.active-class{
+  background: #455A64;
 }

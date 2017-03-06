@@ -1,14 +1,12 @@
-<div>
-	<div *ngIf="noChampionships">Nenhum campeonato criado, inicie criando um.</div>
 
 	<div *ngIf="!noChampionships">
-		<div (click)="changeTab(0)">Classificação</div>
-		<div (click)="changeTab(1)">Jogos</div>
+		<div (click)="changeTab(0)" class="tab">Classificação</div>
+		<div (click)="changeTab(1)" class="tab">Jogos</div>
 
 		<div>
 			<span (click)="previousMonth()"> &lt; </span> {{ this.getCurrentMonth() }} <span (click)="nextMonth()"> &gt; </span>
 		</div>
-		
+
 		<div>
 	      <input type="checkbox" (click)="noFilterSelectionChanged($event)" id="noFilter"/>
 	      <label for="noFilter"> Sem filtro</label>
