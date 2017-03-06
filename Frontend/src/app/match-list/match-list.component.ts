@@ -20,8 +20,11 @@ export class MatchListComponent implements OnChanges {
 
 		if (!this.matches || this.matches.length == 0) {
 			this.error = {description: "Nenhum jogo encontrado"};
+			console.log(this.error.description);
 			return;
 		}
+
+		console.log(this.matches);
 
 		this.cols = Math.min(Math.max(1, Math.round(Math.abs(this.cols))), 4);
 
@@ -32,6 +35,12 @@ export class MatchListComponent implements OnChanges {
 		if (mod == 0) {
 			numberOfMatchesPerColumn = Math.floor(this.matches.length / this.cols);
 		}
+		if (numberOfMatchesPerColumn == 0) {
+			numberOfMatchesPerColumn++;
+		}
+
+		console.log("cols: " + this.cols);
+		console.log("numberOfMatchesPerColumn: " + numberOfMatchesPerColumn);
 
 		var matchIndex = 0;
 		for (var i = 0; i < this.cols; i++) {
