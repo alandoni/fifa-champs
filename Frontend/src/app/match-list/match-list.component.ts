@@ -20,7 +20,6 @@ export class MatchListComponent implements OnChanges {
 
 		if (!this.matches || this.matches.length == 0) {
 			this.error = {description: "Nenhum jogo encontrado"};
-			console.log(this.error.description);
 			return;
 		}
 
