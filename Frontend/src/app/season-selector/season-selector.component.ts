@@ -40,6 +40,12 @@ export class SeasonSelectorComponent implements OnInit {
 
 			console.log("Getting new data");
 
+			if (window.location.href.indexOf('results') > 0) {
+				this.changeTab(1);
+			} else {
+				this.changeTab(0);
+			}
+
 			if (params['id'] === 'current') {
 				this.requestCurrentMatches();
 				return;
@@ -55,7 +61,6 @@ export class SeasonSelectorComponent implements OnInit {
 			}
 
 			if (params['month'] && params['year']) {
-				console.log(params);
 				this.requestMatchesByMonth(+params['month'], +params['year']);
 				return;
 			}
@@ -104,12 +109,13 @@ export class SeasonSelectorComponent implements OnInit {
 		console.log("Requesting matches from championship " + championshipId);
 		this.isLoading = true;
 		this.matchService.getByChampionship(championshipId).subscribe(
-			(matches) => this.processMatches(matches),
+			(matches) => {
+				this.processMatches(matches);
+			},
 			(error) => console.log(error));
 
 		this.championshipService.getById(championshipId).subscribe(
 			(championship) => {
-				console.log(championship);
 				if (championship) {
 					this.noChampionships = false;
 				}
@@ -164,6 +170,13 @@ export class SeasonSelectorComponent implements OnInit {
 
 	changeTab(tab) {
 		this.tab = tab;
+		if (tab == 0) {
+			var newUrl = window.location.href.replace('results', 'classification');
+			history.pushState({}, null, newUrl);
+		} else {
+			var newUrl = window.location.href.replace('classification', 'results');
+			history.pushState({}, null, newUrl);
+		}
 	}
 
 	noFilterSelectionChanged() {

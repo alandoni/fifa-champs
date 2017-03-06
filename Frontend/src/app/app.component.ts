@@ -25,11 +25,17 @@ export class AppComponent {
 
 	matchCreated(result: Match) {
 		//GAMBIARRA BECAUSE I CAN
+
+		var url = 'classification';
+		if (window.location.href.indexOf('results') > 0) {
+			url = 'results';
+		}
+
 		if (window.location.href.indexOf(result.championship._id) > 0) {
-			this.router.navigateByUrl('season/classification/' + result.championship.month + '/' + result.championship.year);
+			this.router.navigateByUrl('season/' + url + '/' + result.championship.month + '/' + result.championship.year);
 			return;
 		}
-		this.router.navigateByUrl('season/classification/' + result.championship._id);
+		this.router.navigateByUrl('season/' + url + '/' + result.championship._id);
 	}
 
 	championshipCreated(result: Championship) {
