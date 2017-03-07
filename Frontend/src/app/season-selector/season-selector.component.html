@@ -1,10 +1,12 @@
 <div>
 	<div *ngIf="noChampionships">Nenhum campeonato criado, inicie criando um.</div>
 
-	<div *ngIf="!noChampionships">
-		<div id="subNav">
-			<div (click)="changeTab(0)" class="tab">Classificação</div>
-			<div (click)="changeTab(1)" class="tab">Jogos</div>
+	<div *ngIf="!noChampionships" class="nav-content">
+		<div id="sub-nav">
+			<ul class="tabs tabs-transparent">
+				<li class="tab"><a (click)="changeTab(0)">Classificação</a></li>
+				<li  class="tab"><a (click)="changeTab(1)">Jogos</a></li>
+			</ul>
 		</div>
 
 		<div>

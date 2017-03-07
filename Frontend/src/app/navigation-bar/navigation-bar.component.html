@@ -1,34 +1,42 @@
 <nav class="nav-extended">
 	<div *ngIf="!isLoggedIn" class="nav-wrapper">
-		<a (click)="openLoginModal()">
+		<ul id="nav-mobile" class="right hide-on-med-and-down">
+		<li><a routerLink="/season/classification/current" routerLinkActive="active-class">
+				Temporada
+			</a></li>
+		<li><a routerLink="/hall" routerLinkActive="active-class">
+			Hall of fame
+		</a></li>
+		<li><a (click)="openLoginModal()">
 			Login
-		</a>
-		<a routerLink="/hall" routerLinkActive="active-class">
-			Hall of fame
-		</a>
-		<a routerLink="/season/classification/current" routerLinkActive="active-class">
-			Temporada
-		</a>
+		</a></li>
+	</ul>
 	</div>
-	<div *ngIf="isLoggedIn">
-		<a (click)="logout()" routerLinkActive="active-class">
-			Logout
-		</a>
-		<a routerLink="/players" routerLinkActive="active-class">
-			Jogadores
-		</a>
-		<a (click)="createMatch()" >
-			Adicionar Jogo
-		</a>
-		<a routerLink="/season/classification/current" routerLinkActive="active-class">
-			Temporada
-		</a>
-		<a routerLink="/hall" routerLinkActive="active-class">
-			Hall of fame
-		</a>
-		<a (click)="createSeason()" >
-			Criar Nova Temporada
-		</a>
+
+	<div *ngIf="isLoggedIn" class="nav-wrapper">
+		<ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li><a (click)="createSeason()" >
+				Criar Nova Temporada
+			</a></li>
+			<li><a routerLink="/hall" routerLinkActive="active-class">
+				Hall of fame
+			</a></li>
+			<li><a routerLink="/season/classification/current" routerLinkActive="active-class">
+				Temporada
+			</a></li>
+			<li><a routerLink="/players" routerLinkActive="active-class">
+				Jogadores
+			</a></li>
+			<li><a (click)="createMatch()" >
+				Adicionar Jogo
+			</a></li>
+			<li><a routerLink="/season/classification/current" routerLinkActive="active-class">
+				Temporada
+			</a></li>
+			<li><a (click)="logout()" routerLinkActive="active-class">
+				Logout
+			</a></li>
+	</ul>
 	</div>
 </nav>
 

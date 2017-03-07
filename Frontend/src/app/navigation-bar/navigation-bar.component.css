@@ -1,17 +1,9 @@
 nav{
   background: #607D8B;
-  position: relative;
 }
 a{
-  float:right;
-  width:auto;
-  padding:0px 25px 0px 25px;
-  cursor: pointer;
+  padding:0px 25px;
 }
-
-a:hover{
-  background: #455A64;
-}
-a.active-class{
-  background: #455A64;
+a:focus, active{
+  background-color:#455A64;
 }
