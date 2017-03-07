@@ -1,7 +1,11 @@
+<div>
+	<div *ngIf="noChampionships">Nenhum campeonato criado, inicie criando um.</div>
 
 	<div *ngIf="!noChampionships">
-		<div (click)="changeTab(0)" class="tab">Classificação</div>
-		<div (click)="changeTab(1)" class="tab">Jogos</div>
+		<div id="subNav">
+			<div (click)="changeTab(0)" class="tab">Classificação</div>
+			<div (click)="changeTab(1)" class="tab">Jogos</div>
+		</div>
 
 		<div>
 			<span (click)="previousMonth()"> &lt; </span> {{ this.getCurrentMonth() }} <span (click)="nextMonth()"> &gt; </span>

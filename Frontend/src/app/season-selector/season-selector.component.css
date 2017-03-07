@@ -1,5 +1,10 @@
+#subNav{
+  background: #607D8B;
+}
 .tab{
-  float:right;
+  float:left;
   width:auto;
   cursor: pointer;
+  padding:0px 20px 0px 20px;
+  
 }
