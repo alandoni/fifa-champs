@@ -20,6 +20,10 @@ th, td{
   padding: 0px;
 }
 
+table{
+  width: 90%;
+}
+
 .dark-cell{
   background-color: #f2f2f2;
 }

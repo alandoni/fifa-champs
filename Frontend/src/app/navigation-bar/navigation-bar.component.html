@@ -41,9 +41,7 @@
 </nav>
 
 <div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
-	<div class="modal-content">
-	  	<h4>Login</h4>
-	</div>
+
 	<app-login (onLoginSuccess)="closeLoginModal($event)"></app-login>
 </div>
 
