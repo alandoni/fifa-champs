@@ -4,8 +4,24 @@
 
 .tab{
   padding: 0 24px;
+  cursor: pointer;
 }
 
 .tab.active{
   color:#ff0000;
+}
+
+#season{
+  margin-left: 3%;
+}
+#season p{
+  background-color: #ffffff;
+  color:#999999;
+  font-weight: bold;
+  font-size: 0.75em;
+  text-transform: uppercase;
+}
+
+.btn-flat{
+  width:50px;
 }

@@ -1,11 +1,9 @@
 .winner #ranking{
   color: #4CAF50;
 }
-
 .loser #ranking{
 	color: #f44336;
 }
-
 .header{
   background-color: #ffffff;
   color:#999999;
@@ -19,19 +17,21 @@ th, td{
   height: 50px;
   padding: 0px;
 }
-
-table{
+#table-standing{
   width: 90%;
 }
-
 .dark-cell{
   background-color: #f2f2f2;
 }
-
 .light-cell{
   background-color: #ffffff;
 }
-
 #player-name{
   text-align: left;
+}
+#table-balance{
+  width:30%;
+  float:right;
+  clear: both;
+  margin-right: 10%;
 }

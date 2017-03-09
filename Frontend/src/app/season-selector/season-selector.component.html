@@ -9,8 +9,9 @@
 			</ul>
 		</div>
 
-		<div>
-			<span (click)="previousMonth()"> &lt; </span> {{ this.getCurrentMonth() }} <span (click)="nextMonth()"> &gt; </span>
+		<div id="season">
+			<p>Temporada</p>
+			<a class="waves-effect waves-teal btn-flat" (click)="previousMonth()"> <i class="material-icons">skip_previous</i> </a> {{ this.getCurrentMonth() }} <a class="waves-effect waves-teal btn-flat" (click)="nextMonth()"> <i class="material-icons">skip_next</i> </a>
 		</div>
 
 		<div>

@@ -2,7 +2,7 @@
 	Nenhum jogador encontrado
 </p>
 
-<table *ngIf="hasPlayers()"class="bordered responsive-table">
+<table *ngIf="hasPlayers()"class="bordered responsive-table" id="table-standing">
 	<tr class="header">
 		<th>Pos</th>
 		<th id="player-name">Nome</th>
@@ -35,8 +35,16 @@
 	</tr>
 </table>
 
-<div>
-	<div>Total: {{numberOfMatches}}</div>
-	<div>Dias: {{days}}</div>
-	<div>Avg: {{limit}}</div>
-</div>
+<table class="bordered" id="table-balance">
+	<tr class="header">
+		<th>Total</th>
+		<th>Dias</th>
+		<th>Avg.</th>
+	</tr>
+
+	<tr>
+		<td>{{numberOfMatches}}</td>
+		<td>{{days}}</td>
+		<td>{{limit}}</td>
+	</tr>
+</table>

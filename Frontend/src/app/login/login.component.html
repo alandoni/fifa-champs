@@ -2,5 +2,5 @@
 	<div *ngIf="error != null"><p>{{error.description}}</p></div>
   	<div id="nickname-container"><input name="nickname"  id="nickname" placeholder="Nickname" [(ngModel)]="nickname"/></div>
   	<div id="password-container"><input name="password" id="password" type="password" placeholder="Password" [(ngModel)]="password" /></div>
-  	<div id="button-container"><input name="submit" class="waves-effect waves-light btn  blue-grey lighten-1" type="button" value="Login" (click)="tryLogin();" /></div>
+  	<div id="button-container"><a class="waves-effect waves-light btn blue-grey lighten-1" (click)="tryLogin();">Login</a></div>
 </div>
