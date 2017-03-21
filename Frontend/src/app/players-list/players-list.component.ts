@@ -56,7 +56,7 @@ export class PlayersListComponent implements OnInit {
 	}
 
 	addUser() {
-		this.selectedPlayer = undefined;
+		this.selectedPlayer = null;
 		this.selectedIndex = -1;
 		this.openModal();
 	}

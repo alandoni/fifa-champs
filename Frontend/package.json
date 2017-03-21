@@ -4,9 +4,9 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "ng serve",
+    "start": "./node_modules/.bin/ng serve",
     "lint": "tslint \"src/**/*.ts\"",
-    "test": "ng test",
+    "test": "./node_modules/.bin/ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor"
   },
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@angular/cli": "^1.0.0-beta.21",
+    "@angular/compiler-cli": "^2.4.9",
     "@types/jasmine": "^2.2.30",
     "@types/node": "^6.0.42",
     "codelyzer": "1.0.0-beta.1",

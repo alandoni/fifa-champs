@@ -5,6 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "monitor": "./node_modules/.bin/node-dev server.js",
+    "database": "run_mongo.sh",
     "test": "SET NODE_ENV=dev && mocha --timeout 10000"
   },
   "author": "Alan Donizete Quintiliano",
@@ -25,6 +27,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "node-dev": "^3.1.3"
   }
 }

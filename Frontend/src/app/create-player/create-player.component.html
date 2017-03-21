@@ -1,5 +1,5 @@
-<div>
+<div id="popup-content">
 	<div *ngIf="error != null"><p>{{error.description}}</p></div>
-  	<div><input name="nickname" placeholder="Nickname" [(ngModel)]="nickname" /></div>
-  	<div><input name="submit" type="button" value="Salvar" (click)="tryCreatePlayer();" /></div>
+  	<div><input name="nickname" placeholder="Apelido" [(ngModel)]="nickname" /></div>
+  	<div id="button-container"><a class="waves-effect waves-light btn blue-grey lighten-1" (click)="tryCreatePlayer();" >Salvar</a></div>
 </div>

@@ -1,25 +1,29 @@
-<table *ngIf="hasPlayers">
-	<tr>
-		<th>Nome</th>
-		<th>Ações</th>
-	</tr>
-	<tr *ngFor="let player of players; let i = index">
-		<td>{{player.nickname}}</td>
-		<td>
-			<span (click)="updateUser(i)">Atualizar</span>
-			<span (click)="deleteUser(i)">Remover</span>
-		</td>
-	</tr>
-</table>
+<div id="container">
+	<table *ngIf="hasPlayers" class="bordered responsive-table">
+		<tr class="header">
+			<th>Nome</th>
+			<th>Ações</th>
+		</tr>
+		<tr *ngFor="let player of players; let i = index">
+			<td id="player-name">{{player.nickname}}</td>
+			<td>
+				<a href="#" (click)="updateUser(i)">Editar</a> - 
+				<a href="#" (click)="deleteUser(i)">Remover</a>
+			</td>
+		</tr>
+	</table>
 
-<p *ngIf="!hasPlayers">Nenhum jogador encontrado</p>
+	<p *ngIf="!hasPlayers" class="text-center">Nenhum jogador encontrado</p>
 
-<a (click)="addUser()">Adicionar Jogador</a>
-
-<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
-	<div class="modal-content">
-	  	<h4 *ngIf="selectedPlayer">Atualizar Jogador</h4>
-	  	<h4 *ngIf="!selectedPlayer">Criar Jogador</h4>
+	<div id="button-container">
+		<a class="waves-effect waves-light btn blue-grey lighten-1" (click)="addUser()">Adicionar Jogador</a>
 	</div>
-	<app-create-player (onCreatePlayerSuccess)="closeModal($event)" [player]="selectedPlayer"></app-create-player>
+
+	<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+		<div class="modal-content">
+			<h4 *ngIf="selectedPlayer">Editar Jogador</h4>
+			<h4 *ngIf="!selectedPlayer">Criar Jogador</h4>
+		</div>
+		<app-create-player (onCreatePlayerSuccess)="closeModal($event)" [player]="selectedPlayer"></app-create-player>
+	</div>
 </div>

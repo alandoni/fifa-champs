@@ -11,4 +11,5 @@ a:focus, active{
   margin:auto;
   padding: 5px 0px;
   width: 30%;
+  overflow: visible;
 }
