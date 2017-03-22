@@ -45,6 +45,7 @@ export class CreatePlayerComponent implements OnInit, OnChanges {
 	playerCreatedSuccess(result: Player) {
 		console.log("Player created " + result.nickname);
 		this.onCreatePlayerSuccess.emit(result);
+		this.nickname = '';
 	}
 
 	ngOnInit() { }

@@ -1,0 +1,35 @@
+#nickname{
+  margin-top: 20px;
+}
+
+#password{
+
+}
+
+#login-content{
+  width:auto;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin:0px;
+}
+
+#nickname-container{
+  width:70%;
+  margin:auto;
+}
+
+#password-container{
+  width:70%;
+  margin:auto;
+}
+
+#button-container{
+  width:70%;
+  margin:auto;
+}
+
+.btn{
+  float: right;
+  clear: both;
+  margin-bottom: 10px;
+}

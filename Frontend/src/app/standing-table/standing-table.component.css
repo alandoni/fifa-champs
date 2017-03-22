@@ -1,7 +1,55 @@
-.winner {
-	background-color: #98FB98;
+.winner #ranking{
+  color: #4CAF50;
 }
 
-.loser {
-	background-color: #FFDAB9;
+.loser #ranking{
+	color: #f44336;
+}
+
+.header{
+  background-color: #ffffff;
+  color:#999999;
+  font-weight: bold;
+  font-size: 0.75em;
+  text-transform: uppercase;
+}
+
+th, td {
+  text-align: center;
+  width: 2vw;
+  height: 50px;
+  padding: 0px;
+}
+
+th#player-name, td#player-name {
+    width: 8vw;
+}
+
+#table-standing {
+  width: 80%;
+  margin: auto;
+  table-layout: fixed;
+}
+
+.dark-cell{
+  background-color: #f2f2f2;
+}
+
+.light-cell{
+  background-color: #ffffff;
+}
+
+#player-name {
+  text-align: left;
+}
+
+#table-balance{
+  width:30%;
+  float:right;
+  clear: both;
+  margin-right: 10%;
+}
+
+.text-center {
+  text-align: center;
 }

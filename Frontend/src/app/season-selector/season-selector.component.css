@@ -1,10 +1,37 @@
-#subNav{
+#sub-nav{
   background: #607D8B;
 }
+
 .tab{
-  float:left;
-  width:auto;
+  padding: 0 24px;
   cursor: pointer;
-  padding:0px 20px 0px 20px;
-  
+}
+
+.tab.active{
+  color:#ff0000;
+}
+
+#season{
+  margin-left: 3%;
+  margin-bottom: 10px;
+}
+
+#season p{
+  background-color: #ffffff;
+  color:#999999;
+  font-weight: bold;
+  font-size: 0.75em;
+  text-transform: uppercase;
+}
+
+.season-button{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#season-month{
+  padding:0px 20px;
+}
+
+#filter-label{
+  margin-left:1%;
 }

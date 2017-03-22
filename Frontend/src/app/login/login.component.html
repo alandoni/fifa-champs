@@ -1,6 +1,6 @@
-<div>
+<div id="login-content">
 	<div *ngIf="error != null"><p>{{error.description}}</p></div>
-  	<div><input name="nickname" placeholder="Nickname" [(ngModel)]="nickname" /></div>
-  	<div><input name="password" type="password" placeholder="Password" [(ngModel)]="password" /></div>
-  	<div><input name="submit" type="button" value="Login" (click)="tryLogin();" /></div>
+  	<div id="nickname-container"><input name="nickname"  id="nickname" placeholder="Nickname" [(ngModel)]="nickname"/></div>
+  	<div id="password-container"><input name="password" id="password" type="password" placeholder="Password" [(ngModel)]="password" /></div>
+  	<div id="button-container"><a class="waves-effect waves-light btn blue-grey lighten-1" (click)="tryLogin();">Login</a></div>
 </div>
