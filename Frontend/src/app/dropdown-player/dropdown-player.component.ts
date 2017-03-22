@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from "./../player.service";
-import { Player } from './../models/Player';
+import { Player } from './../models/player';
 import { PlayerDropdownSelected } from './../models/PlayerDropdownSelected';
 import { Observable } from 'rxjs/Observable';
 

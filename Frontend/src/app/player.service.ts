@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Player } from './models/Player';
+import { Player } from './models/player';
 import { ApiRequestService } from './api-request.service';
 
 @Injectable()

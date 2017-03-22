@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Md5 } from 'ts-md5/dist/md5';
-import { Player } from './models/Player';
+import { Player } from './models/player';
 import { ApiRequestService } from './api-request.service';
 
 @Injectable()

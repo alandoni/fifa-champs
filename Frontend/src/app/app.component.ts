@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Player } from './models/Player';
+import { Player } from './models/player';
 import { Match } from './models/match';
 import { Championship } from './models/championship';
 

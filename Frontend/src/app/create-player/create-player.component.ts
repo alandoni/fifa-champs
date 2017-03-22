@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { PlayerService } from "./../player.service";
-import { Player } from './../models/Player';
+import { Player } from './../models/player';
 
 @Component({
 	selector: 'app-create-player',
