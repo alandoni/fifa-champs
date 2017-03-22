@@ -1,7 +1,7 @@
 "use strict"
 
 const Promise = require("bluebird");
-const Mongoose = require('Mongoose');
+const Mongoose = require('mongoose');
 const ObjectId = Mongoose.Types.ObjectId;
 const db = Mongoose.connection;
 

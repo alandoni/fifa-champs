@@ -1,4 +1,4 @@
-var Mongoose = require('Mongoose');
+var Mongoose = require('mongoose');
 var Schema   = Mongoose.Schema;
 
 var adminSchema = new Schema({
