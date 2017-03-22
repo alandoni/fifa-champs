@@ -3,7 +3,7 @@
 const Promise = require("bluebird");
 const errors = require('./../errors');
 const util = require('./../utils');
-const Mongoose = require('Mongoose');
+const Mongoose = require('mongoose');
 const ObjectId = Mongoose.Types.ObjectId;
 
 const document = require('./../models/match');
