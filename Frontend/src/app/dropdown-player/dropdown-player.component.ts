@@ -30,7 +30,8 @@ export class DropdownPlayerComponent implements OnInit, OnChanges {
 
 	ngOnChanges() {
 		if (this.players && this.players.length > 0) {
-			this.playerSelected(this.players[this.players.length - 1]._id);
+			this.playerSelected(this.players[0]._id);
+			console.log('Selecting player: ' + this.players[0].nickname);
 		}
 	}
 }

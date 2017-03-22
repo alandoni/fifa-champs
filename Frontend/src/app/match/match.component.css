@@ -1,18 +1,43 @@
 .winner {
-	background-color: #98FB98;
+ 	color: #4CAF50;
+  	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .loser {
-	background-color: #FFDAB9;
+	color: #f44336;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .tie {
-	background-color: #FFFFE0;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
 }
 
-.results{
+.results {
+	margin-top: 5px;
+	margin-bottom: 5px;
 	height:44px;
+	line-height: 44px;
+	font-size: 20px;
+	vertical-align: middle;
 }
+
 .results span{
 
+}
+
+.date {
+	background: #607D8B;
+	color: #fff;
+	text-align: center;
+	line-height: 32px;
+}
+
+.row {
+	margin-bottom: 0 !important;
 }

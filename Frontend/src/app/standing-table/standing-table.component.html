@@ -1,8 +1,8 @@
-<p *ngIf="!hasPlayers()">
-	Nenhum jogador encontrado
+<p *ngIf="!hasPlayers()" class="text-center">
+	Nenhum jogador/partida encontrado(a)
 </p>
 
-<table *ngIf="hasPlayers()"class="bordered responsive-table" id="table-standing">
+<table *ngIf="hasPlayers()" class="bordered responsive-table" id="table-standing">
 	<tr class="header">
 		<th>Pos</th>
 		<th id="player-name">Nome</th>
@@ -39,7 +39,7 @@
 	<tr class="header">
 		<th>Total</th>
 		<th>Dias</th>
-		<th>Avg.</th>
+		<th>Média</th>
 	</tr>
 
 	<tr>

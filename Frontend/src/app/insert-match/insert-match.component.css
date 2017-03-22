@@ -1,0 +1,21 @@
+.insert-match-container {
+	padding: 16px;
+	overflow: visible;
+}
+
+a > div {
+  width:70%;
+  margin:auto;
+}
+
+.btn{
+  float: right;
+  clear: both;
+  margin-bottom: 10px;
+}
+
+.text-center {
+	margin-top: -25px;
+	text-align: center;
+	margin-bottom: 30px;
+}

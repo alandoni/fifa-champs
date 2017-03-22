@@ -55,8 +55,17 @@ export class StandingTableComponent implements OnChanges {
 
 		var statistics = [];
 
+		if (!this.players) {
+			return;
+		}
+
 		for (let player in this.players) {
 			let playerObj = this.players[player];
+
+			if (!playerObj.nickname) {
+				continue;
+			}
+
 			statistics[playerObj.nickname] = new Statistics();
 			statistics[playerObj.nickname].player = playerObj;
 		}
@@ -117,6 +126,9 @@ export class StandingTableComponent implements OnChanges {
 	}
 
 	setStatisticOfPlayer(statistics, player, team1score, team2score) {
+		if (!player.nickname) {
+			return;
+		}
 		statistics[player.nickname].player = player;
 		statistics[player.nickname].matches++;
 		statistics[player.nickname].goals += team1score;
@@ -153,7 +165,7 @@ export class StandingTableComponent implements OnChanges {
 			}
 		}
 		this.days = days.length;
-		this.numberOfMatches = this.matches.length
+		this.numberOfMatches = this.matches.length;
 		this.limit = this.numberOfMatches / this.days;
 	}
 

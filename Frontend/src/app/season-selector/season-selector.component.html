@@ -22,7 +22,7 @@
 		<hr />
 
 		<app-standing-table *ngIf="tab == 0" [matches]="matches"></app-standing-table>
-		<app-match-list *ngIf="tab == 1" [matches]="matches" [cols]="1"></app-match-list>
+		<app-match-list *ngIf="tab == 1" [matches]="matches" [cols]="4" [minItemsPerColumn]="6"></app-match-list>
 
 	</div>
 </div>
