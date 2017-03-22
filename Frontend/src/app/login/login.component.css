@@ -1,9 +1,11 @@
 #nickname{
   margin-top: 20px;
 }
+
 #password{
 
 }
+
 #login-content{
   width:auto;
   padding-left: 2%;
@@ -25,6 +27,7 @@
   width:70%;
   margin:auto;
 }
+
 .btn{
   float: right;
   clear: both;

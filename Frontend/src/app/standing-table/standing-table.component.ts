@@ -165,7 +165,7 @@ export class StandingTableComponent implements OnChanges {
 			}
 		}
 		this.days = days.length;
-		this.numberOfMatches = this.matches.length
+		this.numberOfMatches = this.matches.length;
 		this.limit = this.numberOfMatches / this.days;
 	}
 

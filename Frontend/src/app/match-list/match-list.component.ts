@@ -9,6 +9,7 @@ import { Match } from './../models/match';
 export class MatchListComponent implements OnChanges {
 
 	@Input() matches: Array<Match>;
+	@Input() minItemsPerColumn = 6;
 	@Input() cols = 1;
 	error: any;
 	matchesList: Array<Array<Match>>;
@@ -39,13 +40,22 @@ export class MatchListComponent implements OnChanges {
 		}
 
 		var matchIndex = 0;
+		var lastMatchDate = "";
 		for (var i = 0; i < this.cols; i++) {
 			var matchCol = [];
-			for (var j = 0; j < numberOfMatchesPerColumn && matchIndex < this.matches.length; j++) {
+			for (var j = 0; (j < this.minItemsPerColumn || j < numberOfMatchesPerColumn) && matchIndex < this.matches.length; j++) {
 				matchCol.push(this.matches[matchIndex]);
+				
+				if (this.matches[matchIndex].date === lastMatchDate) {
+					this.matches[matchIndex].date = undefined;
+				} else {
+					lastMatchDate = this.matches[matchIndex].date;
+				}
 				matchIndex++;
 			}
+
 			this.matchesList.push(matchCol);
+			lastMatchDate = this.matches[matchIndex - 1].date;
 		}
 	}
 
