@@ -58,11 +58,22 @@ export class HallOfFameComponent implements OnInit {
 			}
 		}
 
+		this.champions = [];
 		for (var key in champions) {
 			this.champions.push({
 				name: key,
 				times: champions[key]
 			})
 		}
+
+		this.champions.sort((champion1, champion2) => {
+			if (champion1.times > champion2.times) {
+				return -1;
+			}
+			if (champion1.times < champion2.times) {
+				return 1;
+			}
+			return 0;
+		});
 	}
 }

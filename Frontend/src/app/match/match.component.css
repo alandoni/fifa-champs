@@ -1,25 +1,25 @@
 .winner {
  	color: #4CAF50;
   	text-align: center;
-	margin-top: 5px;
+	margin-top: 10px;
 	margin-bottom: 5px;
 }
 
 .loser {
 	color: #f44336;
 	text-align: center;
-	margin-top: 5px;
+	margin-top: 10px;
 	margin-bottom: 5px;
 }
 
 .tie {
-	margin-top: 5px;
+	margin-top: 10px;
 	margin-bottom: 5px;
 	text-align: center;
 }
 
 .results {
-	margin-top: 5px;
+	margin-top: 12px;
 	margin-bottom: 5px;
 	height:44px;
 	line-height: 44px;
