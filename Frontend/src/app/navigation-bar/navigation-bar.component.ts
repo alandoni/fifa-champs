@@ -59,6 +59,11 @@ export class NavigationBarComponent implements OnInit {
 	}
 
 	createSeason() {
+		if (!window.confirm("ATENÇÃO!! Tem certeza que quer iniciar um novo campeonato?" + 
+			" O campeonato atual não poderá mais ser alterado!")) {
+			return;
+		}
+
 		if (this.championshipService.getCurrentChampionship()) {
 			this.createSeasonBasedOnCurrentSeason(this.championshipService.getCurrentChampionship());
 			return;
