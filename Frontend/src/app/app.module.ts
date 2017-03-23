@@ -26,6 +26,8 @@ import { ApiRequestService } from './api-request.service';
 
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './routes';
+import { AdminsListComponent } from './admins-list/admins-list.component';
+import { CreateAdminComponent } from './create-admin/create-admin.component';
 
 @NgModule({
 	declarations: [
@@ -42,7 +44,9 @@ import { appRoutes } from './routes';
 		NavigationBarComponent,
 		HallOfFameComponent,
 		MatchComponent,
-		MatchListComponent
+		MatchListComponent,
+		AdminsListComponent,
+		CreateAdminComponent
 	],
 	imports: [
 		BrowserModule,
