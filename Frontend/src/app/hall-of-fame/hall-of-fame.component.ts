@@ -32,6 +32,11 @@ export class HallOfFameComponent implements OnInit {
 
 		var champions = {};
 
+		if (!this.matches || this.matches.length == 0) {
+			this.error = {description: 'Nenhum campeonato foi terminado ainda.'};
+			return;
+		}
+
 		for (var index in matches) {
 			var match = matches[index];
 

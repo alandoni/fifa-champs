@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="error">{{error.description}}</div>
+  <div *ngIf="error" class="error">{{error.description}}</div>
   <div *ngIf="!error" class="row">
   	<div *ngFor="let matches of matchesList" class="col s12" [ngClass]="{'l12': cols == 1, 'l6': cols == 2, 'l4': cols == 3, 'l3': cols == 4}">
   		<div *ngFor="let match of matches">

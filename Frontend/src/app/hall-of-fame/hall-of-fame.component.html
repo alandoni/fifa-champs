@@ -1,8 +1,8 @@
 <div class="row">
 
-	<div *ngIf="error">{{error.description}}</div>
+	<div *ngIf="error" class="error col s12">{{error.description}}</div>
 
-	<div class="col l3 champions">
+	<div *ngIf="!error" class="col l3 champions">
 		<div class="header">
 			Maiores campeões
 		</div>
@@ -11,7 +11,7 @@
 		</p>
 	</div>
 
-	<div class="matches col l9">
+	<div *ngIf="!error" class="matches col l9">
 		<app-match-list [matches]="matches" [cols]="3" [minItemsPerColumn]="6"></app-match-list>
 	</div>
 </div>

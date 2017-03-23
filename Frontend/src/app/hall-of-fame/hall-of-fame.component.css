@@ -16,3 +16,7 @@ span {
 p {
 	margin-left: 10px;
 }
+
+.error {
+	text-align: center;
+}

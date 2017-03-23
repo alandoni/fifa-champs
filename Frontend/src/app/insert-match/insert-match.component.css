@@ -15,7 +15,10 @@ a > div {
 }
 
 .text-center {
-	margin-top: -25px;
 	text-align: center;
+}
+
+.error {
+	margin-top: -25px;	
 	margin-bottom: 30px;
 }
