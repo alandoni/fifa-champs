@@ -11,6 +11,7 @@ const cors = require('cors');
 const errors = require('./errors');
 const utils = require('./utils');
 
+const URL_ADMIN = "/api/admin";
 const URL_CHAMPIONSHIPS = "/api/championships";
 const URL_PLAYERS = "/api/players";
 const URL_MATCHES = "/api/matches";
@@ -81,6 +82,14 @@ exports.set = function(app, mongo) {
 
 	    res.status(401).send(errors.getUnauthorized());
 	}
+
+	app.post(URL_ADMIN, isLoggedIn, (request, response) => {
+		adminController.insert(request.body).then((admin) => {
+			response.send(admin);
+		}).catch((error) => {
+			response.status(500).send(error);
+		});
+	});
 
 	//LOGIN
 	app.post(URL_LOGIN, (request, response, next) => {
