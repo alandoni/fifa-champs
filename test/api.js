@@ -29,6 +29,22 @@ describe('API Test', () => {
         });
     });
 
+    describe('/GET salt', () => {
+        it('it should get SALT', (done) => {
+
+            const nickname = "Admin";
+
+            get('/api/salt/' + nickname).then((res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('salt');
+                console.log(res.body);
+                done(res);
+            }).catch((error) => {
+                done();
+            });
+        });
+    });
+
     describe('/POST wrong login', () => {
         it('it should not LOGIN', (done) => {
 

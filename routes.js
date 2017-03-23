@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const uuid = require('uid-safe');
 const cors = require('cors');
+const SHA3 = require('sha3');
 
 const errors = require('./errors');
 const utils = require('./utils');
@@ -17,6 +18,7 @@ const URL_PLAYERS = "/api/players";
 const URL_MATCHES = "/api/matches";
 const URL_LOGIN = "/api/login";
 const URL_LOGOUT = '/api/logout';
+const URL_SALT = 'api/salt/:nickname';
 
 const ChampionshipController = require('./controllers/championshipController');
 const PlayerController = require('./controllers/playerController');
@@ -115,6 +117,18 @@ exports.set = function(app, mongo) {
 	app.post(URL_LOGOUT, (req, res) => {
         req.logout();
         res.send(true);
+    });
+
+    app.get(URL_SALT, (req, res) => {
+    	adminController.getByCriteria({nickname: req.params.nickname}).then((users) => {
+    		let user = user[0];
+
+			let d = new SHA3.SHA3Hash();
+			d.update(user.nickname);
+
+    		let response = {salt: d.digest(user.id + user.nickname)};
+    		response.send(championshipsList);
+    	});
     });
 
 	//Championships
