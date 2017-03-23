@@ -33,13 +33,15 @@ export class PlayersListComponent implements OnInit {
 		);
 	}
 
-	updateUser(index) {
+	updateUser(event, index) {
+		event.preventDefault();
 		this.selectedPlayer = this.players[index];
 		this.selectedIndex = index;
 		this.openModal();
 	}
 
-	deleteUser(index) {
+	deleteUser(event, index) {
+		event.preventDefault();
 		this.selectedIndex = index;
 		if (window.confirm("Tem certeza que quer excluir o " + this.players[index].nickname + "?")) {
 			this.playerService.delete(this.players[index]._id).subscribe(

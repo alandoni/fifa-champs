@@ -7,8 +7,8 @@
 		<tr *ngFor="let player of players; let i = index">
 			<td id="player-name">{{player.nickname}}</td>
 			<td>
-				<a href="#" (click)="updateUser(i)">Editar</a> - 
-				<a href="#" (click)="deleteUser(i)">Remover</a>
+				<a href="#" (click)="updateUser($event, i)">Editar</a> - 
+				<a href="#" (click)="deleteUser($event, i)">Remover</a>
 			</td>
 		</tr>
 	</table>
