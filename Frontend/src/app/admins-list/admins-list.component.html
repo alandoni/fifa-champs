@@ -1,4 +1,4 @@
-<div id="container">
+<div id="container" class="row">
 
 	<div *ngIf="url">
 		<p>Envie esse link para o futuro administrador registrar sua senha:</p>
@@ -25,7 +25,7 @@
 		<a class="waves-effect waves-light btn blue-grey lighten-1" (click)="addUser()">Adicionar Administrador</a>
 	</div>
 
-	<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+	<div class="modal col s12 m6 l4" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
 		<div class="modal-content">
 			<h4 *ngIf="selectedPlayer">Editar Administrador</h4>
 			<h4 *ngIf="!selectedPlayer">Criar Administrador</h4>

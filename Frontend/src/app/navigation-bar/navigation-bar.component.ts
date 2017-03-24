@@ -5,6 +5,9 @@ import { Championship } from './../models/championship';
 import { Player } from './../models/player';
 import { Match } from './../models/match';
 import { MaterializeAction } from 'angular2-materialize';
+import { NavigationBarItem } from './../models/navigation-bar-item.model';
+
+declare var $ : any;
 
 @Component({
 	selector: 'app-navigation-bar',
@@ -21,14 +24,45 @@ export class NavigationBarComponent implements OnInit {
 	modalActions = new EventEmitter<string|MaterializeAction>();
 	matchModalActions = new EventEmitter<string|MaterializeAction>();
 	isLoggedIn = false;
+	items : Array<NavigationBarItem> = [];
 
 	constructor(private loginService : LoginService, private championshipService : ChampionshipService) {
-		this.isLoggedIn = loginService.isLoggedIn();
 		this.loginService.addListener(this);
+		this.onLoginChange();
+	}
+
+	getItemsNotLogged() {
+		var itemsNotLogged = [];
+		itemsNotLogged.push(new NavigationBarItem('Login', null, this.openLoginModal.bind(this)));
+		itemsNotLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
+		itemsNotLogged.push(new NavigationBarItem('Temporada', '/season/classification/current', null));
+		return itemsNotLogged;
+	}
+
+	getItemsLogged() {
+		var itemsLogged = [];
+		itemsLogged.push(new NavigationBarItem('Logout', null, this.logout.bind(this)));
+		itemsLogged.push(new NavigationBarItem('Administradores', '/admin', null));
+		itemsLogged.push(new NavigationBarItem('Jogadores', '/players', null));
+		itemsLogged.push(new NavigationBarItem('Adicionar Jogo', null, this.createMatch.bind(this)));
+		itemsLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
+		itemsLogged.push(new NavigationBarItem('Temporada', '/season/classification/current', null));
+		itemsLogged.push(new NavigationBarItem('Criar Nova Temporada', null, this.createSeason.bind(this)));
+		return itemsLogged;
+	}
+
+	reverseArray(array) {
+		var newArray = [];
+		for (var i = array.length - 1; i >= 0; i--) {
+			newArray.push(array[i]);
+		}
+		return newArray;
 	}
 
 	ngOnInit() {
-
+		$(".button-collapse").sideNav();
+		  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+		  //$('.collapsible').collapsible();
 	}
 
 	createMatch() {
@@ -42,6 +76,11 @@ export class NavigationBarComponent implements OnInit {
 
 	onLoginChange() {
 		this.isLoggedIn = this.loginService.isLoggedIn();
+		if (this.isLoggedIn) {
+			this.items = this.getItemsLogged();
+		} else {
+			this.items = this.getItemsNotLogged();
+		}
 	}
 
 	logout() {

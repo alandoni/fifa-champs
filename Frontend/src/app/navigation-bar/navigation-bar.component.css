@@ -7,9 +7,10 @@ a{
 a:focus, active{
   background-color:#455A64;
 }
-.modal.open{
-  margin:auto;
+.modal.open {
   padding: 5px 0px;
-  width: 30%;
   overflow: visible;
+}
+.row {
+	margin-bottom: 0;
 }

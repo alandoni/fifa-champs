@@ -1,7 +1,6 @@
 .modal.open {
-  margin:auto;
+  margin: auto;
   padding: 5px 0px;
-  width: 30%;
 }
 
 #container {
