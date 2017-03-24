@@ -7,6 +7,7 @@
     "start": "./node_modules/.bin/ng serve",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "./node_modules/.bin/ng test",
+    "build": "./node_modules/.bin/ng build --prod",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor"
   },
