@@ -24,6 +24,12 @@ class AdminController {
 		});
 	}
 
+	getByCriteria(criteria) {
+		return this.mongo.selectByCriteria(document, criteria).then((admin) => {
+			return this._prepareToSend(admin);
+		});
+	}
+
 	insert(admin) {
 		return this.mongo.insert(new document(admin)).then((admin) => {
 			return this._prepareToSend(admin);
