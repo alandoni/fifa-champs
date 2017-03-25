@@ -18,13 +18,15 @@ export class LoginComponent implements OnInit {
 	constructor(private login: LoginService) { }
 
 	tryLogin() { 
-		this.login.login(this.nickname, this.password).subscribe(
-			(result) => this.loginSuccess(result),
-			(error : any) => {
-				console.log(error);
-				this.error = error;
-			}
-		);
+		this.login.getSalt(this.nickname).subscribe((salt) => {
+			this.login.login(this.nickname, this.password, salt.salt).subscribe(
+				(result) => this.loginSuccess(result),
+				(error : any) => {
+					console.log(error);
+					this.error = error;
+				}
+			);
+		});
 	}
 
 	loginSuccess(result: Player) {

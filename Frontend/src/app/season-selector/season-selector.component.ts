@@ -62,7 +62,6 @@ export class SeasonSelectorComponent implements OnInit {
 
 			if (params['month'] && params['year']) {
 				this.requestMatchesByMonth(+params['month'], +params['year']);
-				return;
 			}
 		});
 	}

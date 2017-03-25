@@ -7,18 +7,18 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const uuid = require('uid-safe');
 const cors = require('cors');
-const SHA3 = require('sha3');
+const sha3 = require('js-sha3').sha3_224;
 
 const errors = require('./errors');
 const utils = require('./utils');
 
-const URL_ADMIN = "/api/admin";
+const URL_ADMIN = '/api/admin';
 const URL_CHAMPIONSHIPS = "/api/championships";
 const URL_PLAYERS = "/api/players";
 const URL_MATCHES = "/api/matches";
 const URL_LOGIN = "/api/login";
 const URL_LOGOUT = '/api/logout';
-const URL_SALT = 'api/salt/:nickname';
+const URL_SALT = '/api/salt/:nickname';
 
 const ChampionshipController = require('./controllers/championshipController');
 const PlayerController = require('./controllers/playerController');
@@ -68,15 +68,17 @@ exports.set = function(app, mongo) {
 
 	adminController.getAll().then((admins) => {
 		if (admins.length == 0) {
-			return adminController.insert({nickname: 'Admin', password: '71e3401a5fdf0203d345362e003636b8'});
+			return adminController.insert({nickname: 'Admin', password: '486a9707d613a6d594bd50fe0314cfbb'});
 		}
 	}).then((admin) => {
 		if (admin) {
-			console.log("Created Admin: " + admin.nickname);
+			console.log('Created Admin: ' + admin.nickname);
 		}
 	});
 
 	function isLoggedIn(req, res, next) {
+
+		console.log('isAuth: ' + req.isAuthenticated());
 
 	    if (req.isAuthenticated()) {
 	        return next();
@@ -85,8 +87,33 @@ exports.set = function(app, mongo) {
 	    res.status(401).send(errors.getUnauthorized());
 	}
 
+	//ADMIN
 	app.post(URL_ADMIN, isLoggedIn, (request, response) => {
 		adminController.insert(request.body).then((admin) => {
+			response.send(admin);
+		}).catch((error) => {
+			response.status(500).send(error);
+		});
+	});
+
+	app.post(URL_ADMIN + '/:id', isLoggedIn, (request, response) => {
+		adminController.update(request.params.id, request.body).then((admin) => {
+			response.send(admin);
+		}).catch((error) => {
+			response.status(500).send(error);
+		});
+	});
+
+	app.get(URL_ADMIN, isLoggedIn, (request, response) => {
+		adminController.getAll().then((admins) => {
+			response.send(admins);
+		}).catch((error) => {
+			response.status(500).send(error);
+		});
+	});
+
+	app.delete(URL_ADMIN + '/:id', isLoggedIn, (request, response) => {
+		adminController.delete(request.params.id).then((admin) => {
 			response.send(admin);
 		}).catch((error) => {
 			response.status(500).send(error);
@@ -97,7 +124,9 @@ exports.set = function(app, mongo) {
 	app.post(URL_LOGIN, (request, response, next) => {
 		passport.authenticate('local-login', (error, user, info) => {
 			
+			console.log('info ' + info);
 			if (error) {
+				console.log('error ' + JSON.stringify(error));
 				response.status(401).send(error);
 				return;
 			}
@@ -105,30 +134,32 @@ exports.set = function(app, mongo) {
 			request.login(user, (error) => {
 				
 				if (error) {
+					console.log('err: ' + error);
 					response.status(401).send(error);
 					return;
 				}
+				console.log('Logged in as ' + user);
 				response.send(user);
 				next();
 			});
 		})(request, response, next);
 	});
 
-	app.post(URL_LOGOUT, (req, res) => {
+	app.post(URL_LOGOUT, isLoggedIn, (req, res) => {
         req.logout();
         res.send(true);
     });
 
-    app.get(URL_SALT, (req, res) => {
-    	adminController.getByCriteria({nickname: req.params.nickname}).then((users) => {
-    		let user = user[0];
+    app.get(URL_SALT, (request, response) => {
+    	adminController.getByCriteria({nickname: request.params.nickname}).then((users) => {
+    		let user = users[0];
 
-			let d = new SHA3.SHA3Hash();
-			d.update(user.nickname);
-
-    		let response = {salt: d.digest(user.id + user.nickname)};
-    		response.send(championshipsList);
-    	});
+    		let salt = {salt: sha3(user.id + user.nickname)};
+    		response.send(salt);
+    	}).catch((error) => {
+			console.log(error);
+			response.status(500).send(error);
+		});
     });
 
 	//Championships

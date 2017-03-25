@@ -28,7 +28,7 @@ export class ApiRequestService {
 	}
 
 	public get(url) : Observable<any> {
-		return this.http.get(this.baseUrl + url)
+		return this.http.get(this.baseUrl + url, { withCredentials: true })
 			.map((response) => { return response.json(); })
 			.share()
 			.catch((error: Response | any) => { return this.handleError(error); });
