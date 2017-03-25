@@ -10,13 +10,29 @@
 		</div>
 
 		<div id="season">
-			<p>Temporada</p>
-			<a class="season-button waves-effect waves-light btn blue-grey" (click)="previousMonth()"> <i class="material-icons">skip_previous</i></a>
-			<span id="season-month">{{ this.getCurrentMonth() }}</span>
-			<a class="season-button waves-effect waves-light btn blue-grey" (click)="nextMonth()"> <i class="material-icons">skip_next</i> </a>
+			<div class="row season-title">
+				<p class="col s12">Temporada</p>
+			</div>
+			<div class="row">
+				<div class="col s2 m1 large-none">
+					<a class="season-button waves-effect waves-light btn blue-grey" (click)="previousMonth()"> <i class="material-icons">skip_previous</i></a>
+				</div>
+				<div class="col s8 m3 l1-5 season-month-container valign-wrapper">
+					<div class="valign text-center">{{ this.getCurrentMonth() }}</div>
+				</div>
+				<div class="col s2 m1 large-none">
+					<a class="season-button waves-effect waves-light btn blue-grey" (click)="nextMonth()"> <i class="material-icons">skip_next</i> </a>
+				</div>
 
-			<span id="no-filter"><input type="checkbox" (click)="noFilterSelectionChanged($event)" id="noFilter"/>
-			<label for="noFilter" id="filter-label">Sem filtro</label></span>
+				<div class="row hide-on-med-and-up"></div>
+
+				<div class="col s12 m4 valign-wrapper no-filter-container">
+					<span id="no-filter">
+						<input type="checkbox" (click)="noFilterSelectionChanged($event)" id="noFilter"/>
+						<label for="noFilter" id="filter-label">Sem filtro</label>
+					</span>
+				</div>
+			</div>
 		</div>
 
 		<hr />

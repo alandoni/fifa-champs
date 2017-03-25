@@ -3,12 +3,16 @@
 	overflow: visible;
 }
 
-a > div {
-  width:70%;
-  margin:auto;
+.versus {
+	margin-top: 30px;
 }
 
-.btn{
+a > div {
+  width: 70%;
+  margin: auto;
+}
+
+.btn {
   float: right;
   clear: both;
   margin-bottom: 10px;

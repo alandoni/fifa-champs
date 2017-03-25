@@ -5,27 +5,30 @@
 		<p>{{url}}</p>
 	</div>
 
-	<table *ngIf="hasAdmins" class="bordered responsive-table">
-		<tr class="header">
-			<th>Nome</th>
-			<th>Ações</th>
-		</tr>
-		<tr *ngFor="let admin of admins; let i = index">
-			<td id="player-name">{{admin.nickname}}</td>
-			<td>
-				<a href="#" (click)="updateUser($event, i)">Editar</a> - 
-				<a href="#" (click)="deleteUser($event, i)">Remover</a>
-			</td>
-		</tr>
-	</table>
-
+	<div class="row" *ngIf="hasAdmins">
+		<div class="col s12 m6 offset-m3 l4 offset-l4">
+			<table class="bordered">
+				<tr class="header">
+					<th>Nome</th>
+					<th>Ações</th>
+				</tr>
+				<tr *ngFor="let admin of admins; let i = index">
+					<td id="player-name">{{admin.nickname}}</td>
+					<td>
+						<a href="#" (click)="updateUser($event, i)">Editar</a> - 
+						<a href="#" (click)="deleteUser($event, i)">Remover</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	<p *ngIf="!hasAdmins" class="text-center">Nenhum administrador encontrado</p>
 
 	<div id="button-container">
 		<a class="waves-effect waves-light btn blue-grey lighten-1" (click)="addUser()">Adicionar Administrador</a>
 	</div>
 
-	<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+	<div class="modal col s12 offset-m3 m6 offset-l4 l4" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
 		<div class="modal-content">
 			<h4 *ngIf="selectedPlayer">Editar Administrador</h4>
 			<h4 *ngIf="!selectedPlayer">Criar Administrador</h4>

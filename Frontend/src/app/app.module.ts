@@ -28,6 +28,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './routes';
 import { AdminsListComponent } from './admins-list/admins-list.component';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
+import { NavigationBarItemComponent } from './navigation-bar-item/navigation-bar-item.component';
 
 @NgModule({
 	declarations: [
@@ -46,7 +47,8 @@ import { CreateAdminComponent } from './create-admin/create-admin.component';
 		MatchComponent,
 		MatchListComponent,
 		AdminsListComponent,
-		CreateAdminComponent
+		CreateAdminComponent,
+		NavigationBarItemComponent
 	],
 	imports: [
 		BrowserModule,

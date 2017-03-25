@@ -1,25 +1,28 @@
 <div id="container">
-	<table *ngIf="hasPlayers" class="bordered responsive-table">
-		<tr class="header">
-			<th>Nome</th>
-			<th>Ações</th>
-		</tr>
-		<tr *ngFor="let player of players; let i = index">
-			<td id="player-name">{{player.nickname}}</td>
-			<td>
-				<a href="#" (click)="updateUser($event, i)">Editar</a> - 
-				<a href="#" (click)="deleteUser($event, i)">Remover</a>
-			</td>
-		</tr>
-	</table>
-
+	<div class="row" *ngIf="hasPlayers">
+		<div class="col s12 m6 offset-m3 l4 offset-l4">
+			<table class="bordered">
+				<tr class="header">
+					<th>Nome</th>
+					<th>Ações</th>
+				</tr>
+				<tr *ngFor="let player of players; let i = index">
+					<td id="player-name">{{player.nickname}}</td>
+					<td>
+						<a href="#" (click)="updateUser($event, i)">Editar</a> - 
+						<a href="#" (click)="deleteUser($event, i)">Remover</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	<p *ngIf="!hasPlayers" class="text-center">Nenhum jogador encontrado</p>
 
 	<div id="button-container">
 		<a class="waves-effect waves-light btn blue-grey lighten-1" (click)="addUser()">Adicionar Jogador</a>
 	</div>
 
-	<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+	<div class="modal col s12 offset-m3 m6 offset-l4 l4" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
 		<div class="modal-content">
 			<h4 *ngIf="selectedPlayer">Editar Jogador</h4>
 			<h4 *ngIf="!selectedPlayer">Criar Jogador</h4>

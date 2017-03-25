@@ -1,15 +1,24 @@
-nav{
+nav {
   background: #607D8B;
 }
-a{
-  padding:0px 25px;
+
+a {
+  padding: 0px 25px;
 }
+
 a:focus, active{
-  background-color:#455A64;
+  background-color: #455A64;
 }
-.modal.open{
-  margin:auto;
+
+.modal.open {
   padding: 5px 0px;
-  width: 30%;
   overflow: visible;
+}
+
+.insert-match-modal {
+  max-height: 100%;
+}
+
+.row {
+	margin-bottom: 0;
 }
