@@ -1,5 +1,11 @@
-<li>
-	<a routerLink="{{item.link}}" routerLinkActive="active-class" (click)="item.action()">
+<li *ngIf="item.link">
+	<a routerLink="{{item.link}}" routerLinkActive="active-class">
+		{{item.label}}
+	</a>
+</li>
+
+<li *ngIf="!item.link">
+	<a (click)="item.action()" routerLinkActive="active-class">
 		{{item.label}}
 	</a>
 </li>

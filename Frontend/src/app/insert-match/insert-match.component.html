@@ -7,14 +7,14 @@
   	<div class="input-field col s12">
       <app-dropdown-player [name]="'player2'" [label]="'Jogador 2 - Time 1'" [players]="this.players" (onSelectedPlayer)="handlePlayerSelection($event)"></app-dropdown-player>
     </div>
-  	<div class="input-field col s3 offset-s2">
-      <input type="number" name="score1" placeholder="Gols do time 1" class="text-center" [(ngModel)]="match.team1score"/>
+  	<div class="input-field col s4 offset-s1">
+      <input type="number" name="score1" placeholder="Gols time 1" class="text-center" [(ngModel)]="match.team1score"/>
     </div>
-    <div class="input-field col s2 text-center">
+    <div class="input-field col s2 text-center versus">
       x
     </div>
-  	<div class="input-field col s3">
-      <input type="number" name="score1" placeholder="Gols do time 2" class="text-center" [(ngModel)]="match.team2score"/>
+  	<div class="input-field col s4">
+      <input type="number" name="score1" placeholder="Gols time 2" class="text-center" [(ngModel)]="match.team2score"/>
     </div>
   	<div class="input-field col s12">
       <app-dropdown-player [name]="'player3'" [label]="'Jogador 3 - Time 2'" [players]="this.players" (onSelectedPlayer)="handlePlayerSelection($event)"></app-dropdown-player>

@@ -60,7 +60,10 @@ export class NavigationBarComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		$(".button-collapse").sideNav();
+		$(".button-collapse").sideNav({
+			closeOnClick: true
+		});
+
 		  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
 		  //$('.collapsible').collapsible();
 	}

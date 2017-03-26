@@ -22,11 +22,14 @@ th, td {
 }
 
 th#player-name, td#player-name {
-    width: 8vw;
+    width: 7vw;
+}
+
+th#percent, td#percent {
+  width: 3vw;
 }
 
 #table-standing {
-  width: 80%;
   margin: auto;
   table-layout: fixed;
 }
@@ -44,7 +47,6 @@ th#player-name, td#player-name {
 }
 
 #table-balance{
-  width:30%;
   float:right;
   clear: both;
   margin-right: 10%;

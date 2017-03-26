@@ -1,11 +1,10 @@
+#container {
+  margin-top: 20px;
+}
+
 .modal.open {
   margin: auto;
   padding: 5px 0px;
-}
-
-#container {
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 .header {
@@ -16,15 +15,13 @@
   text-transform: uppercase;
 }
 
-th, td{
+th, td {
   text-align: center;
-  width: 50px;
   height: 50px;
   padding: 0px;
 }
 
 table {
-  width: 30%;
   margin: auto;
   margin-bottom: 20px;
 }
@@ -37,10 +34,6 @@ table {
   background-color: #ffffff;
 }
 
-#player-name {
-  text-align: left;
-}
-
 th:first-child, td:first-child {
   width: 2vw;
   text-align: left;
@@ -48,6 +41,7 @@ th:first-child, td:first-child {
 
 th:last-child, td:last-child {
   width: 1vw;
+  text-align: center;
 }
 
 #button-container {
