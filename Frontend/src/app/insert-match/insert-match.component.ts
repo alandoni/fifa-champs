@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MatchService } from "./../match.service";
+import { MatchService } from './../match.service';
 import { Match } from './../models/match';
 import { Player } from './../models/player';
 import { PlayerDropdownSelected } from './../models/PlayerDropdownSelected';
@@ -22,21 +22,21 @@ export class InsertMatchComponent implements OnInit {
 	constructor(private playerService: PlayerService, private matchService: MatchService, 
 		private championshipService: ChampionshipService) { }
 
-	tryCreateMatch() { 
+	tryCreateMatch() {
 		if (!this.championshipService.getCurrentChampionship()) {
-			this.error = {description: "Verifique se há um campeonato criado."};
+			this.error = {description: 'Verifique se há um campeonato criado.'};
 			return;
 		}
 		if (this.verifyRepeatedPlayer()) {
-			this.error = {description: "Verifique se há jogadores repetidos."};
+			this.error = {description: 'Verifique se há jogadores repetidos.'};
 			return;
 		}
-		if (this.match.team1score == null || this.match.team1score == undefined) {
-			this.error = {description: "Verifique a pontuação dos times."};
+		if (this.match.team1score == null || this.match.team1score === undefined) {
+			this.error = {description: 'Verifique a pontuação dos times.'};
 			return;
 		}
-		if (this.match.team2score == null || this.match.team2score == undefined) {
-			this.error = {description: "Verifique a pontuação dos times."};
+		if (this.match.team2score == null || this.match.team2score === undefined) {
+			this.error = {description: 'Verifique a pontuação dos times.'};
 			return;
 		}
 
@@ -76,6 +76,10 @@ export class InsertMatchComponent implements OnInit {
 	}
 
 	matchCreatedSuccess(result: Match) {
+		if (document.location.href.indexOf('insert-match') > 0) {
+			document.location.href = '/';
+			return;
+		}
 		this.ngOnInit();
 		this.onCreateMatchSuccess.emit(result);
 	}
@@ -93,7 +97,7 @@ export class InsertMatchComponent implements OnInit {
 		this.requestAllPlayers();
 
 		this.playerService.addListener(this);
-		console.log("Insert-match now will listen any players changes");
+		console.log('Insert-match now will listen any players changes');
 	}
 
 	onPlayersChanged() {
@@ -103,7 +107,7 @@ export class InsertMatchComponent implements OnInit {
 	requestAllPlayers() {
 		this.playerService.getAll().subscribe(
 			(result) => {
-				console.log("Just updated players");
+				console.log('Just updated players');
 				this.players = result;
 			},
 			(error: any) => {

@@ -44,7 +44,7 @@ export class NavigationBarComponent implements OnInit {
 		itemsLogged.push(new NavigationBarItem('Logout', null, this.logout.bind(this)));
 		itemsLogged.push(new NavigationBarItem('Administradores', '/admin', null));
 		itemsLogged.push(new NavigationBarItem('Jogadores', '/players', null));
-		itemsLogged.push(new NavigationBarItem('Adicionar Jogo', null, this.createMatch.bind(this)));
+		itemsLogged.push(new NavigationBarItem('Adicionar Jogo', '/insert-match', this.createMatch.bind(this)));
 		itemsLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
 		itemsLogged.push(new NavigationBarItem('Temporada', '/season/classification/current', null));
 		itemsLogged.push(new NavigationBarItem('Criar Nova Temporada', null, this.createSeason.bind(this)));
@@ -63,9 +63,6 @@ export class NavigationBarComponent implements OnInit {
 		$(".button-collapse").sideNav({
 			closeOnClick: true
 		});
-
-		  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-		  //$('.collapsible').collapsible();
 	}
 
 	createMatch() {
