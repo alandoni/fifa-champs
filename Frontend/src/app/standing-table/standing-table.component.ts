@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { Match } from './../models/match';
 import { Statistics } from './../models/statistics';
 import { Player } from './../models/player';
@@ -20,7 +20,7 @@ export class StandingTableComponent implements OnChanges {
 
 	constructor() { }
 
-	ngOnChanges() {
+	ngOnChanges(changes: SimpleChanges) {
 		console.log("Detected changes");
 		this.setLimit();
 		this.getPlayersFromMatches();

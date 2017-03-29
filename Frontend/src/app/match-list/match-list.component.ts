@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Match } from './../models/match';
 
 @Component({
@@ -16,7 +16,7 @@ export class MatchListComponent implements OnChanges {
 
 	constructor() { }
 
-	ngOnChanges() {
+	ngOnChanges(changes: SimpleChanges) {
 		this.matchesList = [];
 
 		if (!this.matches || this.matches.length == 0) {

@@ -9,9 +9,9 @@ import { Match } from './../models/match';
 })
 export class HallOfFameComponent implements OnInit {
 
-	private matches : Array<Match>;
-	private champions = [];
-	private error;
+	matches : Array<Match>;
+	champions = [];
+	error;
 
 	constructor(private matchService : MatchService) { }
 
