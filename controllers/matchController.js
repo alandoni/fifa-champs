@@ -15,7 +15,7 @@ class MatchController {
 	}
 
 	getAll() {
-		return this.mongo.selectAll(document).sort({ date: -1 }).populate("player1 player2 player3 player4 championship").exec().then((matches) => {
+		return this.mongo.selectAll(document, { date: -1 }).populate("player1 player2 player3 player4 championship").exec().then((matches) => {
 			return this._prepareToSend(matches);
 		});
 	}
@@ -42,12 +42,12 @@ class MatchController {
 			criteria.limit = undefined;
 			var offset = parseInt(criteria.offset);
 			criteria.offset = undefined;
-			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate("player1 player2 player3 player4 championship").exec()
+			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset,  { date: -1 }).populate("player1 player2 player3 player4 championship").exec()
 			.then((matches) => {
 				return this._prepareToSend(matches);
 			});
 		} else {
-			return this.mongo.selectByCriteria(document, criteria).populate("player1 player2 player3 player4 championship").exec()
+			return this.mongo.selectByCriteria(document, criteria, { date: -1 }).populate("player1 player2 player3 player4 championship").exec()
 			.then((matches) => {
 				return this._prepareToSend(matches);
 			});
@@ -56,7 +56,7 @@ class MatchController {
 
 	getByChampionship(championshipId) {
 		var id = new ObjectId(championshipId)
-		return this.mongo.selectByCriteria(document, {championship: id}).populate("player1 player2 player3 player4 championship").exec().then((match) => {
+		return this.mongo.selectByCriteria(document, {championship: id}, { date: -1 }).populate("player1 player2 player3 player4 championship").exec().then((match) => {
 			return this._prepareToSend(match);
 		});
 	}
