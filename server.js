@@ -7,7 +7,7 @@ app.set('port', (process.env.PORT || process.env.FIFA_CHAMPS_PORT || 5001));
 
 const http = app.listen(app.get('port'));
 
-const databaseAddress = process.env.DB_ADDR;
+const databaseAddress = (process.env.DB_ADDR || "mongodb://localhost/test");
 const MongooseController = require('./mongooseController');
 const mongo = new MongooseController(databaseAddress);
 
