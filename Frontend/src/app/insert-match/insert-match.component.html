@@ -3,7 +3,7 @@
   <form>
     <div class="input-field col s12">
       <input type="text" name="gameDate" placeholder="Dia do jogo" class="datepicker" materialize="pickadate"
-             [materializeParams]="[{min: minDate, max: maxDate,  format: 'dd of mmmm, yyyy',formatSubmit: 'yyyy/mm/dd'}]"
+             [materializeParams]="[{min: minDate, max: maxDate,  format: 'dd of mmmm, yyyy',formatSubmit: 'yyyy/mm/dd',hiddenName: true}]"
              [(ngModel)]="match.date"  />
     </div>
     <div class="input-field col s12">
