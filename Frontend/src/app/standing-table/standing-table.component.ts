@@ -94,7 +94,7 @@ export class StandingTableComponent implements OnChanges {
 		if (statistic1.matches < this.limit && statistic2.matches >= this.limit) {
 			return 1;
 		}
-		
+
 		if (statistic1.percent > statistic2.percent) {
 			return -1;
 		}
@@ -161,12 +161,13 @@ export class StandingTableComponent implements OnChanges {
 		var days = [];
 		for (let match of this.matches) {
 			if (days.indexOf(match.date) < 0) {
+				console.log("Included Day: "+ match.date);
 				days.push(match.date);
 			}
 		}
 		this.days = days.length;
 		this.numberOfMatches = this.matches.length;
-		this.limit = this.numberOfMatches / this.days;
+		this.limit = this.days;
 	}
 
 	hasPlayers() {

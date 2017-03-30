@@ -17,24 +17,24 @@ class MongoController {
 		});
 	}
 
-	select(document, criteria, order, limit, offset) {
+	select(document, criteria, limit, offset, order={}) {
 		return document.find(criteria).sort(order).skip(offset).limit(limit);
 	}
 
-	selectAll(document) {
-		return document.find();
+	selectAll(document, order={}) {
+		return document.find().sort(order);
 	}
 
-	selectAllLimitOffset(document, limit, offset) {
-		return document.find().skip(offset).limit(limit);
+	selectAllLimitOffset(document, limit, offset, order={}) {
+		return document.find().sort(order).skip(offset).limit(limit);
 	}
 
-	selectByCriteria(document, criteria) {
-		return document.find(criteria);
+	selectByCriteria(document, criteria, order={}) {
+		return document.find(criteria).sort(order);
 	}
 
-	selectByCriteriaLimitOffset(document, criteria, limit, offset) {
-		return document.find(criteria).skip(offset).limit(limit);
+	selectByCriteriaLimitOffset(document, criteria, limit, offset, order={}) {
+		return document.find(criteria).sort(order).skip(offset).limit(limit);
 	}
 
 	selectById(document, id) {
