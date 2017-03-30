@@ -98,7 +98,7 @@ export class NavigationBarComponent implements OnInit {
 	}
 
 	createSeason() {
-		if (!window.confirm("ATENÇÃO!! Tem certeza que quer iniciar um novo campeonato?" + 
+		if (!window.confirm("ATENÇÃO!! Tem certeza que quer iniciar um novo campeonato?" +
 			" O campeonato atual não poderá mais ser alterado!")) {
 			return;
 		}
