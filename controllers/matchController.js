@@ -13,9 +13,9 @@ class MatchController {
 	constructor(mongo) {
 		this.mongo = mongo;
 	}
-	
+
 	getAll() {
-		return this.mongo.selectAll(document).populate("player1 player2 player3 player4 championship").exec().then((matches) => {
+		return this.mongo.selectAll(document).sort({ date: -1 }).populate("player1 player2 player3 player4 championship").exec().then((matches) => {
 			return this._prepareToSend(matches);
 		});
 	}
@@ -33,7 +33,7 @@ class MatchController {
 
 			criteria.minDate = undefined;
 			criteria.maxDate = undefined;
-			
+
 			criteria.date = {$gte: minDate, $lte: maxDate};
 		}
 
