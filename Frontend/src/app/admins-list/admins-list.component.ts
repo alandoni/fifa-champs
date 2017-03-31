@@ -14,7 +14,7 @@ export class AdminsListComponent implements OnInit {
 	admins: Array<any>;
 	selectedAdmin: any;
 	selectedIndex: number;
-  url: String = null;
+  	url: String = null;
 
 	constructor(private router: Router, private loginService: LoginService) { }
 
@@ -36,7 +36,7 @@ export class AdminsListComponent implements OnInit {
 	updateUser(event, index) {
 		event.preventDefault();
 		this.selectedAdmin = this.admins[index];
-    console.log('Updating user ' + this.admins[index].nickname);
+    	console.log('Updating user ' + this.admins[index].nickname);
 		this.selectedIndex = index;
 		this.openModal();
 	}
@@ -80,7 +80,7 @@ export class AdminsListComponent implements OnInit {
     });
 	}
 
-	private get hasAdmins() {
+	public get hasAdmins() {
 		return this.admins != null && this.admins.length > 0;
 	}
 }

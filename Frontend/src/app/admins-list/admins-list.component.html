@@ -30,8 +30,8 @@
 
 	<div class="modal col s12 offset-m3 m6 offset-l4 l4" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
 		<div class="modal-content">
-			<h4 *ngIf="selectedPlayer">Editar Administrador</h4>
-			<h4 *ngIf="!selectedPlayer">Criar Administrador</h4>
+			<h4 *ngIf="selectedAdmin">Editar Administrador</h4>
+			<h4 *ngIf="!selectedAdmin">Criar Administrador</h4>
 		</div>
 		<app-create-admin (onCreateAdminSuccess)="closeModal($event)" [admin]="selectedAdmin"></app-create-admin>
 	</div>

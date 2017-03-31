@@ -5,15 +5,15 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/share';
-import { AppSettings } from './app-settings';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class ApiRequestService {
 
-	private baseUrl = AppSettings.API_URL;
+	private baseUrl = environment.API_URL;
 	public http;
 
-	constructor(http: Http) { 
+	constructor(http: Http) {
 		if (this.http == null) {
 			console.log("Creating new HTTP");
 			this.http = http;

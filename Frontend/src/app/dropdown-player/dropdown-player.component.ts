@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { PlayerService } from "./../player.service";
 import { Player } from './../models/player';
 import { PlayerDropdownSelected } from './../models/PlayerDropdownSelected';
@@ -28,7 +28,7 @@ export class DropdownPlayerComponent implements OnInit, OnChanges {
 
 	ngOnInit() { }
 
-	ngOnChanges() {
+	ngOnChanges(changes: SimpleChanges) {
 		if (this.players && this.players.length > 0) {
 			this.playerSelected(this.players[0]._id);
 			console.log('Selecting player: ' + this.players[0].nickname);

@@ -76,7 +76,7 @@ export class PlayersListComponent implements OnInit {
 		this.modalActions.emit({action:"modal", params:['close']});
 	}
 
-	private get hasPlayers() {
+	public get hasPlayers() {
 		return this.players != null && this.players.length > 0;
 	}
 }
