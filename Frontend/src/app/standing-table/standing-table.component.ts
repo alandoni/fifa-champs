@@ -133,20 +133,19 @@ export class StandingTableComponent implements OnChanges {
 		statistics[player.nickname].matches++;
 		statistics[player.nickname].goals += team1score;
 		statistics[player.nickname].concededGoals += team2score;
+		statistics[player.nickname].goalBalance += team1score - team2score;
 
 		if (team1score > team2score) {
 			statistics[player.nickname].victories++;
-			statistics[player.nickname].goalBalance += team1score - team2score;
 			statistics[player.nickname].score += 3;
 		} else if (team1score < team2score) {
 			statistics[player.nickname].defeats++;
-			statistics[player.nickname].goalBalance += team2score - team1score;
 		} else {
 			statistics[player.nickname].ties++;
 			statistics[player.nickname].score += 1;
 		}
-		statistics[player.nickname].goalsPerMatch = statistics[player.nickname].goals / statistics[player.nickname].matches;
-		statistics[player.nickname].concededGoalsPerMatch = statistics[player.nickname].concededGoals / statistics[player.nickname].matches;
+		statistics[player.nickname].goalsPerMatch = statistics[player.nickname].goals*1.0 / statistics[player.nickname].matches;
+		statistics[player.nickname].concededGoalsPerMatch = statistics[player.nickname].concededGoals*1.0 / statistics[player.nickname].matches;
 		statistics[player.nickname].percent = statistics[player.nickname].score / (3 * statistics[player.nickname].matches) * 100;
 	}
 
@@ -172,6 +171,13 @@ export class StandingTableComponent implements OnChanges {
 
 	hasPlayers() {
 		return this.players != null && this.players.length > 0;
+	}
+
+	getSg(statistic){
+		if(statistic.goalBalance < 0)
+			return 1;
+
+		return 0;
 	}
 
 	getColor(position, statistic) {
