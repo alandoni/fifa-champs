@@ -18,13 +18,13 @@ export class InsertMatchComponent implements OnInit {
   error: any;
   selected: false;
   players: Array<Player>;
-  minDate: Date;
-  maxDate: Date;
+  matchDateOptions:any;
 
   constructor(private playerService: PlayerService, private matchService: MatchService,
               private championshipService: ChampionshipService) {  }
 
   tryCreateMatch() {
+    console.log(this.match.date);
     if (!this.championshipService.getCurrentChampionship()) {
       this.error = {description: 'Verifique se há um campeonato criado.'};
       return;
@@ -95,8 +95,7 @@ export class InsertMatchComponent implements OnInit {
     this.error = null;
     this.selected = false;
 
-    this.minDate = new Date(dateNow.getFullYear(),dateNow.getMonth(),1);
-    this.maxDate = new Date(dateNow.getFullYear(),dateNow.getMonth() +1,0);
+    this.matchDateOptions = this.getDefaultPickaOption();
 
     this.requestAllPlayers();
 
@@ -120,4 +119,18 @@ export class InsertMatchComponent implements OnInit {
       }
     );
   }
+
+  private getDefaultPickaOption(){
+   return {
+     monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
+     monthsShort: [ 'jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez' ],
+     weekdaysFull: [ 'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado' ],
+     weekdaysShort: [ 'dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab' ],
+     today: 'hoje',
+     clear: 'limpar',
+     close: 'fechar',
+     max: new Date(),
+     format: 'yyyy-mm-dd'
+   };
+ }
 }

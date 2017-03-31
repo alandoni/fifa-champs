@@ -160,7 +160,7 @@ export class StandingTableComponent implements OnChanges {
 
 		var days = [];
 		for (let match of this.matches) {
-			if (days.indexOf(match.date) < 0) {
+			if (days.indexOf(match.date) < 0 && match.date != undefined) {
 				console.log("Included Day: "+ match.date);
 				days.push(match.date);
 			}
