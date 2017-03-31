@@ -6,6 +6,10 @@ a {
   padding: 0px 25px;
 }
 
+a.button-collapse {
+  padding: 0;
+}
+
 a:focus, active{
   background-color: #455A64;
 }
