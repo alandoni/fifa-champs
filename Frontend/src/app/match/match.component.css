@@ -37,3 +37,8 @@
 .row {
 	margin-bottom: 0 !important;
 }
+
+.penalty {
+	font-size: 14px;
+	color: #444;
+}

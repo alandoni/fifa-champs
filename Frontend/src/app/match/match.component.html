@@ -6,12 +6,20 @@
   	<div class="player player2">{{match.player2.nickname}}</div>
   </div>
   <div class="results col s4 center">
-  	<span [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0 }">
-      {{match.team1score}}</span>
+  	
+    <span [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0 }">
+      {{match.team1score}}
+    </span>
+    <span *ngIf="hasPenalties" class="penalty">({{match.team1penalties}})</span>
+
   	<span class="versus"> x </span>
+
   	<span [ngClass]="{'winner': getWinnerTeamIndex() == 2, 'loser': getWinnerTeamIndex() == 1, 'tie': getWinnerTeamIndex() == 0 }">
-      {{match.team2score}}</span>
+      {{match.team2score}}
+    </span>
+    <span *ngIf="hasPenalties" class="penalty">({{match.team2penalties}})</span>
   </div>
+
   <div class="team2 col s4" [ngClass]="{'winner': getWinnerTeamIndex() == 2, 'loser': getWinnerTeamIndex() == 1, 'tie': getWinnerTeamIndex() == 0 }">
   	<div class="player player3">{{match.player3.nickname}}</div>
   	<div class="player player4">{{match.player4.nickname}}</div>
