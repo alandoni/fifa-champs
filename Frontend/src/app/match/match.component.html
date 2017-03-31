@@ -1,11 +1,12 @@
 <div class="row">
+
   <div class="date col s12" *ngIf="match.date">{{match.date}}</div>
 
-  <div class="team1 col s4" [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0 }">
+  <div class="team1 col s4" [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0, 'deleted': isDeleted}">
   	<div class="player player1">{{match.player1.nickname}}</div>
   	<div class="player player2">{{match.player2.nickname}}</div>
   </div>
-  <div class="results col s4 center">
+  <div class="results col s4 center" [ngClass]="{'deleted': isDeleted}">
   	
     <span [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0 }">
       {{match.team1score}}
@@ -20,10 +21,12 @@
     <span *ngIf="hasPenalties" class="penalty">({{match.team2penalties}})</span>
   </div>
 
-  <div class="team2 col s4" [ngClass]="{'winner': getWinnerTeamIndex() == 2, 'loser': getWinnerTeamIndex() == 1, 'tie': getWinnerTeamIndex() == 0 }">
+  <div class="team2 col s4" [ngClass]="{'winner': getWinnerTeamIndex() == 2, 'loser': getWinnerTeamIndex() == 1, 'tie': getWinnerTeamIndex() == 0, 'deleted': isDeleted}">
+    <div *ngIf="isLoggedIn" class="edit-delete">
+      <a class="material-icons" href="#" (click)="delete($event)">delete</a>
+    </div>
   	<div class="player player3">{{match.player3.nickname}}</div>
   	<div class="player player4">{{match.player4.nickname}}</div>
   </div>
 </div>
-<hr />
-
+<hr [ngClass]="{'deleted': isDeleted}"/>

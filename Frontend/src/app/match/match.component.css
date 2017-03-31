@@ -42,3 +42,20 @@
 	font-size: 14px;
 	color: #444;
 }
+
+.edit-delete {
+	position: absolute;
+	right: 10px;
+}
+
+.edit-delete a {
+	font-size: 16px;
+}
+
+.team2 {
+	position: relative;
+}
+
+.deleted {
+	display: none;
+}
