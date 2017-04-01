@@ -5,8 +5,15 @@ export class Match {
 	player4;
 	team1score;
 	team2score;
+	team1penalties;
+	team2penalties;
 	date;
 	championship;
 	isFinal;
 	_id;
+
+	constructor() {
+		let dateNow = new Date();
+		this.date = dateNow;
+	}
 }

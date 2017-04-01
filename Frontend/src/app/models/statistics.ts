@@ -12,7 +12,7 @@ export class Statistics {
 	score;
 	percent;
 
-	constructor() { 
+	constructor() {
 		this.matches = 0;
 		this.victories = 0;
 		this.ties = 0;

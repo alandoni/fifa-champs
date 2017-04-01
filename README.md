@@ -47,7 +47,7 @@ To run backend tests:
 npm test
 ```
 
-# Run Backend
+# Run Frontend
 ```
 cd ../Frontend
 npm install
