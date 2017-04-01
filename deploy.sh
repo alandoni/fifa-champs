@@ -4,6 +4,9 @@ npm install
 npm run build
 popd
 pushd Backend
-ln -sf ../Frontend/dist ./dist
+rm -r dist
+cp ../Frontend/dist dist/
 popd
-git push heroku `git subtree split --prefix Backend production`:master --force
+git subtree split --branch production --prefix Backend/
+git push -f
+git push heroku production:master --force
