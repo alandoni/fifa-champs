@@ -1,5 +1,7 @@
-<select materialize="material_select" [materializeSelectOptions]="players" id="{{this.name}}" name="{{this.name}}" 
-	(change)="playerSelected($event.target.value);">
-		<option *ngFor="let player of this.players" [value]="player._id">{{player.nickname}}</option>
-</select>
-<label [attr.for]="this.name">{{this.label}}</label>
+<app-select 
+	[ids]="ids"
+	[names]="names"
+	id="{{this.name}}" 
+	name="{{this.name}}"
+	[(selected)]="selectedId"
+	(onChange)="change($event)"></app-select>

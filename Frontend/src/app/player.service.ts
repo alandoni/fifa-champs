@@ -8,6 +8,7 @@ export class PlayerService {
 
 	private url = '/players';
 	private listeners = [];
+	private players = [];
 
 	constructor(private api: ApiRequestService) { }
 
@@ -16,6 +17,7 @@ export class PlayerService {
 		var result = this.api.post(this.url, {nickname: nickname});
 		result.subscribe((res) => {
 			console.log("Notifying listeners");
+			this.players.push(res);
 			for (var listener in this.listeners) {
 				if (this.listeners[listener]) {
 					this.listeners[listener].onPlayersChanged();
@@ -28,6 +30,14 @@ export class PlayerService {
 	update(id, nickname, pictureUrl) : Observable<Player> {
 		var result = this.api.post(this.url + '/' + id, {nickname: nickname, picture: pictureUrl});
 		result.subscribe((res) => {
+
+			for (let i = 0; i < this.players.length; i++) {
+				if (this.players[i]._id === res._id) {
+					this.players[i] = res;
+					break;
+				}
+			}
+
 			for (var listener in this.listeners) {
 				if (this.listeners[listener]) {
 					this.listeners[listener].onPlayersChanged();
@@ -40,6 +50,11 @@ export class PlayerService {
 	delete(id) : Observable<Player> {
 		var result = this.api.delete(this.url + '/' + id);
 		result.subscribe((res) => {
+
+			this.players = this.players.filter((el) => {
+				return el._id !== res._id;
+			});
+
 			for (var listener in this.listeners) {
 				if (this.listeners[listener]) {
 					this.listeners[listener].onPlayersChanged();
@@ -54,6 +69,19 @@ export class PlayerService {
 	}
 
 	getAll() : Observable<Player[]> {
-		return this.api.get(this.url);
+		var result = this.api.get(this.url);
+		result.subscribe((res) => {
+			this.players = res;
+			for (var listener in this.listeners) {
+				if (this.listeners[listener]) {
+					this.listeners[listener].onPlayersChanged();
+				}
+			}
+		});
+		return result;
+	}
+
+	getPlayers() {
+		return this.players;
 	}
 }

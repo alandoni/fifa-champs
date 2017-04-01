@@ -29,6 +29,8 @@ import { appRoutes } from './routes';
 import { AdminsListComponent } from './admins-list/admins-list.component';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { NavigationBarItemComponent } from './navigation-bar-item/navigation-bar-item.component';
+import { SelectComponent } from './select/select.component';
+import { TestsComponent } from './tests/tests.component';
 
 @NgModule({
 	declarations: [
@@ -48,7 +50,9 @@ import { NavigationBarItemComponent } from './navigation-bar-item/navigation-bar
 		MatchListComponent,
 		AdminsListComponent,
 		CreateAdminComponent,
-		NavigationBarItemComponent
+		NavigationBarItemComponent,
+		SelectComponent,
+		TestsComponent
 	],
 	imports: [
 		BrowserModule,

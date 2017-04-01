@@ -1,37 +1,61 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { PlayerService } from "./../player.service";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PlayerService } from './../player.service';
 import { Player } from './../models/player';
-import { PlayerDropdownSelected } from './../models/PlayerDropdownSelected';
-import { Observable } from 'rxjs/Observable';
+import * as Materialize from 'materialize-css';
+declare var $ : any;
 
 @Component({
   selector: 'app-dropdown-player',
   templateUrl: './dropdown-player.component.html',
-  styleUrls: ['./dropdown-player.component.css']
+  styleUrls: ['./dropdown-player.component.css'],
 })
-export class DropdownPlayerComponent implements OnInit, OnChanges {
+export class DropdownPlayerComponent implements OnInit {
 
-	@Output() onSelectedPlayer: EventEmitter<PlayerDropdownSelected> = new EventEmitter();
+	@Output() onChange = new EventEmitter();
+
 	@Input() name : string;
 	@Input() label : string;
 	@Input() players : Array<Player>;
+	@Input() selected : Player;
 
-	selected: string;
-	error: any;
+	names : Array<string>;
+	ids : Array<string>;
+	selectedId : string;
+	initilized = false;
 
-	constructor() { }
+	constructor() {
 
-	playerSelected(_id: string) {
-		this.selected = _id;
-		this.onSelectedPlayer.emit({inputName: this.name, selectedValue: _id});
 	}
 
-	ngOnInit() { }
-
-	ngOnChanges(changes: SimpleChanges) {
-		if (this.players && this.players.length > 0) {
-			this.playerSelected(this.players[0]._id);
-			console.log('Selecting player: ' + this.players[0].nickname);
+	change(value) {
+		if (!this.initilized) {
+			return;
 		}
+		for (let player of this.players) {
+			if (player._id === value) {
+				this.selected = player;
+				this.onChange.emit({target: this.name, player: player});
+				break;
+			}
+		}
+	}
+
+	ngOnInit() {
+		this.ids = [];
+		this.names = [];
+		for (let player of this.players) {
+			this.ids.push(player._id);
+			this.names.push(player.nickname);
+		}
+		if (!this.selected) {
+			this.selected = this.players[0];
+			this.selectedId = this.selected._id;
+		} else {
+			this.selectedId = this.selected._id;
+		}
+	}
+
+	ngAfterViewInit() {
+		this.initilized = true;
 	}
 }

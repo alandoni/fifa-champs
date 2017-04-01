@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { Match } from './../models/match';
 import { LoginService } from './../login.service';
 import { MatchService } from './../match.service';
+import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
 	selector: 'app-match',
@@ -10,14 +11,18 @@ import { MatchService } from './../match.service';
 })
 export class MatchComponent implements OnInit {
 
+	matchModalActions = new EventEmitter<string|MaterializeAction>();
+
 	@Input() match: Match;
 	hasPenalties: boolean;
 	isLoggedIn: boolean;
 	isDeleted: boolean;
+	showModal: boolean = false;
 
 	constructor(private loginService: LoginService, private matchService: MatchService) { }
 
 	ngOnInit() {
+		console.log(this.match);
 		this.hasPenalties = this.match.isFinal && (this.match.team1penalties > 0 || this.match.team2penalties);
 		this.loginService.addListener(this);
 		this.onLoginChange();
@@ -45,8 +50,19 @@ export class MatchComponent implements OnInit {
 		return 0;
 	}
 
-	editGame() {
+	editGame(event) {
+		event.preventDefault();
+		this.showModal = true;
+		console.log('Opening modal');
+		this.matchModalActions.emit({action: 'modal', params: ['open']});
+	}
 
+	closeMatchModal(result) {
+		console.log('Closing modal');
+		console.log(result);
+		this.showModal = false;
+		this.matchModalActions.emit({action: 'modal', params: ['close']});
+		this.match = result;
 	}
 
 	delete(event) {

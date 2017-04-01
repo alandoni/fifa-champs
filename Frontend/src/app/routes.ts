@@ -9,6 +9,7 @@ import { PlayersListComponent } from './players-list/players-list.component';
 import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { AdminsListComponent } from './admins-list/admins-list.component';
+import { TestsComponent } from './tests/tests.component';
 
 export const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent},
@@ -23,6 +24,7 @@ export const appRoutes: Routes = [
 	{path: 'season/classification/current', component: SeasonSelectorComponent},
 	{path: 'season/classification/:month/:year', component: SeasonSelectorComponent},
 	{path: 'season/classification/alltime', component: SeasonSelectorComponent},
+	{path: 'tests', component: TestsComponent},
 	{path: 'admin', component: AdminsListComponent},
 	{path: 'admin/create/:id/:nickname/:salt', component: CreateAdminComponent},
 	{path: 'hall', component: HallOfFameComponent},
