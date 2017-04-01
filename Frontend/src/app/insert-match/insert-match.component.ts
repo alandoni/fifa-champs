@@ -24,6 +24,7 @@ export class InsertMatchComponent implements OnInit {
               private championshipService: ChampionshipService) {  }
 
   tryCreateMatch() {
+
     this.match.isFinal = this.isFinal;
     if (!this.championshipService.getCurrentChampionship()) {
       this.error = {description: 'Verifique se há um campeonato criado.'};
