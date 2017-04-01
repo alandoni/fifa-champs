@@ -26,7 +26,6 @@ export class InsertMatchComponent implements OnInit {
   tryCreateMatch() {
 
     this.match.isFinal = this.isFinal;
-
     if (!this.championshipService.getCurrentChampionship()) {
       this.error = {description: 'Verifique se há um campeonato criado.'};
       return;
@@ -65,7 +64,6 @@ export class InsertMatchComponent implements OnInit {
 
     // TODO: get championship of month:
     this.match.championship = this.championshipService.getCurrentChampionship();
-    console.log(this.match);
 
     this.matchService.insert(this.match).subscribe(
       (result) => this.matchCreatedSuccess(result),
