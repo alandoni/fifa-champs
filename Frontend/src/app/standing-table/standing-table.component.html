@@ -20,7 +20,7 @@
 				<th>Pontos</th>
 				<th id="percent">%</th>
 			</tr>
-			<tr *ngFor="let statistic of statisticsList; let i = index" [ngClass]="{'winner': getColor(i, statistic) == 1, 'loser': getColor(i, statistic) == 2 }">
+			<tr *ngFor="let statistic of statisticsList; let i = index" [ngClass]="{'winner': getColor(i, statistic) == 1, 'loser': getColor(i, statistic) == 2, 'sgNegative':getSg(statistic) == 1 }">
 				<td id="ranking">{{ (i + 1) }}</td>
 				<td id="player-name">{{ statistic.player.nickname }}</td>
 				<td class="dark-cell">{{ statistic.matches }}</td>
@@ -29,9 +29,9 @@
 				<td class="light-cell hide-on-small-only">{{ statistic.defeats }}</td>
 				<td class="dark-cell hide-on-med-and-down">{{ statistic.goals }}</td>
 				<td class="light-cell hide-on-med-and-down">{{ statistic.concededGoals }}</td>
-				<td class="dark-cell hide-on-small-only">{{ statistic.goalBalance }}</td>
-				<td class="light-cell hide-on-small-only">{{ formatNumber(statistic.goalsPerMatch) }}</td>
-				<td class="dark-cell hide-on-med-and-down">{{ formatNumber(statistic.concededGoalsPerMatch) }}</td>
+				<td class="dark-cell hide-on-small-only">{{ formatNumber(statistic.goalsPerMatch) }}</td>
+				<td class="light-cell hide-on-med-and-down">{{ formatNumber(statistic.concededGoalsPerMatch) }}</td>
+				<td class="dark-cell hide-on-small-only" id="balance">{{ statistic.goalBalance }}</td>
 				<td class="light-cell">{{ statistic.score }}</td>
 				<td class="dark-cell" id="percent">{{ formatNumber(statistic.percent) }}%</td>
 			</tr>
