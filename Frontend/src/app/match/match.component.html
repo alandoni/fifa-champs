@@ -23,7 +23,8 @@
 
   <div class="team2 col s4" [ngClass]="{'winner': getWinnerTeamIndex() == 2, 'loser': getWinnerTeamIndex() == 1, 'tie': getWinnerTeamIndex() == 0, 'deleted': isDeleted}">
     <div *ngIf="isLoggedIn" class="edit-delete">
-      <a class="material-icons" href="#" (click)="editGame($event)">mode_edit</a>      
+      <a class="material-icons hide-on-med-and-up" routerLink="{{'/match/' + match._id}}">mode_edit</a>
+      <a class="material-icons hide-on-small-only" href="#" (click)="editGame($event)">mode_edit</a>
       <a class="material-icons" href="#" (click)="delete($event)">delete</a>
     </div>
   	<div class="player player3">{{match.player3.nickname}}</div>

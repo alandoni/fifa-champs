@@ -10,7 +10,7 @@ export class TestsComponent implements OnInit {
   ids = ['1', '2', '3', '4'];
   names = ['alan', 'chris', 'junim', 'rborcat'];
 
-  selected : string = '3';
+  selected : string = '0';
 
   constructor() { }
 
@@ -19,6 +19,11 @@ export class TestsComponent implements OnInit {
 
   change(event) {
     this.selected = event;
+  }
+
+  increment() {
+    this.selected = (+this.selected + 1) + '';
+    console.log(this.selected);
   }
 
 }

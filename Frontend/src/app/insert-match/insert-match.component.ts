@@ -4,6 +4,7 @@ import { Match } from './../models/match';
 import { Player } from './../models/player';
 import { ChampionshipService } from './../championship.service';
 import { PlayerService } from './../player.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-insert-match',
@@ -25,9 +26,21 @@ export class InsertMatchComponent implements OnInit {
 	players: Array<Player>;
 
 	constructor(private playerService: PlayerService, private matchService: MatchService,
-							private championshipService: ChampionshipService) {
-		this.players = this.playerService.getPlayers();
+				private championshipService: ChampionshipService,  private router: Router,
+				private route: ActivatedRoute) {
+		this.playerService.getAll();
 		this.playerService.addListener(this);
+	}
+
+	requestMatch(id) {
+		this.isEditingMatch = true;
+		console.log('Requesting match with id: ' + id);
+		this.matchService.getById(id).subscribe((result) => {
+			this.match = result;
+		}, (error) => {
+			console.error(error);
+			this.error = error;
+		});
 	}
 
 	onPlayersChanged() {
@@ -137,8 +150,8 @@ export class InsertMatchComponent implements OnInit {
 	}
 
 	matchCreatedSuccess(result: Match) {
-		if (document.location.href.indexOf('insert-match') > 0) {
-			document.location.href = '/';
+		if (document.location.href.indexOf('match') > 0) {
+			this.router.navigate(['/']);
 			return;
 		}
 		this.ngOnInit();
@@ -146,7 +159,14 @@ export class InsertMatchComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		if (!this.match) {
+		const url = window.location.href;
+		this.isEditingMatch = url.indexOf('match') > 0 && url.indexOf('insert') < 0;
+		this.route.params.subscribe(params => {
+			if (params['id'] && this.isEditingMatch) {
+				this.requestMatch(params['id']);
+			}
+		});
+		if (!this.match && !this.isEditingMatch) {
 			this.isEditingMatch = false;
 			this.match = new Match();
 		} else {
@@ -160,8 +180,6 @@ export class InsertMatchComponent implements OnInit {
 		let dateNow = new Date();
 		this.minDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
 		this.maxDate = new Date(dateNow.getFullYear(), dateNow.getMonth() + 1, 0);
-
-		console.log('Insert-match now will listen any players changes');
 	}
 
 	private getDefaultPickaOption() {
@@ -171,9 +189,9 @@ export class InsertMatchComponent implements OnInit {
 			monthsShort: [ 'jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez' ],
 			weekdaysFull: [ 'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado' ],
 			weekdaysShort: [ 'dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab' ],
-			today: 'hoje',
-			clear: 'limpar',
-			close: 'fechar',
+			today: 'Hoje',
+			clear: 'Limpar',
+			close: 'Fechar',
 			max: new Date(),
 			format: 'yyyy-mm-dd'
 		};

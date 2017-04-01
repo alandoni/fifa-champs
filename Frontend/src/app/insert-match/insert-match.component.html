@@ -1,6 +1,6 @@
 <div class="insert-match-container row">
 	<div *ngIf="error != null" class="text-center error"><p>{{error.description}}</p></div>
-	<form *ngIf="players && players.length > 0">
+	<form *ngIf="match && players && players.length > 0">
 		<div class="input-field col s12">
 			<input type="text" name="gameDate" 
 					placeholder="Dia do jogo" 
@@ -31,7 +31,7 @@
 			x
 		</div>
 		<div class="input-field col s4">
-			<input type="number" name="score1" placeholder="Gols time 2" class="text-center" [(ngModel)]="match.team2score"/>
+			<input type="number" name="score2" placeholder="Gols time 2" class="text-center" [(ngModel)]="match.team2score"/>
 		</div>
 
 		<div *ngIf="isFinal && match.team1score == match.team2score">
