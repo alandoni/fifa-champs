@@ -11,3 +11,4 @@ git subtree split --branch production --prefix Backend/
 git checkout production
 git push -f
 git push heroku production:master --force
+$SHELL
