@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 	styleUrls: ['./season-selector.component.css']
 })
 export class SeasonSelectorComponent implements OnInit {
-	
+
 	matches : Array<Match>;
 	date = new Date();
 	isLoading = false;
@@ -19,7 +19,7 @@ export class SeasonSelectorComponent implements OnInit {
 	noChampionships = false;
 	noFilterSelected = false;
 
-	constructor(private matchService: MatchService, private championshipService: ChampionshipService, 
+	constructor(private matchService: MatchService, private championshipService: ChampionshipService,
 		private route: ActivatedRoute, private router: Router) {
 	}
 
@@ -158,13 +158,15 @@ export class SeasonSelectorComponent implements OnInit {
 	}
 
 	formatDate(date) {
-		return (date.getDate() < 9 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 9 ? "0" : "") 
+		console.log(date);
+		return (date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 9 ? "0" : "")
 			+ (date.getMonth() + 1) + "/" + date.getFullYear();
 	}
 
 	dateFromString(str) {
+		console.log(str);
 		var parts = str.split('/');
-		return new Date(+parts[2], +parts[1] - 1, +parts[0]);
+		return new Date(parts[2], parts[1] - 1, parts[0]);
 	}
 
 	changeTab(tab) {
