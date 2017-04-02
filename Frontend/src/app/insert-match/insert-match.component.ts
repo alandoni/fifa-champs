@@ -13,16 +13,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class InsertMatchComponent implements OnInit {
 
-	matchDateOptions: any;
-
 	@Output() onCreateMatchSuccess: EventEmitter<Match> = new EventEmitter();
 	@Input() match: Match;
 
+	matchDateOptions: any;
 	isEditingMatch = false;
 	error: any;
 	isFinal: false;
-	minDate: Date;
-	maxDate: Date;
 	players: Array<Player>;
 
 	constructor(private playerService: PlayerService, private matchService: MatchService,
@@ -173,16 +170,13 @@ export class InsertMatchComponent implements OnInit {
 			this.isEditingMatch = true;
 		}
 
-		this.matchDateOptions = this.getDefaultPickaOption();
+		this.matchDateOptions = this.getDefaultPickerOptions();
 
 		this.error = null;
 		this.isFinal = false;
-		let dateNow = new Date();
-		this.minDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
-		this.maxDate = new Date(dateNow.getFullYear(), dateNow.getMonth() + 1, 0);
 	}
 
-	private getDefaultPickaOption() {
+	private getDefaultPickerOptions() {
 		return {
 			monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
 				'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
