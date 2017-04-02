@@ -73,12 +73,18 @@ export class SeasonSelectorComponent implements OnInit {
 
 	previousMonth() {
 		this.date = this.sumMonth(this.date, -1)
-		this.router.navigateByUrl('season/classification/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
+		if(this.tab == 0)
+			this.router.navigateByUrl('season/classification/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
+		else
+			this.router.navigateByUrl('season/results/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 	}
 
 	nextMonth() {
 		this.date = this.sumMonth(this.date, 1)
-		this.router.navigateByUrl('season/classification/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
+		if(this.tab == 0)
+			this.router.navigateByUrl('season/classification/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
+		else
+			this.router.navigateByUrl('season/results/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 	}
 
 	sumMonth(date, numberOfMonths) {

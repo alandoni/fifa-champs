@@ -4,8 +4,8 @@
 	<div *ngIf="!noChampionships" class="nav-content">
 		<div id="sub-nav">
 			<ul materialize="tabs" class="tabs tabs-transparent">
-				<li class="tab"><a (click)="changeTab(0)">Classificação</a></li>
-				<li  class="tab"><a (click)="changeTab(1)">Jogos</a></li>
+				<li class="tab"><a (click)="changeTab(0)" [ngClass]="{active : tab == 0}">Classificação</a></li>
+				<li  class="tab"><a (click)="changeTab(1)"  [ngClass]="{active : tab == 1}">Jogos</a></li>
 			</ul>
 		</div>
 
