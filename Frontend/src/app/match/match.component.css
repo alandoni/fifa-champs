@@ -5,6 +5,19 @@
 	margin-bottom: 5px;
 }
 
+.final-match{
+  padding-top: 3px;
+  padding-bottom: 0px;
+}
+
+.final-match .chip{
+  margin: 0;
+  height: 20px;
+  line-height: 20px;
+  color: #fafafa;
+  background-color: #ff5252;
+}
+
 .loser {
 	color: #f44336;
 	text-align: center;
