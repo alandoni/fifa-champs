@@ -70,8 +70,15 @@ export class StandingTableComponent implements OnChanges {
 			statistics[playerObj.nickname].player = playerObj;
 		}
 
-		for (let match in this.matches) {
-			var m = this.matches[match];
+		let matchWihtoutFinal:Array<Match>;
+
+		if(Array.isArray(this.matches))
+			matchWihtoutFinal = this.matches.filter(match => match.isFinal == false);
+		else
+			matchWihtoutFinal = new Array<Match>();
+
+		for (let match in matchWihtoutFinal) {
+			var m = matchWihtoutFinal[match];
 			this.setStatisticOfPlayer(statistics, m.player1, m.team1score, m.team2score);
 			this.setStatisticOfPlayer(statistics, m.player2, m.team1score, m.team2score);
 			this.setStatisticOfPlayer(statistics, m.player3, m.team2score, m.team1score);
@@ -160,7 +167,6 @@ export class StandingTableComponent implements OnChanges {
 		var days = [];
 		for (let match of this.matches) {
 			if (days.indexOf(match.date) < 0 && match.date != undefined) {
-				console.log("Included Day: "+ match.date);
 				days.push(match.date);
 			}
 		}
