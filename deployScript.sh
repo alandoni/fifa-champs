@@ -32,7 +32,7 @@ git checkout production
 cd Frontend
 cp -r ./dist ../dist/
 cd ..
-git add ./dist
+git add -f ./dist
 git commit -m "Adding dist files"
 echo "--------------------------------------------------------------------------"
 echo ""
