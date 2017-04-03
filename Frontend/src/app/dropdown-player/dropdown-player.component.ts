@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { PlayerService } from './../player.service';
 import { Player } from './../models/player';
 import * as Materialize from 'materialize-css';
@@ -55,7 +55,7 @@ export class DropdownPlayerComponent implements OnInit, OnChanges {
 		}
 	}
 
-	ngOnChanges() {
+	ngOnChanges(changes: SimpleChanges) {
 		this.selectedId = this.selected._id;
 	}
 
