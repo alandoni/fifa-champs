@@ -1,13 +1,13 @@
 <div class="row">
 
   <div class="date col s12" *ngIf="match.date">{{match.date}}</div>
-
+  <div *ngIf="match.isFinal" class="col s12 center-align final-match"><span class="chip">Final</span></div>
   <div class="team1 col s4" [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0, 'deleted': isDeleted}">
   	<div class="player player1">{{match.player1.nickname}}</div>
   	<div class="player player2">{{match.player2.nickname}}</div>
   </div>
   <div class="results col s4 center" [ngClass]="{'deleted': isDeleted}">
-  	
+
     <span [ngClass]="{'winner': getWinnerTeamIndex() == 1, 'loser': getWinnerTeamIndex() == 2, 'tie': getWinnerTeamIndex() == 0 }">
       {{match.team1score}}
     </span>
