@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from './../player.service';
 import { Player } from './../models/player';
 import * as Materialize from 'materialize-css';
@@ -9,7 +9,7 @@ declare var $ : any;
   templateUrl: './dropdown-player.component.html',
   styleUrls: ['./dropdown-player.component.css'],
 })
-export class DropdownPlayerComponent implements OnInit {
+export class DropdownPlayerComponent implements OnInit, OnChanges {
 
 	@Output() onChange = new EventEmitter();
 
@@ -53,6 +53,10 @@ export class DropdownPlayerComponent implements OnInit {
 		} else {
 			this.selectedId = this.selected._id;
 		}
+	}
+
+	ngOnChanges() {
+		this.selectedId = this.selected._id;
 	}
 
 	ngAfterViewInit() {

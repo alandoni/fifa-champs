@@ -33,13 +33,3 @@
 </div>
 
 <hr [ngClass]="{'deleted': isDeleted}"/>
-
-<div class="row">
-	<div class="modal col s12 offset-m3 m6 offset-l4 l4 insert-match-modal" materialize="modal" 
-      [materializeParams]="[{dismissible: true}]" [materializeActions]="matchModalActions">
-		<div class="modal-content">
-		  	<h4>Editar Jogo</h4>
-		</div>
-		<app-insert-match (onCreateMatchSuccess)="closeMatchModal($event)" [match]="match"></app-insert-match>
-	</div>
-</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Output, Input, EventEmitter } from '@angular/core';
 import { MatchService } from './../match.service';
 import { Match } from './../models/match';
 import { Player } from './../models/player';
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 	templateUrl: './insert-match.component.html',
 	styleUrls: ['./insert-match.component.css']
 })
-export class InsertMatchComponent implements OnInit {
+export class InsertMatchComponent implements OnInit, OnChanges {
 
 	@Output() onCreateMatchSuccess: EventEmitter<Match> = new EventEmitter();
 	@Input() match: Match;
@@ -42,6 +42,9 @@ export class InsertMatchComponent implements OnInit {
 	onPlayersChanged() {
 		this.players = this.playerService.getPlayers();
 		if (!this.isEditingMatch) {
+			if (!this.match) {
+				this.match = new Match();
+			}
 			this.match.player1 = this.players[0];
 			this.match.player2 = this.players[0];
 			this.match.player3 = this.players[0];
@@ -145,11 +148,15 @@ export class InsertMatchComponent implements OnInit {
 			this.router.navigate(['/']);
 			return;
 		}
-		this.ngOnInit();
+		this.ngOnChanges();
 		this.onCreateMatchSuccess.emit(result);
 	}
 
 	ngOnInit() {
+
+	}
+
+	ngOnChanges() {
 		const url = window.location.href;
 		this.isEditingMatch = url.indexOf('match') > 0 && url.indexOf('insert') < 0;
 		this.route.params.subscribe(params => {

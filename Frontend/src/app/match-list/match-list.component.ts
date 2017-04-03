@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import { MaterializeAction } from 'angular2-materialize';
 import { Match } from './../models/match';
 
 @Component({
@@ -11,8 +12,13 @@ export class MatchListComponent implements OnChanges {
 	@Input() matches: Array<Match>;
 	@Input() minItemsPerColumn = 6;
 	@Input() cols = 1;
+
+	matchModalActions = new EventEmitter<string|MaterializeAction>();
+
 	error: any;
 	matchesList: Array<Array<Match>>;
+
+	matchToEdit: Match;
 
 	constructor() { }
 
@@ -45,7 +51,7 @@ export class MatchListComponent implements OnChanges {
 			var matchCol = [];
 			for (var j = 0; (j < this.minItemsPerColumn || j < numberOfMatchesPerColumn) && matchIndex < this.matches.length; j++) {
 				matchCol.push(this.matches[matchIndex]);
-				
+
 				if (this.matches[matchIndex].date === lastMatchDate) {
 					this.matches[matchIndex].date = undefined;
 				} else {
@@ -53,10 +59,18 @@ export class MatchListComponent implements OnChanges {
 				}
 				matchIndex++;
 			}
-
 			this.matchesList.push(matchCol);
 			lastMatchDate = this.matches[matchIndex - 1].date;
 		}
 	}
 
+	onEditMatch(match) {
+		this.matchToEdit = match;
+		this.matchModalActions.emit({action: 'modal', params: ['open']});
+	}
+
+	closeMatchModal(result) {
+		this.matchToEdit = result;
+		this.matchModalActions.emit({action: 'modal', params: ['close']});
+	}
 }

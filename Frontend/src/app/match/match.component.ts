@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Match } from './../models/match';
 import { LoginService } from './../login.service';
 import { MatchService } from './../match.service';
@@ -12,12 +12,11 @@ import { MaterializeAction } from 'angular2-materialize';
 export class MatchComponent implements OnInit {
 
 	matchModalActions = new EventEmitter<string|MaterializeAction>();
-
+	@Output() onEditMatch = new EventEmitter<Match>();
 	@Input() match: Match;
 	hasPenalties: boolean;
 	isLoggedIn: boolean;
 	isDeleted: boolean;
-	showModal: boolean = false;
 
 	constructor(private loginService: LoginService, private matchService: MatchService) { }
 
@@ -51,14 +50,7 @@ export class MatchComponent implements OnInit {
 
 	editGame(event) {
 		event.preventDefault();
-		this.showModal = true;
-		this.matchModalActions.emit({action: 'modal', params: ['open']});
-	}
-
-	closeMatchModal(result) {
-		this.showModal = false;
-		this.matchModalActions.emit({action: 'modal', params: ['close']});
-		this.match = result;
+		this.onEditMatch.emit(this.match);
 	}
 
 	delete(event) {
