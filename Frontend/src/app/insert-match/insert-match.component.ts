@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { MatchService } from './../match.service';
 import { Match } from './../models/match';
 import { Player } from './../models/player';
@@ -148,12 +148,17 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 			this.router.navigate(['/']);
 			return;
 		}
-		this.ngOnChanges();
+		this.ngOnInit();
 		this.onCreateMatchSuccess.emit(result);
 	}
 
 	ngOnInit() {
+		this.matchDateOptions = this.getDefaultPickerOptions();
 
+		this.error = null;
+		this.isFinal = false;
+		this.isEditingMatch = false;
+		this.match = new Match();
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -170,11 +175,6 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 		} else {
 			this.isEditingMatch = true;
 		}
-
-		this.matchDateOptions = this.getDefaultPickerOptions();
-
-		this.error = null;
-		this.isFinal = false;
 	}
 
 	private getDefaultPickerOptions() {
