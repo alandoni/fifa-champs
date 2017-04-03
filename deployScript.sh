@@ -29,6 +29,8 @@ echo "--------------------------------------------------------------------------
 echo "Copying FrontEnd generated dist to BackEnd project"
 echo "--------------------------------------------------------------------------"
 git checkout production
+rm -r dist
+rm -r dist/
 cd Frontend
 cp -r ./dist ../dist/
 cd ..
