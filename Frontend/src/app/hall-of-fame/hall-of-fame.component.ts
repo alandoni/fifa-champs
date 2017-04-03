@@ -57,10 +57,23 @@ export class HallOfFameComponent implements OnInit {
 				champions[match.player1.nickname] = champions[match.player1.nickname] + 1;
 				champions[match.player2.nickname] = champions[match.player2.nickname] + 1;
 			}
-			if (match.team2score > match.team1score) {
+			else if (match.team2score > match.team1score) {
 				champions[match.player3.nickname] = champions[match.player3.nickname] + 1;
 				champions[match.player4.nickname] = champions[match.player4.nickname] + 1;
 			}
+			else{
+				if(match.team1penalties > match.team2penalties){
+					champions[match.player1.nickname] = champions[match.player1.nickname] + 1;
+					champions[match.player2.nickname] = champions[match.player2.nickname] + 1;
+				}
+				else if(match.team2penalties > match.team1penalties){
+					champions[match.player3.nickname] = champions[match.player3.nickname] + 1;
+					champions[match.player4.nickname] = champions[match.player4.nickname] + 1;
+				}
+			}
+
+
+
 		}
 
 		this.champions = [];
