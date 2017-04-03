@@ -1,9 +1,14 @@
 nav {
   background: #607D8B;
+  height: 64px;
 }
 
 a {
   padding: 0px 25px;
+}
+
+a.button-collapse {
+  padding: 0;
 }
 
 a:focus, active{

@@ -16,15 +16,16 @@ export class InsertMatchComponent implements OnInit {
   @Output() onCreateMatchSuccess: EventEmitter<Match> = new EventEmitter();
   match: Match = new Match();
   error: any;
-  selected: false;
+  isFinal: false;
   players: Array<Player>;
-  minDate: Date;
-  maxDate: Date;
+  matchDateOptions:any;
 
   constructor(private playerService: PlayerService, private matchService: MatchService,
               private championshipService: ChampionshipService) {  }
 
   tryCreateMatch() {
+
+    this.match.isFinal = this.isFinal;
     if (!this.championshipService.getCurrentChampionship()) {
       this.error = {description: 'Verifique se há um campeonato criado.'};
       return;
@@ -33,17 +34,37 @@ export class InsertMatchComponent implements OnInit {
       this.error = {description: 'Verifique se há jogadores repetidos.'};
       return;
     }
-    if (this.match.team1score == null || this.match.team1score === undefined) {
+    if (this.match.team1score == null || this.match.team1score === undefined || this.match.team1score.length === 0) {
       this.error = {description: 'Verifique a pontuação dos times.'};
       return;
     }
-    if (this.match.team2score == null || this.match.team2score === undefined) {
+    if (this.match.team2score == null || this.match.team2score === undefined || this.match.team1score.length === 0) {
       this.error = {description: 'Verifique a pontuação dos times.'};
       return;
     }
 
+    const isTieAndFinal: boolean = this.match.team1score === this.match.team2score && this.match.isFinal;
+
+    if (isTieAndFinal &&
+        (this.match.team1penalties == null || this.match.team1penalties === undefined || this.match.team1penalties.length === 0)) {
+      this.error = {description: 'Verifique os pênaltis dos times.'};
+      return;
+    }
+
+    if (isTieAndFinal &&
+        (this.match.team2penalties == null || this.match.team2penalties === undefined || this.match.team2penalties.length === 0)) {
+      this.error = {description: 'Verifique os pênaltis dos times.'};
+      return;
+    }
+
+    if (isTieAndFinal && (this.match.team1penalties === this.match.team2penalties)) {
+      this.error = {description: 'Verifique os pênaltis dos times.'};
+      return;
+    }
+
+    // TODO: get championship of month:
     this.match.championship = this.championshipService.getCurrentChampionship();
-    this.match.isFinal = this.selected;
+
     this.matchService.insert(this.match).subscribe(
       (result) => this.matchCreatedSuccess(result),
       (error : any) => {
@@ -90,13 +111,11 @@ export class InsertMatchComponent implements OnInit {
 
   ngOnInit() {
     let dateNow = new Date();
-    this.match = {_id: undefined, player1: undefined, player2: undefined, player3: undefined, player4: undefined,
-      team1score: undefined, team2score: undefined, isFinal: false, championship: undefined, date: dateNow};
+    this.match = new Match();
     this.error = null;
-    this.selected = false;
+    this.isFinal = false;
 
-    this.minDate = new Date(dateNow.getFullYear(),dateNow.getMonth(),1);
-    this.maxDate = new Date(dateNow.getFullYear(),dateNow.getMonth() +1,0);
+    this.matchDateOptions = this.getDefaultPickaOption();
 
     this.requestAllPlayers();
 
@@ -120,4 +139,18 @@ export class InsertMatchComponent implements OnInit {
       }
     );
   }
+
+  private getDefaultPickaOption(){
+   return {
+     monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
+     monthsShort: [ 'jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez' ],
+     weekdaysFull: [ 'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado' ],
+     weekdaysShort: [ 'dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab' ],
+     today: 'hoje',
+     clear: 'limpar',
+     close: 'fechar',
+     max: new Date(),
+     format: 'yyyy-mm-dd'
+   };
+ }
 }
