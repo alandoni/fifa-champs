@@ -156,7 +156,7 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 
 	}
 
-	ngOnChanges() {
+	ngOnChanges(changes: SimpleChanges) {
 		const url = window.location.href;
 		this.isEditingMatch = url.indexOf('match') > 0 && url.indexOf('insert') < 0;
 		this.route.params.subscribe(params => {

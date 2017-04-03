@@ -55,7 +55,7 @@ export class DropdownPlayerComponent implements OnInit, OnChanges {
 		}
 	}
 
-	ngOnChanges() {
+	ngOnChanges(changes: SimpleChanges) {
 		this.selectedId = this.selected._id;
 	}
 
