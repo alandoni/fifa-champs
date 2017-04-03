@@ -26,12 +26,12 @@ const MatchController = require('./controllers/matchController');
 const AdminController = require('./controllers/adminController');
 
 exports.set = function(app, mongo) {
-	
+
 	const championshipController = new ChampionshipController(mongo);
 	const playerController = new PlayerController(mongo);
 	const matchController = new MatchController(mongo);
 	const adminController = new AdminController(mongo);
-	
+
 	require('./passport')(passport, adminController);
 
 	app.use(bodyParser.urlencoded({
@@ -51,7 +51,7 @@ exports.set = function(app, mongo) {
 		allowedHeaders: ['set-cookie', 'Content-Type', 'cookie', 'cookies', 'connect.sid'],
 		exposedHeaders: ['set-cookie', 'Content-Type', 'cookie', 'cookies', 'connect.sid']
 	}));
-	
+
 	app.options('*', cors());
 
 	app.use(cookieParser());
@@ -77,8 +77,6 @@ exports.set = function(app, mongo) {
 	});
 
 	function isLoggedIn(req, res, next) {
-
-		console.log('isAuth: ' + req.isAuthenticated());
 
 	    if (req.isAuthenticated()) {
 	        return next();
@@ -123,8 +121,7 @@ exports.set = function(app, mongo) {
 	//LOGIN
 	app.post(URL_LOGIN, (request, response, next) => {
 		passport.authenticate('local-login', (error, user, info) => {
-			
-			console.log('info ' + info);
+
 			if (error) {
 				console.log('error ' + JSON.stringify(error));
 				response.status(401).send(error);
@@ -132,13 +129,12 @@ exports.set = function(app, mongo) {
 			}
 
 			request.login(user, (error) => {
-				
+
 				if (error) {
 					console.log('err: ' + error);
 					response.status(401).send(error);
 					return;
 				}
-				console.log('Logged in as ' + user);
 				response.send(user);
 				next();
 			});
@@ -171,7 +167,7 @@ exports.set = function(app, mongo) {
 		} else {
 			promise = championshipController.getAll()
 		}
-		
+
 		promise.then((championshipsList) => {
 			response.send(championshipsList);
 		}).catch((error) => {
@@ -198,9 +194,6 @@ exports.set = function(app, mongo) {
 
 	app.post(URL_CHAMPIONSHIPS + "/:id", isLoggedIn, (request, response) => {
 		var id = request.params.id;
-
-		console.log(id);
-		console.log(request.body);
 
 		championshipController.update(id, request.body).then((championship) => {
 			response.send(championship);

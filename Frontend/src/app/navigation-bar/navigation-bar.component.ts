@@ -110,11 +110,9 @@ export class NavigationBarComponent implements OnInit {
 		this.championshipService.getCurrent().subscribe((current: Championship[]) => {
 			if (current.length == 0) {
 				var date = new Date();
-				console.log("No championships found, creating the first one");
 				this.insertChampionship(date.getMonth() + 1, date.getFullYear());
 				return;
 			}
-			console.log("Championships found");
 			var currentSeason = current[0];
 			this.createSeasonBasedOnCurrentSeason(currentSeason);
 		}, (error: any) => {

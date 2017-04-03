@@ -31,7 +31,6 @@ export class InsertMatchComponent implements OnInit {
 
 	requestMatch(id) {
 		this.isEditingMatch = true;
-		console.log('Requesting match with id: ' + id);
 		this.matchService.getById(id).subscribe((result) => {
 			this.match = result;
 		}, (error) => {
@@ -51,7 +50,6 @@ export class InsertMatchComponent implements OnInit {
 	}
 
 	handlePlayerChange(event) {
-		console.log(event);
 		this.match[event.target] = event.player;
 	}
 
@@ -97,16 +95,12 @@ export class InsertMatchComponent implements OnInit {
 	tryCreateMatch() {
 		this.match.isFinal = this.isFinal;
 
-		console.log('Saving match');
-		console.log(this.match);
-
 		if (!this.validate()) {
 			return;
 		}
 
 		// TODO: get championship of month:
 		this.match.championship = this.championshipService.getCurrentChampionship();
-		console.log(this.match);
 
 		let request = null;
 		if (this.isEditingMatch) {

@@ -17,7 +17,6 @@ export class LoginService {
 
 	public login(nickname, password, salt) : Observable<any> {
 		var passwordHash = this.getPasswordHash(password, salt);
-		console.log(passwordHash);
 		var result = this.api.post(this.url, {nickname: nickname, password: passwordHash});
 		result.subscribe((res) => {
 			this.isLogged = true;
@@ -27,8 +26,7 @@ export class LoginService {
 					this.listeners[listener].onLoginChange();
 				}
 			}
-			console.log('Logged: ' + res);
-			
+
 		}, (error) => this.isLogged = false);
 		return result;
 	}
@@ -46,7 +44,6 @@ export class LoginService {
 	}
 
 	public logout() : Observable<any>  {
-		console.log("Logging out");
 		var result = this.api.post('/logout', {});
 		result.subscribe((result) => {
 			this.isLogged = false;
@@ -72,7 +69,6 @@ export class LoginService {
 		if (password && salt) {
 			password = this.getPasswordHash(password, salt);
 		}
-		console.log(password);
 		return this.api.post(this.url_admin + '/' + id, {nickname: nickname, password: password});
 	}
 

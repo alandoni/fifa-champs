@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
 	constructor(private login: LoginService) { }
 
-	tryLogin() { 
+	tryLogin() {
 		this.login.getSalt(this.nickname).subscribe((salt) => {
 			this.login.login(this.nickname, this.password, salt.salt).subscribe(
 				(result) => this.loginSuccess(result),
@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
 	}
 
 	loginSuccess(result: Player) {
-		console.log(result);
 		this.onLoginSuccess.emit(result);
 	}
 

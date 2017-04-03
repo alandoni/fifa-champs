@@ -20,7 +20,6 @@ export class AdminsListComponent implements OnInit {
 
 	ngOnInit() {
 		if (!this.loginService.isLoggedIn()) {
-      console.log('Not logged, redirecting');
 			this.router.navigateByUrl('/');
 			return;
 		}
@@ -36,7 +35,6 @@ export class AdminsListComponent implements OnInit {
 	updateUser(event, index) {
 		event.preventDefault();
 		this.selectedAdmin = this.admins[index];
-    	console.log('Updating user ' + this.admins[index].nickname);
 		this.selectedIndex = index;
 		this.openModal();
 	}
@@ -47,11 +45,9 @@ export class AdminsListComponent implements OnInit {
 		if (window.confirm('Tem certeza que quer excluir o ' + this.admins[index].nickname + '?')) {
 			this.loginService.delete(this.admins[index]._id).subscribe(
 				(result) => {
-					console.log(result);
 					this.admins = this.admins.filter((el) => {
 					    return el._id !== this.admins[this.selectedIndex]._id;
 					});
-					console.log(this.selectedIndex);
 				},
 				(error) => console.log(error)
 			);

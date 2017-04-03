@@ -38,8 +38,6 @@ export class SeasonSelectorComponent implements OnInit {
 
 		this.route.params.subscribe(params => {
 
-			console.log("Getting new data");
-
 			if (window.location.href.indexOf('results') > 0) {
 				this.changeTab(1);
 			} else {
@@ -94,7 +92,6 @@ export class SeasonSelectorComponent implements OnInit {
 	}
 
 	requestMatchesByMonth(month, year) {
-		console.log("Requesting championship for " + month + "/" + year);
 		this.date = new Date(year, month - 1, 1);
 		this.isLoading = true;
 		this.championshipService.getByMonth(month, year).subscribe(
@@ -102,7 +99,6 @@ export class SeasonSelectorComponent implements OnInit {
 				if (championships.length > 0) {
 					this.requestMatchesByChampionship(championships[0]._id);
 				} else {
-					console.log("No championship found");
 					this.matches = [];
 				}
 				this.isLoading = false;
@@ -111,7 +107,6 @@ export class SeasonSelectorComponent implements OnInit {
 	}
 
 	requestMatchesByChampionship(championshipId) {
-		console.log("Requesting matches from championship " + championshipId);
 		this.isLoading = true;
 		this.matchService.getByChampionship(championshipId).subscribe(
 			(matches) => {
@@ -130,7 +125,6 @@ export class SeasonSelectorComponent implements OnInit {
 
 	requestAllMatches() {
 		this.isLoading = true;
-		console.log("Requesting all matches");
 		this.matchService.getAll().subscribe(
 			(matches) => this.processMatches(matches),
 			(error) => console.log(error));
@@ -138,20 +132,15 @@ export class SeasonSelectorComponent implements OnInit {
 
 	requestCurrentMatches() {
 		if (this.championshipService.getCurrentChampionship()) {
-			console.log("Already has a current championship loaded");
 			this.requestMatchesByChampionship(this.championshipService.getCurrentChampionship()._id);
 			return;
 		}
 
-		console.log("Loading new current championship");
-
 		this.championshipService.getCurrent().subscribe((championships) => {
 			if (championships.length == 0) {
-				console.log("No current championship, create a new one");
 				this.isLoading = false;
 				return;
 			}
-			console.log("New current championship loaded");
 
 			this.championshipService.setCurrentChampionship(championships[0]);
 			this.requestMatchesByChampionship(championships[0]._id);
@@ -164,13 +153,11 @@ export class SeasonSelectorComponent implements OnInit {
 	}
 
 	formatDate(date) {
-		console.log(date);
 		return (date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 9 ? "0" : "")
 			+ (date.getMonth() + 1) + "/" + date.getFullYear();
 	}
 
 	dateFromString(str) {
-		console.log(str);
 		var parts = str.split('/');
 		return new Date(parts[2], parts[1] - 1, parts[0]);
 	}

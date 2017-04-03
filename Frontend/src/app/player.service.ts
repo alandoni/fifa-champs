@@ -13,10 +13,8 @@ export class PlayerService {
 	constructor(private api: ApiRequestService) { }
 
 	insert(nickname) : Observable<Player> {
-		console.log("inserting player " + nickname);
 		var result = this.api.post(this.url, {nickname: nickname});
 		result.subscribe((res) => {
-			console.log("Notifying listeners");
 			this.players.push(res);
 			for (var listener in this.listeners) {
 				if (this.listeners[listener]) {

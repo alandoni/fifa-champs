@@ -23,7 +23,6 @@ export class CreateAdminComponent implements OnInit {
 
   ngOnInit() {
 		this.route.params.subscribe(params => {
-			console.log('Getting new data');
 
 			if (params['id']) {
 				this.id = params['id'];
@@ -31,13 +30,11 @@ export class CreateAdminComponent implements OnInit {
 
 			if (params['nickname']) {
 				this.nickname = params['nickname'];
-				console.log(this.nickname);
 				this.isUpdatingByUrl = true;
 			}
 
       if (params['salt']) {
         this.salt = params['salt'];
-				console.log(this.salt);
       }
     });
   }
@@ -87,23 +84,19 @@ export class CreateAdminComponent implements OnInit {
 		var admin = changes['admin'].currentValue;
 
 		if (admin) {
-			console.log(admin.nickname);
 			this.nickname = admin.nickname;
 			this.id = admin._id;
 		} else {
-			console.log(admin);
 			this.nickname = '';
 			this.id = null;
 		}
 
 		if (admin) {
-			console.log(this.loginService.user.nickname);
 			if (admin && this.loginService.user.nickname === admin.nickname) {
 				this.loginService.getSalt(admin.nickname).subscribe((salt) => {
 					this.salt = salt.salt;
 				});
 			} else {
-				console.log('cancel salt');
 				this.salt = null;
 			}
 		}

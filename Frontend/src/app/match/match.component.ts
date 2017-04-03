@@ -22,7 +22,6 @@ export class MatchComponent implements OnInit {
 	constructor(private loginService: LoginService, private matchService: MatchService) { }
 
 	ngOnInit() {
-		console.log(this.match);
 		this.hasPenalties = this.match.isFinal && (this.match.team1penalties > 0 || this.match.team2penalties);
 		this.loginService.addListener(this);
 		this.onLoginChange();
@@ -53,13 +52,10 @@ export class MatchComponent implements OnInit {
 	editGame(event) {
 		event.preventDefault();
 		this.showModal = true;
-		console.log('Opening modal');
 		this.matchModalActions.emit({action: 'modal', params: ['open']});
 	}
 
 	closeMatchModal(result) {
-		console.log('Closing modal');
-		console.log(result);
 		this.showModal = false;
 		this.matchModalActions.emit({action: 'modal', params: ['close']});
 		this.match = result;

@@ -46,7 +46,6 @@ export class PlayersListComponent implements OnInit {
 		if (window.confirm("Tem certeza que quer excluir o " + this.players[index].nickname + "?")) {
 			this.playerService.delete(this.players[index]._id).subscribe(
 				(result) => { 
-					console.log(result);
 					this.players = this.players.filter((el) => {
 					    return el._id !== this.players[this.selectedIndex]._id;
 					});

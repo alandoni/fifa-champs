@@ -15,7 +15,6 @@ export class ApiRequestService {
 
 	constructor(http: Http) {
 		if (this.http == null) {
-			console.log("Creating new HTTP");
 			this.http = http;
 		}
 	}
