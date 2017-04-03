@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoginService } from './../login.service';
 import { ChampionshipService } from './../championship.service';
 import { Championship } from './../models/championship';
-import { Player } from './../models/player';
 import { Match } from './../models/match';
 import { MaterializeAction } from 'angular2-materialize';
 import { NavigationBarItem } from './../models/navigation-bar-item.model';

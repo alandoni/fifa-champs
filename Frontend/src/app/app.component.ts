@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Player } from './models/player';
 import { Match } from './models/match';
 import { Championship } from './models/championship';
+import { PlayerService } from './player.service';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	title = 'app works!';
 
-	constructor(private router: Router) {
+	constructor(private router: Router, private playerService: PlayerService) {
+	}
+
+	ngOnInit() {
+		this.playerService.getAll();
 	}
 
 	loginSuccess(user) {

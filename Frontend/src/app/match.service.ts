@@ -31,10 +31,14 @@ export class MatchService {
 	}
 
 	getByChampionship(championshipId) : Observable<Match[]> {
-		return this.api.get(this.url + '/' + championshipId);
+		return this.api.get(this.url + '/championship/' + championshipId);
 	}
 
 	getFinals() : Observable<Match[]> {
 		return this.api.get(this.url + '?isFinal=true');
+	}
+
+	getById(id) :  Observable<Match> {
+		return this.api.get(this.url + '/' + id);
 	}
 }
