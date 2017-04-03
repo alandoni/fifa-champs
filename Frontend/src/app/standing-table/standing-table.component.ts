@@ -21,7 +21,6 @@ export class StandingTableComponent implements OnChanges {
 	constructor() { }
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log("Detected changes");
 		this.setLimit();
 		this.getPlayersFromMatches();
 

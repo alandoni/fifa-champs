@@ -43,7 +43,6 @@ export class CreatePlayerComponent implements OnInit, OnChanges {
 	}
 
 	playerCreatedSuccess(result: Player) {
-		console.log("Player created " + result.nickname);
 		this.onCreatePlayerSuccess.emit(result);
 		this.nickname = '';
 	}
@@ -51,7 +50,6 @@ export class CreatePlayerComponent implements OnInit, OnChanges {
 	ngOnInit() { }
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log("Updating existing player");
 
 		if (changes['player'].currentValue) {
 			this.nickname = changes['player'].currentValue.nickname;
@@ -60,4 +58,3 @@ export class CreatePlayerComponent implements OnInit, OnChanges {
 		}
 	}
 }
-
