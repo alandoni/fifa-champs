@@ -3,8 +3,18 @@
   <div *ngIf="!error" class="row">
   	<div *ngFor="let matches of matchesList" class="col s12 m6" [ngClass]="{'l12': cols == 1, 'l6': cols == 2, 'l4': cols == 3, 'l3': cols == 4}">
   		<div *ngFor="let match of matches">
-  			<app-match [match]="match"></app-match>
+  			<app-match [match]="match" (onEditMatch)="onEditMatch($event)"></app-match>
   		</div>
   	</div>
   </div>
+</div>
+
+<div class="row">
+	<div class="modal col s12 offset-m3 m6 offset-l4 l4 insert-match-modal" materialize="modal" 
+      [materializeParams]="[{dismissible: true}]" [materializeActions]="matchModalActions">
+		<div class="modal-content">
+		  	<h4>Editar Jogo</h4>
+		</div>
+		<app-insert-match (onCreateMatchSuccess)="closeMatchModal($event)" [match]="matchToEdit"></app-insert-match>
+	</div>
 </div>
