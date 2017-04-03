@@ -8,7 +8,6 @@ module.exports = {
 	},
 
 	formatDate: function(date) {
-		console.log(date);
 		return this._formatNumber(date.getDate()) + "/" + this._formatNumber(date.getMonth() + 1) + "/" + this._formatNumber(date.getFullYear());
 	},
 

@@ -12,7 +12,6 @@ module.exports = function(passport, adminController) {
     passport.deserializeUser(function(id, done) {
         adminController.getById(id).then((user) => {
             if (!user) {
-                console.log('null user');
                 done('Null user');
             } else {
                 done(null, user);
@@ -28,10 +27,9 @@ module.exports = function(passport, adminController) {
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     }, (req, nickname, password, done) => {
-        console.log('Logging in with ' + nickname + ' and ' + password);
 
 		const loginObj = {nickname: nickname, password: password};
-    	
+
         adminController.login(loginObj).then((result) => {
     		return done(null, result);
     	}).catch((error) => {

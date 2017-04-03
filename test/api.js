@@ -18,13 +18,11 @@ var agent = chai.request.agent(server);
 describe('API Test', () => {
 
     after((done) => {
-        console.log('Removing previous test data');
         Championship.remove({}, (err) => {
-            Match.remove({}, (err) => { 
-                Player.remove({}, (err) => { 
-                    console.log('Removing previous test data with success');
-                    done();         
-                });        
+            Match.remove({}, (err) => {
+                Player.remove({}, (err) => {
+                    done();
+                });
             });
         });
     });
@@ -37,7 +35,6 @@ describe('API Test', () => {
             get('/api/salt/' + nickname).then((res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('salt');
-                console.log(res.body);
                 done(res);
             }).catch((error) => {
                 done();
