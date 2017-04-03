@@ -8,6 +8,8 @@ var matchSchema = new Schema({
 	player4: {type: Schema.Types.ObjectId, ref: 'Player'},
 	team1score: Number,
 	team2score: Number,
+	team1penalties: Number,
+	team2penalties: Number,
 	date: Date,
 	championship: {type: Schema.Types.ObjectId, ref: 'Championship'},
 	isFinal: Boolean
