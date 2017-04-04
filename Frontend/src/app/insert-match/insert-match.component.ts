@@ -20,6 +20,7 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 	isEditingMatch = false;
 	error: any;
 	isFinal: false;
+	hasFinal: boolean = false;
 	players: Array<Player>;
 
 	constructor(private playerService: PlayerService, private matchService: MatchService,
@@ -61,6 +62,12 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 			this.error = {description: 'Verifique se há um campeonato criado.'};
 			return false;
 		}
+
+		if (this.hasFinal && this.match.isFinal) {
+			this.error = {description: 'Já existe uma final nesse campeonato.'};
+			return false;
+		}
+
 		if (this.verifyRepeatedPlayer()) {
 			this.error = {description: 'Verifique se há jogadores repetidos.'};
 			return false;
@@ -95,15 +102,30 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 		return true;
 	}
 
+	checkFinals(finals){
+		if(finals.length > 0)
+			this.hasFinal = true;
+		else
+			this.hasFinal = false;
+	}
 	tryCreateMatch() {
 		this.match.isFinal = this.isFinal;
+
+		// TODO: get championship of month:
+		this.match.championship = this.championshipService.getCurrentChampionship();
+
+		this.matchService.getFinalFromChampionship(this.match.championship._id).subscribe(
+			(res) => {
+				this.checkFinals(res);
+			},
+			(error : any) => {
+				console.log(error);
+				this.error = error;
+			});
 
 		if (!this.validate()) {
 			return;
 		}
-
-		// TODO: get championship of month:
-		this.match.championship = this.championshipService.getCurrentChampionship();
 
 		let request = null;
 		if (this.isEditingMatch) {
