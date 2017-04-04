@@ -46,4 +46,8 @@ export class AppComponent implements OnInit {
 	championshipCreated(result: Championship) {
 		this.router.navigateByUrl('season/classification/' + result._id);
 	}
+
+	loggedOut(){
+		this.router.navigateByUrl('season/classification/current');
+	}
 }
