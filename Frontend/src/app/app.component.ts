@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 	matchCreated(result: Match) {
 		//GAMBIARRA BECAUSE I CAN
 
-		var url = 'classification';
+		var url = 'standings';
 		if (window.location.href.indexOf('results') > 0) {
 			url = 'results';
 		}
@@ -44,10 +44,10 @@ export class AppComponent implements OnInit {
 	}
 
 	championshipCreated(result: Championship) {
-		this.router.navigateByUrl('season/classification/' + result._id);
+		this.router.navigateByUrl('season/standings/' + result._id);
 	}
 
 	loggedOut(){
-		this.router.navigateByUrl('season/classification/current');
+		this.router.navigateByUrl('season/standings/current');
 	}
 }

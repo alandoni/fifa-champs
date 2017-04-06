@@ -34,7 +34,7 @@ export class NavigationBarComponent implements OnInit {
 		var itemsNotLogged = [];
 		itemsNotLogged.push(new NavigationBarItem('Login', null, this.openLoginModal.bind(this)));
 		itemsNotLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
-		itemsNotLogged.push(new NavigationBarItem('Temporada', '/season/classification/current', null));
+		itemsNotLogged.push(new NavigationBarItem('Temporada', '/season/standings/current', null));
 		return itemsNotLogged;
 	}
 
@@ -45,7 +45,7 @@ export class NavigationBarComponent implements OnInit {
 		itemsLogged.push(new NavigationBarItem('Jogadores', '/players', null));
 		itemsLogged.push(new NavigationBarItem('Adicionar Jogo', '/insert-match', this.createMatch.bind(this)));
 		itemsLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
-		itemsLogged.push(new NavigationBarItem('Temporada', '/season/classification/current', null));
+		itemsLogged.push(new NavigationBarItem('Temporada', '/season/standings/current', null));
 		itemsLogged.push(new NavigationBarItem('Criar Nova Temporada', null, this.createSeason.bind(this)));
 		return itemsLogged;
 	}

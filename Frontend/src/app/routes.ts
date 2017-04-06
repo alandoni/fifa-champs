@@ -20,13 +20,13 @@ export const appRoutes: Routes = [
 	{path: 'create-player', component: CreatePlayerComponent},
 	{path: 'insert-match', component: InsertMatchComponent},
 	{path: 'match/:id', component: InsertMatchComponent},
-	{path: 'season/classification/:id', component: SeasonSelectorComponent},
-	{path: 'season/classification/current', component: SeasonSelectorComponent},
-	{path: 'season/classification/:month/:year', component: SeasonSelectorComponent},
-	{path: 'season/classification/alltime', component: SeasonSelectorComponent},
+	{path: 'season/standings/:id', component: SeasonSelectorComponent},
+	{path: 'season/standings/current', component: SeasonSelectorComponent},
+	{path: 'season/standings/:month/:year', component: SeasonSelectorComponent},
+	{path: 'season/standings/alltime', component: SeasonSelectorComponent},
 	{path: 'admin', component: AdminsListComponent},
 	{path: 'admin/create/:id/:nickname/:salt', component: CreateAdminComponent},
 	{path: 'hall', component: HallOfFameComponent},
-	{path: '', redirectTo: 'season/classification/current', pathMatch: 'full'},
+	{path: '', redirectTo: 'season/standings/current', pathMatch: 'full'},
 	{path: '**', component: PageNotFoundComponent}
 ];
