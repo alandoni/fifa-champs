@@ -72,7 +72,7 @@ export class SeasonSelectorComponent implements OnInit {
 	previousMonth() {
 		this.date = this.sumMonth(this.date, -1)
 		if(this.tab == 0)
-			this.router.navigateByUrl('season/classification/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
+			this.router.navigateByUrl('season/standings/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 		else
 			this.router.navigateByUrl('season/results/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 	}
@@ -80,7 +80,7 @@ export class SeasonSelectorComponent implements OnInit {
 	nextMonth() {
 		this.date = this.sumMonth(this.date, 1)
 		if(this.tab == 0)
-			this.router.navigateByUrl('season/classification/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
+			this.router.navigateByUrl('season/standings/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 		else
 			this.router.navigateByUrl('season/results/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 	}
@@ -165,10 +165,10 @@ export class SeasonSelectorComponent implements OnInit {
 	changeTab(tab) {
 		this.tab = tab;
 		if (tab == 0) {
-			var newUrl = window.location.href.replace('results', 'classification');
+			var newUrl = window.location.href.replace('results', 'standings');
 			history.pushState({}, null, newUrl);
 		} else {
-			var newUrl = window.location.href.replace('classification', 'results');
+			var newUrl = window.location.href.replace('standings', 'results');
 			history.pushState({}, null, newUrl);
 		}
 	}
