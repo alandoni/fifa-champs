@@ -56,7 +56,8 @@ export class DropdownPlayerComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		this.selectedId = this.selected._id;
+		if(this.selected != undefined)
+			this.selectedId = this.selected._id;
 	}
 
 	ngAfterViewInit() {
