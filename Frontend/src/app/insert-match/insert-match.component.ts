@@ -5,6 +5,7 @@ import { Player } from './../models/player';
 import { ChampionshipService } from './../championship.service';
 import { PlayerService } from './../player.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
 	selector: 'app-insert-match',
@@ -24,8 +25,8 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 	players: Array<Player>;
 
 	constructor(private playerService: PlayerService, private matchService: MatchService,
-				private championshipService: ChampionshipService,  private router: Router,
-				private route: ActivatedRoute) {
+		private championshipService: ChampionshipService, private router: Router,
+		private route: ActivatedRoute) {
 		this.playerService.getAll();
 		this.playerService.addListener(this);
 	}
@@ -58,89 +59,86 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 	}
 
 	validate(): boolean {
-		if (!this.championshipService.getCurrentChampionship()) {
-			this.error = {description: 'Verifique se há um campeonato criado.'};
-			return false;
-		}
-
 		if (this.hasFinal && this.match.isFinal) {
-			this.error = {description: 'Já existe uma final nesse campeonato.'};
+			this.error = { description: 'Já existe uma final nesse campeonato.' };
 			return false;
 		}
 
 		if (this.verifyRepeatedPlayer()) {
-			this.error = {description: 'Verifique se há jogadores repetidos.'};
+			this.error = { description: 'Verifique se há jogadores repetidos.' };
 			return false;
 		}
 		if (this.match.team1score == null || this.match.team1score === undefined || this.match.team1score.length === 0) {
-			this.error = {description: 'Verifique a pontuação dos times.'};
+			this.error = { description: 'Verifique a pontuação dos times.' };
 			return false;
 		}
 		if (this.match.team2score == null || this.match.team2score === undefined || this.match.team1score.length === 0) {
-			this.error = {description: 'Verifique a pontuação dos times.'};
+			this.error = { description: 'Verifique a pontuação dos times.' };
 			return false;
 		}
 
 		const isTieAndFinal: boolean = this.match.team1score === this.match.team2score && this.match.isFinal;
 
 		if (isTieAndFinal &&
-				(this.match.team1penalties == null || this.match.team1penalties === undefined || this.match.team1penalties.length === 0)) {
-			this.error = {description: 'Verifique os pênaltis dos times.'};
+			(this.match.team1penalties == null || this.match.team1penalties === undefined || this.match.team1penalties.length === 0)) {
+			this.error = { description: 'Verifique os pênaltis dos times.' };
 			return false;
 		}
 
 		if (isTieAndFinal &&
-				(this.match.team2penalties == null || this.match.team2penalties === undefined || this.match.team2penalties.length === 0)) {
-			this.error = {description: 'Verifique os pênaltis dos times.'};
+			(this.match.team2penalties == null || this.match.team2penalties === undefined || this.match.team2penalties.length === 0)) {
+			this.error = { description: 'Verifique os pênaltis dos times.' };
 			return false;
 		}
 
 		if (isTieAndFinal && (this.match.team1penalties === this.match.team2penalties)) {
-			this.error = {description: 'Verifique os pênaltis dos times.'};
+			this.error = { description: 'Verifique os pênaltis dos times.' };
 			return false;
 		}
 		return true;
 	}
 
-	checkFinals(finals){
-		if(finals.length > 0)
-			this.hasFinal = true;
-		else
-			this.hasFinal = false;
-	}
 	tryCreateMatch() {
 		this.match.isFinal = this.isFinal;
 
 		// TODO: get championship of month:
+		if (!this.championshipService.getCurrentChampionship()) {
+			this.error = { description: 'Verifique se há um campeonato criado.' };
+			return false;
+		}
+
 		this.match.championship = this.championshipService.getCurrentChampionship();
 
-		this.matchService.getFinalFromChampionship(this.match.championship._id).subscribe(
-			(res) => {
-				this.checkFinals(res);
-			},
-			(error : any) => {
-				console.log(error);
-				this.error = error;
+		this.matchService.getFinalFromChampionship(this.match.championship._id).toPromise()
+			.then(response => {
+				if(response.length > 0)
+					this.hasFinal = true;
+				else
+					this.hasFinal = false;
+					
+				if (!this.validate()) {
+					return;
+				}
+
+				let request = null;
+				if (this.isEditingMatch) {
+					request = this.matchService.update(this.match._id, this.match);
+				} else {
+					request = this.matchService.insert(this.match);
+				}
+
+				request.subscribe(
+					(result) => this.matchCreatedSuccess(result),
+					(error: any) => {
+						console.log(error);
+						this.error = error;
+					}
+				);
+			})
+			.catch(err => {
+				console.log(err);
+				this.error = err;
 			});
-
-		if (!this.validate()) {
-			return;
-		}
-
-		let request = null;
-		if (this.isEditingMatch) {
-			request = this.matchService.update(this.match._id, this.match);
-		} else {
-			request = this.matchService.insert(this.match);
-		}
-
-		request.subscribe(
-			(result) => this.matchCreatedSuccess(result),
-			(error: any) => {
-				console.log(error);
-				this.error = error;
-			}
-		);
 	}
 
 	verifyRepeatedPlayer() {
@@ -201,11 +199,11 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 
 	private getDefaultPickerOptions() {
 		return {
-			monthsFull: [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-				'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ],
-			monthsShort: [ 'jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez' ],
-			weekdaysFull: [ 'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado' ],
-			weekdaysShort: [ 'dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab' ],
+			monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+				'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+			monthsShort: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+			weekdaysFull: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+			weekdaysShort: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'],
 			today: 'Hoje',
 			clear: 'Limpar',
 			close: 'Fechar',
