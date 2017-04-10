@@ -54,11 +54,10 @@ class MatchController {
 		}
 	}
 
-	getByChampionship(championshipId) {
-		var id = new ObjectId(championshipId)
-		return this.mongo.selectByCriteria(document, {championship: id}, { date: -1 }).populate("player1 player2 player3 player4 championship").exec().then((match) => {
-			return this._prepareToSend(match);
-		});
+	getByChampionship(championshipId, criteria) {
+		var id = new ObjectId(championshipId);
+		criteria.championship = id;
+		return this.getByCriteria(criteria);
 	}
 
 	insert(match) {

@@ -272,7 +272,7 @@ exports.set = function(app, mongo) {
 
 	app.get(URL_MATCHES + "/championship/:championshipId", (request, response) => {
 		var championshipId = request.params.championshipId;
-		matchController.getByChampionship(championshipId).then((matchesList) => {
+		matchController.getByChampionship(championshipId, request.query).then((matchesList) => {
 			response.send(matchesList);
 		}).catch((error) => {
 			response.status(500).send(error);
