@@ -22,6 +22,7 @@ export class NavigationBarComponent implements OnInit {
 
 	modalActions = new EventEmitter<string|MaterializeAction>();
 	matchModalActions = new EventEmitter<string|MaterializeAction>();
+	teamPickModalActions = new EventEmitter<string|MaterializeAction>();
 	isLoggedIn = false;
 	items : Array<NavigationBarItem> = [];
 
@@ -35,6 +36,7 @@ export class NavigationBarComponent implements OnInit {
 		itemsNotLogged.push(new NavigationBarItem('Login', null, this.openLoginModal.bind(this)));
 		itemsNotLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
 		itemsNotLogged.push(new NavigationBarItem('Temporada', '/season/standings/current', null));
+		itemsNotLogged.push(new NavigationBarItem('Escolher times', '/team-pick', this.teamPick.bind(this)));
 		return itemsNotLogged;
 	}
 
@@ -66,6 +68,14 @@ export class NavigationBarComponent implements OnInit {
 
 	createMatch() {
 		this.matchModalActions.emit({action:"modal", params:['open']});
+	}
+
+	teamPick() {
+		this.teamPickModalActions.emit({action:"modal", params:['open']});
+	}
+
+	closeTeamPickModal(result) {
+		this.teamPickModalActions.emit({action:"modal", params:['close']});
 	}
 
 	closeMatchModal(result) {

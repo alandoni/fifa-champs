@@ -1,0 +1,54 @@
+{
+    "4.0": [
+        {
+            "name":"",
+            "league":"",
+            "attack":"",
+            "midfield":"",
+            "defense":"",
+            "badge_url":""
+        }
+    ],
+    "4.5": [
+
+    ],
+    "5.0": [
+
+    ],
+    "6.0": [
+
+    ],
+    "INT 4.0":[
+
+    ],
+    "INT 4.5":[
+
+    ],
+    "INT 5.0":[
+
+    ],
+    "WINT 4.0":[
+
+    ],
+    "WINT 4.5":[
+
+    ],
+    "WINT 5.0":[
+        {
+            "name":"Germany",
+            "league":"Women International",
+            "attack":"",
+            "midfield":"",
+            "defense":"",
+            "badge_url":"http://i.imgur.com/KVV5CEY.png"
+        },
+        {
+            "name":"United States",
+            "league":"Women International",
+            "attack":"",
+            "midfield":"",
+            "defense":"",
+            "badge_url":"http://i.imgur.com/TMtZzmQ.png"
+        }        
+    ]
+}
