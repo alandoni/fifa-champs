@@ -32,3 +32,10 @@
 		<app-insert-match (onCreateMatchSuccess)="closeMatchModal($event)"></app-insert-match>
 	</div>
 </div>
+
+<div class="modal col s8" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="teamPickModalActions">
+	<div class="modal-content">
+		<h4>Escolher Times</h4>
+	</div>
+	<app-team-pick></app-team-pick>
+</div>

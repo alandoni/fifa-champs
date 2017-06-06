@@ -23,6 +23,7 @@ import { PlayerService } from './player.service';
 import { MatchService } from './match.service';
 import { ChampionshipService } from './championship.service';
 import { ApiRequestService } from './api-request.service';
+import { TeamPickService } from './team-pick.service';
 
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './routes';
@@ -30,6 +31,7 @@ import { AdminsListComponent } from './admins-list/admins-list.component';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { NavigationBarItemComponent } from './navigation-bar-item/navigation-bar-item.component';
 import { SelectComponent } from './select/select.component';
+import { TeamPickComponent } from './team-pick/team-pick.component';
 
 @NgModule({
 	declarations: [
@@ -50,7 +52,8 @@ import { SelectComponent } from './select/select.component';
 		AdminsListComponent,
 		CreateAdminComponent,
 		NavigationBarItemComponent,
-		SelectComponent
+		SelectComponent,
+		TeamPickComponent
 	],
 	imports: [
 		BrowserModule,
@@ -59,7 +62,7 @@ import { SelectComponent } from './select/select.component';
 		MaterializeModule,
 		RouterModule.forRoot(appRoutes)
 	],
-	providers: [LoginService, PlayerService, MatchService, ChampionshipService, ApiRequestService],
+	providers: [LoginService, PlayerService, MatchService, ChampionshipService, ApiRequestService, TeamPickService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

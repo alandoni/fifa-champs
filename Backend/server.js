@@ -16,6 +16,11 @@ console.log("Listening at port: " + app.get("port"));
 const routes = require('./routes');
 routes.set(app, mongo);
 
+app.get('/assets/:file', (req, res) => {
+	const file = req.params.file;
+	res.sendfile(__dirname + '/dist/assets/' + file);
+});
+
 app.get('/', (req, res) => {
 	res.sendfile(__dirname + '/dist/index.html');
 });
@@ -28,5 +33,6 @@ app.get('/:file', (req, res) => {
 app.get('*', (req, res) => {
 	res.sendfile(__dirname + '/dist/index.html');
 });
+
 
 module.exports = app;
