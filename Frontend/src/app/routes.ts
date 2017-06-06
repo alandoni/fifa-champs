@@ -1,6 +1,7 @@
 import { Routes }  from '@angular/router';
 
 import { InsertMatchComponent } from './insert-match/insert-match.component';
+import { TeamPickComponent } from './team-pick/team-pick.component';
 import { CreatePlayerComponent } from './create-player/create-player.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -19,6 +20,7 @@ export const appRoutes: Routes = [
 	{path: 'season/results/alltime', component: SeasonSelectorComponent},
 	{path: 'create-player', component: CreatePlayerComponent},
 	{path: 'insert-match', component: InsertMatchComponent},
+	{path: 'team-pick', component: TeamPickComponent},
 	{path: 'match/:id', component: InsertMatchComponent},
 	{path: 'season/standings/:id', component: SeasonSelectorComponent},
 	{path: 'season/standings/current', component: SeasonSelectorComponent},

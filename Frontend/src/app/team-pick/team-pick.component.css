@@ -1,3 +1,12 @@
 .star-yellow{
   color: #fdd835;
 }
+
+.attributes-row{
+  margin-bottom:0px;
+}
+
+.padding-x{
+  padding-left: 30%;
+  padding-top:40px;
+}
