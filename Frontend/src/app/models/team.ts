@@ -1,8 +1,8 @@
 export class Team {
 	name;
     league;
-    defense;
     attack;
     midfield;
+    defense;
     badge_url;
 }

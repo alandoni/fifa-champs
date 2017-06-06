@@ -23,6 +23,7 @@ import { PlayerService } from './player.service';
 import { MatchService } from './match.service';
 import { ChampionshipService } from './championship.service';
 import { ApiRequestService } from './api-request.service';
+import { TeamPickService } from './team-pick.service';
 
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './routes';
@@ -61,7 +62,7 @@ import { TeamPickComponent } from './team-pick/team-pick.component';
 		MaterializeModule,
 		RouterModule.forRoot(appRoutes)
 	],
-	providers: [LoginService, PlayerService, MatchService, ChampionshipService, ApiRequestService],
+	providers: [LoginService, PlayerService, MatchService, ChampionshipService, ApiRequestService, TeamPickService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

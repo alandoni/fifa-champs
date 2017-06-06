@@ -1,18 +1,66 @@
-<div class="container">
+<div *ngIf="!pickedTeams" class="container">
+  <div class="row">
+    <div class="col s4 offset-s5 padding-loader">
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div *ngIf="pickedTeams" class="container">
   <div class="row">
     <div class="col s5 offset-s5">
-    <h3>4.5 <i class="small material-icons star-yellow">star</i></h3>
+    <h3>{{stars}} <i class="small material-icons star-yellow">star</i></h3>
     </div>
   </div>
   <div class="row divider"></div>
   <div class="row">
     <div class="col s5">
       <div class="row valign-wrapper">
-        <div class="col s4"><img class="responsive-img" src="http://i.imgur.com/KVV5CEY.png"/></div>
-        <div class="col s8 flow-text">Germany</div>
+        <div class="col s4"><img class="responsive-img" src="{{team1.badge_url}}"/></div>
+        <div class="col s8 flow-text">{{team1.name}}</div>
       </div>
       <div class="row">
-        <div class="col s12 flow-text">Women International</div>
+        <div class="col s12 flow-text">{{team1.league}}</div>
       </div>
       <div class="row grey lighten-2 attributes-row">
         <div class="col s4">ATK</div>
@@ -20,9 +68,9 @@
         <div class="col s4">DEF</div>
       </div>
       <div class="row">
-        <div class="col s4">88</div>
-        <div class="col s4">82</div>
-        <div class="col s4">87</div>
+        <div class="col s4">{{team1.attack}}</div>
+        <div class="col s4">{{team1.midfield}}</div>
+        <div class="col s4">{{team1.defense}}</div>
       </div>
     </div>
     <div class="col s2">
@@ -30,11 +78,11 @@
     </div>
     <div class="col s5">
       <div class="row valign-wrapper">
-        <div class="col s4"><img class="responsive-img" src="http://i.imgur.com/KVV5CEY.png"/></div>
-        <div class="col s8 flow-text">Germany</div>
+        <div class="col s4"><img class="responsive-img" src="{{team2.badge_url}}"/></div>
+        <div class="col s8 flow-text">{{team2.name}}</div>
       </div>
       <div class="row">
-        <div class="col s12 flow-text">Women International</div>
+        <div class="col s12 flow-text">{{team2.league}}</div>
       </div>
       <div class="row grey lighten-2 attributes-row">
         <div class="col s4">ATK</div>
@@ -42,10 +90,14 @@
         <div class="col s4">DEF</div>
       </div>
       <div class="row">
-        <div class="col s4">88</div>
-        <div class="col s4">82</div>
-        <div class="col s4">87</div>
+        <div class="col s4">{{team2.attack}}</div>
+        <div class="col s4">{{team2.midfield}}</div>
+        <div class="col s4">{{team2.defense}}</div>
       </div>
     </div>
+  </div>
+  <div class="row"><div class="divider"></div></div>
+  <div class="row">
+    <div class="col s12"><input type="button" class="waves-effect waves-light btn blue-grey lighten-1" (click)="selectStarsAndTeams();" value="Sortear Outro"/></div>
   </div>
 </div>
