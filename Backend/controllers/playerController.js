@@ -11,10 +11,16 @@ class PlayerController {
 	constructor(mongo) {
 		this.mongo = mongo;
 	}
-	
+
 	getAll() {
 		return this.mongo.selectAll(document).then((players) => {
 			return players;
+		});
+	}
+
+	getByNickname(name) {
+		return this.mongo.selectByCriteria(document,{nickname: name}).then((player) => {
+			return player;
 		});
 	}
 
