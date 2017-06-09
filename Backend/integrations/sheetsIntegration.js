@@ -117,13 +117,18 @@ function fetchDatesFromResult(values, arrayMatches, index, yearToSave, monthToSa
   // Getting the dates from all Matches and populating arrayMatches
   var dayToSave = null;
   var currentDateBeingSet = null;
-  for (var dateIndex = 0; dateIndex < values[index].length; dateIndex++) {
-    // Date wil be null if it's the same as previous one
-    if (values[index][dateIndex] != "") {
+
+  /* Sheets api doesn't return empty values from the end of a row/collumn, so the comparison here
+     has to be made by the number of player's collumns and not the one from date */
+  for (var dateIndex = 0; dateIndex < values[index+1].length; dateIndex+=2) {
+    // Date wil be null/undefined if it's the same as previous one
+    if ((values[index][dateIndex] != "") && (values[index][dateIndex] != undefined)) {
       dayToSave = values[index][dateIndex].slice(0, 2);
       currentDateBeingSet = new Date("20" + yearToSave, monthToSave - 1, dayToSave);
     }
-    arrayMatches.push(new matchModel({ date: currentDateBeingSet }));
+
+    arrayMatches.push(new matchModel({ date: currentDateBeingSet, isFinal: false}));
+
   }
 }
 
@@ -132,12 +137,13 @@ function fetchScoreFromResult(values, arrayMatches, index, lastMatchArray) {
   if (values[index + 2].length == values[index + 3].length) {
     for (var scoreIndex = 0; scoreIndex < values[index + 2].length; scoreIndex += 2) {
       arrayMatches[currentMatch].team1score = values[index + 2][scoreIndex];
-      arrayMatches[currentMatch].team2score = values[index + 3][scoreIndex];
+      arrayMatches[currentMatch].team2score = values[index + 3][scoreIndex];   
       currentMatch++;
     }
   }
   else
     console.error("Number of scores don't match!");
+
 }
 
 function fetchPlayersFromResult(values, arrayMatches, index, lastMatchArray, nicknamesArray) {
@@ -157,10 +163,19 @@ function fetchPlayersFromResult(values, arrayMatches, index, lastMatchArray, nic
 
 function getPlayerByNickname(player, nicknamesArray) {
   for (var index in nicknamesArray) {
-    if (nicknamesArray[index].nickname == player)
+    if (nicknamesArray[index].nickname == getEquivalentNickname(player))
       return nicknamesArray[index];
   }
-  return false;
+  return 'not found';
+}
+
+function getEquivalentNickname(nickname){
+  var equivalent = {
+    "Schezar":"Junim",
+    "Leonardo":"Leo"
+  }
+
+  return (equivalent[nickname]!=undefined)?equivalent[nickname]:nickname;
 }
 
 function getMatchesFromSpreadsheet(auth, monthSheets) {
@@ -178,7 +193,7 @@ function getMatchesFromSpreadsheet(auth, monthSheets) {
     sheets.spreadsheets.values.get({
       auth: auth,
       spreadsheetId: SHEETS_ID,
-      range: "'" + val + "'!O4:AQ47",
+      range: "'" + val + "'!O4:AQ60",
       majorDimension: 'COLUMNS'
     }, function (err, response) {
       if (err) {
@@ -201,23 +216,34 @@ function getMatchesFromSpreadsheet(auth, monthSheets) {
           // Creating championship
           var yearToSave = monthToInclude.slice(3);
           var monthToSave = monthToInclude.slice(0, 2);
-          /* championshipsClient.post(null, new championshipModel({
+          var championship = new championshipModel({
              month: monthToSave,
-             year: yearToSave,
-             date: new Date(yearToSave, monthToSave, 31),
+             year: "20" + yearToSave,
+             date: new Date("20" + yearToSave, monthToSave - 1, 1),
              isCurrent: false
-           }));*/
+          });
+          championshipController.insert(championship).then((championship) => {
+            var arrayMatches = new Array();
+            var lastMatchArray = 0;
+            // Getting blocks of data gotten from spreadsheet
+            for (var i = 0; i < response.values.length; i += 6) {
+              fetchDatesFromResult(response.values, arrayMatches, i, yearToSave, monthToSave);
+              fetchScoreFromResult(response.values, arrayMatches, i, lastMatchArray);
+              fetchPlayersFromResult(response.values, arrayMatches, i, lastMatchArray, nicknamesArray);
+              lastMatchArray = arrayMatches.length;
+            }
 
-          var arrayMatches = new Array();
-          var lastMatchArray = 0;
-          // Getting blocks of data gotten from spreadsheet
-          for (var i = 0; i < response.values.length; i += 6) {
-            fetchDatesFromResult(response.values, arrayMatches, i, yearToSave, monthToSave);
-            fetchScoreFromResult(response.values, arrayMatches, i, lastMatchArray);
-            fetchPlayersFromResult(response.values, arrayMatches, i, lastMatchArray, nicknamesArray);
-            lastMatchArray = arrayMatches.length;
-          }
-          console.log(arrayMatches);
+            for(var j =0; j < arrayMatches.length;j++){
+              arrayMatches[j].championship = championship._id;
+              matchController.insert(arrayMatches[j]).then((match) => {
+                console.log("Inserted Match: "+ match);
+              }).catch((error) => {
+                console.log("error" + error);
+              });
+            }
+          }).catch((error) => {
+            console.log("error" + error);
+          });
         });
       }
     });
