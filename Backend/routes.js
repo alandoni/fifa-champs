@@ -19,11 +19,13 @@ const URL_MATCHES = "/api/matches";
 const URL_LOGIN = "/api/login";
 const URL_LOGOUT = '/api/logout';
 const URL_SALT = '/api/salt/:nickname';
+const URL_TEAM_PICK = '/api/team-pick';
 
 const ChampionshipController = require('./controllers/championshipController');
 const PlayerController = require('./controllers/playerController');
 const MatchController = require('./controllers/matchController');
 const AdminController = require('./controllers/adminController');
+const teamsJSON = require("./integrations/resources/teamsFifa17.json");
 
 exports.set = function(app, mongo) {
 
@@ -304,5 +306,9 @@ exports.set = function(app, mongo) {
 		}).catch((error) => {
 			response.status(500).send(error);
 		});
+	});
+
+	app.get(URL_TEAM_PICK, (request, response) => {
+		response.send(JSON.stringify(teamsJSON, null, 2));
 	});
 };

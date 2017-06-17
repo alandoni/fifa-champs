@@ -3,6 +3,7 @@ export class Team {
     league;
     attack;
     midfield;
+    overall;
     defense;
-    badge_url;
+    badgeImage;
 }
