@@ -3,7 +3,7 @@ const cheerioDOMLoader = require('cheerio');
 const fs = require('fs');
 
 const BASE_URL = "https://www.fifaindex.com"
-const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/{0}/"';
+const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/{0}/?type={1}"';
 const PARAMS = "&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=";
 
 var jsonFile = {};
@@ -22,14 +22,30 @@ if (!String.prototype.format) {
 
 countDownAsynchronousCalls = {
     count: 0,
-    lastCallWasMade: false,
+    lastCallWasMadeClubs: false,
+    lastCallWasMadeInt: false,
+    lastCallWasMadeWomen: false,
+    lastCallWasMade: function(typeOfTeams) {
+        switch(typeOfTeams){
+            case 1:
+                this.lastCallWasMadeInt = true;
+                break;
+            case 2:
+                this.lastCallWasMadeWomen = true;
+                break;
+            default:
+                this.lastCallWasMadeClubs = true;
+                break;
+        }
+    },
     check: function() {
         this.count--;
         if (this.count == 0) this.calculate();
     },
     calculate: function() {
-        if(this.lastCallWasMade){
-            fs.writeFile("resources/teamsFifa17.json", JSON.stringify(jsonFile), function(err) {
+        if(this.lastCallWasMadeClubs && this.lastCallWasMadeInt && this.lastCallWasMadeWomen){
+            jsonFile["oddsForTypesAvailable"] =  ["4.0", "4.5","5.0", "6.0","4.0", "5.0","4.0", "INT 4.5","4.5","4.5","INT 5.0","4.0","6.0", "WMN 4.5", "4.5","5.0"];
+            fs.writeFile("resources/teamsFifa17.json", JSON.stringify(jsonFile, null, 2), function(err) {
                 if(err) {
                 return console.log(err);
                 }
@@ -56,7 +72,18 @@ function getTeamStars($collumn){
     return wholeStar + halfStar;
 }
 
-function getAttributesFromTeam($, teamElem, jsonFile){
+function getStringPerTeamType(typeOfTeam){
+    switch(typeOfTeam){
+        case 1:
+            return "INT ";
+        case 2:
+            return "WMN ";
+        default:
+            return "";
+    }
+}
+
+function getAttributesFromTeam($, teamElem, jsonFile, typeOfTeams){
     var team = {};
     var teamsAttributes = teamElem.children("td");
     team.badgeImage = getImageFromTeam($(teamsAttributes.get(0)));
@@ -67,7 +94,7 @@ function getAttributesFromTeam($, teamElem, jsonFile){
     team.defense =  getTeamRatingParam($(teamsAttributes.get(5)));
     team.overall =  getTeamRatingParam($(teamsAttributes.get(6)));
     
-    var stars = getTeamStars($(teamsAttributes.get(7))).toString();
+    var stars = getStringPerTeamType(typeOfTeams) + getTeamStars($(teamsAttributes.get(7))).toFixed(1);
 
     if(jsonFile[stars] == null){
         jsonFile[stars] = [];
@@ -76,15 +103,15 @@ function getAttributesFromTeam($, teamElem, jsonFile){
     jsonFile[stars].push(team);
 }
 
-function getTeams($, jsonFile){
+function getTeams($, jsonFile ,typeOfTeams){
     var $teamsTable =  $('table tbody');
     var teamRows = $teamsTable.children("tr").each(function(i,elem){
-        getAttributesFromTeam($, $(elem), jsonFile);
+        getAttributesFromTeam($, $(elem), jsonFile, typeOfTeams);
     });
 }
 
-function requestTeamPage(page){
-    var formattedQuery = BASE_QUERY.format(page);
+function requestTeamPage(page, typeOfTeams){
+    var formattedQuery = BASE_QUERY.format(page, typeOfTeams);
     var url = "https://query.yahooapis.com/v1/public/yql?q="+ encodeURIComponent(formattedQuery) + PARAMS;
     var data = [];
     https.get(url, function(res) {
@@ -100,13 +127,14 @@ function requestTeamPage(page){
 
             // Get Current Page From HTML
             var $ = cheerioDOMLoader.load(data);
-            getTeams($, jsonFile);
+            getTeams($, jsonFile, typeOfTeams);
   
             var $hasNextPage = ($("li.next").not(".disabled").children("a").text().localeCompare("Next Page") == 0);
             if($hasNextPage)
-                requestTeamPage(++page);
-            else
-                countDownAsynchronousCalls.lastCallWasMade = true;
+                requestTeamPage(++page, typeOfTeams);
+            else{
+                countDownAsynchronousCalls.lastCallWasMade(typeOfTeams);
+            }
 
             countDownAsynchronousCalls.check();
             console.log("Number of async calls running:" + countDownAsynchronousCalls.count);
@@ -119,4 +147,6 @@ function requestTeamPage(page){
     });
 }
 
-requestTeamPage(1);
+requestTeamPage(1,0);
+requestTeamPage(1,1);
+requestTeamPage(1,2);
