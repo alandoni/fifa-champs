@@ -1,412 +1,4 @@
 {
-  "WMN 5.0": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113009.png",
-      "name": "United States",
-      "league": "Women's National",
-      "attack": "82",
-      "midfield": "83",
-      "defense": "84",
-      "overall": "83"
-    }
-  ],
-  "WMN 4.5": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113004.png",
-      "name": "Germany",
-      "league": "Women's National",
-      "attack": "83",
-      "midfield": "81",
-      "defense": "79",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113003.png",
-      "name": "France",
-      "league": "Women's National",
-      "attack": "83",
-      "midfield": "80",
-      "defense": "80",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/112999.png",
-      "name": "Brazil",
-      "league": "Women's National",
-      "attack": "85",
-      "midfield": "81",
-      "defense": "77",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113008.png",
-      "name": "Sweden",
-      "league": "Women's National",
-      "attack": "78",
-      "midfield": "80",
-      "defense": "77",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113002.png",
-      "name": "England",
-      "league": "Women's National",
-      "attack": "77",
-      "midfield": "78",
-      "defense": "79",
-      "overall": "79"
-    }
-  ],
-  "WMN 4.0": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113007.png",
-      "name": "Norway",
-      "league": "Women's National",
-      "attack": "79",
-      "midfield": "77",
-      "defense": "77",
-      "overall": "77"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113001.png",
-      "name": "China PR",
-      "league": "Women's National",
-      "attack": "78",
-      "midfield": "76",
-      "defense": "78",
-      "overall": "77"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/112998.png",
-      "name": "Australia",
-      "league": "Women's National",
-      "attack": "77",
-      "midfield": "80",
-      "defense": "75",
-      "overall": "77"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113000.png",
-      "name": "Canada",
-      "league": "Women's National",
-      "attack": "76",
-      "midfield": "81",
-      "defense": "74",
-      "overall": "77"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113011.png",
-      "name": "Holland Women",
-      "league": "Women's National",
-      "attack": "78",
-      "midfield": "77",
-      "defense": "73",
-      "overall": "76"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113012.png",
-      "name": "Spain",
-      "league": "Women's National",
-      "attack": "79",
-      "midfield": "75",
-      "defense": "73",
-      "overall": "75"
-    }
-  ],
-  "WMN 3.5": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113005.png",
-      "name": "Italy",
-      "league": "Women's National",
-      "attack": "75",
-      "midfield": "74",
-      "defense": "74",
-      "overall": "74"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113010.png",
-      "name": "Mexico",
-      "league": "Women's National",
-      "attack": "77",
-      "midfield": "74",
-      "defense": "71",
-      "overall": "73"
-    }
-  ],
-  "5.0": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/243.png",
-      "name": "Real Madrid",
-      "league": "Liga BBVA",
-      "attack": "88",
-      "midfield": "86",
-      "defense": "86",
-      "overall": "86"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/241.png",
-      "name": "FC Barcelona",
-      "league": "Liga BBVA",
-      "attack": "92",
-      "midfield": "85",
-      "defense": "83",
-      "overall": "85"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/21.png",
-      "name": "FC Bayern",
-      "league": "Bundesliga",
-      "attack": "90",
-      "midfield": "84",
-      "defense": "87",
-      "overall": "85"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/45.png",
-      "name": "Juventus",
-      "league": "Serie A TIM",
-      "attack": "89",
-      "midfield": "84",
-      "defense": "85",
-      "overall": "85"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/5.png",
-      "name": "Chelsea",
-      "league": "Barclays PL",
-      "attack": "86",
-      "midfield": "84",
-      "defense": "81",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/73.png",
-      "name": "PSG",
-      "league": "Ligue 1",
-      "attack": "85",
-      "midfield": "83",
-      "defense": "82",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/11.png",
-      "name": "Manchester Utd",
-      "league": "Barclays PL",
-      "attack": "84",
-      "midfield": "84",
-      "defense": "82",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/240.png",
-      "name": "Atlético Madrid",
-      "league": "Liga BBVA",
-      "attack": "84",
-      "midfield": "82",
-      "defense": "84",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/10.png",
-      "name": "Manchester City",
-      "league": "Barclays PL",
-      "attack": "83",
-      "midfield": "85",
-      "defense": "81",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1.png",
-      "name": "Arsenal",
-      "league": "Barclays PL",
-      "attack": "81",
-      "midfield": "83",
-      "defense": "82",
-      "overall": "83"
-    }
-  ],
-  "4.5": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/22.png",
-      "name": "Bor. Dortmund",
-      "league": "Bundesliga",
-      "attack": "85",
-      "midfield": "80",
-      "defense": "82",
-      "overall": "82"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/18.png",
-      "name": "Spurs",
-      "league": "Barclays PL",
-      "attack": "85",
-      "midfield": "81",
-      "defense": "81",
-      "overall": "81"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/9.png",
-      "name": "Liverpool",
-      "league": "Barclays PL",
-      "attack": "82",
-      "midfield": "81",
-      "defense": "81",
-      "overall": "81"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/48.png",
-      "name": "Napoli",
-      "league": "Serie A TIM",
-      "attack": "82",
-      "midfield": "81",
-      "defense": "79",
-      "overall": "81"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/44.png",
-      "name": "Inter",
-      "league": "Serie A TIM",
-      "attack": "82",
-      "midfield": "81",
-      "defense": "79",
-      "overall": "81"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/52.png",
-      "name": "Roma",
-      "league": "Serie A TIM",
-      "attack": "81",
-      "midfield": "81",
-      "defense": "81",
-      "overall": "81"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/481.png",
-      "name": "Sevilla FC",
-      "league": "Liga BBVA",
-      "attack": "80",
-      "midfield": "81",
-      "defense": "80",
-      "overall": "81"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/7.png",
-      "name": "Everton",
-      "league": "Barclays PL",
-      "attack": "85",
-      "midfield": "78",
-      "defense": "79",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/483.png",
-      "name": "Villarreal CF",
-      "league": "Liga BBVA",
-      "attack": "79",
-      "midfield": "81",
-      "defense": "80",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/32.png",
-      "name": "Bayer 04",
-      "league": "Bundesliga",
-      "attack": "79",
-      "midfield": "80",
-      "defense": "79",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/175.png",
-      "name": "VfL Wolfsburg",
-      "league": "Bundesliga",
-      "attack": "82",
-      "midfield": "79",
-      "defense": "78",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/46.png",
-      "name": "Lazio",
-      "league": "Serie A TIM",
-      "attack": "81",
-      "midfield": "79",
-      "defense": "78",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/23.png",
-      "name": "Bor. M'gladbach",
-      "league": "Bundesliga",
-      "attack": "81",
-      "midfield": "78",
-      "defense": "78",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/47.png",
-      "name": "Milan",
-      "league": "Serie A TIM",
-      "attack": "81",
-      "midfield": "77",
-      "defense": "77",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/448.png",
-      "name": "Athletic Bilbao",
-      "league": "Liga BBVA",
-      "attack": "80",
-      "midfield": "81",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/69.png",
-      "name": "AS Monaco",
-      "league": "Ligue 1",
-      "attack": "80",
-      "midfield": "80",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/234.png",
-      "name": "SL Benfica",
-      "league": "Liga NOS",
-      "attack": "80",
-      "midfield": "79",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/461.png",
-      "name": "Valencia CF",
-      "league": "Liga BBVA",
-      "attack": "78",
-      "midfield": "79",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/236.png",
-      "name": "FC Porto",
-      "league": "Liga NOS",
-      "attack": "78",
-      "midfield": "79",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/34.png",
-      "name": "FC Schalke 04",
-      "league": "Bundesliga",
-      "attack": "77",
-      "midfield": "79",
-      "defense": "80",
-      "overall": "79"
-    }
-  ],
   "INT 5.0": [
     {
       "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1362.png",
@@ -773,6 +365,485 @@
       "midfield": "72",
       "defense": "72",
       "overall": "71"
+    }
+  ],
+  "5.0": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/243.png",
+      "name": "Real Madrid",
+      "league": "Liga BBVA",
+      "attack": "88",
+      "midfield": "86",
+      "defense": "86",
+      "overall": "86"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/241.png",
+      "name": "FC Barcelona",
+      "league": "Liga BBVA",
+      "attack": "92",
+      "midfield": "85",
+      "defense": "83",
+      "overall": "85"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/21.png",
+      "name": "FC Bayern",
+      "league": "Bundesliga",
+      "attack": "90",
+      "midfield": "84",
+      "defense": "87",
+      "overall": "85"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/45.png",
+      "name": "Juventus",
+      "league": "Serie A TIM",
+      "attack": "89",
+      "midfield": "84",
+      "defense": "85",
+      "overall": "85"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/5.png",
+      "name": "Chelsea",
+      "league": "Barclays PL",
+      "attack": "86",
+      "midfield": "84",
+      "defense": "81",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/73.png",
+      "name": "PSG",
+      "league": "Ligue 1",
+      "attack": "85",
+      "midfield": "83",
+      "defense": "82",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/11.png",
+      "name": "Manchester Utd",
+      "league": "Barclays PL",
+      "attack": "84",
+      "midfield": "84",
+      "defense": "82",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/240.png",
+      "name": "Atlético Madrid",
+      "league": "Liga BBVA",
+      "attack": "84",
+      "midfield": "82",
+      "defense": "84",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/10.png",
+      "name": "Manchester City",
+      "league": "Barclays PL",
+      "attack": "83",
+      "midfield": "85",
+      "defense": "81",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1.png",
+      "name": "Arsenal",
+      "league": "Barclays PL",
+      "attack": "81",
+      "midfield": "83",
+      "defense": "82",
+      "overall": "83"
+    }
+  ],
+  "4.5": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/22.png",
+      "name": "Bor. Dortmund",
+      "league": "Bundesliga",
+      "attack": "85",
+      "midfield": "80",
+      "defense": "82",
+      "overall": "82"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/18.png",
+      "name": "Spurs",
+      "league": "Barclays PL",
+      "attack": "85",
+      "midfield": "81",
+      "defense": "81",
+      "overall": "81"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/9.png",
+      "name": "Liverpool",
+      "league": "Barclays PL",
+      "attack": "82",
+      "midfield": "81",
+      "defense": "81",
+      "overall": "81"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/48.png",
+      "name": "Napoli",
+      "league": "Serie A TIM",
+      "attack": "82",
+      "midfield": "81",
+      "defense": "79",
+      "overall": "81"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/44.png",
+      "name": "Inter",
+      "league": "Serie A TIM",
+      "attack": "82",
+      "midfield": "81",
+      "defense": "79",
+      "overall": "81"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/52.png",
+      "name": "Roma",
+      "league": "Serie A TIM",
+      "attack": "81",
+      "midfield": "81",
+      "defense": "81",
+      "overall": "81"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/481.png",
+      "name": "Sevilla FC",
+      "league": "Liga BBVA",
+      "attack": "80",
+      "midfield": "81",
+      "defense": "80",
+      "overall": "81"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/7.png",
+      "name": "Everton",
+      "league": "Barclays PL",
+      "attack": "85",
+      "midfield": "78",
+      "defense": "79",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/483.png",
+      "name": "Villarreal CF",
+      "league": "Liga BBVA",
+      "attack": "79",
+      "midfield": "81",
+      "defense": "80",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/32.png",
+      "name": "Bayer 04",
+      "league": "Bundesliga",
+      "attack": "79",
+      "midfield": "80",
+      "defense": "79",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/175.png",
+      "name": "VfL Wolfsburg",
+      "league": "Bundesliga",
+      "attack": "82",
+      "midfield": "79",
+      "defense": "78",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/46.png",
+      "name": "Lazio",
+      "league": "Serie A TIM",
+      "attack": "81",
+      "midfield": "79",
+      "defense": "78",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/23.png",
+      "name": "Bor. M'gladbach",
+      "league": "Bundesliga",
+      "attack": "81",
+      "midfield": "78",
+      "defense": "78",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/47.png",
+      "name": "Milan",
+      "league": "Serie A TIM",
+      "attack": "81",
+      "midfield": "77",
+      "defense": "77",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/448.png",
+      "name": "Athletic Bilbao",
+      "league": "Liga BBVA",
+      "attack": "80",
+      "midfield": "81",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/69.png",
+      "name": "AS Monaco",
+      "league": "Ligue 1",
+      "attack": "80",
+      "midfield": "80",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/234.png",
+      "name": "SL Benfica",
+      "league": "Liga NOS",
+      "attack": "80",
+      "midfield": "79",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/461.png",
+      "name": "Valencia CF",
+      "league": "Liga BBVA",
+      "attack": "78",
+      "midfield": "79",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/236.png",
+      "name": "FC Porto",
+      "league": "Liga NOS",
+      "attack": "78",
+      "midfield": "79",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/34.png",
+      "name": "FC Schalke 04",
+      "league": "Bundesliga",
+      "attack": "77",
+      "midfield": "79",
+      "defense": "80",
+      "overall": "79"
+    }
+  ],
+  "WMN 5.0": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113009.png",
+      "name": "United States",
+      "league": "Women's National",
+      "attack": "82",
+      "midfield": "83",
+      "defense": "84",
+      "overall": "83"
+    }
+  ],
+  "WMN 4.5": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113004.png",
+      "name": "Germany",
+      "league": "Women's National",
+      "attack": "83",
+      "midfield": "81",
+      "defense": "79",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113003.png",
+      "name": "France",
+      "league": "Women's National",
+      "attack": "83",
+      "midfield": "80",
+      "defense": "80",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/112999.png",
+      "name": "Brazil",
+      "league": "Women's National",
+      "attack": "85",
+      "midfield": "81",
+      "defense": "77",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113008.png",
+      "name": "Sweden",
+      "league": "Women's National",
+      "attack": "78",
+      "midfield": "80",
+      "defense": "77",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113002.png",
+      "name": "England",
+      "league": "Women's National",
+      "attack": "77",
+      "midfield": "78",
+      "defense": "79",
+      "overall": "79"
+    }
+  ],
+  "WMN 4.0": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113007.png",
+      "name": "Norway",
+      "league": "Women's National",
+      "attack": "79",
+      "midfield": "77",
+      "defense": "77",
+      "overall": "77"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113001.png",
+      "name": "China PR",
+      "league": "Women's National",
+      "attack": "78",
+      "midfield": "76",
+      "defense": "78",
+      "overall": "77"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/112998.png",
+      "name": "Australia",
+      "league": "Women's National",
+      "attack": "77",
+      "midfield": "80",
+      "defense": "75",
+      "overall": "77"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113000.png",
+      "name": "Canada",
+      "league": "Women's National",
+      "attack": "76",
+      "midfield": "81",
+      "defense": "74",
+      "overall": "77"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113011.png",
+      "name": "Holland Women",
+      "league": "Women's National",
+      "attack": "78",
+      "midfield": "77",
+      "defense": "73",
+      "overall": "76"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113012.png",
+      "name": "Spain",
+      "league": "Women's National",
+      "attack": "79",
+      "midfield": "75",
+      "defense": "73",
+      "overall": "75"
+    }
+  ],
+  "WMN 3.5": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113005.png",
+      "name": "Italy",
+      "league": "Women's National",
+      "attack": "75",
+      "midfield": "74",
+      "defense": "74",
+      "overall": "74"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113010.png",
+      "name": "Mexico",
+      "league": "Women's National",
+      "attack": "77",
+      "midfield": "74",
+      "defense": "71",
+      "overall": "73"
+    }
+  ],
+  "INT 3.0": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/111108.png",
+      "name": "Peru",
+      "league": "Men's National",
+      "attack": "72",
+      "midfield": "69",
+      "defense": "68",
+      "overall": "70"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1334.png",
+      "name": "Finland",
+      "league": "Men's National",
+      "attack": "71",
+      "midfield": "70",
+      "defense": "70",
+      "overall": "70"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1327.png",
+      "name": "Bulgaria",
+      "league": "Men's National",
+      "attack": "69",
+      "midfield": "70",
+      "defense": "69",
+      "overall": "70"
+    }
+  ],
+  "INT 2.5": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/111455.png",
+      "name": "Canada",
+      "league": "Men's National",
+      "attack": "68",
+      "midfield": "69",
+      "defense": "65",
+      "overall": "68"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/111451.png",
+      "name": "Bolivia",
+      "league": "Men's National",
+      "attack": "71",
+      "midfield": "67",
+      "defense": "66",
+      "overall": "67"
+    }
+  ],
+  "INT 1.5": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1413.png",
+      "name": "China PR",
+      "league": "Men's National",
+      "attack": "66",
+      "midfield": "64",
+      "defense": "60",
+      "overall": "64"
+    }
+  ],
+  "INT 1.0": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/111466.png",
+      "name": "India",
+      "league": "Men's National",
+      "attack": "63",
+      "midfield": "59",
+      "defense": "58",
+      "overall": "60"
     }
   ],
   "4.0": [
@@ -1342,77 +1413,6 @@
       "midfield": "75",
       "defense": "76",
       "overall": "75"
-    }
-  ],
-  "INT 3.0": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/111108.png",
-      "name": "Peru",
-      "league": "Men's National",
-      "attack": "72",
-      "midfield": "69",
-      "defense": "68",
-      "overall": "70"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1334.png",
-      "name": "Finland",
-      "league": "Men's National",
-      "attack": "71",
-      "midfield": "70",
-      "defense": "70",
-      "overall": "70"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1327.png",
-      "name": "Bulgaria",
-      "league": "Men's National",
-      "attack": "69",
-      "midfield": "70",
-      "defense": "69",
-      "overall": "70"
-    }
-  ],
-  "INT 2.5": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/111455.png",
-      "name": "Canada",
-      "league": "Men's National",
-      "attack": "68",
-      "midfield": "69",
-      "defense": "65",
-      "overall": "68"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/111451.png",
-      "name": "Bolivia",
-      "league": "Men's National",
-      "attack": "71",
-      "midfield": "67",
-      "defense": "66",
-      "overall": "67"
-    }
-  ],
-  "INT 1.5": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/1413.png",
-      "name": "China PR",
-      "league": "Men's National",
-      "attack": "66",
-      "midfield": "64",
-      "defense": "60",
-      "overall": "64"
-    }
-  ],
-  "INT 1.0": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/111466.png",
-      "name": "India",
-      "league": "Men's National",
-      "attack": "63",
-      "midfield": "59",
-      "defense": "58",
-      "overall": "60"
     }
   ],
   "3.5": [
