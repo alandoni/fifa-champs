@@ -8,6 +8,8 @@ const PARAMS = "&format=json&diagnostics=true&env=store://datatables.org/alltabl
 
 var jsonFile = {};
 
+/* This allows to replace {0}, {1}, etc type of 
+    placeholders with strings I want them to be replaced with */
 if (!String.prototype.format) {
   String.prototype.format = function() {
     var args = arguments;
@@ -20,12 +22,17 @@ if (!String.prototype.format) {
   };
 }
 
+/* Organize the number of asynchronous calls being executed at the same time
+   It will save the file only when all calls were requested, and finished */
 countDownAsynchronousCalls = {
     count: 0,
     lastCallWasMadeClubs: false,
     lastCallWasMadeInt: false,
     lastCallWasMadeWomen: false,
     lastCallWasMade: function(typeOfTeams) {
+        /* Since International, Women and Clubs are separate things on the website,
+           the requests are separated as well, so we need a control over which type of team were already finished
+           and save the file only when all of them were done */
         switch(typeOfTeams){
             case 1:
                 this.lastCallWasMadeInt = true;
@@ -44,6 +51,9 @@ countDownAsynchronousCalls = {
     },
     calculate: function() {
         if(this.lastCallWasMadeClubs && this.lastCallWasMadeInt && this.lastCallWasMadeWomen){
+            /* This is saved to keep a list of odds of when a specific star will be selected
+               A refactor on the way this is implemented will happen soon.
+            */
             jsonFile["oddsForTypesAvailable"] =  ["4.0", "4.5","5.0", "6.0","4.0", "5.0","4.0", "INT 4.5","4.5","4.5","INT 5.0","4.0","6.0", "WMN 4.5", "4.5","5.0"];
             fs.writeFile("resources/teamsFifa17.json", JSON.stringify(jsonFile, null, 2), function(err) {
                 if(err) {
@@ -55,6 +65,7 @@ countDownAsynchronousCalls = {
 };
 
 function getImageFromTeam($collumn){
+    // Replace the small image on the table with the much larger one available on team's profile.
     return BASE_URL + $collumn.find("img").attr('src').replace("/50/","/256/");
 }
 
@@ -67,12 +78,14 @@ function getTeamRatingParam($collumn){
 }
 
 function getTeamStars($collumn){
+    /* Self-explained, but the class of the element inside span determine how many stars a team has */
     var wholeStar = $collumn.children("span.star").find(".fa-star").length*1.0;
     var halfStar = $collumn.children("span.star").find(".fa-star-half-o").length/2.0;
     return wholeStar + halfStar;
 }
 
 function getStringPerTeamType(typeOfTeam){
+    /* It will switch the "stars" name with the proper type of team: Women (WMN), International (INT) or Clubs */
     switch(typeOfTeam){
         case 1:
             return "INT ";
@@ -84,6 +97,7 @@ function getStringPerTeamType(typeOfTeam){
 }
 
 function getAttributesFromTeam($, teamElem, jsonFile, typeOfTeams){
+    /* The variable "$" is passed here and on other functions in order to be able to use the cheerio context properly */
     var team = {};
     var teamsAttributes = teamElem.children("td");
     team.badgeImage = getImageFromTeam($(teamsAttributes.get(0)));
@@ -123,12 +137,19 @@ function requestTeamPage(page, typeOfTeams){
 
         res.on('end', () => {
 
+            // Remove any \n and escaped \ that is gotten from the request.
             data = Buffer.concat(data).toString().replace(/\\n/g,"").replace(/\\/g,"");
 
-            // Get Current Page From HTML
+            // Get Current Page From HTML inside Cheerio's context.
             var $ = cheerioDOMLoader.load(data);
+
+            // Where the magic happens
             getTeams($, jsonFile, typeOfTeams);
   
+            /* If this element exists, then has a next page for the current type of team.
+               Condition to stop the recursive algorithm is here.
+               Mainly "When it does not have more pages".
+            */
             var $hasNextPage = ($("li.next").not(".disabled").children("a").text().localeCompare("Next Page") == 0);
             if($hasNextPage)
                 requestTeamPage(++page, typeOfTeams);
@@ -137,7 +158,6 @@ function requestTeamPage(page, typeOfTeams){
             }
 
             countDownAsynchronousCalls.check();
-            console.log("Number of async calls running:" + countDownAsynchronousCalls.count);
         });
     }
 
@@ -147,6 +167,9 @@ function requestTeamPage(page, typeOfTeams){
     });
 }
 
+/* Call the functions for Clubs (typeOfTeam=0), 
+                          International Teams (typeOfTeam=1), 
+                          and Women International (typeOfTeam=2) */
 requestTeamPage(1,0);
 requestTeamPage(1,1);
 requestTeamPage(1,2);
