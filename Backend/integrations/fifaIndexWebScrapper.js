@@ -10,7 +10,7 @@ let jsonFile = {};
 
 /* This allows to replace {0}, {1}, etc type of 
     placeholders with strings I want them to be replaced with */
-const formatString = function(){
+const formatString = function () {
     let args = Array.prototype.slice.call(arguments).slice(1);
     return arguments[0].replace(/{(\d+)}/g, function (match, number) {
         return typeof args[number] != 'undefined'
@@ -21,9 +21,9 @@ const formatString = function(){
 }
 
 const TYPE_OF_TEAMS = {
-  CLUBS: 0,
-  INTERNATIONAL_TEAMS: 1,
-  WOMEN_INTERNATIONAL: 2
+    CLUBS: 0,
+    INTERNATIONAL_TEAMS: 1,
+    WOMEN_INTERNATIONAL: 2
 }
 
 /* Organize the number of asynchronous calls being executed at the same time
