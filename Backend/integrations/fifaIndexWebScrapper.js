@@ -6,13 +6,13 @@ const BASE_URL = "https://www.fifaindex.com"
 const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/{0}/?type={1}"';
 const PARAMS = "&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=";
 
-var jsonFile = {};
+let jsonFile = {};
 
 /* This allows to replace {0}, {1}, etc type of 
     placeholders with strings I want them to be replaced with */
 if (!String.prototype.format) {
   String.prototype.format = function() {
-    var args = arguments;
+    let args = arguments;
     return this.replace(/{(\d+)}/g, function(match, number) { 
       return typeof args[number] != 'undefined'
         ? args[number]
@@ -24,7 +24,7 @@ if (!String.prototype.format) {
 
 /* Organize the number of asynchronous calls being executed at the same time
    It will save the file only when all calls were requested, and finished */
-countDownAsynchronousCalls = {
+let countDownAsynchronousCalls = {
     count: 0,
     lastCallWasMadeClubs: false,
     lastCallWasMadeInt: false,
@@ -79,8 +79,8 @@ function getTeamRatingParam($collumn){
 
 function getTeamStars($collumn){
     /* Self-explained, but the class of the element inside span determine how many stars a team has */
-    var wholeStar = $collumn.children("span.star").find(".fa-star").length*1.0;
-    var halfStar = $collumn.children("span.star").find(".fa-star-half-o").length/2.0;
+    let wholeStar = $collumn.children("span.star").find(".fa-star").length*1.0;
+    let halfStar = $collumn.children("span.star").find(".fa-star-half-o").length/2.0;
     return wholeStar + halfStar;
 }
 
@@ -98,8 +98,8 @@ function getStringPerTeamType(typeOfTeam){
 
 function getAttributesFromTeam($, teamElem, jsonFile, typeOfTeams){
     /* The variable "$" is passed here and on other functions in order to be able to use the cheerio context properly */
-    var team = {};
-    var teamsAttributes = teamElem.children("td");
+    let team = {};
+    let teamsAttributes = teamElem.children("td");
     team.badgeImage = getImageFromTeam($(teamsAttributes.get(0)));
     team.name = getTeamGeneralParam($(teamsAttributes.get(1)));
     team.league =  getTeamGeneralParam($(teamsAttributes.get(2)));
@@ -108,7 +108,7 @@ function getAttributesFromTeam($, teamElem, jsonFile, typeOfTeams){
     team.defense =  getTeamRatingParam($(teamsAttributes.get(5)));
     team.overall =  getTeamRatingParam($(teamsAttributes.get(6)));
     
-    var stars = getStringPerTeamType(typeOfTeams) + getTeamStars($(teamsAttributes.get(7))).toFixed(1);
+    let stars = getStringPerTeamType(typeOfTeams) + getTeamStars($(teamsAttributes.get(7))).toFixed(1);
 
     if(jsonFile[stars] == null){
         jsonFile[stars] = [];
@@ -118,19 +118,19 @@ function getAttributesFromTeam($, teamElem, jsonFile, typeOfTeams){
 }
 
 function getTeams($, jsonFile ,typeOfTeams){
-    var $teamsTable =  $('table tbody');
-    var teamRows = $teamsTable.children("tr").each(function(i,elem){
+    let $teamsTable =  $('table tbody');
+    $teamsTable.children("tr").each(function(i,elem){
         getAttributesFromTeam($, $(elem), jsonFile, typeOfTeams);
     });
 }
 
 function requestTeamPage(page, typeOfTeams){
-    var formattedQuery = BASE_QUERY.format(page, typeOfTeams);
-    var url = "https://query.yahooapis.com/v1/public/yql?q="+ encodeURIComponent(formattedQuery) + PARAMS;
-    var data = [];
+    let formattedQuery = BASE_QUERY.format(page, typeOfTeams);
+    let url = "https://query.yahooapis.com/v1/public/yql?q="+ encodeURIComponent(formattedQuery) + PARAMS;
+    let data = [];
     https.get(url, function(res) {
-    countDownAsynchronousCalls.count++;
     if(res.statusCode == 200) {
+        countDownAsynchronousCalls.count++;
         res.on('data', (chunk) => {
             data.push(chunk);
         });
@@ -141,7 +141,7 @@ function requestTeamPage(page, typeOfTeams){
             data = Buffer.concat(data).toString().replace(/\\n/g,"").replace(/\\/g,"");
 
             // Get Current Page From HTML inside Cheerio's context.
-            var $ = cheerioDOMLoader.load(data);
+            let $ = cheerioDOMLoader.load(data);
 
             // Where the magic happens
             getTeams($, jsonFile, typeOfTeams);
@@ -150,7 +150,7 @@ function requestTeamPage(page, typeOfTeams){
                Condition to stop the recursive algorithm is here.
                Mainly "When it does not have more pages".
             */
-            var $hasNextPage = ($("li.next").not(".disabled").children("a").text().localeCompare("Next Page") == 0);
+            let $hasNextPage = ($("li.next").not(".disabled").children("a").text().localeCompare("Next Page") == 0);
             if($hasNextPage)
                 requestTeamPage(++page, typeOfTeams);
             else{
