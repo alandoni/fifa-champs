@@ -58,7 +58,8 @@ let countDownAsynchronousCalls = {
             /* This is saved to keep a list of odds of when a specific star will be selected
                A refactor on the way this is implemented will happen soon.
             */
-            jsonFile["oddsForTypesAvailable"] = ["4.0", "4.5", "5.0", "5.0", "4.0", "5.0", "4.0", "INT 4.5", "4.5", "4.5", "INT 5.0", "4.0", "3.0", "WMN 4.5", "4.5", "5.0"];
+            jsonFile["oddsForTypesAvailable"] = ["2.5","4.0", "5.0", "3.0", "3.5", "4.5","4.0","0.5","WMN 4.5",
+             "WMN 4.0","4.5", "INT 4.5","1.0", "INT 5.0", "INT 4.0","1.5","5.0","1.0","4.5","2.0", "5.0", "4.0"];
             fs.writeFile("resources/teamsFifa17.json", JSON.stringify(jsonFile, null, 2), function (err) {
                 if (err) {
                     return console.log(err);

@@ -367,6 +367,140 @@
       "overall": "71"
     }
   ],
+  "WMN 5.0": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113009.png",
+      "name": "United States",
+      "league": "Women's National",
+      "attack": "82",
+      "midfield": "83",
+      "defense": "84",
+      "overall": "83"
+    }
+  ],
+  "WMN 4.5": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113004.png",
+      "name": "Germany",
+      "league": "Women's National",
+      "attack": "83",
+      "midfield": "81",
+      "defense": "79",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113003.png",
+      "name": "France",
+      "league": "Women's National",
+      "attack": "83",
+      "midfield": "80",
+      "defense": "80",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/112999.png",
+      "name": "Brazil",
+      "league": "Women's National",
+      "attack": "85",
+      "midfield": "81",
+      "defense": "77",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113008.png",
+      "name": "Sweden",
+      "league": "Women's National",
+      "attack": "78",
+      "midfield": "80",
+      "defense": "77",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113002.png",
+      "name": "England",
+      "league": "Women's National",
+      "attack": "77",
+      "midfield": "78",
+      "defense": "79",
+      "overall": "79"
+    }
+  ],
+  "WMN 4.0": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113007.png",
+      "name": "Norway",
+      "league": "Women's National",
+      "attack": "79",
+      "midfield": "77",
+      "defense": "77",
+      "overall": "77"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113001.png",
+      "name": "China PR",
+      "league": "Women's National",
+      "attack": "78",
+      "midfield": "76",
+      "defense": "78",
+      "overall": "77"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/112998.png",
+      "name": "Australia",
+      "league": "Women's National",
+      "attack": "77",
+      "midfield": "80",
+      "defense": "75",
+      "overall": "77"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113000.png",
+      "name": "Canada",
+      "league": "Women's National",
+      "attack": "76",
+      "midfield": "81",
+      "defense": "74",
+      "overall": "77"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113011.png",
+      "name": "Holland Women",
+      "league": "Women's National",
+      "attack": "78",
+      "midfield": "77",
+      "defense": "73",
+      "overall": "76"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113012.png",
+      "name": "Spain",
+      "league": "Women's National",
+      "attack": "79",
+      "midfield": "75",
+      "defense": "73",
+      "overall": "75"
+    }
+  ],
+  "WMN 3.5": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113005.png",
+      "name": "Italy",
+      "league": "Women's National",
+      "attack": "75",
+      "midfield": "74",
+      "defense": "74",
+      "overall": "74"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113010.png",
+      "name": "Mexico",
+      "league": "Women's National",
+      "attack": "77",
+      "midfield": "74",
+      "defense": "71",
+      "overall": "73"
+    }
+  ],
   "5.0": [
     {
       "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/243.png",
@@ -639,140 +773,6 @@
       "midfield": "79",
       "defense": "80",
       "overall": "79"
-    }
-  ],
-  "WMN 5.0": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113009.png",
-      "name": "United States",
-      "league": "Women's National",
-      "attack": "82",
-      "midfield": "83",
-      "defense": "84",
-      "overall": "83"
-    }
-  ],
-  "WMN 4.5": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113004.png",
-      "name": "Germany",
-      "league": "Women's National",
-      "attack": "83",
-      "midfield": "81",
-      "defense": "79",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113003.png",
-      "name": "France",
-      "league": "Women's National",
-      "attack": "83",
-      "midfield": "80",
-      "defense": "80",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/112999.png",
-      "name": "Brazil",
-      "league": "Women's National",
-      "attack": "85",
-      "midfield": "81",
-      "defense": "77",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113008.png",
-      "name": "Sweden",
-      "league": "Women's National",
-      "attack": "78",
-      "midfield": "80",
-      "defense": "77",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113002.png",
-      "name": "England",
-      "league": "Women's National",
-      "attack": "77",
-      "midfield": "78",
-      "defense": "79",
-      "overall": "79"
-    }
-  ],
-  "WMN 4.0": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113007.png",
-      "name": "Norway",
-      "league": "Women's National",
-      "attack": "79",
-      "midfield": "77",
-      "defense": "77",
-      "overall": "77"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113001.png",
-      "name": "China PR",
-      "league": "Women's National",
-      "attack": "78",
-      "midfield": "76",
-      "defense": "78",
-      "overall": "77"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/112998.png",
-      "name": "Australia",
-      "league": "Women's National",
-      "attack": "77",
-      "midfield": "80",
-      "defense": "75",
-      "overall": "77"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113000.png",
-      "name": "Canada",
-      "league": "Women's National",
-      "attack": "76",
-      "midfield": "81",
-      "defense": "74",
-      "overall": "77"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113011.png",
-      "name": "Holland Women",
-      "league": "Women's National",
-      "attack": "78",
-      "midfield": "77",
-      "defense": "73",
-      "overall": "76"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113012.png",
-      "name": "Spain",
-      "league": "Women's National",
-      "attack": "79",
-      "midfield": "75",
-      "defense": "73",
-      "overall": "75"
-    }
-  ],
-  "WMN 3.5": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113005.png",
-      "name": "Italy",
-      "league": "Women's National",
-      "attack": "75",
-      "midfield": "74",
-      "defense": "74",
-      "overall": "74"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA17/images/crest/50/light/113010.png",
-      "name": "Mexico",
-      "league": "Women's National",
-      "attack": "77",
-      "midfield": "74",
-      "defense": "71",
-      "overall": "73"
     }
   ],
   "INT 3.0": [
@@ -6290,21 +6290,27 @@
     }
   ],
   "oddsForTypesAvailable": [
-    "4.0",
-    "4.5",
-    "5.0",
-    "5.0",
+    "2.5",
     "4.0",
     "5.0",
-    "4.0",
-    "INT 4.5",
-    "4.5",
-    "4.5",
-    "INT 5.0",
-    "4.0",
     "3.0",
-    "WMN 4.5",
+    "3.5",
     "4.5",
-    "5.0"
+    "4.0",
+    "0.5",
+    "WMN 4.5",
+    "WMN 4.0",
+    "4.5",
+    "INT 4.5",
+    "1.0",
+    "INT 5.0",
+    "INT 4.0",
+    "1.5",
+    "5.0",
+    "1.0",
+    "4.5",
+    "2.0",
+    "5.0",
+    "4.0"
   ]
 }
