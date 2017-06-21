@@ -174,7 +174,7 @@ export class StandingTableComponent implements OnChanges {
 		this.numberOfMatches = this.matches.length;
 
 		if(this.noFilterSelected){
-			this.limit = this.numberOfMatches / 15;
+			this.limit = Math.floor(this.numberOfMatches / 15);
 		}
 		else{
 			this.limit = this.days;
