@@ -37,15 +37,15 @@ jspm_packages
 .node_repl_history
 
 # mongo
-/Backend/data/db/*
+/api/data/db/*
 
 # Angular
-Frontend/typings
-Frontend/app/**/*.js
-Frontend/app/**/*.map
-Frontend/node_modules
-Frontend/jspm_packages
-Frontend/bower_components
-Frontend/dist/
-Backend/dist/
+webapp/typings
+webapp/app/**/*.js
+webapp/app/**/*.map
+webapp/node_modules
+webapp/jspm_packages
+webapp/bower_components
+webapp/dist/
+api/dist/
 dist/

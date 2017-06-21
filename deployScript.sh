@@ -3,7 +3,7 @@ cd fifa-champs
 echo "--------------------------------------------------------------------------"
 echo "Installing FrontEnd Dependencies"
 echo "--------------------------------------------------------------------------"
-pushd Frontend
+pushd webapp
 npm install
 echo "--------------------------------------------------------------------------"
 echo ""
@@ -20,7 +20,7 @@ echo "--------------------------------------------------------------------------
 current_branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
 git branch -D production
 git push origin :production
-git subtree split --branch production --prefix Backend/
+git subtree split --branch production --prefix api/
 git add .
 git stash
 echo "--------------------------------------------------------------------------"
@@ -31,7 +31,7 @@ echo "--------------------------------------------------------------------------
 git checkout production
 rm -r dist
 rm -r dist/
-cd Frontend
+cd webapp
 cp -r ./dist ../dist/
 cd ..
 git add -f ./dist

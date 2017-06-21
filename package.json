@@ -1,8 +1,8 @@
 {
   "name": "fifa-champs",
-  "version": "0.0.1",
-  "description": "",
-  "main": "/Frontend/index.html",
+  "version": "1.0.0",
+  "description": "An Angular 2 Application with a NodeJS backend to control EA Sports Fifa matches between a set of players.",
+  "main": "/webapp/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/aquintiliano/fifa-champs.git"
   },
-  "author": "Alan Donizete Quintiliano",
+  "author": "Alan Donizete Quintiliano & Cristiano Faustino",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aquintiliano/fifa-champs/issues"

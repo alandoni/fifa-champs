@@ -1,4 +1,5 @@
 # fifa-champs
+An Angular 2 Application with a NodeJS backend to control EA Sports Fifa matches between a set of players.
 
 # Dependencies: 
 Install node
@@ -24,7 +25,7 @@ On windows:
 install dependencies
 ```
 cd fifa-champs
-cd Backend
+cd api
 npm install
 ```
 Run mongo 
@@ -49,7 +50,7 @@ npm test
 
 # Run Frontend
 ```
-cd ../Frontend
+cd ../webapp
 npm install
 sudo npm install -g @angular/cli
 ng serve
