@@ -1,4 +1,5 @@
 # fifa-champs
+An Angular 2 Application with a NodeJS backend to control EA Sports Fifa matches between a set of players.
 
 # Dependencies: 
 Install node

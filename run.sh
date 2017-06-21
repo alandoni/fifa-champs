@@ -1,8 +1,8 @@
 #!/bin/bash
-pushd Frontend
+pushd webapp
 npm run build
 popd
-pushd Backend
-ln -sf ../Frontend/dist ./dist
+pushd api
+ln -sf ../webapp/dist ./dist
 nohup npm start &
 popd
