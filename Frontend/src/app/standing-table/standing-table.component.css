@@ -58,3 +58,12 @@ th#percent, td#percent {
 .text-center {
   text-align: center;
 }
+
+.tiebreak-list{
+  line-height: 120%;
+  margin-top: 2px;
+}
+
+.margin-tiebreak{
+  margin-bottom: 2px;
+}

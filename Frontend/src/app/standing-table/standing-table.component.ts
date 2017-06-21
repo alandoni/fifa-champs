@@ -11,6 +11,7 @@ import { Player } from './../models/player';
 export class StandingTableComponent implements OnChanges {
 
 	@Input() matches : Array<Match>;
+	@Input() noFilterSelected: Boolean;
 
 	statisticsList : Array<Statistics>;
 	days = 0;
@@ -171,7 +172,13 @@ export class StandingTableComponent implements OnChanges {
 		}
 		this.days = days.length;
 		this.numberOfMatches = this.matches.length;
-		this.limit = this.days;
+
+		if(this.noFilterSelected){
+			this.limit = Math.floor(this.numberOfMatches / 15);
+		}
+		else{
+			this.limit = this.days;
+		}
 	}
 
 	hasPlayers() {
