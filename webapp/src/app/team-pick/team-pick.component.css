@@ -14,3 +14,26 @@
 .padding-loader{
   padding-top: 10px;
 }
+
+.controller{
+  margin: 0;
+  height: 20px;
+  line-height: 20px;
+  color: #fafafa;
+}
+
+.controller-1{
+  background-color: #e57373;
+}
+
+.controller-2{
+  background-color: #64b5f6;
+}
+
+.controller-3{
+  background-color: #FFCC00;
+}
+
+.controller-4{
+  background-color: #81c784;
+}
