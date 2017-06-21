@@ -1,0 +1,74 @@
+.winner {
+ 	color: #4CAF50;
+  	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.final-match{
+  padding-top: 3px;
+  padding-bottom: 0px;
+}
+
+.final-match .chip{
+  margin: 0;
+  height: 20px;
+  line-height: 20px;
+  color: #fafafa;
+  background-color: #ff5252;
+}
+
+.loser {
+	color: #f44336;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.tie {
+	margin-top: 10px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.results {
+	margin-top: 12px;
+	margin-bottom: 5px;
+	height:44px;
+	line-height: 44px;
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+.date {
+	background: #607D8B;
+	color: #fff;
+	text-align: center;
+	line-height: 32px;
+}
+
+.row {
+	margin-bottom: 0 !important;
+}
+
+.penalty {
+	font-size: 14px;
+	color: #444;
+}
+
+.edit-delete {
+	position: absolute;
+	right: 10px;
+}
+
+.edit-delete a {
+	font-size: 16px;
+}
+
+.team2 {
+	position: relative;
+}
+
+.deleted {
+	display: none;
+}

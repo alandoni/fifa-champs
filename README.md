@@ -24,7 +24,7 @@ On windows:
 install dependencies
 ```
 cd fifa-champs
-cd Backend
+cd api
 npm install
 ```
 Run mongo 
@@ -49,7 +49,7 @@ npm test
 
 # Run Frontend
 ```
-cd ../Frontend
+cd ../webapp
 npm install
 sudo npm install -g @angular/cli
 ng serve
