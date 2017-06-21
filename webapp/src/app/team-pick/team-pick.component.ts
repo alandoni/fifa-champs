@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamPickService } from './../team-pick.service';
 import { Team } from './../models/team'
+import { PickedControllers } from './../models/picked-controllers'
+
 @Component({
   selector: 'app-team-pick',
   templateUrl: './team-pick.component.html',
@@ -13,6 +15,7 @@ export class TeamPickComponent implements OnInit {
   jsonTeams: JSON;
   team1: Team;
   team2: Team;
+  controllersSelected: PickedControllers;
 
   constructor(private teamPickService: TeamPickService) { }
 
@@ -21,7 +24,7 @@ export class TeamPickComponent implements OnInit {
 
     this.teamPickService.getJSON().subscribe((jsonTeams) => {
       this.jsonTeams = jsonTeams;
-      this.selectStarsAndTeams();
+      this.selectControllersAndTeams();
     });
   }
 
@@ -29,12 +32,23 @@ export class TeamPickComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  selectStarsAndTeams() {
+  selectControllersAndTeams() {
     this.pickedTeams = false;
     this.shuffleArray(this.jsonTeams["oddsForTypesAvailable"]);
     this.chooseStars();
     this.chooseTeams();
+    this.pickControllers();
     this.pickedTeams = true;
+  }
+
+  pickControllers(){
+    let controllers = [1,2,3,4];
+    this.shuffleArray(controllers);
+    this.controllersSelected = new PickedControllers();
+    this.controllersSelected.firstSelected = controllers.pop();
+    this.controllersSelected.secondSelected = controllers.pop();
+    this.controllersSelected.thirdSelected = controllers.pop();
+    this.controllersSelected.fourthSelected = controllers.pop();
   }
 
   chooseStars() {
