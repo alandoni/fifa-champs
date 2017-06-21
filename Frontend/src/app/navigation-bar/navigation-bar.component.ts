@@ -49,6 +49,7 @@ export class NavigationBarComponent implements OnInit {
 		itemsLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
 		itemsLogged.push(new NavigationBarItem('Temporada', '/season/standings/current', null));
 		itemsLogged.push(new NavigationBarItem('Criar Nova Temporada', null, this.createSeason.bind(this)));
+		itemsLogged.push(new NavigationBarItem('Escolher times', '/team-pick', this.teamPick.bind(this)));
 		return itemsLogged;
 	}
 
