@@ -8,8 +8,8 @@ import { Team } from './../models/team'
 })
 export class TeamPickComponent implements OnInit {
 
-	pickedTeams: boolean;
-  stars:string;
+  pickedTeams: boolean;
+  stars: string;
   jsonTeams: JSON;
   team1: Team;
   team2: Team;
@@ -18,7 +18,7 @@ export class TeamPickComponent implements OnInit {
 
   ngOnInit() {
     this.pickedTeams = false;
-    
+
     this.teamPickService.getJSON().subscribe((jsonTeams) => {
       this.jsonTeams = jsonTeams;
       this.selectStarsAndTeams();
@@ -26,20 +26,21 @@ export class TeamPickComponent implements OnInit {
   }
 
   randomIntFromInterval(min, max) {
-      return Math.floor(Math.random()*(max-min+1)+min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  selectStarsAndTeams(){
-      this.pickedTeams = false;
-      this.chooseStars();
-      this.chooseTeams();
-      this.pickedTeams = true;
+  selectStarsAndTeams() {
+    this.pickedTeams = false;
+    this.shuffleArray(this.jsonTeams["oddsForTypesAvailable"]);
+    this.chooseStars();
+    this.chooseTeams();
+    this.pickedTeams = true;
   }
-  
-  chooseStars(){
+
+  chooseStars() {
     let indexOfType = this.randomIntFromInterval(1, this.jsonTeams["oddsForTypesAvailable"].length) - 1;;
     this.stars = this.jsonTeams["oddsForTypesAvailable"][indexOfType];
-    while((this.jsonTeams["oddsForTypesAvailable"].length > 0) && (this.jsonTeams[this.stars].length < 2)){
+    while ((this.jsonTeams["oddsForTypesAvailable"].length > 0) && (this.jsonTeams[this.stars].length < 2)) {
       console.log("Removed Stars: " + this.jsonTeams["oddsForTypesAvailable"][indexOfType]);
       this.jsonTeams["oddsForTypesAvailable"].splice(indexOfType, 1);
       indexOfType = this.randomIntFromInterval(1, this.jsonTeams["oddsForTypesAvailable"].length) - 1;
@@ -47,16 +48,25 @@ export class TeamPickComponent implements OnInit {
     }
   }
 
-  chooseTeams(){
+  chooseTeams() {
     let indexTeamOne = this.randomIntFromInterval(1, this.jsonTeams[this.stars].length) - 1
     this.team1 = this.jsonTeams[this.stars][indexTeamOne];
-    this.team1.badgeImage = (this.team1.badgeImage == "")?"https://cdn.tutsplus.com/net/uploads/legacy/958_placeholders/placehold.gif":this.team1.badgeImage;
+    this.team1.badgeImage = (this.team1.badgeImage == "") ? "https://cdn.tutsplus.com/net/uploads/legacy/958_placeholders/placehold.gif" : this.team1.badgeImage;
     this.jsonTeams[this.stars].splice(indexTeamOne, 1);
 
-    let indexTeamTwo = this.randomIntFromInterval(1, this.jsonTeams[this.stars].length) - 1  
+    let indexTeamTwo = this.randomIntFromInterval(1, this.jsonTeams[this.stars].length) - 1
     this.team2 = this.jsonTeams[this.stars][indexTeamTwo];
-    this.team2.badgeImage = (this.team2.badgeImage == "")?"https://cdn.tutsplus.com/net/uploads/legacy/958_placeholders/placehold.gif":this.team2.badgeImage;
+    this.team2.badgeImage = (this.team2.badgeImage == "") ? "https://cdn.tutsplus.com/net/uploads/legacy/958_placeholders/placehold.gif" : this.team2.badgeImage;
     this.jsonTeams[this.stars].splice(indexTeamTwo, 1);
+  }
+
+  shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
   }
 
 }
