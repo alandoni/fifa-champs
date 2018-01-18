@@ -41,6 +41,20 @@ export class TeamPickComponent implements OnInit {
     this.pickedTeams = true;
   }
 
+  reselectTeams() {
+    this.pickedTeams = false;
+    this.chooseTeams();
+    this.pickedTeams = true;
+  }
+
+  reselectStarsAndTeams() {
+    this.pickedTeams = false;
+    this.shuffleArray(this.jsonTeams["oddsForTypesAvailable"]);
+    this.chooseStars();
+    this.chooseTeams();
+    this.pickedTeams = true;
+  }
+
   pickControllers(){
     let controllers = [1,2,3,4];
     this.shuffleArray(controllers);

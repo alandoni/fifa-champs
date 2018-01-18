@@ -76,9 +76,9 @@
       </div>
       <div class="row">
         <div class="col s12"><strong>Jogadores</strong></div>
-        <div class="col s12">Controles 
-          <span class="chip controller controller-{{controllersSelected.secondSelected}}">{{controllersSelected.secondSelected}}</span> 
-          e 
+        <div class="col s12">Controles
+          <span class="chip controller controller-{{controllersSelected.secondSelected}}">{{controllersSelected.secondSelected}}</span>
+          e
           <span class="chip controller controller-{{controllersSelected.fourthSelected}}">{{controllersSelected.fourthSelected}}</span></div>
       </div>
     </div>
@@ -107,9 +107,9 @@
       </div>
       <div class="row">
         <div class="col s12"><strong>Jogadores</strong></div>
-        <div class="col s12">Controles 
-          <span class="chip controller controller-{{controllersSelected.firstSelected}}">{{controllersSelected.firstSelected}}</span>  
-          e 
+        <div class="col s12">Controles
+          <span class="chip controller controller-{{controllersSelected.firstSelected}}">{{controllersSelected.firstSelected}}</span>
+          e
           <span class="chip controller controller-{{controllersSelected.thirdSelected}}">{{controllersSelected.thirdSelected}}</span>
         </div>
       </div>
@@ -118,7 +118,8 @@
   <div class="row"><div class="divider"></div></div>
   <div class="row">
     <div class="col s12">
-      <input type="button" class="waves-effect waves-light btn blue-grey lighten-1" (click)="selectControllersAndTeams();" value="Sortear Outro"/>
+      <input type="button" class="waves-effect waves-light btn blue-grey lighten-1" (click)="reselectTeams();" value="Sortear Outro"/>
+      <!-- <input type="button" class="waves-effect waves-light btn blue-grey lighten-1" (click)="reselectStarsAndTeams();" value="Sortear Outro"/> -->
       <input type="button" class="waves-effect waves-light btn blue-grey lighten-1" (click)="pickControllers();" value="Mudar Controles"/>
     </div>
   </div>

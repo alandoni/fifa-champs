@@ -31,6 +31,7 @@ export class HallOfFameComponent implements OnInit {
 		this.matches = matches;
 
 		var champions = {};
+		var runnerups = {};
 
 		if (!this.matches || this.matches.length == 0) {
 			this.error = {description: 'Nenhum campeonato foi terminado ainda.'};
@@ -53,34 +54,53 @@ export class HallOfFameComponent implements OnInit {
 				champions[match.player4.nickname] = 0;
 			}
 
+			if (!runnerups[match.player1.nickname]) {
+				runnerups[match.player1.nickname] = 0;
+			}
+			if (!runnerups[match.player2.nickname]) {
+				runnerups[match.player2.nickname] = 0;
+			}
+			if (!runnerups[match.player3.nickname]) {
+				runnerups[match.player3.nickname] = 0;
+			}
+			if (!runnerups[match.player4.nickname]) {
+				runnerups[match.player4.nickname] = 0;
+			}
+
 			if (match.team1score > match.team2score) {
-				champions[match.player1.nickname] = champions[match.player1.nickname] + 1;
-				champions[match.player2.nickname] = champions[match.player2.nickname] + 1;
+				champions[match.player1.nickname] += 1;
+				champions[match.player2.nickname] += 1;
+				runnerups[match.player3.nickname] += 1;
+				runnerups[match.player4.nickname] += 1;
 			}
 			else if (match.team2score > match.team1score) {
-				champions[match.player3.nickname] = champions[match.player3.nickname] + 1;
-				champions[match.player4.nickname] = champions[match.player4.nickname] + 1;
+				runnerups[match.player1.nickname] += 1;
+				runnerups[match.player2.nickname] += 1;
+				champions[match.player3.nickname] += 1;
+				champions[match.player4.nickname] += 1;
 			}
 			else{
 				if(match.team1penalties > match.team2penalties){
-					champions[match.player1.nickname] = champions[match.player1.nickname] + 1;
-					champions[match.player2.nickname] = champions[match.player2.nickname] + 1;
+					champions[match.player1.nickname] += 1;
+					champions[match.player2.nickname] += 1;
+					runnerups[match.player3.nickname] += 1;
+					runnerups[match.player4.nickname] += 1;
 				}
 				else if(match.team2penalties > match.team1penalties){
-					champions[match.player3.nickname] = champions[match.player3.nickname] + 1;
-					champions[match.player4.nickname] = champions[match.player4.nickname] + 1;
+					runnerups[match.player1.nickname] += 1;
+					runnerups[match.player2.nickname] += 1;
+					champions[match.player3.nickname] += 1;
+					champions[match.player4.nickname] += 1;
 				}
 			}
-
-
-
 		}
 
 		this.champions = [];
 		for (var key in champions) {
 			this.champions.push({
 				name: key,
-				times: champions[key]
+				times: champions[key],
+				runnerup: runnerups[key]
 			})
 		}
 
