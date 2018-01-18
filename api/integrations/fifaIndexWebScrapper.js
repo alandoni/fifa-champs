@@ -3,13 +3,12 @@ const cheerioDOMLoader = require('cheerio');
 const fs = require('fs');
 
 const BASE_URL = "https://www.fifaindex.com"
-const FIFA_VERSION = "fifa17_74"
-const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/{0}/?type={1}"';
+const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/fifa17_74/{0}/?type={1}"';
 const PARAMS = "&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=";
 
 let jsonFile = {};
 
-/* This allows to replace {0}, {1}, etc type of 
+/* This allows to replace {0}, {1}, etc type of
     placeholders with strings I want them to be replaced with */
 const formatString = function () {
     let args = Array.prototype.slice.call(arguments).slice(1);
@@ -19,6 +18,47 @@ const formatString = function () {
             : match
             ;
     });
+}
+
+const LEAGUES_COUNTRY =  {
+  "ALJ League" : "Saudi Arabia",
+  "Alka Superliga" : "Denmark",
+  "Allsvenskan" : "Sweden",
+  "Barclays PL" : "England",
+  "Bundesliga" : "Germany",
+  "Bundesliga 2" : "Germany",
+  "Camp. Scotiabank" : "Chile",
+  "Ekstraklasa" : "Poland",
+  "Eredivisie" : "Netherlands",
+  "FL Championship" : "England",
+  "Football League 1" : "England",
+  "Football League 2" : "England",
+  "Hyundai A-League" : "Australia",
+  "Japan J1 League (1)" : "Japan",
+  "K LEAGUE Classic" : "South Korea",
+  "LIGA Bancomer MX" : "Mexico",
+  "Liga Adelante" : "Spain",
+  "Liga BBVA" : "Spain",
+  "Liga Dimayor" : "Colombia",
+  "Liga NOS" : "Portugal",
+  "Liga do Brasil" : "Brasil",
+  "Ligue 1" : "France",
+  "Ligue 2" : "France",
+  "MLS" : "United States",
+  "Primera División" : "Argentina",
+  "Pro League" : "Belgium",
+  "Raiffeisen SL" : "Switzerland",
+  "Rest of World" : "N/A",
+  "Russian League" : "Russia",
+  "SSE Airtricity Lge" : "Ireland",
+  "Scottish Prem" : "Scotland",
+  "Serie A TIM" : "Italy",
+  "Serie B" : "Italy",
+  "Süper Lig" : "Turkey",
+  "Tippeligaen" : "Norway",
+  "Ö. Bundesliga" : "Austria",
+  "Women's National" : "N/A",
+  "Men's National" : "N/A"
 }
 
 const TYPE_OF_TEAMS = {
@@ -108,6 +148,7 @@ function getAttributesFromTeam($, teamElem, jsonFile, typeOfTeams) {
     team.badgeImage = getImageFromTeam($(teamsAttributes.get(0)));
     team.name = getTeamGeneralParam($(teamsAttributes.get(1)));
     team.league = getTeamGeneralParam($(teamsAttributes.get(2)));
+    team.country = LEAGUES_COUNTRY[team.league];
     team.attack = getTeamRatingParam($(teamsAttributes.get(3)));
     team.midfield = getTeamRatingParam($(teamsAttributes.get(4)));
     team.defense = getTeamRatingParam($(teamsAttributes.get(5)));
@@ -119,7 +160,8 @@ function getAttributesFromTeam($, teamElem, jsonFile, typeOfTeams) {
         jsonFile[stars] = [];
     }
 
-    jsonFile[stars].push(team);
+    if(team.league!="Free Agents")
+      jsonFile[stars].push(team);
 }
 
 function getTeams($, jsonFile, typeOfTeams) {
@@ -172,9 +214,9 @@ function requestTeamPage(page, typeOfTeams) {
     });
 }
 
-/* Call the functions for Clubs (typeOfTeam=0), 
-                          International Teams (typeOfTeam=1), 
+/* Call the functions for Clubs (typeOfTeam=0),
+                          International Teams (typeOfTeam=1),
                           and Women International (typeOfTeam=2) */
-requestTeamPage(FIFA_VERSION, TYPE_OF_TEAMS.CLUBS);
-requestTeamPage(FIFA_VERSION, TYPE_OF_TEAMS.INTERNATIONAL_TEAMS);
-requestTeamPage(FIFA_VERSION, TYPE_OF_TEAMS.WOMEN_INTERNATIONAL);
+requestTeamPage(1, TYPE_OF_TEAMS.CLUBS);
+requestTeamPage(1, TYPE_OF_TEAMS.INTERNATIONAL_TEAMS);
+requestTeamPage(1, TYPE_OF_TEAMS.WOMEN_INTERNATIONAL);
