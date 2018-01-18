@@ -3,7 +3,8 @@ const cheerioDOMLoader = require('cheerio');
 const fs = require('fs');
 
 const BASE_URL = "https://www.fifaindex.com"
-const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/fifa17_74/{0}/?type={1}"';
+const FIFA_VERSION = "fifa17_74";
+const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/'+FIFA_VERSION+'/{0}/?type={1}"';
 const PARAMS = "&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=";
 
 let jsonFile = {};
