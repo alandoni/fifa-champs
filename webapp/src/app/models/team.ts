@@ -1,7 +1,7 @@
 export class Team {
 	name;
     league;
-		country;
+    country;
     attack;
     midfield;
     overall;
