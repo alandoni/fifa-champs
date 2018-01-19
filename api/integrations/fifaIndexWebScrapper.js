@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const BASE_URL = "https://www.fifaindex.com"
 const FIFA_VERSION = "fifa17_74";
-const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/'+FIFA_VERSION+'/{0}/?type={1}"';
+const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/{0}/{1}/?type={2}"';
 const PARAMS = "&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=";
 
 let jsonFile = {};
@@ -200,7 +200,7 @@ function requestTeamPage(page, typeOfTeams) {
                 */
                 let $hasNextPage = ($("li.next").not(".disabled").children("a").text().localeCompare("Next Page") == 0);
                 if ($hasNextPage)
-                    requestTeamPage(++page, typeOfTeams);
+                    requestTeamPage(FIFA_VERSION, ++page, typeOfTeams);
                 else {
                     countDownAsynchronousCalls.lastCallWasMade(typeOfTeams);
                 }
@@ -218,6 +218,6 @@ function requestTeamPage(page, typeOfTeams) {
 /* Call the functions for Clubs (typeOfTeam=0),
                           International Teams (typeOfTeam=1),
                           and Women International (typeOfTeam=2) */
-requestTeamPage(1, TYPE_OF_TEAMS.CLUBS);
-requestTeamPage(1, TYPE_OF_TEAMS.INTERNATIONAL_TEAMS);
-requestTeamPage(1, TYPE_OF_TEAMS.WOMEN_INTERNATIONAL);
+requestTeamPage(FIFA_VERSION, 1, TYPE_OF_TEAMS.CLUBS);
+requestTeamPage(FIFA_VERSION, 1, TYPE_OF_TEAMS.INTERNATIONAL_TEAMS);
+requestTeamPage(FIFA_VERSION, 1, TYPE_OF_TEAMS.WOMEN_INTERNATIONAL);

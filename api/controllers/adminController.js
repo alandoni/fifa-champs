@@ -11,7 +11,7 @@ class AdminController {
 	constructor(mongo) {
 		this.mongo = mongo;
 	}
-	
+
 	getAll() {
 		return this.mongo.selectAll(document).then((admins) => {
 			return this._prepareToSend(admins);
@@ -69,7 +69,7 @@ class AdminController {
 				throw errors.getWrongLogin();
 			}
 			if (admins[0].password !== loginObj.password) {
-				throw errors.getWrongLogin();	
+				throw errors.getWrongLogin();
 			}
 			return admins[0];
 		}).then((result) => {
