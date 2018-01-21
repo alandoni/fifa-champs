@@ -70,7 +70,7 @@ exports.set = function(app, mongo) {
 
 	adminController.getAll().then((admins) => {
 		if (admins.length == 0) {
-			return adminController.insert({nickname: 'Admin', password: '603bd9274280f3bbea9d7c0180a83f6e'});
+			return adminController.insert({nickname: 'admin', password: 'b13713ee65ace0fc770d3c5ba5fa033d'});
 		}
 	}).then((admin) => {
 		if (admin) {
