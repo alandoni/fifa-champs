@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoginService } from './../login.service';
 import { ChampionshipService } from './../championship.service';
 import { Championship } from './../models/championship';
+import { MatchService } from './../match.service';
 import { Match } from './../models/match';
 import { MaterializeAction } from 'angular2-materialize';
 import { NavigationBarItem } from './../models/navigation-bar-item.model';
@@ -26,7 +27,7 @@ export class NavigationBarComponent implements OnInit {
 	isLoggedIn = false;
 	items : Array<NavigationBarItem> = [];
 
-	constructor(private loginService : LoginService, private championshipService : ChampionshipService) {
+	constructor(private loginService : LoginService, private championshipService : ChampionshipService, private matchService : MatchService) {
 		this.loginService.addListener(this);
 		this.onLoginChange();
 	}
@@ -67,17 +68,28 @@ export class NavigationBarComponent implements OnInit {
 		});
 	}
 
+	openMatchModal() {
+		this.matchModalActions.emit({action:"modal", params:['open']});
+	}
+
 	createMatch() {
-		if (!this.championshipService.getSelectedChampionship()) {
+		var currentChamp = this.championshipService.getSelectedChampionship();
+		if (currentChamp) {
+			this.matchService.getFinalFromChampionship(currentChamp._id).toPromise()
+				.then(response => {
+					if (response.length > 0) {
+						window.alert("Não é possível cadastrar um jogo pois este mês já tem uma final cadastrada.");
+						return;
+					}	else {
+						this.openMatchModal();
+					}
+				})
+		} else {
 			if (!window.confirm("Este mês ainda não tem um campeonato criado. Deseja criar?")) {
 				return;
-			} else {
-				if (this.createSeason()) {
-					this.matchModalActions.emit({action:"modal", params:['open']});
-				}
+			} else if (this.createSeason()) {
+					this.openMatchModal();
 			}
-		} else {
-			this.matchModalActions.emit({action:"modal", params:['open']});
 		}
 	}
 
@@ -118,11 +130,6 @@ export class NavigationBarComponent implements OnInit {
 	}
 
 	createSeason() {
-		if (!window.confirm("ATENÇÃO!! Tem certeza que quer iniciar um novo campeonato?" +
-			" O campeonato atual não poderá mais ser alterado!")) {
-			return false;
-		}
-
 		if (this.championshipService.getCurrentChampionship()) {
 			this.createSeasonBasedOnCurrentSeason(this.championshipService.getCurrentChampionship());
 			return true;
