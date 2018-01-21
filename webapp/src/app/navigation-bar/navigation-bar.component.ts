@@ -68,7 +68,17 @@ export class NavigationBarComponent implements OnInit {
 	}
 
 	createMatch() {
-		this.matchModalActions.emit({action:"modal", params:['open']});
+		if (!this.championshipService.getSelectedChampionship()) {
+			if (!window.confirm("Este mês ainda não tem um campeonato criado. Deseja criar?")) {
+				return;
+			} else {
+				if (this.createSeason()) {
+					this.matchModalActions.emit({action:"modal", params:['open']});
+				}
+			}
+		} else {
+			this.matchModalActions.emit({action:"modal", params:['open']});
+		}
 	}
 
 	teamPick() {
@@ -110,24 +120,26 @@ export class NavigationBarComponent implements OnInit {
 	createSeason() {
 		if (!window.confirm("ATENÇÃO!! Tem certeza que quer iniciar um novo campeonato?" +
 			" O campeonato atual não poderá mais ser alterado!")) {
-			return;
+			return false;
 		}
 
 		if (this.championshipService.getCurrentChampionship()) {
 			this.createSeasonBasedOnCurrentSeason(this.championshipService.getCurrentChampionship());
-			return;
+			return true;
 		}
 
 		this.championshipService.getCurrent().subscribe((current: Championship[]) => {
 			if (current.length == 0) {
 				var date = new Date();
 				this.insertChampionship(date.getMonth() + 1, date.getFullYear());
-				return;
+				return true;
 			}
 			var currentSeason = current[0];
 			this.createSeasonBasedOnCurrentSeason(currentSeason);
+			return true;
 		}, (error: any) => {
 			console.error(error);
+			return false;
 		});
 	}
 
