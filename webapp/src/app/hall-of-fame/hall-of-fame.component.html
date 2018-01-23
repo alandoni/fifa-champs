@@ -4,10 +4,33 @@
 
 	<div *ngIf="!error" class="col m4 s12 champions">
 		<div class="header">
-			Maiores campeões
+			Sala de Troféus
 		</div>
-		<p *ngFor="let champion of champions">
-			<span>{{ champion.name }}</span> foi campeão <span>{{ champion.times }}</span> vez(es) e vice <span>{{ champion.runnerup }}</span> vez(es).
+		<div class="row" *ngFor="let champion of champions">
+			<div class="col m2">
+				<span>{{ champion.name }}</span>
+			</div>
+			<div class="col m1">
+				<img class="trophyImg" src="assets/platinum_trophy.png"/> <span>{{ champion.times }}</span>
+			</div>
+			<div class="col m1">
+				<img class="trophyImg" src="assets/gold_trophy.png"/> <span>{{ champion.runnerup }}</span>
+			</div>
+			<div class="col m1">
+				<img class="trophyImg" src="assets/silver_trophy.png"/> <span>{{ champion.firstPlace }}</span>
+			</div>
+			<div class="col m1">
+				<img class="trophyImg" src="assets/bronze_trophy.png"/> <span>{{ champion.secondPlace }}</span>
+			</div>
+		</div>
+		<div class="header">
+			Legenda
+		</div>
+		<p>
+			<img class="trophyImg" src="assets/platinum_trophy.png"/> <span>Campeão</span> /
+			<img class="trophyImg" src="assets/gold_trophy.png"/> <span>Vice-Campeão</span> /
+			<img class="trophyImg" src="assets/silver_trophy.png"/> <span>Líder</span> /
+			<img class="trophyImg" src="assets/bronze_trophy.png"/> <span>Vice-Líder</span>
 		</p>
 	</div>
 

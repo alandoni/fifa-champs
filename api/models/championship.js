@@ -4,8 +4,8 @@ var Schema   = Mongoose.Schema;
 var championshipSchema = new Schema({
 	month: Number,
 	year: Number,
-	players: [{type: Schema.Types.ObjectId, ref: 'Player'}],
-	matches: [{type: Schema.Types.ObjectId, ref: 'Match'}],
+	players: [String],
+	matches: [String],
 	date: Date,
 	finalMatch: {type: Schema.Types.ObjectId, ref: 'Match'},
 	isCurrent: Boolean

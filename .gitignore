@@ -41,6 +41,7 @@ jspm_packages
 
 # mongo
 /api/data/db/*
+/data_dump
 
 # Angular
 webapp/typings

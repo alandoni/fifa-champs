@@ -42,7 +42,7 @@ export class MatchService {
 		return this.api.get(this.url + '/championship/' + championshipId + '?isFinal=true');
 	}
 
-	getById(id) :  Observable<Match> {
+	getById(id) : Observable<Match> {
 		return this.api.get(this.url + '/' + id);
 	}
 }

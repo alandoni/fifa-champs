@@ -9,7 +9,7 @@ import { Match } from './../models/match';
 })
 export class HallOfFameComponent implements OnInit {
 
-	matches : Array<Match>;
+	finalMatches : Array<Match>;
 	champions = [];
 	error;
 
@@ -17,8 +17,9 @@ export class HallOfFameComponent implements OnInit {
 
 	ngOnInit() {
 		this.matchService.getFinals().subscribe(
-			(res) => {
-				this.processMatches(res);
+			(finalMatches) => {
+				this.finalMatches = finalMatches;
+				this.processFinals();
 			},
 			(error : any) => {
 				console.log(error);
@@ -26,71 +27,68 @@ export class HallOfFameComponent implements OnInit {
 			});
 	}
 
-	processMatches(matches : Array<Match>) {
-
-		this.matches = matches;
-
+	processFinals() {
 		var champions = {};
 		var runnerups = {};
 
-		if (!this.matches || this.matches.length == 0) {
+		if (!this.finalMatches || this.finalMatches.length == 0) {
 			this.error = {description: 'Nenhum campeonato foi terminado ainda.'};
 			return;
 		}
 
-		for (var index in matches) {
-			var match = matches[index];
+		for (var index in this.finalMatches) {
+			var finalMatch = this.finalMatches[index];
 
-			if (!champions[match.player1.nickname]) {
-				champions[match.player1.nickname] = 0;
+			if (!champions[finalMatch.player1.nickname]) {
+				champions[finalMatch.player1.nickname] = 0;
 			}
-			if (!champions[match.player2.nickname]) {
-				champions[match.player2.nickname] = 0;
+			if (!champions[finalMatch.player2.nickname]) {
+				champions[finalMatch.player2.nickname] = 0;
 			}
-			if (!champions[match.player3.nickname]) {
-				champions[match.player3.nickname] = 0;
+			if (!champions[finalMatch.player3.nickname]) {
+				champions[finalMatch.player3.nickname] = 0;
 			}
-			if (!champions[match.player4.nickname]) {
-				champions[match.player4.nickname] = 0;
-			}
-
-			if (!runnerups[match.player1.nickname]) {
-				runnerups[match.player1.nickname] = 0;
-			}
-			if (!runnerups[match.player2.nickname]) {
-				runnerups[match.player2.nickname] = 0;
-			}
-			if (!runnerups[match.player3.nickname]) {
-				runnerups[match.player3.nickname] = 0;
-			}
-			if (!runnerups[match.player4.nickname]) {
-				runnerups[match.player4.nickname] = 0;
+			if (!champions[finalMatch.player4.nickname]) {
+				champions[finalMatch.player4.nickname] = 0;
 			}
 
-			if (match.team1score > match.team2score) {
-				champions[match.player1.nickname] += 1;
-				champions[match.player2.nickname] += 1;
-				runnerups[match.player3.nickname] += 1;
-				runnerups[match.player4.nickname] += 1;
+			if (!runnerups[finalMatch.player1.nickname]) {
+				runnerups[finalMatch.player1.nickname] = 0;
 			}
-			else if (match.team2score > match.team1score) {
-				runnerups[match.player1.nickname] += 1;
-				runnerups[match.player2.nickname] += 1;
-				champions[match.player3.nickname] += 1;
-				champions[match.player4.nickname] += 1;
+			if (!runnerups[finalMatch.player2.nickname]) {
+				runnerups[finalMatch.player2.nickname] = 0;
+			}
+			if (!runnerups[finalMatch.player3.nickname]) {
+				runnerups[finalMatch.player3.nickname] = 0;
+			}
+			if (!runnerups[finalMatch.player4.nickname]) {
+				runnerups[finalMatch.player4.nickname] = 0;
+			}
+
+			if (finalMatch.team1score > finalMatch.team2score) {
+				champions[finalMatch.player1.nickname] += 1;
+				champions[finalMatch.player2.nickname] += 1;
+				runnerups[finalMatch.player3.nickname] += 1;
+				runnerups[finalMatch.player4.nickname] += 1;
+			}
+			else if (finalMatch.team2score > finalMatch.team1score) {
+				runnerups[finalMatch.player1.nickname] += 1;
+				runnerups[finalMatch.player2.nickname] += 1;
+				champions[finalMatch.player3.nickname] += 1;
+				champions[finalMatch.player4.nickname] += 1;
 			}
 			else{
-				if(match.team1penalties > match.team2penalties){
-					champions[match.player1.nickname] += 1;
-					champions[match.player2.nickname] += 1;
-					runnerups[match.player3.nickname] += 1;
-					runnerups[match.player4.nickname] += 1;
+				if(finalMatch.team1penalties > finalMatch.team2penalties){
+					champions[finalMatch.player1.nickname] += 1;
+					champions[finalMatch.player2.nickname] += 1;
+					runnerups[finalMatch.player3.nickname] += 1;
+					runnerups[finalMatch.player4.nickname] += 1;
 				}
-				else if(match.team2penalties > match.team1penalties){
-					runnerups[match.player1.nickname] += 1;
-					runnerups[match.player2.nickname] += 1;
-					champions[match.player3.nickname] += 1;
-					champions[match.player4.nickname] += 1;
+				else if(finalMatch.team2penalties > finalMatch.team1penalties){
+					runnerups[finalMatch.player1.nickname] += 1;
+					runnerups[finalMatch.player2.nickname] += 1;
+					champions[finalMatch.player3.nickname] += 1;
+					champions[finalMatch.player4.nickname] += 1;
 				}
 			}
 		}
