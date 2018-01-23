@@ -33,6 +33,7 @@ export class SeasonSelectorComponent implements OnInit {
 					return;
 				}
 				this.championshipService.setCurrentChampionship(championships[0]);
+				this.championshipService.setSelectedChampionship(championships[0]);
 			});
 		}
 
@@ -71,6 +72,11 @@ export class SeasonSelectorComponent implements OnInit {
 
 	previousMonth() {
 		this.date = this.sumMonth(this.date, -1)
+
+		this.championshipService.getByMonth(this.date.getMonth() + 1, this.date.getFullYear()).subscribe((championships) => {
+			this.championshipService.setSelectedChampionship(championships[0]);
+		});
+
 		if(this.tab == 0)
 			this.router.navigateByUrl('season/standings/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 		else
@@ -79,6 +85,11 @@ export class SeasonSelectorComponent implements OnInit {
 
 	nextMonth() {
 		this.date = this.sumMonth(this.date, 1)
+
+		this.championshipService.getByMonth(this.date.getMonth() + 1, this.date.getFullYear()).subscribe((championships) => {
+			this.championshipService.setSelectedChampionship(championships[0]);
+		});
+
 		if(this.tab == 0)
 			this.router.navigateByUrl('season/standings/' + (this.date.getMonth() + 1) + '/' + this.date.getFullYear());
 		else

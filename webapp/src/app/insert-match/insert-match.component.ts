@@ -101,13 +101,12 @@ export class InsertMatchComponent implements OnInit, OnChanges {
 	tryCreateMatch() {
 		this.match.isFinal = this.isFinal;
 
-		// TODO: get championship of month:
-		if (!this.championshipService.getCurrentChampionship()) {
-			this.error = { description: 'Verifique se há um campeonato criado.' };
+		if (!this.championshipService.getSelectedChampionship()) {
+			this.error = { description: 'Verifique se há um campeonato criado neste mês.' };
 			return false;
 		}
 
-		this.match.championship = this.championshipService.getCurrentChampionship();
+		this.match.championship = this.championshipService.getSelectedChampionship();
 
 		this.matchService.getFinalFromChampionship(this.match.championship._id).toPromise()
 			.then(response => {

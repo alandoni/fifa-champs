@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { LoginService } from './../login.service';
 import { ChampionshipService } from './../championship.service';
 import { Championship } from './../models/championship';
+import { MatchService } from './../match.service';
 import { Match } from './../models/match';
 import { MaterializeAction } from 'angular2-materialize';
 import { NavigationBarItem } from './../models/navigation-bar-item.model';
@@ -26,7 +27,7 @@ export class NavigationBarComponent implements OnInit {
 	isLoggedIn = false;
 	items : Array<NavigationBarItem> = [];
 
-	constructor(private loginService : LoginService, private championshipService : ChampionshipService) {
+	constructor(private loginService : LoginService, private championshipService : ChampionshipService, private matchService : MatchService) {
 		this.loginService.addListener(this);
 		this.onLoginChange();
 	}
@@ -67,8 +68,29 @@ export class NavigationBarComponent implements OnInit {
 		});
 	}
 
-	createMatch() {
+	openMatchModal() {
 		this.matchModalActions.emit({action:"modal", params:['open']});
+	}
+
+	createMatch() {
+		var currentChamp = this.championshipService.getSelectedChampionship();
+		if (currentChamp) {
+			this.matchService.getFinalFromChampionship(currentChamp._id).toPromise()
+				.then(response => {
+					if (response.length > 0) {
+						window.alert("Não é possível cadastrar um jogo pois este mês já tem uma final cadastrada.");
+						return;
+					}	else {
+						this.openMatchModal();
+					}
+				})
+		} else {
+			if (!window.confirm("Este mês ainda não tem um campeonato criado. Deseja criar?")) {
+				return;
+			} else if (this.createSeason()) {
+					this.openMatchModal();
+			}
+		}
 	}
 
 	teamPick() {
@@ -108,26 +130,23 @@ export class NavigationBarComponent implements OnInit {
 	}
 
 	createSeason() {
-		if (!window.confirm("ATENÇÃO!! Tem certeza que quer iniciar um novo campeonato?" +
-			" O campeonato atual não poderá mais ser alterado!")) {
-			return;
-		}
-
 		if (this.championshipService.getCurrentChampionship()) {
 			this.createSeasonBasedOnCurrentSeason(this.championshipService.getCurrentChampionship());
-			return;
+			return true;
 		}
 
 		this.championshipService.getCurrent().subscribe((current: Championship[]) => {
 			if (current.length == 0) {
 				var date = new Date();
 				this.insertChampionship(date.getMonth() + 1, date.getFullYear());
-				return;
+				return true;
 			}
 			var currentSeason = current[0];
 			this.createSeasonBasedOnCurrentSeason(currentSeason);
+			return true;
 		}, (error: any) => {
 			console.error(error);
+			return false;
 		});
 	}
 

@@ -7,7 +7,8 @@ import { Championship } from './models/championship';
 export class ChampionshipService {
 
 	private url = '/championships';
-	private currentChampionhip: Championship;
+	private currentChampionship: Championship;
+	private selectedChampionship: Championship;
 
 	constructor(private api: ApiRequestService) { }
 
@@ -16,6 +17,7 @@ export class ChampionshipService {
 	}
 
 	update(id, championship: Championship) : Observable<Championship> {
+		delete championship._id;
 		return this.api.post(this.url + '/' + id, championship);
 	}
 
@@ -39,11 +41,19 @@ export class ChampionshipService {
 		return this.api.get(this.url + '?month=' + month + '&year=' + year);
 	}
 
+	setSelectedChampionship(championship: Championship) {
+		this.selectedChampionship = championship;
+	}
+
+	getSelectedChampionship() {
+		return this.selectedChampionship;
+	}
+
 	setCurrentChampionship(championship: Championship) {
-		this.currentChampionhip = championship;
+		this.currentChampionship = championship;
 	}
 
 	getCurrentChampionship() {
-		return this.currentChampionhip;
+		return this.currentChampionship;
 	}
 }
