@@ -11,16 +11,16 @@
 				<span>{{ champion.name }}</span>
 			</div>
 			<div class="col m1">
-				<img class="trophyImg" src="assets/platinum_trophy.png"/> <span>{{ champion.times }}</span>
+				<img class="trophyImg" src="assets/platinum_trophy.png"/> <span>{{ champion.times || 0 }}</span>
 			</div>
 			<div class="col m1">
-				<img class="trophyImg" src="assets/gold_trophy.png"/> <span>{{ champion.runnerup }}</span>
+				<img class="trophyImg" src="assets/gold_trophy.png"/> <span>{{ champion.runnerup || 0 }}</span>
 			</div>
 			<div class="col m1">
-				<img class="trophyImg" src="assets/silver_trophy.png"/> <span>{{ champion.firstPlace }}</span>
+				<img class="trophyImg" src="assets/silver_trophy.png"/> <span>{{ champion.firstPlace || 0 }}</span>
 			</div>
 			<div class="col m1">
-				<img class="trophyImg" src="assets/bronze_trophy.png"/> <span>{{ champion.secondPlace }}</span>
+				<img class="trophyImg" src="assets/bronze_trophy.png"/> <span>{{ champion.secondPlace || 0 }}</span>
 			</div>
 		</div>
 		<div class="header">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchService } from './../match.service';
 import { Match } from './../models/match';
+import { ChampionshipService } from './../championship.service';
 
 @Component({
 	selector: 'app-hall-of-fame',
@@ -11,15 +12,17 @@ export class HallOfFameComponent implements OnInit {
 
 	finalMatches : Array<Match>;
 	champions = [];
+	firsts = {};
+	seconds = {};
 	error;
 
-	constructor(private matchService : MatchService) { }
+	constructor(private matchService : MatchService, private championshipService : ChampionshipService) { }
 
 	ngOnInit() {
 		this.matchService.getFinals().subscribe(
 			(finalMatches) => {
 				this.finalMatches = finalMatches;
-				this.processFinals();
+				this.processPlayers();
 			},
 			(error : any) => {
 				console.log(error);
@@ -98,7 +101,9 @@ export class HallOfFameComponent implements OnInit {
 			this.champions.push({
 				name: key,
 				times: champions[key],
-				runnerup: runnerups[key]
+				runnerup: runnerups[key],
+				firstPlace: this.firsts[key],
+				secondPlace: this.seconds[key]
 			})
 		}
 
@@ -111,5 +116,22 @@ export class HallOfFameComponent implements OnInit {
 			}
 			return 0;
 		});
+	}
+
+	processPlayers() {
+		this.championshipService.getAll().subscribe(
+			(championships) => {
+				for(var index in championships) {
+					if(!this.firsts[championships[index].players[0]]++) {
+						this.firsts[championships[index].players[0]] = 1;
+					}
+
+					if(!this.seconds[championships[index].players[1]]++) {
+						this.seconds[championships[index].players[1]] = 1;
+					}
+				}
+				this.processFinals();
+			}
+		)
 	}
 }

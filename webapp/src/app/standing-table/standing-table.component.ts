@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/cor
 import { Match } from './../models/match';
 import { Statistics } from './../models/statistics';
 import { Player } from './../models/player';
+import { ChampionshipService } from './../championship.service';
 
 @Component({
 	selector: 'app-standing-table',
@@ -14,37 +15,62 @@ export class StandingTableComponent implements OnChanges {
 	@Input() noFilterSelected: Boolean;
 
 	statisticsList : Array<Statistics>;
+	matchesList : Array<String>;
 	days = 0;
 	numberOfMatches = 0;
 	limit = 0;
 	players: Array<Player>;
 
-	constructor() { }
+	constructor(private championshipService : ChampionshipService) { }
 
 	ngOnChanges(changes: SimpleChanges) {
 		this.setLimit();
-		this.getPlayersFromMatches();
+		this.players = this.getPlayersFromMatches();
 
 		this.statisticsList = [];
+		this.matchesList = [];
 
 		this.createStatistics();
+
+		// we should not update the stats it the statisticsList
+		// contains stats for all championships
+		if(!changes["noFilterSelected"]) {
+			this.updateStats();
+		}
 	}
 
-	getPlayersFromMatches() {
-		this.players = [];
+	getPlayersFromMatches() : Array<Player> {
+		var players = [];
 		for (var match in this.matches) {
-			if (this.players.indexOf(this.matches[match].player1) < 0) {
-				this.players.push(this.matches[match].player1);
+			if (players.indexOf(this.matches[match].player1) < 0) {
+				players.push(this.matches[match].player1);
 			}
-			if (this.players.indexOf(this.matches[match].player2) < 0) {
-				this.players.push(this.matches[match].player2);
+			if (players.indexOf(this.matches[match].player2) < 0) {
+				players.push(this.matches[match].player2);
 			}
-			if (this.players.indexOf(this.matches[match].player3) < 0) {
-				this.players.push(this.matches[match].player3);
+			if (players.indexOf(this.matches[match].player3) < 0) {
+				players.push(this.matches[match].player3);
 			}
-			if (this.players.indexOf(this.matches[match].player4) < 0) {
-				this.players.push(this.matches[match].player4);
+			if (players.indexOf(this.matches[match].player4) < 0) {
+				players.push(this.matches[match].player4);
 			}
+		}
+		return players;
+	}
+
+	updateStats() {
+		if(this.statisticsList.length > 0) {
+			let champs = this.championshipService.getSelectedChampionship();
+			// we should not add stats for an unfinished championship
+			if(!champs.isCurrent){
+				champs.matches = this.matchesList;
+				champs.players = this.statisticsList.map(item => item.player.nickname);
+			} else {
+				// if the championship is unfinished, the stats must remain empty
+				champs.matches = [];
+				champs.players = [];
+			}
+			this.championshipService.update(champs._id, champs).subscribe((res) => {}, (err) => {});
 		}
 	}
 
@@ -79,13 +105,13 @@ export class StandingTableComponent implements OnChanges {
 
 		for (let match in matchWihtoutFinal) {
 			var m = matchWihtoutFinal[match];
+			this.matchesList.push(m["_id"]);
 			this.setStatisticOfPlayer(statistics, m.player1, m.team1score, m.team2score);
 			this.setStatisticOfPlayer(statistics, m.player2, m.team1score, m.team2score);
 			this.setStatisticOfPlayer(statistics, m.player3, m.team2score, m.team1score);
 			this.setStatisticOfPlayer(statistics, m.player4, m.team2score, m.team1score);
 		}
 
-		this.statisticsList = [];
 		for (var key in statistics) {
 			this.statisticsList.push(statistics[key]);
 		}
