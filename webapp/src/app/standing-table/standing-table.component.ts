@@ -3,6 +3,7 @@ import { Match } from './../models/match';
 import { Statistics } from './../models/statistics';
 import { Player } from './../models/player';
 import { ChampionshipService } from './../championship.service';
+import { LoginService } from './../login.service';
 
 @Component({
 	selector: 'app-standing-table',
@@ -21,7 +22,7 @@ export class StandingTableComponent implements OnChanges {
 	limit = 0;
 	players: Array<Player>;
 
-	constructor(private championshipService : ChampionshipService) { }
+	constructor(private championshipService : ChampionshipService, private loginService : LoginService) { }
 
 	ngOnChanges(changes: SimpleChanges) {
 		this.setLimit();
@@ -59,18 +60,21 @@ export class StandingTableComponent implements OnChanges {
 	}
 
 	updateStats() {
-		if(this.statisticsList.length > 0) {
-			let champs = this.championshipService.getSelectedChampionship();
-			// we should not add stats for an unfinished championship
-			if(!champs.isCurrent){
-				champs.matches = this.matchesList;
-				champs.players = this.statisticsList.map(item => item.player.nickname);
-			} else {
-				// if the championship is unfinished, the stats must remain empty
-				champs.matches = [];
-				champs.players = [];
+		// update the stats only if the user is an admin
+		if(this.loginService.isLoggedIn()) {
+			if(this.statisticsList.length > 0) {
+				let champs = this.championshipService.getSelectedChampionship();
+				// we should not add stats for an unfinished championship
+				if(!champs.isCurrent){
+					champs.matches = this.matchesList;
+					champs.players = this.statisticsList.map(item => item.player.nickname);
+				} else {
+					// if the championship is unfinished, the stats must remain empty
+					champs.matches = [];
+					champs.players = [];
+				}
+				this.championshipService.update(champs._id, champs).subscribe((res) => {}, (err) => {});
 			}
-			this.championshipService.update(champs._id, champs).subscribe((res) => {}, (err) => {});
 		}
 	}
 
