@@ -41,8 +41,8 @@ export class StandingTableComponent implements OnChanges {
 	}
 
 	getPlayersFromMatches() : Array<Player> {
-		var players = [];
-		for (var match in this.matches) {
+		let players = [];
+		for (let match in this.matches) {
 			if (players.indexOf(this.matches[match].player1) < 0) {
 				players.push(this.matches[match].player1);
 			}
@@ -83,7 +83,7 @@ export class StandingTableComponent implements OnChanges {
 			return;
 		}
 
-		var statistics = [];
+		let statistics = [];
 
 		if (!this.players) {
 			return;
@@ -108,7 +108,7 @@ export class StandingTableComponent implements OnChanges {
 			matchWihtoutFinal = new Array<Match>();
 
 		for (let match in matchWihtoutFinal) {
-			var m = matchWihtoutFinal[match];
+			let m = matchWihtoutFinal[match];
 			this.matchesList.push(m["_id"]);
 			this.setStatisticOfPlayer(statistics, m.player1, m.team1score, m.team2score);
 			this.setStatisticOfPlayer(statistics, m.player2, m.team1score, m.team2score);
@@ -116,7 +116,7 @@ export class StandingTableComponent implements OnChanges {
 			this.setStatisticOfPlayer(statistics, m.player4, m.team2score, m.team1score);
 		}
 
-		for (var key in statistics) {
+		for (let key in statistics) {
 			this.statisticsList.push(statistics[key]);
 		}
 		this.statisticsList.sort((statistic1, statistic2) => {
