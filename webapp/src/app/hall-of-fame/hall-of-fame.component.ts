@@ -137,7 +137,7 @@ export class HallOfFameComponent implements OnInit {
                         this.firsts[firstPlayer] = 1;
                     }
                     if (!this.seconds[secondPlayer]++) {
-                        this.seconds[secondPlayer];
+                        this.seconds[secondPlayer] = 1;
                     }
 
 				}
