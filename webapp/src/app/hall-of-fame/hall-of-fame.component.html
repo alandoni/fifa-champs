@@ -6,32 +6,32 @@
 		<div class="header">
 			Sala de Troféus
 		</div>
+		<div class="header">
+			Legenda
+		</div>
+		<p>
+			<img class="trophyImg" src="https://i.imgur.com/AGJBLYR.png"/> <span>Campeão</span> /
+			<img class="trophyImg" src="https://i.imgur.com/Xw0CQVM.png"/> <span>Vice-Campeão</span> /
+			<img class="trophyImg" src="https://i.imgur.com/5uIsl50.png"/> <span>Líder</span> /
+			<img class="trophyImg" src="https://i.imgur.com/pbaGW7G.png"/> <span>Vice-Líder</span>
+		</p>
 		<div class="row" *ngFor="let champion of champions">
 			<div class="col m2">
 				<span>{{ champion.name }}</span>
 			</div>
 			<div class="col m1">
-				<img class="trophyImg" src="assets/platinum_trophy.png"/> <span>{{ champion.times || 0 }}</span>
+				<img class="trophyImg" src="https://i.imgur.com/AGJBLYR.png"/> <span>{{ champion.times || 0 }}</span>
 			</div>
 			<div class="col m1">
-				<img class="trophyImg" src="assets/gold_trophy.png"/> <span>{{ champion.runnerup || 0 }}</span>
+				<img class="trophyImg" src="https://i.imgur.com/Xw0CQVM.png"/> <span>{{ champion.runnerup || 0 }}</span>
 			</div>
 			<div class="col m1">
-				<img class="trophyImg" src="assets/silver_trophy.png"/> <span>{{ champion.firstPlace || 0 }}</span>
+				<img class="trophyImg" src="https://i.imgur.com/5uIsl50.png"/> <span>{{ champion.firstPlace || 0 }}</span>
 			</div>
 			<div class="col m1">
-				<img class="trophyImg" src="assets/bronze_trophy.png"/> <span>{{ champion.secondPlace || 0 }}</span>
+				<img class="trophyImg" src="https://i.imgur.com/pbaGW7G.png"/> <span>{{ champion.secondPlace || 0 }}</span>
 			</div>
 		</div>
-		<div class="header">
-			Legenda
-		</div>
-		<p>
-			<img class="trophyImg" src="assets/platinum_trophy.png"/> <span>Campeão</span> /
-			<img class="trophyImg" src="assets/gold_trophy.png"/> <span>Vice-Campeão</span> /
-			<img class="trophyImg" src="assets/silver_trophy.png"/> <span>Líder</span> /
-			<img class="trophyImg" src="assets/bronze_trophy.png"/> <span>Vice-Líder</span>
-		</p>
 	</div>
 
 	<div *ngIf="!error" class="matches col m8 s12">
