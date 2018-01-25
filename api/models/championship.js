@@ -12,4 +12,5 @@ var championshipSchema = new Schema({
 });
 
 var Championship = Mongoose.model('Championship', championshipSchema);
+
 module.exports = Championship;

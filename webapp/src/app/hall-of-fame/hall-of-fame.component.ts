@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchService } from './../match.service';
 import { Match } from './../models/match';
+import { ChampionshipService } from './../championship.service';
 
 @Component({
 	selector: 'app-hall-of-fame',
@@ -9,16 +10,19 @@ import { Match } from './../models/match';
 })
 export class HallOfFameComponent implements OnInit {
 
-	matches : Array<Match>;
+	finalMatches : Array<Match>;
 	champions = [];
+	firsts = {};
+	seconds = {};
 	error;
 
-	constructor(private matchService : MatchService) { }
+	constructor(private matchService : MatchService, private championshipService : ChampionshipService) { }
 
 	ngOnInit() {
 		this.matchService.getFinals().subscribe(
-			(res) => {
-				this.processMatches(res);
+			(finalMatches) => {
+				this.finalMatches = finalMatches;
+				this.processPlayers();
 			},
 			(error : any) => {
 				console.log(error);
@@ -26,81 +30,88 @@ export class HallOfFameComponent implements OnInit {
 			});
 	}
 
-	processMatches(matches : Array<Match>) {
+    initializeCounters(champions, runnerups, playerName) {
+        if (!champions[playerName]) {
+            champions[playerName] = 0;
+        }
+        if (!runnerups[playerName]) {
+            runnerups[playerName] = 0;
+        }
+    }
 
-		this.matches = matches;
+    processFinal(scores, players, champions, runnerups) {
+        if (scores[0] > scores[1]) {
+            champions[players[0]]++;
+            champions[players[1]]++;
+            runnerups[players[2]]++;
+            runnerups[players[3]]++;
+        } else {
+            runnerups[players[0]]++;
+            runnerups[players[1]]++;
+            champions[players[2]]++;
+            champions[players[3]]++;
+        }
+    }
 
-		var champions = {};
-		var runnerups = {};
+    extractPlayersFrom(match) : Array<String> {
+        let playersFromMatch = [];
+        playersFromMatch.push(match.player1.nickname);
+        playersFromMatch.push(match.player2.nickname);
+        playersFromMatch.push(match.player3.nickname);
+        playersFromMatch.push(match.player4.nickname);
+        return playersFromMatch;
+    }
 
-		if (!this.matches || this.matches.length == 0) {
-			this.error = {description: 'Nenhum campeonato foi terminado ainda.'};
+    extractDecisiveScoreFrom(match) : Array<Number> {
+        let scores = [];
+        if (match.team1penalties) {
+            scores.push(match.team1penalties);
+            scores.push(match.team2penalties);
+        } else {
+            scores.push(match.team1score);
+            scores.push(match.team2score);
+        }
+        return scores;
+    }
+
+    getChampionsAndRunnerups(champions, runnerups) {
+        for (let index in this.finalMatches) {
+            let finalMatch = this.finalMatches[index];
+
+            let playersFromFinal = this.extractPlayersFrom(finalMatch);
+
+            for (index in playersFromFinal) {
+                this.initializeCounters(champions, runnerups, playersFromFinal[index]);
+            }
+
+            let scores = this.extractDecisiveScoreFrom(finalMatch);
+
+            this.processFinal(scores, playersFromFinal, champions, runnerups);
+        }
+    }
+
+	processFinals() {
+		let champions = {};
+		let runnerups = {};
+
+		if (!this.finalMatches || this.finalMatches.length == 0) {
+			this.error = {
+                "description" : 'Nenhum campeonato foi terminado ainda.'
+            };
 			return;
 		}
 
-		for (var index in matches) {
-			var match = matches[index];
-
-			if (!champions[match.player1.nickname]) {
-				champions[match.player1.nickname] = 0;
-			}
-			if (!champions[match.player2.nickname]) {
-				champions[match.player2.nickname] = 0;
-			}
-			if (!champions[match.player3.nickname]) {
-				champions[match.player3.nickname] = 0;
-			}
-			if (!champions[match.player4.nickname]) {
-				champions[match.player4.nickname] = 0;
-			}
-
-			if (!runnerups[match.player1.nickname]) {
-				runnerups[match.player1.nickname] = 0;
-			}
-			if (!runnerups[match.player2.nickname]) {
-				runnerups[match.player2.nickname] = 0;
-			}
-			if (!runnerups[match.player3.nickname]) {
-				runnerups[match.player3.nickname] = 0;
-			}
-			if (!runnerups[match.player4.nickname]) {
-				runnerups[match.player4.nickname] = 0;
-			}
-
-			if (match.team1score > match.team2score) {
-				champions[match.player1.nickname] += 1;
-				champions[match.player2.nickname] += 1;
-				runnerups[match.player3.nickname] += 1;
-				runnerups[match.player4.nickname] += 1;
-			}
-			else if (match.team2score > match.team1score) {
-				runnerups[match.player1.nickname] += 1;
-				runnerups[match.player2.nickname] += 1;
-				champions[match.player3.nickname] += 1;
-				champions[match.player4.nickname] += 1;
-			}
-			else{
-				if(match.team1penalties > match.team2penalties){
-					champions[match.player1.nickname] += 1;
-					champions[match.player2.nickname] += 1;
-					runnerups[match.player3.nickname] += 1;
-					runnerups[match.player4.nickname] += 1;
-				}
-				else if(match.team2penalties > match.team1penalties){
-					runnerups[match.player1.nickname] += 1;
-					runnerups[match.player2.nickname] += 1;
-					champions[match.player3.nickname] += 1;
-					champions[match.player4.nickname] += 1;
-				}
-			}
-		}
+        this.getChampionsAndRunnerups(champions, runnerups);
 
 		this.champions = [];
-		for (var key in champions) {
+
+		for (let key in champions) {
 			this.champions.push({
-				name: key,
-				times: champions[key],
-				runnerup: runnerups[key]
+				"name" : key,
+				"times" : champions[key],
+				"runnerup" : runnerups[key],
+				"firstPlace" : this.firsts[key],
+				"secondPlace" : this.seconds[key]
 			})
 		}
 
@@ -113,5 +124,26 @@ export class HallOfFameComponent implements OnInit {
 			}
 			return 0;
 		});
+	}
+
+	processPlayers() {
+		this.championshipService.getAll().subscribe(
+			(championships) => {
+				for (let index in championships) {
+                    if ((championships[index].players.length > 1) && (!championships[index].isCurrent)) {
+                        let firstPlayer = championships[index].players[0];
+                        let secondPlayer = championships[index].players[1];
+    					if (!this.firsts[firstPlayer.nickname]++) {
+                            this.firsts[firstPlayer.nickname] = 1;
+                        }
+                        if (!this.seconds[secondPlayer.nickname]++) {
+                            this.seconds[secondPlayer.nickname] = 1;
+                        }
+                    }
+
+				}
+				this.processFinals();
+			}
+		)
 	}
 }

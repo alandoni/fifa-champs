@@ -70,7 +70,7 @@ exports.set = function(app, mongo) {
 
 	adminController.getAll().then((admins) => {
 		if (admins.length == 0) {
-			return adminController.insert({nickname: 'Admin', password: '603bd9274280f3bbea9d7c0180a83f6e'});
+			return adminController.insert({nickname: 'admin', password: '1083fed03a78190c39c39a898f64f46e'});
 		}
 	}).then((admin) => {
 		if (admin) {
@@ -164,7 +164,7 @@ exports.set = function(app, mongo) {
 	app.get(URL_CHAMPIONSHIPS, (request, response) => {
 
 		var promise = null;
-		if (request.query) {
+		if ((request.query) && (Object.keys(request.query).length)) {
 			promise = championshipController.getByCriteria(request.query);
 		} else {
 			promise = championshipController.getAll()

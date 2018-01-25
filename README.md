@@ -55,3 +55,7 @@ npm install
 sudo npm install -g @angular/cli
 ng serve
 ```
+
+# Webapp admin password
+
+An admin user is created, the username is `admin` and the password is `admin`
