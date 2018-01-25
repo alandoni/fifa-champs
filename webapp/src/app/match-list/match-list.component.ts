@@ -3,74 +3,77 @@ import { MaterializeAction } from 'angular2-materialize';
 import { Match } from './../models/match';
 
 @Component({
-	selector: 'app-match-list',
-	templateUrl: './match-list.component.html',
-	styleUrls: ['./match-list.component.css']
+    selector : 'app-match-list',
+    templateUrl : './match-list.component.html',
+    styleUrls : ['./match-list.component.css']
 })
 export class MatchListComponent implements OnChanges {
 
-	@Input() matches: Array<Match>;
-	@Input() minItemsPerColumn = 6;
-	@Input() cols = 1;
+    @Input() matches : Array<Match>;
+    @Input() minItemsPerColumn = 6;
+    @Input() cols = 1;
 
-	matchModalActions = new EventEmitter<string|MaterializeAction>();
+    matchModalActions = new EventEmitter<string|MaterializeAction>();
 
-	error: any;
-	matchesList: Array<Array<Match>>;
+    error : any;
+    matchesList : Array<Array<Match>>;
+    matchToEdit : Match;
 
-	matchToEdit: Match;
+    constructor() { }
 
-	constructor() { }
+    ngOnChanges(changes : SimpleChanges) {
+        this.matchesList = [];
 
-	ngOnChanges(changes: SimpleChanges) {
-		this.matchesList = [];
+        if (!this.matches || this.matches.length === 0) {
+            this.error = {description: 'Nenhum jogo encontrado'};
+            return;
+        }
 
-		if (!this.matches || this.matches.length == 0) {
-			this.error = {description: "Nenhum jogo encontrado"};
-			return;
-		}
+        this.error = null;
 
-		this.error = null;
+        this.cols = Math.min(Math.max(1, Math.round(Math.abs(this.cols))), 4);
 
-		this.cols = Math.min(Math.max(1, Math.round(Math.abs(this.cols))), 4);
+        const mod = this.matches.length % this.cols;
 
-		var mod = this.matches.length % this.cols;
+        let numberOfMatchesPerColumn = Math.floor(this.matches.length / (this.cols - 1));
 
-		var numberOfMatchesPerColumn = Math.floor(this.matches.length / (this.cols - 1));
+        if (mod === 0) {
+            numberOfMatchesPerColumn = Math.floor(this.matches.length / this.cols);
+        }
+        if (numberOfMatchesPerColumn === 0) {
+            numberOfMatchesPerColumn++;
+        }
 
-		if (mod == 0) {
-			numberOfMatchesPerColumn = Math.floor(this.matches.length / this.cols);
-		}
-		if (numberOfMatchesPerColumn == 0) {
-			numberOfMatchesPerColumn++;
-		}
+        let matchIndex = 0;
+        let lastMatchDate = '';
+        for (let i = 0; i < this.cols; i++) {
+            const matchCol = [];
+            let aux = false;
+            for (let j = 0; aux; j++) {
+                matchCol.push(this.matches[matchIndex]);
 
-		var matchIndex = 0;
-		var lastMatchDate = "";
-		for (var i = 0; i < this.cols; i++) {
-			var matchCol = [];
-			for (var j = 0; (j < this.minItemsPerColumn || j < numberOfMatchesPerColumn) && matchIndex < this.matches.length; j++) {
-				matchCol.push(this.matches[matchIndex]);
+                if (this.matches[matchIndex].date === lastMatchDate) {
+                    this.matches[matchIndex].date = undefined;
+                } else {
+                    lastMatchDate = this.matches[matchIndex].date;
+                }
+                matchIndex++;
+            }
+            this.matchesList.push(matchCol);
+            lastMatchDate = this.matches[matchIndex - 1].date;
+            if ((j < this.minItemsPerColumn || j < numberOfMatchesPerColumn) && matchIndex < this.matches.length) {
+                aux = true;
+            }
+        }
+    }
 
-				if (this.matches[matchIndex].date === lastMatchDate) {
-					this.matches[matchIndex].date = undefined;
-				} else {
-					lastMatchDate = this.matches[matchIndex].date;
-				}
-				matchIndex++;
-			}
-			this.matchesList.push(matchCol);
-			lastMatchDate = this.matches[matchIndex - 1].date;
-		}
-	}
+    onEditMatch(match) {
+        this.matchToEdit = match;
+        this.matchModalActions.emit({action: 'modal', params: ['open']});
+    }
 
-	onEditMatch(match) {
-		this.matchToEdit = match;
-		this.matchModalActions.emit({action: 'modal', params: ['open']});
-	}
-
-	closeMatchModal(result) {
-		this.matchToEdit = result;
-		this.matchModalActions.emit({action: 'modal', params: ['close']});
-	}
+    closeMatchModal(result) {
+        this.matchToEdit = result;
+        this.matchModalActions.emit({action: 'modal', params: ['close']});
+    }
 }

@@ -2,16 +2,16 @@
 	<div *ngIf="noChampionships" class="error text-center">Nenhum campeonato criado, inicie criando um.</div>
 
 	<div *ngIf="!noChampionships" class="nav-content">
-		<div id="sub-nav">
+		<div id="sub-nav" class="sub-nav">
 			<ul materialize="tabs" class="tabs tabs-transparent">
-				<li class="tab"><a (click)="changeTab(0)" [ngClass]="{active : tab == 0}">Classificação</a></li>
-				<li  class="tab"><a (click)="changeTab(1)"  [ngClass]="{active : tab == 1}">Jogos</a></li>
+				<li class="tab"><a (click)="changeTab(0)" [ngClass]="{active-tab : tab == 0}">Classificação</a></li>
+				<li  class="tab"><a (click)="changeTab(1)"  [ngClass]="{active-tab : tab == 1}">Jogos</a></li>
 			</ul>
 		</div>
 
-		<div id="season">
+		<div id="season" class="season">
 			<div class="row season-title">
-				<p class="col s12">Temporada</p>
+				<p class="col s12 season-p">Temporada</p>
 			</div>
 			<div class="row">
 				<div class="col s2 m1 large-none">
@@ -27,9 +27,9 @@
 				<div class="row hide-on-med-and-up"></div>
 
 				<div class="col s12 m4 valign-wrapper no-filter-container">
-					<span id="no-filter">
+					<span id="no-filter" class="no-filter">
 						<input type="checkbox" (click)="noFilterSelectionChanged($event)" id="noFilter"/>
-						<label for="noFilter" id="filter-label">Todos os jogos</label>
+						<label for="noFilter" id="filter-label" class="filter-label">Todos os jogos</label>
 					</span>
 				</div>
 			</div>

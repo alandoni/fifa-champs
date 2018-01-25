@@ -3,7 +3,7 @@
     "attr-lowercase": false,
     "attr-unsafe-chars": true,
     "attr-value-double-quotes": true,
-    "attr-no-duplication": true,    
+    "attr-no-duplication": true,
     "doctype-first": false,
     "tag-pair": true,
     "spec-char-escape": true,
