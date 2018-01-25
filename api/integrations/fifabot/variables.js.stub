@@ -1,0 +1,22 @@
+// The application depends on a file named variables.js
+// This is a stub for it.
+
+module.exports = {
+  JAMBABOT_DEBUG: false,
+  JAMBABOT_DEBUG_URL: 'URL for development',
+  JAMBABOT_PROD_URL: 'URL for production',
+
+  JAMBABOT_USER_TOKEN: 'URL for userbot',
+
+  JAMBABOT_DEBUG_TOKEN: 'Token for development',
+  JAMBABOT_PROD_TOKEN: 'Token for production',
+
+  GOOGLE_API_KEY: 'Google API Key',
+  GOOGLE_CSE_ID: 'Custom Search Engine ID',
+
+  MONGO_CONNECTION_STR: 'mongodb://localhost/jambadb',
+
+  IFOOD_ACCOUNT: '',
+  IFOOD_PASSWORD: '',
+  IFOOD_ACCOUNTS_QTY: ''
+};
