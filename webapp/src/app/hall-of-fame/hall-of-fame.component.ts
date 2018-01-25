@@ -91,8 +91,8 @@ export class HallOfFameComponent implements OnInit {
     }
 
 	processFinals() {
-		var champions = {};
-		var runnerups = {};
+		let champions = {};
+		let runnerups = {};
 
 		if (!this.finalMatches || this.finalMatches.length == 0) {
 			this.error = {
