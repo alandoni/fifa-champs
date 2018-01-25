@@ -68,7 +68,7 @@
         "dot-notation": "off",
         "eol-last": [
             "error",
-            "never"
+            "always"
         ],
         "eqeqeq": "off",
         "func-call-spacing": "error",
