@@ -16,7 +16,7 @@ export class StandingTableComponent implements OnChanges {
 	@Input() noFilterSelected: Boolean;
 
 	statisticsList : Array<Statistics>;
-	matchesList : Array<String>;
+	matchesList : Array<Match>;
 	days = 0;
 	numberOfMatches = 0;
 	limit = 0;
@@ -67,7 +67,7 @@ export class StandingTableComponent implements OnChanges {
 				// we should not add stats for an unfinished championship
 				if(!champs.isCurrent){
 					champs.matches = this.matchesList;
-					champs.players = this.statisticsList.map(item => item.player.nickname);
+					champs.players = this.statisticsList.map(item => item.player);
 				} else {
 					// if the championship is unfinished, the stats must remain empty
 					champs.matches = [];
@@ -109,7 +109,7 @@ export class StandingTableComponent implements OnChanges {
 
 		for (let match in matchWihtoutFinal) {
 			let m = matchWihtoutFinal[match];
-			this.matchesList.push(m["_id"]);
+			this.matchesList.push(m);
 			this.setStatisticOfPlayer(statistics, m.player1, m.team1score, m.team2score);
 			this.setStatisticOfPlayer(statistics, m.player2, m.team1score, m.team2score);
 			this.setStatisticOfPlayer(statistics, m.player3, m.team2score, m.team1score);

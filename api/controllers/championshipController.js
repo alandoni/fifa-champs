@@ -13,7 +13,7 @@ class ChampionshipController {
 	}
 	
 	getAll() {
-		return this.mongo.selectAll(document).then((championships) => {
+		return this.mongo.selectAll(document).populate("players").exec().then((championships) => {
 			return this._prepareToSend(championships);
 		});
 	}

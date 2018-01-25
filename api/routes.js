@@ -164,7 +164,7 @@ exports.set = function(app, mongo) {
 	app.get(URL_CHAMPIONSHIPS, (request, response) => {
 
 		var promise = null;
-		if (request.query) {
+		if ((request.query) && (Object.keys(request.query).length)) {
 			promise = championshipController.getByCriteria(request.query);
 		} else {
 			promise = championshipController.getAll()

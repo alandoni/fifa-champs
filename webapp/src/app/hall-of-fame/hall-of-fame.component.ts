@@ -130,14 +130,15 @@ export class HallOfFameComponent implements OnInit {
 		this.championshipService.getAll().subscribe(
 			(championships) => {
 				for (let index in championships) {
-                    let firstPlayer = championships[index].players[0];
-                    let secondPlayer = championships[index].players[1];
-
-					if (!this.firsts[firstPlayer]++) {
-                        this.firsts[firstPlayer] = 1;
-                    }
-                    if (!this.seconds[secondPlayer]++) {
-                        this.seconds[secondPlayer] = 1;
+                    if ((championships[index].players.length > 1) && (!championships[index].isCurrent)) {
+                        let firstPlayer = championships[index].players[0];
+                        let secondPlayer = championships[index].players[1];
+    					if (!this.firsts[firstPlayer.nickname]++) {
+                            this.firsts[firstPlayer.nickname] = 1;
+                        }
+                        if (!this.seconds[secondPlayer.nickname]++) {
+                            this.seconds[secondPlayer.nickname] = 1;
+                        }
                     }
 
 				}
