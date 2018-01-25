@@ -30,80 +30,88 @@ export class HallOfFameComponent implements OnInit {
 			});
 	}
 
+    initializeCounters(champions, runnerups, playerName) {
+        if (!champions[playerName]) {
+            champions[playerName] = 0;
+        }
+        if (!runnerups[playerName]) {
+            runnerups[playerName] = 0;
+        }
+    }
+
+    processFinal(scores, players, champions, runnerups) {
+        if (scores[0] > scores[1]) {
+            champions[players[0]]++;
+            champions[players[1]]++;
+            runnerups[players[2]]++;
+            runnerups[players[3]]++;
+        } else {
+            runnerups[players[0]]++;
+            runnerups[players[1]]++;
+            champions[players[2]]++;
+            champions[players[3]]++;
+        }
+    }
+
+    extractPlayersFrom(match) : Array<String> {
+        let playersFromMatch = [];
+        playersFromMatch.push(match.player1.nickname);
+        playersFromMatch.push(match.player2.nickname);
+        playersFromMatch.push(match.player3.nickname);
+        playersFromMatch.push(match.player4.nickname);
+        return playersFromMatch;
+    }
+
+    extractDecisiveScoreFrom(match) : Array<Number> {
+        let scores = [];
+        if (match.team1penalties) {
+            scores.push(match.team1penalties);
+            scores.push(match.team2penalties);
+        } else {
+            scores.push(match.team1score);
+            scores.push(match.team2score);
+        }
+        return scores;
+    }
+
+    getChampionsAndRunnerups(champions, runnerups) {
+        for (let index in this.finalMatches) {
+            let finalMatch = this.finalMatches[index];
+
+            let playersFromFinal = this.extractPlayersFrom(finalMatch);
+
+            for (index in playersFromFinal) {
+                this.initializeCounters(champions, runnerups, playersFromFinal[index]);
+            }
+
+            let scores = this.extractDecisiveScoreFrom(finalMatch);
+
+            this.processFinal(scores, playersFromFinal, champions, runnerups);
+        }
+    }
+
 	processFinals() {
 		var champions = {};
 		var runnerups = {};
 
 		if (!this.finalMatches || this.finalMatches.length == 0) {
-			this.error = {description: 'Nenhum campeonato foi terminado ainda.'};
+			this.error = {
+                "description" : 'Nenhum campeonato foi terminado ainda.'
+            };
 			return;
 		}
 
-		for (var index in this.finalMatches) {
-			var finalMatch = this.finalMatches[index];
-
-			if (!champions[finalMatch.player1.nickname]) {
-				champions[finalMatch.player1.nickname] = 0;
-			}
-			if (!champions[finalMatch.player2.nickname]) {
-				champions[finalMatch.player2.nickname] = 0;
-			}
-			if (!champions[finalMatch.player3.nickname]) {
-				champions[finalMatch.player3.nickname] = 0;
-			}
-			if (!champions[finalMatch.player4.nickname]) {
-				champions[finalMatch.player4.nickname] = 0;
-			}
-
-			if (!runnerups[finalMatch.player1.nickname]) {
-				runnerups[finalMatch.player1.nickname] = 0;
-			}
-			if (!runnerups[finalMatch.player2.nickname]) {
-				runnerups[finalMatch.player2.nickname] = 0;
-			}
-			if (!runnerups[finalMatch.player3.nickname]) {
-				runnerups[finalMatch.player3.nickname] = 0;
-			}
-			if (!runnerups[finalMatch.player4.nickname]) {
-				runnerups[finalMatch.player4.nickname] = 0;
-			}
-
-			if (finalMatch.team1score > finalMatch.team2score) {
-				champions[finalMatch.player1.nickname] += 1;
-				champions[finalMatch.player2.nickname] += 1;
-				runnerups[finalMatch.player3.nickname] += 1;
-				runnerups[finalMatch.player4.nickname] += 1;
-			}
-			else if (finalMatch.team2score > finalMatch.team1score) {
-				runnerups[finalMatch.player1.nickname] += 1;
-				runnerups[finalMatch.player2.nickname] += 1;
-				champions[finalMatch.player3.nickname] += 1;
-				champions[finalMatch.player4.nickname] += 1;
-			}
-			else{
-				if(finalMatch.team1penalties > finalMatch.team2penalties){
-					champions[finalMatch.player1.nickname] += 1;
-					champions[finalMatch.player2.nickname] += 1;
-					runnerups[finalMatch.player3.nickname] += 1;
-					runnerups[finalMatch.player4.nickname] += 1;
-				}
-				else if(finalMatch.team2penalties > finalMatch.team1penalties){
-					runnerups[finalMatch.player1.nickname] += 1;
-					runnerups[finalMatch.player2.nickname] += 1;
-					champions[finalMatch.player3.nickname] += 1;
-					champions[finalMatch.player4.nickname] += 1;
-				}
-			}
-		}
+        this.getChampionsAndRunnerups(champions, runnerups);
 
 		this.champions = [];
-		for (var key in champions) {
+
+		for (let key in champions) {
 			this.champions.push({
-				name: key,
-				times: champions[key],
-				runnerup: runnerups[key],
-				firstPlace: this.firsts[key],
-				secondPlace: this.seconds[key]
+				"name" : key,
+				"times" : champions[key],
+				"runnerup" : runnerups[key],
+				"firstPlace" : this.firsts[key],
+				"secondPlace" : this.seconds[key]
 			})
 		}
 
@@ -121,14 +129,17 @@ export class HallOfFameComponent implements OnInit {
 	processPlayers() {
 		this.championshipService.getAll().subscribe(
 			(championships) => {
-				for(var index in championships) {
-					if(!this.firsts[championships[index].players[0]]++) {
-						this.firsts[championships[index].players[0]] = 1;
-					}
+				for (let index in championships) {
+                    let firstPlayer = championships[index].players[0];
+                    let secondPlayer = championships[index].players[1];
 
-					if(!this.seconds[championships[index].players[1]]++) {
-						this.seconds[championships[index].players[1]] = 1;
-					}
+					if (!this.firsts[firstPlayer]++) {
+                        this.firsts[firstPlayer] = 1;
+                    }
+                    if (!this.seconds[secondPlayer]++) {
+                        this.seconds[secondPlayer];
+                    }
+
 				}
 				this.processFinals();
 			}
