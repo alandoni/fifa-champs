@@ -1,88 +1,88 @@
 <p *ngIf="!hasPlayers()" class="text-center">
-	Nenhum jogador/partida encontrado(a)
+    Nenhum jogador/partida encontrado(a)
 </p>
 
 <div class="row">
-	<div class="col s12 offset-l2 l8">
-		<table *ngIf="hasPlayers()" class="bordered" id="table-standing">
-			<tr class="header">
-				<th>Pos</th>
-				<th id="player-name">Nome</th>
-				<th>J</th>
-				<th>V</th>
-				<th class="hide-on-small-only">E</th>
-				<th class="hide-on-small-only">D</th>
-				<th class="hide-on-med-and-down">GP</th>
-				<th class="hide-on-med-and-down">GC</th>
-				<th class="hide-on-small-only">GP/J</th>
-				<th class="hide-on-small-only">GC/J</th>
-				<th class="hide-on-med-and-down">SG</th>
-				<th>Pontos</th>
-				<th id="percent">%</th>
-			</tr>
-			<tr *ngFor="let statistic of statisticsList; let i = index" [ngClass]="{'winner': getColor(i, statistic) == 1, 'loser': getColor(i, statistic) == 2, 'sgNegative':getSg(statistic) == 1 }">
-				<td id="ranking">{{ (i + 1) }}</td>
-				<td id="player-name">{{ statistic.player.nickname }}</td>
-				<td class="dark-cell">{{ statistic.matches }}</td>
-				<td class="light-cell">{{ statistic.victories }}</td>
-				<td class="dark-cell hide-on-small-only">{{ statistic.ties }}</td>
-				<td class="light-cell hide-on-small-only">{{ statistic.defeats }}</td>
-				<td class="dark-cell hide-on-med-and-down">{{ statistic.goals }}</td>
-				<td class="light-cell hide-on-med-and-down">{{ statistic.concededGoals }}</td>
-				<td class="dark-cell hide-on-small-only">{{ formatNumber(statistic.goalsPerMatch) }}</td>
-				<td class="light-cell hide-on-med-and-down">{{ formatNumber(statistic.concededGoalsPerMatch) }}</td>
-				<td class="dark-cell hide-on-small-only" id="balance">{{ statistic.goalBalance }}</td>
-				<td class="light-cell">{{ statistic.score }}</td>
-				<td class="dark-cell" id="percent">{{ formatNumber(statistic.percent) }}%</td>
-			</tr>
-		</table>
-	</div>
+    <div class="col s12 offset-l2 l8">
+        <table *ngIf="hasPlayers()" class="bordered" id="table-standing">
+            <tr class="header">
+                <th>Pos</th>
+                <th id="header-player-name" class="player-name">Nome</th>
+                <th>J</th>
+                <th>V</th>
+                <th class="hide-on-small-only">E</th>
+                <th class="hide-on-small-only">D</th>
+                <th class="hide-on-med-and-down">GP</th>
+                <th class="hide-on-med-and-down">GC</th>
+                <th class="hide-on-small-only">GP/J</th>
+                <th class="hide-on-small-only">GC/J</th>
+                <th class="hide-on-med-and-down">SG</th>
+                <th>Pontos</th>
+                <th id="header-percent">%</th>
+            </tr>
+            <tr *ngFor="let statistic of statisticsList; let i = index" [ngClass]="{'winner': getColor(i, statistic) == 1, 'loser': getColor(i, statistic) == 2, 'sgNegative':getSg(statistic) == 1 }">
+                <td id="ranking">{{ (i + 1) }}</td>
+                <td id="player-name" class="player-name">{{ statistic.player.nickname }}</td>
+                <td class="dark-cell">{{ statistic.matches }}</td>
+                <td class="light-cell">{{ statistic.victories }}</td>
+                <td class="dark-cell hide-on-small-only">{{ statistic.ties }}</td>
+                <td class="light-cell hide-on-small-only">{{ statistic.defeats }}</td>
+                <td class="dark-cell hide-on-med-and-down">{{ statistic.goals }}</td>
+                <td class="light-cell hide-on-med-and-down">{{ statistic.concededGoals }}</td>
+                <td class="dark-cell hide-on-small-only">{{ formatNumber(statistic.goalsPerMatch) }}</td>
+                <td class="light-cell hide-on-med-and-down">{{ formatNumber(statistic.concededGoalsPerMatch) }}</td>
+                <td class="dark-cell hide-on-small-only" id="balance">{{ statistic.goalBalance }}</td>
+                <td class="light-cell">{{ statistic.score }}</td>
+                <td class="dark-cell" id="percent">{{ formatNumber(statistic.percent) }}%</td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <div class="row">
-	<div class="col l6 offset-l2 m8 s4 offset-s2">
-		<span class="hide-on-small-only">
-			<strong class="margin-tiebreak">Critérios de desempate</strong>
-			<small>
-				<ol class="tiebreak-list">
-					<li>Ter jogado pelo menos o número minimo de jogos.</li>
-					<li>Porcentagem de pontos aproveitados.</li>
-					<li>Numero de vitórias por jogo.</li>
-					<li>Saldo de Gols dividido pelo número de jogos.</li>
-					<li>Gols por jogo.</li>
-				</ol>
-			</small>
-		</span>
-	</div>
-	<div class="col l2 m4 s6">
-		<table class="bordered" id="table-balance">
-			<tr class="header">
-				<th>Total</th>
-				<th>Dias</th>
-				<th>Min. Jogos</th>
-			</tr>
+    <div class="col l6 offset-l2 m8 s4 offset-s2">
+        <span class="hide-on-small-only">
+            <strong class="margin-tiebreak">Critérios de desempate</strong>
+            <small>
+                <ol class="tiebreak-list">
+                    <li>Ter jogado pelo menos o número minimo de jogos.</li>
+                    <li>Porcentagem de pontos aproveitados.</li>
+                    <li>Numero de vitórias por jogo.</li>
+                    <li>Saldo de Gols dividido pelo número de jogos.</li>
+                    <li>Gols por jogo.</li>
+                </ol>
+            </small>
+        </span>
+    </div>
+    <div class="col l2 m4 s6">
+        <table class="bordered" id="table-balance">
+            <tr class="header">
+                <th>Total</th>
+                <th>Dias</th>
+                <th>Min. Jogos</th>
+            </tr>
 
-			<tr>
-				<td>{{numberOfMatches}}</td>
-				<td>{{days}}</td>
-				<td>{{limit}}</td>
-			</tr>
-		</table>
-	</div>
+            <tr>
+                <td>{{numberOfMatches}}</td>
+                <td>{{days}}</td>
+                <td>{{limit}}</td>
+            </tr>
+        </table>
+    </div>
 </div>
 <div class="row hide-on-med-and-up">
-	<div class="col s12">
-		<span>
-			<strong class="margin-tiebreak">Critérios de desempate</strong>
-			<small>
-				<ol class="tiebreak-list">
-					<li>Ter jogado pelo menos o número minimo de jogos.</li>
-					<li>Porcentagem de pontos aproveitados.</li>
-					<li>Numero de vitórias por jogo.</li>
-					<li>Saldo de Gols dividido pelo número de jogos.</li>
-					<li>Gols por jogo.</li>
-				</ol>
-			</small>
-		</span>
-	</div>
+    <div class="col s12">
+        <span>
+            <strong class="margin-tiebreak">Critérios de desempate</strong>
+            <small>
+                <ol class="tiebreak-list">
+                    <li>Ter jogado pelo menos o número minimo de jogos.</li>
+                    <li>Porcentagem de pontos aproveitados.</li>
+                    <li>Numero de vitórias por jogo.</li>
+                    <li>Saldo de Gols dividido pelo número de jogos.</li>
+                    <li>Gols por jogo.</li>
+                </ol>
+            </small>
+        </span>
+    </div>
 </div>

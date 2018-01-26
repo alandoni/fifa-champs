@@ -1,73 +1,73 @@
 <div class="insert-match-container row">
-	<div *ngIf="error != null" class="text-center error"><p>{{error.description}}</p></div>
-	<form *ngIf="match && players && players.length > 0">
-		<div class="input-field col s12">
-			<input type="text" name="gameDate" 
-					placeholder="Dia do jogo" 
-					class="datepicker" 
-					materialize="pickadate"
-					[materializeParams]="[matchDateOptions]"
-					[(ngModel)]="match.date"  />
-		</div>
-		<div class="input-field col s12">
-			<app-dropdown-player [name]="'player1'" 
-					[label]="'Jogador 1 - Time 1'" 
-					[players]="players" 
-					[selected]="match.player1" 
-					(onChange)="handlePlayerChange($event)"></app-dropdown-player>
-		</div>
-		<div class="input-field col s12">
-			<app-dropdown-player [name]="'player2'" 
-					[label]="'Jogador 2 - Time 1'" 
-					[players]="players" 
-					[selected]="match.player2"
-					(onChange)="handlePlayerChange($event)"></app-dropdown-player>
-		</div>
-		
-		<div class="input-field col s4 offset-s1">
-			<input type="number" name="score1" placeholder="Gols time 1" class="text-center" [(ngModel)]="match.team1score"/>
-		</div>
-		<div class="input-field col s2 text-center versus">
-			x
-		</div>
-		<div class="input-field col s4">
-			<input type="number" name="score2" placeholder="Gols time 2" class="text-center" [(ngModel)]="match.team2score"/>
-		</div>
+    <div *ngIf="error != null" class="text-center error"><p>{{ error.description }}</p></div>
+    <form *ngIf="match && players && players.length > 0">
+        <div class="input-field col s12">
+            <input type="text" name="gameDate"
+                placeholder="Dia do jogo"
+                class="datepicker"
+                materialize="pickadate"
+                [materializeParams]="[matchDateOptions]"
+                [(ngModel)]="match.date"  />
+        </div>
+        <div class="input-field col s12">
+            <app-dropdown-player [name]="'player1'"
+                [label]="'Jogador 1 - Time 1'"
+                [players]="players"
+                [selected]="match.player1"
+                (onChange)="handlePlayerChange($event)"></app-dropdown-player>
+        </div>
+        <div class="input-field col s12">
+            <app-dropdown-player [name]="'player2'"
+                [label]="'Jogador 2 - Time 1'"
+                [players]="players"
+                [selected]="match.player2"
+                (onChange)="handlePlayerChange($event)"></app-dropdown-player>
+        </div>
 
-		<div *ngIf="isFinal && match.team1score == match.team2score">
-			<div class="input-field col s4 offset-s1">
-				<input type="number" name="penaltis1" placeholder="Penaltis time 1" class="text-center" [(ngModel)]="match.team1penalties"/>
-			</div>
-			<div class="input-field col s2 text-center versus">
-				x
-			</div>
-			<div class="input-field col s4">
-				<input type="number" name="penaltis2" placeholder="Penaltis time 2" class="text-center" [(ngModel)]="match.team2penalties"/>
-			</div>
-		</div>
+        <div class="input-field col s4 offset-s1">
+            <input type="number" name="score1" placeholder="Gols time 1" class="text-center" [(ngModel)]="match.team1score"/>
+        </div>
+        <div class="input-field col s2 text-center versus">
+            x
+        </div>
+        <div class="input-field col s4">
+            <input type="number" name="score2" placeholder="Gols time 2" class="text-center" [(ngModel)]="match.team2score"/>
+        </div>
 
-		<div class="input-field col s12">
-			<app-dropdown-player [name]="'player3'" 
-					[label]="'Jogador 3 - Time 2'" 
-					[players]="players" 
-					[selected]="match.player3"
-					(onChange)="handlePlayerChange($event)"></app-dropdown-player>
-		</div>
-		<div class="input-field col s12">
-			<app-dropdown-player [name]="'player4'"
-					[label]="'Jogador 4 - Time 2'" 
-					[players]="players" 
-					[selected]="match.player4"
-					(onChange)="handlePlayerChange($event)"></app-dropdown-player>
-		</div>
-		<div class="col s12">
-			<input type="checkbox" [(ngModel)]="isFinal" value="selected" [ngModelOptions]="{standalone: true}" id="final"/>
-			<label for="final">É a final</label>
-		</div>
-		<div id="button-container">
-			<a class="waves-effect waves-light btn blue-grey lighten-1" (click)="tryCreateMatch();">Salvar
-				<i class="material-icons right">send</i>
-			</a>
-		</div>
-	</form>
+        <div *ngIf="isFinal && match.team1score == match.team2score">
+            <div class="input-field col s4 offset-s1">
+                <input type="number" name="penaltis1" placeholder="Penaltis time 1" class="text-center" [(ngModel)]="match.team1penalties"/>
+            </div>
+            <div class="input-field col s2 text-center versus">
+                x
+            </div>
+            <div class="input-field col s4">
+                <input type="number" name="penaltis2" placeholder="Penaltis time 2" class="text-center" [(ngModel)]="match.team2penalties"/>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <app-dropdown-player [name]="'player3'"
+                [label]="'Jogador 3 - Time 2'"
+                [players]="players"
+                [selected]="match.player3"
+                (onChange)="handlePlayerChange($event)"></app-dropdown-player>
+        </div>
+        <div class="input-field col s12">
+            <app-dropdown-player [name]="'player4'"
+                [label]="'Jogador 4 - Time 2'"
+                [players]="players"
+                [selected]="match.player4"
+                (onChange)="handlePlayerChange($event)"></app-dropdown-player>
+        </div>
+        <div class="col s12">
+            <input type="checkbox" [(ngModel)]="isFinal" value="selected" [ngModelOptions]="{standalone: true}" id="final"/>
+            <label for="final">É a final</label>
+        </div>
+        <div id="button-container">
+            <a class="waves-effect waves-light btn blue-grey lighten-1" (click)="tryCreateMatch();">Salvar
+                <i class="material-icons right">send</i>
+            </a>
+        </div>
+    </form>
 </div>

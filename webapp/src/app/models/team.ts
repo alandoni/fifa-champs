@@ -1,5 +1,5 @@
 export class Team {
-	name;
+    name;
     league;
     country;
     attack;

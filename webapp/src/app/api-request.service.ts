@@ -10,43 +10,43 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class ApiRequestService {
 
-	private baseUrl = environment.API_URL;
-	public http;
+    private baseUrl = environment.API_URL;
+    public http;
 
-	constructor(http: Http) {
-		if (this.http == null) {
-			this.http = http;
-		}
-	}
+    constructor(http : Http) {
+        if (this.http == null) {
+            this.http = http;
+        }
+    }
 
-	public post(url, data) : Observable<any> {
-		return this.http.post(this.baseUrl + url, data, { withCredentials: true })
-			.map((response) => { return response.json(); })
-			.share()
-			.catch((error: Response | any) => { return this.handleError(error); });
-	}
+    public post(url, data) : Observable<any> {
+        return this.http.post(this.baseUrl + url, data, { withCredentials: true })
+        .map((response) => { return response.json(); })
+        .share()
+        .catch((error : Response | any) => { return this.handleError(error); });
+    }
 
-	public get(url) : Observable<any> {
-		return this.http.get(this.baseUrl + url, { withCredentials: true })
-			.map((response) => { return response.json(); })
-			.share()
-			.catch((error: Response | any) => { return this.handleError(error); });
-	}
+    public get(url) : Observable<any> {
+        return this.http.get(this.baseUrl + url, { withCredentials: true })
+        .map((response) => { return response.json(); })
+        .share()
+        .catch((error : Response | any) => { return this.handleError(error); });
+    }
 
-	public delete(url) : Observable<any> {
-		return this.http.delete(this.baseUrl + url, { withCredentials: true })
-			.map((response) => { return response.json(); })
-			.share()
-			.catch((error: Response | any) => { return this.handleError(error); });
-	}
+    public delete(url) : Observable<any> {
+        return this.http.delete(this.baseUrl + url, { withCredentials: true })
+        .map((response) => { return response.json(); })
+        .share()
+        .catch((error : Response | any) => { return this.handleError(error); });
+    }
 
-	private handleError(error: Response | any) {
-		console.log(error);
+    private handleError(error : Response | any) {
+        console.log(error);
 
-		if (error.json().description) {
-			return Observable.throw(error.json());
-		} else {
-			return Observable.throw({description: error});
-		}
-	}
+        if (error.json().description) {
+            return Observable.throw(error.json());
+        } else {
+            return Observable.throw({description: error});
+        }
+    }
 }

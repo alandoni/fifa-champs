@@ -6,43 +6,43 @@ import { Match } from './models/match';
 @Injectable()
 export class MatchService {
 
-	private url = '/matches';
+    private url = '/matches';
 
-	constructor(private api: ApiRequestService) { }
+    constructor(private api : ApiRequestService) { }
 
-	insert(match: Match) : Observable<Match> {
-		return this.api.post(this.url, match);
-	}
+    insert(match : Match) : Observable<Match> {
+        return this.api.post(this.url, match);
+    }
 
-	update(id, match: Match) : Observable<Match> {
-		return this.api.post(this.url + '/' + id, match);
-	}
+    update(id, match : Match) : Observable<Match> {
+        return this.api.post(this.url + '/' + id, match);
+    }
 
-	delete(id) : Observable<Match> {
-		return this.api.delete(this.url + '/' + id);
-	}
+    delete(id) : Observable<Match> {
+        return this.api.delete(this.url + '/' + id);
+    }
 
-	getAll() : Observable<Match[]> {
-		return this.api.get(this.url);
-	}
+    getAll() : Observable<Match[]> {
+        return this.api.get(this.url);
+    }
 
-	getByDates(minDate, maxDate) : Observable<Match[]> {
-		return this.api.get(this.url + '?minDate=' + minDate + '&maxDate=' + maxDate);
-	}
+    getByDates(minDate, maxDate) : Observable<Match[]> {
+        return this.api.get(this.url + '?minDate=' + minDate + '&maxDate=' + maxDate);
+    }
 
-	getByChampionship(championshipId) : Observable<Match[]> {
-		return this.api.get(this.url + '/championship/' + championshipId);
-	}
+    getByChampionship(championshipId) : Observable<Match[]> {
+        return this.api.get(this.url + '/championship/' + championshipId);
+    }
 
-	getFinals() : Observable<Match[]> {
-		return this.api.get(this.url + '?isFinal=true');
-	}
+    getFinals() : Observable<Match[]> {
+        return this.api.get(this.url + '?isFinal=true');
+    }
 
-	getFinalFromChampionship(championshipId) : Observable<Match[]> {
-		return this.api.get(this.url + '/championship/' + championshipId + '?isFinal=true');
-	}
+    getFinalFromChampionship(championshipId) : Observable<Match[]> {
+        return this.api.get(this.url + '/championship/' + championshipId + '?isFinal=true');
+    }
 
-	getById(id) : Observable<Match> {
-		return this.api.get(this.url + '/' + id);
-	}
+    getById(id) : Observable<Match> {
+        return this.api.get(this.url + '/' + id);
+    }
 }

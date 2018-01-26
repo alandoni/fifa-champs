@@ -4,31 +4,29 @@ import { Match } from './../models/match';
 import { ChampionshipService } from './../championship.service';
 
 @Component({
-	selector: 'app-hall-of-fame',
-	templateUrl: './hall-of-fame.component.html',
-	styleUrls: ['./hall-of-fame.component.css']
+    selector : 'app-hall-of-fame',
+    templateUrl : './hall-of-fame.component.html',
+    styleUrls : ['./hall-of-fame.component.css']
 })
 export class HallOfFameComponent implements OnInit {
 
-	finalMatches : Array<Match>;
-	champions = [];
-	firsts = {};
-	seconds = {};
-	error;
+    finalMatches : Array<Match>;
+    champions = [];
+    firsts = {};
+    seconds = {};
+    error;
 
-	constructor(private matchService : MatchService, private championshipService : ChampionshipService) { }
+    constructor(private matchService : MatchService, private championshipService : ChampionshipService) { }
 
-	ngOnInit() {
-		this.matchService.getFinals().subscribe(
-			(finalMatches) => {
-				this.finalMatches = finalMatches;
-				this.processPlayers();
-			},
-			(error : any) => {
-				console.log(error);
-				this.error = error;
-			});
-	}
+    ngOnInit() {
+        this.matchService.getFinals().subscribe((finalMatches) => {
+            this.finalMatches = finalMatches;
+            this.processPlayers();
+        }, (error : any) => {
+            console.log(error);
+            this.error = error;
+        });
+    }
 
     initializeCounters(champions, runnerups, playerName) {
         if (!champions[playerName]) {
@@ -54,7 +52,7 @@ export class HallOfFameComponent implements OnInit {
     }
 
     extractPlayersFrom(match) : Array<String> {
-        let playersFromMatch = [];
+        const playersFromMatch = [];
         playersFromMatch.push(match.player1.nickname);
         playersFromMatch.push(match.player2.nickname);
         playersFromMatch.push(match.player3.nickname);
@@ -63,7 +61,7 @@ export class HallOfFameComponent implements OnInit {
     }
 
     extractDecisiveScoreFrom(match) : Array<Number> {
-        let scores = [];
+        const scores = [];
         if (match.team1penalties) {
             scores.push(match.team1penalties);
             scores.push(match.team2penalties);
@@ -75,65 +73,71 @@ export class HallOfFameComponent implements OnInit {
     }
 
     getChampionsAndRunnerups(champions, runnerups) {
-        for (let index in this.finalMatches) {
-            let finalMatch = this.finalMatches[index];
+        for (const i in this.finalMatches) {
+            if (this.finalMatches.hasOwnProperty(i)) {
+                const finalMatch = this.finalMatches[i];
 
-            let playersFromFinal = this.extractPlayersFrom(finalMatch);
+                const playersFromFinal = this.extractPlayersFrom(finalMatch);
 
-            for (index in playersFromFinal) {
-                this.initializeCounters(champions, runnerups, playersFromFinal[index]);
+                for (j in playersFromFinal) {
+                    if (playersFromFinal.hasOwnProperty(j)) {
+                        this.initializeCounters(champions, runnerups, playersFromFinal[j]);
+                    }
+                }
+
+                const scores = this.extractDecisiveScoreFrom(finalMatch);
+
+                this.processFinal(scores, playersFromFinal, champions, runnerups);
             }
-
-            let scores = this.extractDecisiveScoreFrom(finalMatch);
-
-            this.processFinal(scores, playersFromFinal, champions, runnerups);
         }
     }
 
-	processFinals() {
-		let champions = {};
-		let runnerups = {};
+    processFinals() {
+        const champions = {};
+        const runnerups = {};
 
-		if (!this.finalMatches || this.finalMatches.length == 0) {
-			this.error = {
-                "description" : 'Nenhum campeonato foi terminado ainda.'
+        if (!this.finalMatches || this.finalMatches.length === 0) {
+            this.error = {
+                'description' : 'Nenhum campeonato foi terminado ainda.'
             };
-			return;
-		}
+            return;
+        }
 
         this.getChampionsAndRunnerups(champions, runnerups);
 
-		this.champions = [];
+        this.champions = [];
 
-		for (let key in champions) {
-			this.champions.push({
-				"name" : key,
-				"times" : champions[key],
-				"runnerup" : runnerups[key],
-				"firstPlace" : this.firsts[key],
-				"secondPlace" : this.seconds[key]
-			})
-		}
+        for (const key in champions) {
+            if (champions.hasOwnProperty(key)) {
+                this.champions.push({
+                    'name' : key,
+                    'times' : champions[key],
+                    'runnerup' : runnerups[key],
+                    'firstPlace' : this.firsts[key],
+                    'secondPlace' : this.seconds[key]
+                });
+            }
+        }
 
-		this.champions.sort((champion1, champion2) => {
-			if (champion1.times > champion2.times) {
-				return -1;
-			}
-			if (champion1.times < champion2.times) {
-				return 1;
-			}
-			return 0;
-		});
-	}
+        this.champions.sort((champion1, champion2) => {
+            if (champion1.times > champion2.times) {
+                return -1;
+            }
+            if (champion1.times < champion2.times) {
+                return 1;
+            }
+            return 0;
+        });
+    }
 
-	processPlayers() {
-		this.championshipService.getAll().subscribe(
-			(championships) => {
-				for (let index in championships) {
+    processPlayers() {
+        this.championshipService.getAll().subscribe(
+            (championships) => {
+                for (const index in championships) {
                     if ((championships[index].players.length > 1) && (!championships[index].isCurrent)) {
-                        let firstPlayer = championships[index].players[0];
-                        let secondPlayer = championships[index].players[1];
-    					if (!this.firsts[firstPlayer.nickname]++) {
+                        const firstPlayer = championships[index].players[0];
+                        const secondPlayer = championships[index].players[1];
+                        if (!this.firsts[firstPlayer.nickname]++) {
                             this.firsts[firstPlayer.nickname] = 1;
                         }
                         if (!this.seconds[secondPlayer.nickname]++) {
@@ -141,9 +145,9 @@ export class HallOfFameComponent implements OnInit {
                         }
                     }
 
-				}
-				this.processFinals();
-			}
-		)
-	}
+                }
+                this.processFinals();
+            }
+        );
+    }
 }

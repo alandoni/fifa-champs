@@ -34,35 +34,35 @@ import { SelectComponent } from './select/select.component';
 import { TeamPickComponent } from './team-pick/team-pick.component';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		LoginComponent,
-		CreatePlayerComponent,
-	    InsertMatchComponent,
-		StandingTableComponent,
-		PageNotFoundComponent,
-		SeasonSelectorComponent,
-		NavigationBarComponent,
-		PlayersListComponent,
-		DropdownPlayerComponent,
-		NavigationBarComponent,
-		HallOfFameComponent,
-		MatchComponent,
-		MatchListComponent,
-		AdminsListComponent,
-		CreateAdminComponent,
-		NavigationBarItemComponent,
-		SelectComponent,
-		TeamPickComponent
-	],
-	imports: [
-		BrowserModule,
-		FormsModule,
-		HttpModule,
-		MaterializeModule,
-		RouterModule.forRoot(appRoutes)
-	],
-	providers: [LoginService, PlayerService, MatchService, ChampionshipService, ApiRequestService, TeamPickService],
-	bootstrap: [AppComponent]
+    declarations : [
+        AppComponent,
+        LoginComponent,
+        CreatePlayerComponent,
+        InsertMatchComponent,
+        StandingTableComponent,
+        PageNotFoundComponent,
+        SeasonSelectorComponent,
+        NavigationBarComponent,
+        PlayersListComponent,
+        DropdownPlayerComponent,
+        NavigationBarComponent,
+        HallOfFameComponent,
+        MatchComponent,
+        MatchListComponent,
+        AdminsListComponent,
+        CreateAdminComponent,
+        NavigationBarItemComponent,
+        SelectComponent,
+        TeamPickComponent
+    ],
+    imports : [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        MaterializeModule,
+        RouterModule.forRoot(appRoutes)
+    ],
+    providers : [LoginService, PlayerService, MatchService, ChampionshipService, ApiRequestService, TeamPickService],
+    bootstrap : [AppComponent]
 })
 export class AppModule { }

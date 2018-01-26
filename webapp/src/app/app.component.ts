@@ -6,48 +6,49 @@ import { Championship } from './models/championship';
 import { PlayerService } from './player.service';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    selector : 'app-root',
+    templateUrl : './app.component.html',
+    styleUrls : ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	title = 'app works!';
+    title = 'app works!';
 
-	constructor(private router: Router, private playerService: PlayerService) {
-	}
+    constructor(private router : Router, private playerService : PlayerService) {
+    }
 
-	ngOnInit() {
-		this.playerService.getAll();
-	}
+    ngOnInit() {
+        this.playerService.getAll();
+    }
 
-	loginSuccess(user) {
-		//TODO handle login success here
-	}
+    loginSuccess(user) {
+        // TODO handle login success here
+    }
 
-	createPlayerSuccess(user: Player) {
-		//TODO handle login success here
-	}
+    createPlayerSuccess(user : Player) {
+        // TODO handle login success here
+    }
 
-	matchCreated(result: Match) {
-		//GAMBIARRA BECAUSE I CAN
+    matchCreated(result : Match) {
+        // GAMBIARRA BECAUSE I CAN
 
-		var url = 'standings';
-		if (window.location.href.indexOf('results') > 0) {
-			url = 'results';
-		}
+        let url = 'standings';
+        if (window.location.href.indexOf('results') > 0) {
+            url = 'results';
+        }
 
-		if (window.location.href.indexOf(result.championship._id) > 0) {
-			this.router.navigateByUrl('season/' + url + '/' + result.championship.month + '/' + result.championship.year);
-			return;
-		}
-		this.router.navigateByUrl('season/' + url + '/' + result.championship._id);
-	}
+        if (window.location.href.indexOf(result.championship._id) > 0) {
+            const completeUrl = 'season/' + url + '/' + result.championship.month + '/' + result.championship.year;
+            this.router.navigateByUrl(completeUrl);
+            return;
+        }
+        this.router.navigateByUrl('season/' + url + '/' + result.championship._id);
+    }
 
-	championshipCreated(result: Championship) {
-		this.router.navigateByUrl('season/standings/' + result._id);
-	}
+    championshipCreated(result : Championship) {
+        this.router.navigateByUrl('season/standings/' + result._id);
+    }
 
-	loggedOut(){
-		this.router.navigateByUrl('season/standings/current');
-	}
+    loggedOut() {
+        this.router.navigateByUrl('season/standings/current');
+    }
 }

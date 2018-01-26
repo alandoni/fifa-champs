@@ -6,54 +6,54 @@ import { Championship } from './models/championship';
 @Injectable()
 export class ChampionshipService {
 
-	private url = '/championships';
-	private currentChampionship: Championship;
-	private selectedChampionship: Championship;
+    private url = '/championships';
+    private currentChampionship : Championship;
+    private selectedChampionship : Championship;
 
-	constructor(private api: ApiRequestService) { }
+    constructor(private api : ApiRequestService) { }
 
-	insert(championship: Championship) : Observable<Championship> {
-		return this.api.post(this.url, championship);
-	}
+    insert(championship : Championship) : Observable<Championship> {
+        return this.api.post(this.url, championship);
+    }
 
-	update(id, championship: Championship) : Observable<Championship> {
-		delete championship._id;
-		return this.api.post(this.url + '/' + id, championship);
-	}
+    update(id, championship : Championship) : Observable<Championship> {
+        delete championship._id;
+        return this.api.post(this.url + '/' + id, championship);
+    }
 
-	delete(id) : Observable<Championship> {
-		return this.api.delete(this.url + '/' + id);
-	}
+    delete(id) : Observable<Championship> {
+        return this.api.delete(this.url + '/' + id);
+    }
 
-	getAll() : Observable<Championship[]> {
-		return this.api.get(this.url);
-	}
+    getAll() : Observable<Championship[]> {
+        return this.api.get(this.url);
+    }
 
-	getById(id) : Observable<Championship> {
-		return this.api.get(this.url + '/' + id);
-	}
+    getById(id) : Observable<Championship> {
+        return this.api.get(this.url + '/' + id);
+    }
 
-	getCurrent() : Observable<Championship[]> {
-		return this.api.get(this.url + '?isCurrent=true');
-	}
+    getCurrent() : Observable<Championship[]> {
+        return this.api.get(this.url + '?isCurrent=true');
+    }
 
-	getByMonth(month, year) : Observable<Championship[]> {
-		return this.api.get(this.url + '?month=' + month + '&year=' + year);
-	}
+    getByMonth(month, year) : Observable<Championship[]> {
+        return this.api.get(this.url + '?month=' + month + '&year=' + year);
+    }
 
-	setSelectedChampionship(championship: Championship) {
-		this.selectedChampionship = championship;
-	}
+    setSelectedChampionship(championship : Championship) {
+        this.selectedChampionship = championship;
+    }
 
-	getSelectedChampionship() {
-		return this.selectedChampionship;
-	}
+    getSelectedChampionship() {
+        return this.selectedChampionship;
+    }
 
-	setCurrentChampionship(championship: Championship) {
-		this.currentChampionship = championship;
-	}
+    setCurrentChampionship(championship : Championship) {
+        this.currentChampionship = championship;
+    }
 
-	getCurrentChampionship() {
-		return this.currentChampionship;
-	}
+    getCurrentChampionship() {
+        return this.currentChampionship;
+    }
 }
