@@ -7,7 +7,7 @@ const variables = require('../variables');
   });
 
   exports.bot = exports.controller.spawn({
-    token: variables.FIFABOT_USER_TOKEN,
+    token: variables.FIFABOT_TOKEN,
     retry: Infinity
   });
 

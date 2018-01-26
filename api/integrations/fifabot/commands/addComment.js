@@ -1,21 +1,12 @@
-const mongodb = require('../integrations/mongodb');
-
-function addComment(message, callback, comment) {
-  mongodb.addSilvioComment(comment, (error) => {
-    if (error) {
-      console.log(error);
-      callback('Não entendi nada....');
-      return;
-    }
-
-    callback('Show');
+function addComment(message) {
+  return new Promise((resolve) => {
+    resolve(`addComment ${message}`);
   });
 }
 
 module.exports = {
-  pattern: /^add comment ([^]*)$/,
+  pattern: /^add comment (.*)$/,
   handler: addComment,
-  description: '*fifabot add comment*: Adds a new comment',
+  description: '*edsonbastos add comment*: adds a new comment',
   channels: ['fifa-champs-dev'],
-  acceptsPreFormattedText: true
 };

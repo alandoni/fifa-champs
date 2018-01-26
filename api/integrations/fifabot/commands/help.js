@@ -1,27 +1,12 @@
-const isValidCommand = require('./utils/isValidCommand');
-const commands = require('./index');
-
-function help(message, callback, invalidCommand) {
-  let helpText;
-
-  if (invalidCommand) {
-    helpText = `Vixxxxxxxi... não entendi nada ..... "${invalidCommand}". Veja aii :\n>>>`;
-  } else {
-    helpText = 'Então o que me diz disso aiiii :\n>>>';
-  }
-
-  commands.forEach((command) => {
-    if (isValidCommand(command, message)) {
-      helpText += `${command.description}\n`;
-    }
+function help() {
+  return new Promise((resolve) => {
+    resolve('help');
   });
-
-  callback(helpText);
 }
 
 module.exports = {
   pattern: /^ajuda$/,
   handler: help,
-  description: '*fifabot ajuda* : shows a list of valid commands',
-  channels: undefined
+  description: '*edsonbastos ajuda* : mostra a lista de comandos disponiveis',
+  channels: ['fifa-champs']
 };
