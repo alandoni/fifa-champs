@@ -81,15 +81,50 @@ export class Statistics {
 			matchWihtoutFinal = new Array<Match>();
 		}
 
-		for (let match in matchWihtoutFinal) {
-			let m = matchWihtoutFinal[match];
-			this._setStatisticOfPlayer(statistics, m.player1, m.team1score, m.team2score);
-			this._setStatisticOfPlayer(statistics, m.player2, m.team1score, m.team2score);
-			this._setStatisticOfPlayer(statistics, m.player3, m.team2score, m.team1score);
-			this._setStatisticOfPlayer(statistics, m.player4, m.team2score, m.team1score);
+		for (let matchIndex in matchWihtoutFinal) {
+			let match = matchWihtoutFinal[matchIndex];
+			this._addMatchToStatistics(statistics, match);
 		}
 
-		return statistics;
+		return this._convertFromDictionaryToArray(statistics);
+	}
+
+	static _addMatchToStatistics(statistics, match) {
+		this._setStatisticOfPlayer(statistics, match.player1, match.team1score, match.team2score);
+		this._setStatisticOfPlayer(statistics, match.player2, match.team1score, match.team2score);
+		this._setStatisticOfPlayer(statistics, match.player3, match.team2score, match.team1score);
+		this._setStatisticOfPlayer(statistics, match.player4, match.team2score, match.team1score);
+	}
+
+	static _setStatisticOfPlayer(statistics, player, team1score, team2score) {
+		if (!player.nickname) {
+			return;
+		}
+		statistics[player.nickname].player = player;
+		statistics[player.nickname].matches++;
+		statistics[player.nickname].goals += team1score;
+		statistics[player.nickname].concededGoals += team2score;
+		statistics[player.nickname].goalBalance += team1score - team2score;
+
+		if (team1score > team2score) {
+			statistics[player.nickname].victories++;
+			statistics[player.nickname].score += 3;
+		} else if (team1score < team2score) {
+			statistics[player.nickname].defeats++;
+		} else {
+			statistics[player.nickname].ties++;
+			statistics[player.nickname].score += 1;
+		}
+		statistics[player.nickname].goalsPerMatch = statistics[player.nickname].goals*1.0 / statistics[player.nickname].matches;
+		statistics[player.nickname].concededGoalsPerMatch = statistics[player.nickname].concededGoals*1.0 / statistics[player.nickname].matches;
+		statistics[player.nickname].percent = statistics[player.nickname].score / (3 * statistics[player.nickname].matches) * 100;
+	}
+
+	static _convertFromDictionaryToArray(dictionary) {
+		const keys = Object.keys(dictionary);
+		return keys.map(function(v) {
+			return dictionary[v];
+		});
 	}
 
 	static _compareStatistics(limit, statistic1, statistic2) {
@@ -128,29 +163,5 @@ export class Statistics {
 			return 1;
 		}
 		return 0;
-	}
-
-	static _setStatisticOfPlayer(statistics, player, team1score, team2score) {
-		if (!player.nickname) {
-			return;
-		}
-		statistics[player.nickname].player = player;
-		statistics[player.nickname].matches++;
-		statistics[player.nickname].goals += team1score;
-		statistics[player.nickname].concededGoals += team2score;
-		statistics[player.nickname].goalBalance += team1score - team2score;
-
-		if (team1score > team2score) {
-			statistics[player.nickname].victories++;
-			statistics[player.nickname].score += 3;
-		} else if (team1score < team2score) {
-			statistics[player.nickname].defeats++;
-		} else {
-			statistics[player.nickname].ties++;
-			statistics[player.nickname].score += 1;
-		}
-		statistics[player.nickname].goalsPerMatch = statistics[player.nickname].goals*1.0 / statistics[player.nickname].matches;
-		statistics[player.nickname].concededGoalsPerMatch = statistics[player.nickname].concededGoals*1.0 / statistics[player.nickname].matches;
-		statistics[player.nickname].percent = statistics[player.nickname].score / (3 * statistics[player.nickname].matches) * 100;
 	}
 }
