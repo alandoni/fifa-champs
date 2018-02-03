@@ -6,23 +6,23 @@ import { DebugElement } from '@angular/core';
 import { SeasonSelectorComponent } from './season-selector.component';
 
 describe('SeasonSelectorComponent', () => {
-  let component: SeasonSelectorComponent;
-  let fixture: ComponentFixture<SeasonSelectorComponent>;
+    let component : SeasonSelectorComponent;
+    let fixture : ComponentFixture<SeasonSelectorComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SeasonSelectorComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ SeasonSelectorComponent ]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SeasonSelectorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(SeasonSelectorComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
