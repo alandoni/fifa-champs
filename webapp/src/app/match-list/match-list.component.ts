@@ -47,8 +47,7 @@ export class MatchListComponent implements OnChanges {
         let lastMatchDate = '';
         for (let i = 0; i < this.cols; i++) {
             const matchCol = [];
-            let shouldPutMatchOnColumn = true;
-            for (let j = 0; shouldPutMatchOnColumn; j++) {
+            for (let j = 0; (j < this.minItemsPerColumn || j < numberOfMatchesPerColumn) && matchIndex < this.matches.length; j++) {
                 matchCol.push(this.matches[matchIndex]);
 
                 if (this.matches[matchIndex].date === lastMatchDate) {
@@ -57,9 +56,6 @@ export class MatchListComponent implements OnChanges {
                     lastMatchDate = this.matches[matchIndex].date;
                 }
                 matchIndex++;
-                const columnFitMatches = (j < this.minItemsPerColumn) || (j < numberOfMatchesPerColumn);
-                const isThereMatches = matchIndex < this.matches.length;
-                shouldPutMatchOnColumn = columnFitMatches && isThereMatches;
             }
             this.matchesList.push(matchCol);
             lastMatchDate = this.matches[matchIndex - 1].date;
