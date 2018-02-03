@@ -5,12 +5,16 @@ const Mongoose = require('mongoose');
 const ObjectId = Mongoose.Types.ObjectId;
 const db = Mongoose.connection;
 
+const options = {
+    useMongoClient : true
+}
+
 Mongoose.Promise = Promise;
 
 class MongoController {
     constructor(databaseAddress) {
         console.log('Connecting to MongoDB.')
-        Mongoose.connect(databaseAddress);
+        Mongoose.connect(databaseAddress, options);
         db.on('error', console.error);
         db.once('open', function() {
             console.log('Connected to MongoDB. We\'re ready to go');
