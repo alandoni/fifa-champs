@@ -1,27 +1,28 @@
-.winner #ranking{
-  color: #4CAF50;
+.winner #ranking {
+    color: #4CAF50;
 }
 
-.loser #ranking{
-	color: #f44336;
+.loser #ranking {
+    color: #f44336;
 }
 
-.sgNegative #balance{
-	color: #f44336;
+.sgNegative #balance {
+    color: #f44336;
 }
-.header{
-  background-color: #ffffff;
-  color:#999999;
-  font-weight: bold;
-  font-size: 0.75em;
-  text-transform: uppercase;
+
+.header {
+    background-color: #ffffff;
+    color:#999999;
+    font-weight: bold;
+    font-size: 0.75em;
+    text-transform: uppercase;
 }
 
 th, td {
-  text-align: center;
-  width: 2vw;
-  height: 50px;
-  padding: 0px;
+    height: 50px;
+    padding: 0;
+    text-align: center;
+    width: 2vw;
 }
 
 th#player-name, td#player-name {
@@ -29,41 +30,41 @@ th#player-name, td#player-name {
 }
 
 th#percent, td#percent {
-  width: 3vw;
+    width: 3vw;
 }
 
 #table-standing {
-  margin: auto;
-  table-layout: fixed;
+    margin: auto;
+    table-layout: fixed;
 }
 
-.dark-cell{
-  background-color: #f2f2f2;
+.dark-cell {
+    background-color: #f2f2f2;
 }
 
-.light-cell{
-  background-color: #ffffff;
+.light-cell {
+    background-color: #ffffff;
 }
 
 #player-name {
-  text-align: left;
+    text-align: left;
 }
 
-#table-balance{
-  float:right;
-  clear: both;
-  margin-right: 10%;
+#table-balance {
+    clear: both;
+    float:right;
+    margin-right: 10%;
 }
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
 
-.tiebreak-list{
-  line-height: 120%;
-  margin-top: 2px;
+.tiebreak-list {
+    line-height: 120%;
+    margin-top: 2px;
 }
 
-.margin-tiebreak{
-  margin-bottom: 2px;
+.margin-tiebreak {
+    margin-bottom: 2px;
 }

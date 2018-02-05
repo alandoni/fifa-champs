@@ -1,11 +1,11 @@
 {
 	"ignore": [
 		"order-alphabetical",
-		"important"		
+		"important"
 	],
 	"warnings": [
 		"box-sizing",
-		"known-properties",		
+		"known-properties",
 		"adjoining-classes",
 		"fallback-colors",
 		"font-faces",
@@ -17,7 +17,7 @@
 		"star-property-hack",
 		"underscore-property-hack",
 		"universal-selector",
-		"zero-units"		
+		"zero-units"
 	],
 	"errors": [
 		"box-model",
@@ -42,6 +42,6 @@
 		"selector-newline",
 		"unique-headings",
 		"unqualified-attributes",
-		"vendor-prefix"	
+		"vendor-prefix"
 	]
 }

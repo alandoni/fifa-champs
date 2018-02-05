@@ -1,6 +1,6 @@
 export class PickedControllers {
-	firstSelected;
-	secondSelected;
-	thirdSelected;
-	fourthSelected;
+    firstSelected;
+    secondSelected;
+    thirdSelected;
+    fourthSelected;
 }

@@ -1,9 +1,9 @@
 <select #select
-	materialize="material_select" 
-	[materializeSelectOptions]="names" 
-	id="{{this.name}}" 
-	name="{{this.name}}"
-	[(ngModel)]="selected">
-		<option *ngFor="let name of names; let i = index" [value]="ids[i]" id="{{ids[i]}}">{{name}}</option>
+    materialize="material_select"
+    [materializeSelectOptions]="names"
+    id="{{this.name}}"
+    name="{{this.name}}"
+    [(ngModel)]="selected">
+    <option *ngFor="let name of names; let i = index" [value]="ids[i]" id="{{ids[i]}}">{{name}}</option>
 </select>
 <label for="{{this.name}}">{{this.label}}</label>
