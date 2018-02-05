@@ -204,7 +204,7 @@ function requestTeamPage(page, typeOfTeams) {
                 let $hasNextPage = ($('li.next').not('.disabled').children('a').text().localeCompare('Next Page') == 0);
                 if ($hasNextPage) {
                     requestTeamPage(FIFA_VERSION, ++page, typeOfTeams);
-                }                else {
+                } else {
                     countDownAsynchronousCalls.lastCallWasMade(typeOfTeams);
                 }
 
