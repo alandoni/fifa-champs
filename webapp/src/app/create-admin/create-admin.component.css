@@ -1,16 +1,16 @@
 #popup-content {
-  padding-left: 2%;
-  padding-right: 2%;
-  margin:0px;
+    margin:0;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 input > div, a > div {
-  width:70%;
-  margin:auto;
+    margin:auto;
+    width:70%;
 }
 
 .btn {
-  float: right;
-  clear: both;
-  margin-bottom: 10px;
+    clear: both;
+    float: right;
+    margin-bottom: 10px;
 }

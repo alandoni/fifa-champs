@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Championship = require('../models/championship');
 const Match = require('../models/match');
@@ -9,11 +9,11 @@ const chaiHttp = require('chai-http');
 const server = require('../server');
 const should = chai.should();
 
-const Promise = require("bluebird");
+const Promise = require('bluebird');
 
 chai.use(chaiHttp);
 
-var agent = chai.request.agent(server);
+let agent = chai.request.agent(server);
 
 describe('API Test', () => {
 
@@ -30,7 +30,7 @@ describe('API Test', () => {
     describe('/GET salt', () => {
         it('it should get SALT', (done) => {
 
-            const nickname = "Admin";
+            const nickname = 'Admin';
 
             get('/api/salt/' + nickname).then((res) => {
                 res.should.have.status(200);
@@ -45,7 +45,7 @@ describe('API Test', () => {
     describe('/POST wrong login', () => {
         it('it should not LOGIN', (done) => {
 
-            const invalidAdmin = {nickname: "AlanDoni", password:"123456"};
+            const invalidAdmin = { nickname : 'AlanDoni', password : '123456' };
 
             post('/api/login', invalidAdmin).then((res) => {
                 done(res);
@@ -82,8 +82,8 @@ describe('API Test', () => {
     describe('/POST player', () => {
         it('it should POST a player ', (done) => {
             const player = {
-                nickname: 'joao',
-                picture: 'http://i.imgur.com/61hqH6f.jpg'
+                nickname : 'joao',
+                picture : 'http://i.imgur.com/61hqH6f.jpg'
             }
 
             login().then((res) => {
@@ -106,10 +106,10 @@ describe('API Test', () => {
     describe('/POST unauthorized player', () => {
         it('it should NOT POST a player ', (done) => {
             const player = {
-                nickname: 'alan',
-                picture: 'http://i.imgur.com/61hqH6f.jpg'
+                nickname : 'alan',
+                picture : 'http://i.imgur.com/61hqH6f.jpg'
             }
-            var agent = chai.request.agent(server);
+            let agent = chai.request.agent(server);
 
             agent.post('/api/players').send(player).then((res) => {
                 res.should.have.status(401);
@@ -140,10 +140,10 @@ describe('API Test', () => {
         it('it should Update a player', (done) => {
 
             const player = {
-                nickname: 'alex'
+                nickname : 'alex'
             }
             createPlayer(player).then((res) => {
-                var newPlayer = {picture: 'http://i.imgur.com/61hqH6f.jpg'};
+                let newPlayer = { picture : 'http://i.imgur.com/61hqH6f.jpg' };
                 return post('/api/players/' + res.body._id, newPlayer);
             }).then((res) => {
                 res.should.have.status(200);
@@ -160,12 +160,12 @@ describe('API Test', () => {
 
     describe('/DELETE/:id Players', () => {
         it('it should DELETE a player', (done) => {
-            var size = 0;
+            let size = 0;
 
             get('/api/players').then((res) => {
                 res.should.have.status(200);
                 size = res.body.length;
-                var player = {nickname: 'chris'};
+                let player = { nickname : 'chris' };
                 return createPlayer(player);
             }).then((res) => {
                 res.should.have.status(200);
@@ -182,11 +182,6 @@ describe('API Test', () => {
             });
         });
     });
-
-
-
-
-
 
     describe('/GET Championships', () => {
         it('it should GET all the championships', (done) => {
@@ -231,7 +226,7 @@ describe('API Test', () => {
                 res.body.length.should.be.eql(1);
                 res.body[0].should.have.property('month').eql(2);
                 res.body[0].should.have.property('year').eql(2017);
-              done();
+                done();
             }).catch((error) => {
                 done(error);
             });
@@ -244,7 +239,7 @@ describe('API Test', () => {
             createPlayers().then((players) => {
                 return createChampionship(players);
             }).then((res) => {
-                var championshipUpdate = {isCurrent: true};
+                let championshipUpdate = { isCurrent : true };
                 return post('/api/championships/' + res.body._id, championshipUpdate);
             }).then((res) => {
                 res.should.have.status(200);
@@ -258,7 +253,7 @@ describe('API Test', () => {
 
     describe('/DELETE/:id Championship', () => {
         it('it should DELETE a championship', (done) => {
-            var size = 0;
+            let size = 0;
 
             get('/api/championships').then((res) => {
                 res.should.have.status(200);
@@ -281,12 +276,6 @@ describe('API Test', () => {
             });
         });
     });
-
-
-
-
-
-
 
     describe('/GET Matches', () => {
         it('it should GET all the matches', (done) => {
@@ -344,7 +333,7 @@ describe('API Test', () => {
                 return createMatch(players);
             }).then((res) => {
                 res.should.have.status(200);
-                var newMatch = {team2score: 1};
+                let newMatch = { team2score : 1 };
                 return post('/api/matches/' + res.body._id, newMatch);
             }).then((res) => {
                 res.should.have.status(200);
@@ -365,7 +354,7 @@ describe('API Test', () => {
 
     describe('/GET Matches with limit and offset', () => {
         it('it should GET all the matches', (done) => {
-            var playersSaved = null;
+            let playersSaved = null;
             createPlayers().then((players) => {
                 playersSaved = players;
                 return createMatch(playersSaved);
@@ -390,7 +379,7 @@ describe('API Test', () => {
 
     describe('/GET Final Matches with limit and offset', () => {
         it('it should GET all the matches', (done) => {
-            var playersSaved = null;
+            let playersSaved = null;
             createPlayers().then((players) => {
                 playersSaved = players;
                 return createMatch(playersSaved);
@@ -414,7 +403,7 @@ describe('API Test', () => {
 
     describe('/DELETE/:id Match', () => {
         it('it should DELETE a Match', (done) => {
-            var size = 0;
+            let size = 0;
 
             get('/api/matches').then((res) => {
                 res.should.have.status(200);
@@ -441,10 +430,10 @@ describe('API Test', () => {
 
 function createPlayers() {
     const players = [];
-    players.push({nickname: 'alan', picture: 'http://i.imgur.com/61hqH6f.jpg'});
-    players.push({nickname: 'rodrigo'});
-    players.push({nickname: 'sergio'});
-    players.push({nickname: 'lauro'});
+    players.push({ nickname : 'alan', picture : 'http://i.imgur.com/61hqH6f.jpg' });
+    players.push({ nickname : 'rodrigo' });
+    players.push({ nickname : 'sergio' });
+    players.push({ nickname : 'lauro' });
 
     return createPlayer(players[0]).then((res) => {
         res.should.have.status(200);
@@ -471,31 +460,31 @@ function createPlayer(player) {
 
 function createChampionship(players) {
     const championship = {
-        month: 2,
-        year: 2017,
-        players: [players[0]._id,
-          players[1]._id,
-          players[2]._id,
-          players[3]._id],
-        matches: null,
-        date: new Date(),
-        finalMatch: null,
-        isCurrent: false
+        month : 2,
+        year : 2017,
+        players : [players[0]._id,
+            players[1]._id,
+            players[2]._id,
+            players[3]._id],
+        matches : null,
+        date : new Date(),
+        finalMatch : null,
+        isCurrent : false
     }
     return post('/api/championships', championship);
 }
 
 function createFinalMatch(players, isFinal) {
     const match = {
-        player1: players[0]._id,
-        player2: players[1]._id,
-        player3: players[2]._id,
-        player4: players[3]._id,
-        team1score: 3,
-        team2score: 0,
-        date: new Date(),
-        championship: null,
-        isFinal: isFinal
+        player1 : players[0]._id,
+        player2 : players[1]._id,
+        player3 : players[2]._id,
+        player4 : players[3]._id,
+        team1score : 3,
+        team2score : 0,
+        date : new Date(),
+        championship : null,
+        isFinal : isFinal
     };
 
     return post('/api/matches', match);
@@ -507,9 +496,9 @@ function createMatch(players) {
 
 function login() {
     const admin = {
-            nickname : 'admin',
-            password : '71e3401a5fdf0203d345362e003636b8'
-        }
+        nickname : 'admin',
+        password : '1083fed03a78190c39c39a898f64f46e'
+    }
     return post('/api/login', admin);
 }
 
