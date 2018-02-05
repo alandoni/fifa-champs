@@ -16,6 +16,10 @@ export class Statistics {
     percent : number;
 
     static getStatisticsFromMatches(matches : Array<Match>, limit : number) : Array<Statistics> {
+        if (matches === undefined) {
+            return null;
+        }
+
         const players : Array<Player> = this._getPlayersFromMatches(matches);
 
         const statistics = this._createStatistics(matches, players);
