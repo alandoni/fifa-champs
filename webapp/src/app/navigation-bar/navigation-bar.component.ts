@@ -27,7 +27,9 @@ export class NavigationBarComponent implements OnInit {
     isLoggedIn = false;
     items : Array<NavigationBarItem> = [];
 
-    constructor(private loginService : LoginService, private championshipService : ChampionshipService, private matchService : MatchService) {
+    constructor(private loginService : LoginService, private championshipService : ChampionshipService,
+        private matchService : MatchService) {
+
         this.loginService.addListener(this);
         this.onLoginChange();
     }

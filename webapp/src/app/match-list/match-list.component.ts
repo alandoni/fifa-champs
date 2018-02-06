@@ -47,7 +47,10 @@ export class MatchListComponent implements OnChanges {
         let lastMatchDate = '';
         for (let i = 0; i < this.cols; i++) {
             const matchCol = [];
-            for (let j = 0; (j < this.minItemsPerColumn || j < numberOfMatchesPerColumn) && matchIndex < this.matches.length; j++) {
+            for (let j = 0; (j < this.minItemsPerColumn
+                || j < numberOfMatchesPerColumn)
+                && matchIndex < this.matches.length; j++) {
+
                 matchCol.push(this.matches[matchIndex]);
 
                 if (this.matches[matchIndex].date === lastMatchDate) {
