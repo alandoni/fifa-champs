@@ -1,5 +1,3 @@
 module.exports = {
   FIFABOT_TOKEN: '',
-
-  MONGO_CONNECTION_STR: 'mongodb://localhost/fifadb',
 };

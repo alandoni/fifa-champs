@@ -1,4 +1,3 @@
-// const variables = require('./variables');
 const commands = require('./commands');
 const slack = require('./integrations/slack');
 

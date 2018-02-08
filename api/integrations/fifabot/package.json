@@ -25,6 +25,7 @@
     "protractor": "^5.1.1",
     "protractor-jasmine2-screenshot-reporter": "^0.3.5",
     "request": "^2.81.0",
+    "request-promise": "^4.2.2",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0"
   },
