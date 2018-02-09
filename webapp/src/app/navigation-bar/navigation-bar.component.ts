@@ -76,7 +76,7 @@ export class NavigationBarComponent implements OnInit {
 
     createMatch() {
         const currentChamp = this.championshipService.getSelectedChampionship();
-        if (currentChamp) {
+        if (currentChamp !== undefined) {
             this.matchService.getFinalFromChampionship(currentChamp._id).toPromise()
             .then(response => {
                 if (response.length > 0) {
