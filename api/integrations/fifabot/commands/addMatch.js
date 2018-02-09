@@ -1,19 +1,26 @@
 const request = require('request-promise');
-
-const pattern = /^add match (.*) (.*) (\d+)\s*x\s*(\d+) (.*) (.*)$/;
-const seasonOptions = {
-  url: 'http://localhost:5001/api/championships',
+const { FIFABOT_API_URL } = require('../variables');
+ 
+// adicionar partida player1 player2 team1score x team2score player3 player4
+const pattern = /^adicionar partida (.*) (.*) (\d+)\s*x\s*(\d+) (.*) (.*)$/;
+const seasonsRequestOptions = {
+  url: `${FIFABOT_API_URL}/api/championships`,
   method: 'GET',
   json: true
 };
-const playerOptions = {
-  url: 'http://localhost:5001/api/players',
+const playersRequestOptions = {
+  url: `${FIFABOT_API_URL}/api/players`,
   method: 'GET',
   json: true
 };
-const matchOptions = {
-  url: 'http://localhost:5001/api/matches',
+const matchesRequestOptions = {
+  url: `${FIFABOT_API_URL}/api/matches`,
   method: 'POST',
+  json: true
+};
+const adminsRequestOptions = {
+  url: `${FIFABOT_API_URL}/api/admin`,
+  method: 'GET',
   json: true
 };
 const PLAYER1 = 1;
@@ -25,33 +32,47 @@ const PLAYER4 = 6;
 
 function addMatch(message, isFinal = false) {
   return new Promise((resolve, reject) => {
-    const args = message.text.match(pattern);
-    const seasonsPromise = request(seasonOptions);
-    const playersPromise = request(playerOptions);
+    const captureGroups = message.text.match(pattern);
+    const seasonsPromise = request(seasonsRequestOptions);
+    const playersPromise = request(playersRequestOptions);
+    const adminsPromise = request(adminsRequestOptions);
 
-    Promise.all([seasonsPromise, playersPromise])
-      .then(([seasonsBody, playersBody]) => {
-        const championship = seasonsBody.find(season => season.isCurrent === true);
-        const player1 = playersBody.find(player => player.nickname === args[PLAYER1]);
-        const player2 = playersBody.find(player => player.nickname === args[PLAYER2]);
-        const team1score = args[TEAM1SCORE];
-        const team2score = args[TEAM2SCORE];
-        const player3 = playersBody.find(player => player.nickname === args[PLAYER3]);
-        const player4 = playersBody.find(player => player.nickname === args[PLAYER4]);
-        const date = new Date().toISOString();
-        return {
-          championship, player1, player2, player3, player4, team1score, team2score, isFinal, date
-        };
-      })
-      .then(match => request(Object.assign(matchOptions, { form: match })))
+    // resolves all requests, build the match object and then post the match on fifa-champs api
+    Promise.all([seasonsPromise, playersPromise, adminsPromise])
+      .then(resolvedPromises => buildMatchObject(resolvedPromises, message.userName, captureGroups, isFinal))
+      .then(match => request(Object.assign(matchesRequestOptions, { form: match })))
       .then(() => resolve('partida adicionada.'))
       .catch(error => reject(`partida não adicionada (${error})`));
+  });
+}
+
+function buildMatchObject([seasonsBody, playersBody, adminsBody], userName, captureGroups, isFinal) {
+  return new Promise((resolve, reject) => {
+    const championship = seasonsBody.find(season => season.isCurrent === true);
+    const isUserAdmin = adminsBody.find(admin => admin.nickname === userName);
+    
+    if (!isUserAdmin) {
+      reject(':slack-jihad: acesso negado :slack-jihad:');
+    }
+    
+    const player1 = playersBody.find(player => player.nickname === captureGroups[PLAYER1]);
+    const player2 = playersBody.find(player => player.nickname === captureGroups[PLAYER2]);
+    const team1score = captureGroups[TEAM1SCORE];
+    const team2score = captureGroups[TEAM2SCORE];
+    const player3 = playersBody.find(player => player.nickname === captureGroups[PLAYER3]);
+    const player4 = playersBody.find(player => player.nickname === captureGroups[PLAYER4]);
+    const date = new Date().toISOString();
+    
+    resolve({
+      championship, player1, player2, player3, player4, team1score, team2score, isFinal, date
+    });
   });
 }
 
 module.exports = {
   pattern,
   handler: addMatch,
-  description: '*edsonbastos add match*: adds a new match to current fifa-champs season',
-  channels: ['fifa-champs-dev'],
+  usage: '_edsonbastos adicionar partida player1 player2 team1score x team2score player3 player4_',
+  description: '*adicionar partida*: adiciona uma partida a temporada atual do fifa-champs',
+  channels: ['fifa-champs', 'fifa-champs-dev'],
 };

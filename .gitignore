@@ -52,3 +52,6 @@ webapp/bower_components
 webapp/dist/
 api/dist/
 dist/
+
+# fifabot project ignored files
+api/integrations/fifabot/variables\.js
