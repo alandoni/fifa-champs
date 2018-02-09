@@ -120,7 +120,7 @@ function fetchDatesFromResult(values, arrayMatches, index, yearToSave, monthToSa
     has to be made by the number of player's collumns and not the one from date */
     for (let dateIndex = 0; dateIndex < values[index + 1].length; dateIndex += 2) {
         // Date wil be null/undefined if it's the same as previous one
-        if ((values[index][dateIndex] != '') && (values[index][dateIndex] != undefined)) {
+        if ((values[index][dateIndex] != '') && (values[index][dateIndex] !== null)) {
             dayToSave = values[index][dateIndex].slice(0, 2);
             currentDateBeingSet = new Date('20' + yearToSave, monthToSave - 1, dayToSave);
         }
@@ -174,7 +174,7 @@ function getEquivalentNickname(nickname) {
         'Leonardo' : 'Leo'
     }
 
-    return (equivalent[nickname] === undefined) ? nickname : equivalent[nickname];
+    return (equivalent[nickname] == null) ? nickname : equivalent[nickname];
 }
 
 function getMatchesFromSpreadsheet(auth, monthSheets) {
@@ -200,7 +200,7 @@ function getMatchesFromSpreadsheet(auth, monthSheets) {
                 return;
             }
 
-            if (response.values == undefined) {
+            if (response.values == null) {
                 console.log('Sheet not Found: ' + val);
                 return;
             }

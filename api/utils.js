@@ -25,12 +25,18 @@ module.exports = {
         let milli = seconds.substr(seconds.indexOf('.') + 1, 3);
         timeParts[2] = timeParts[2].substr(0, timeParts[2].indexOf('.'));
         let date = new Date(dateParts[0], dateParts[1], dateParts[2], timeParts[0], timeParts[1], timeParts[2], milli);
-        date = sumHour(date, -3);
+        date = this.sumHour(date, -3);
         return date;
     },
 
     setTime : function(date, hour, minute) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0);
+    },
+
+    sumHour : function(date, numberOfHours) {
+        let newDate = new Date(date);
+        newDate.setHours(date.getHours() + numberOfHours);
+        return newDate;
     },
 
     sumMinutes : function(date, numberOfMinutes) {

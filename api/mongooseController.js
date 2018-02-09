@@ -12,12 +12,12 @@ const options = {
 Mongoose.Promise = Promise;
 
 class MongoController {
-    constructor(databaseAddress) {
-        console.log('Connecting to MongoDB.')
+    constructor(databaseAddress, log) {
+        log.debug('Connecting to MongoDB.')
         Mongoose.connect(databaseAddress, options);
-        db.on('error', console.error);
+        db.on('error', log.error);
         db.once('open', function() {
-            console.log('Connected to MongoDB. We\'re ready to go');
+            log.debug('Connected to MongoDB. We\'re ready to go');
         });
     }
 

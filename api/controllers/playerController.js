@@ -1,9 +1,5 @@
 'use strict'
 
-const Promise = require('bluebird');
-const errors = require('./../errors');
-const util = require('./../utils');
-
 const document = require('./../models/player');
 
 class PlayerController {
@@ -37,7 +33,7 @@ class PlayerController {
     }
 
     update(id, player) {
-        return this.mongo.update(document, id, player).then((playerSaved) => {
+        return this.mongo.update(document, id, player).then(() => {
             return this.getById(id);
         }).bind(this).then((playerSaved) => {
             return playerSaved;

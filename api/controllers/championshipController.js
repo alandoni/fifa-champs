@@ -1,7 +1,5 @@
 'use strict'
 
-const Promise = require('bluebird');
-const errors = require('./../errors');
 const util = require('./../utils');
 
 const document = require('./../models/championship');
@@ -40,17 +38,17 @@ class ChampionshipController {
             let minDate = criteria.minDate;
             let maxDate = criteria.maxDate;
 
-            criteria.minDate = undefined;
-            criteria.maxDate = undefined;
+            criteria.minDate = null;
+            criteria.maxDate = null;
 
             criteria.date = { $gte : minDate, $lte : maxDate };
         }
 
         if (criteria.offset && criteria.limit) {
             let limit = parseInt(criteria.limit);
-            criteria.limit = undefined;
+            criteria.limit = null;
             let offset = parseInt(criteria.offset);
-            criteria.offset = undefined;
+            criteria.offset = null;
 
             return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate(populate).exec();
         }
@@ -86,7 +84,7 @@ class ChampionshipController {
     }
 
     update(id, championship) {
-        return this.mongo.update(document, id, championship).then((championshipSaved) => {
+        return this.mongo.update(document, id, championship).then(() => {
             return this.getById(id);
         }).bind(this).then((championshipSaved) => {
             return this._prepareToSend(championshipSaved);
@@ -102,12 +100,12 @@ class ChampionshipController {
     _prepareToSend(championshipSaved) {
         if (Array.isArray(championshipSaved)) {
             let championships = util.copyObject(championshipSaved);
-            for (var championship in championships) {
+            for (const championship in championships) {
                 championships[championship].date = util.formatDate(new Date(championships[championship].date));
             }
             return championships;
         }
-        var championship = util.copyObject(championshipSaved);
+        const championship = util.copyObject(championshipSaved);
         championship.date = util.formatDate(new Date(championship.date));
         return championship;
     }
