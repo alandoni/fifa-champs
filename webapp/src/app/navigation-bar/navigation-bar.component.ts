@@ -153,7 +153,7 @@ export class NavigationBarComponent implements OnInit {
     }
 
     createSeasonBasedOnCurrentSeason(currentSeason) {
-        currentSeason.date = undefined;
+        currentSeason.date = null;
         currentSeason.isCurrent = false;
 
         return this.championshipService.update(currentSeason._id, currentSeason).subscribe((current) => {
@@ -172,10 +172,10 @@ export class NavigationBarComponent implements OnInit {
         const newChampionship = {
             month: month,
             year: year,
-            players: undefined,
-            matches: undefined,
-            finalMatch: undefined,
-            _id: undefined,
+            players: null,
+            matches: null,
+            finalMatch: null,
+            _id: null,
             date: new Date(),
             isCurrent: true
         };

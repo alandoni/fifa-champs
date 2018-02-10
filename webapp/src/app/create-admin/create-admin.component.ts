@@ -54,8 +54,8 @@ export class CreateAdminComponent implements OnInit {
     }
 
     tryUpdateAdmin() {
-        let salt = undefined;
-        let password = undefined;
+        let salt = null;
+        let password = null;
         if (this.salt) {
             salt = this.salt;
             password = this.password;
