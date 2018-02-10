@@ -37,7 +37,7 @@ export class StandingTableComponent implements OnChanges {
     updateStats() {
         // update the stats only if the user is an admin
         if (this.loginService.isLoggedIn()) {
-            if (this.statisticsList.length > 0) {
+            if (this.statisticsList != null && this.statisticsList.length > 0) {
                 const champs = this.championshipService.getSelectedChampionship();
                 // we should not add stats for an unfinished championship
                 if (!champs.isCurrent) {
@@ -54,7 +54,7 @@ export class StandingTableComponent implements OnChanges {
     }
 
     setLimit() {
-        if (!this.matches || this.matches.length === 0) {
+        if (this.matches == null || this.matches.length === 0) {
             this.days = 0;
             this.numberOfMatches = 0;
             this.limit = 0;
@@ -78,7 +78,7 @@ export class StandingTableComponent implements OnChanges {
     }
 
     hasPlayers() {
-        return this.statisticsList !== null && this.statisticsList.length > 0;
+        return this.statisticsList != null && this.statisticsList.length > 0;
     }
 
     getSg(statistic) {

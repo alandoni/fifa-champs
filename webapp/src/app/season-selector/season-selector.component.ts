@@ -105,7 +105,7 @@ export class SeasonSelectorComponent implements OnInit {
         this.date = new Date(year, month - 1, 1);
         this.isLoading = true;
         this.championshipService.getByMonth(month, year).subscribe((seasons) => {
-            if (seasons.length > 0) {
+            if (seasons != null && seasons.length > 0) {
                 this.requestMatchesByChampionship(seasons[0]._id);
             } else {
                 this.matches = [];
