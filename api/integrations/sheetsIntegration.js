@@ -120,7 +120,7 @@ function fetchDatesFromResult(values, arrayMatches, index, yearToSave, monthToSa
     has to be made by the number of player's collumns and not the one from date */
     for (let dateIndex = 0; dateIndex < values[index + 1].length; dateIndex += 2) {
         // Date wil be null/undefined if it's the same as previous one
-        if ((values[index][dateIndex] != '') && (values[index][dateIndex] !== null)) {
+        if ((values[index][dateIndex] != '') && (values[index][dateIndex] != null)) {
             dayToSave = values[index][dateIndex].slice(0, 2);
             currentDateBeingSet = new Date('20' + yearToSave, monthToSave - 1, dayToSave);
         }
