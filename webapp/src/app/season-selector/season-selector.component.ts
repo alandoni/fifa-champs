@@ -27,7 +27,7 @@ export class SeasonSelectorComponent implements OnInit {
 
         if (!this.championshipService.getCurrentChampionship()) {
             this.championshipService.getCurrent().subscribe((championships) => {
-                if (championships.length === 0) {
+                if (championships !== null && championships.length === 0) {
                     this.noChampionships = true;
                     return;
                 }
