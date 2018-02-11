@@ -1,8 +1,8 @@
 const request = require('request-promise');
 const { FIFABOT_API_URL } = require('../variables');
  
-// adicionar partida player1 player2 team1score x team2score player3 player4
-const pattern = /^adicionar partida (.*) (.*) (\d+)\s*x\s*(\d+) (.*) (.*)$/;
+// adicionar partida @player1 @player2 team1score x team2score @player3 @player4
+const pattern = /^adicionar partida @?(.*) @?(.*) (\d+)\s*x\s*(\d+) @?(.*) @?(.*)$/;
 const seasonsRequestOptions = {
   url: `${FIFABOT_API_URL}/api/championships`,
   method: 'GET',
@@ -72,7 +72,7 @@ function buildMatchObject([seasonsBody, playersBody, adminsBody], userName, capt
 module.exports = {
   pattern,
   handler: addMatch,
-  usage: '_edsonbastos adicionar partida player1 player2 team1score x team2score player3 player4_',
+  usage: '_edsonbastos adicionar partida @player1 @player2 team1score x team2score @player3 @player4_',
   description: '*adicionar partida*: adiciona uma partida a temporada atual do fifa-champs',
   channels: ['fifa-champs', 'fifa-champs-dev'],
 };
