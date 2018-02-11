@@ -1,6 +1,5 @@
 'use strict'
 
-const Promise = require('bluebird');
 const errors = require('./../errors');
 const util = require('./../utils');
 
@@ -37,7 +36,7 @@ class AdminController {
     }
 
     update(id, admin) {
-        return this.mongo.update(document, id, admin).then((admin) => {
+        return this.mongo.update(document, id, admin).then(() => {
             return this.getById(id);
         }).bind(this).then((admin) => {
             return this._prepareToSend(admin);
@@ -50,16 +49,16 @@ class AdminController {
         });
     }
 
-    _prepareToSend(admin) {
-        if (Array.isArray(admin)) {
-            let admins = util.copyObject(admin);
-            for (var admin in admins) {
-                admins[admin].password = undefined;
+    _prepareToSend(adminSaved) {
+        if (Array.isArray(adminSaved)) {
+            let admins = util.copyObject(adminSaved);
+            for (const admin in admins) {
+                admins[admin].password = null;
             }
             return admins;
         }
-
-        admin.password = undefined;
+        const admin = util.copyObject(adminSaved);
+        admin.password = null;
         return admin;
     }
 

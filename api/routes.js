@@ -24,7 +24,7 @@ const MatchController = require('./controllers/matchController');
 const AdminController = require('./controllers/adminController');
 const teamsJSON = require('./integrations/resources/teamsFifa17.json');
 
-exports.set = function(app, mongo) {
+exports.set = function(app, mongo, log) {
 
     const championshipController = new ChampionshipController(mongo);
     const playerController = new PlayerController(mongo);
@@ -71,7 +71,7 @@ exports.set = function(app, mongo) {
         }
     }).then((admin) => {
         if (admin) {
-            console.log('Created Admin: ' + admin.nickname);
+            log.debug('Created Admin: ' + admin.nickname);
         }
     });
 
@@ -122,7 +122,7 @@ exports.set = function(app, mongo) {
         passport.authenticate('local-login', (error, user) => {
 
             if (error) {
-                console.log('error ' + JSON.stringify(error));
+                log.error('error ' + JSON.stringify(error));
                 response.status(401).send(error);
                 return;
             }
@@ -130,7 +130,7 @@ exports.set = function(app, mongo) {
             request.login(user, (error) => {
 
                 if (error) {
-                    console.log('err: ' + error);
+                    log.error('err: ' + error);
                     response.status(401).send(error);
                     return;
                 }
@@ -147,12 +147,12 @@ exports.set = function(app, mongo) {
 
     app.get(URL_SALT, (request, response) => {
         adminController.getByCriteria({ nickname : request.params.nickname }).then((users) => {
-            let user = users[0];
+            let user = users;
 
             let salt = { salt : sha3(user.id + user.nickname) };
             response.send(salt);
         }).catch((error) => {
-            console.log(error);
+            log.error(error);
             response.status(500).send(error);
         });
     });

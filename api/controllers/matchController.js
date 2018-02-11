@@ -1,7 +1,5 @@
 'use strict'
 
-const Promise = require('bluebird');
-const errors = require('./../errors');
 const util = require('./../utils');
 const Mongoose = require('mongoose');
 const ObjectId = Mongoose.Types.ObjectId;
@@ -31,17 +29,17 @@ class MatchController {
             let minDate = criteria.minDate;
             let maxDate = criteria.maxDate;
 
-            criteria.minDate = undefined;
-            criteria.maxDate = undefined;
+            criteria.minDate = null;
+            criteria.maxDate = null;
 
             criteria.date = { $gte : minDate, $lte : maxDate };
         }
 
         if (criteria.offset && criteria.limit) {
             let limit = parseInt(criteria.limit);
-            criteria.limit = undefined;
+            criteria.limit = null;
             let offset = parseInt(criteria.offset);
-            criteria.offset = undefined;
+            criteria.offset = null;
             return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset,  { date : -1 }).populate('player1 player2 player3 player4 championship').exec()
             .then((matches) => {
                 return this._prepareToSend(matches);
