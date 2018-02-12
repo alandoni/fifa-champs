@@ -51,6 +51,8 @@ describe('API Test', () => {
         it('it should LOGIN', (done) => {
             functions.login(agent).then((res) => {
                 res.should.have.status(200);
+                res.body.should.not.have.property('password');
+                res.body.should.not.have.property('tokens');
                 res.body.should.have.property('token');
                 token = res.body.token;
                 done();
@@ -123,7 +125,7 @@ describe('API Test', () => {
             agent.post('/api/players').send(player).then((res) => {
                 res.should.have.status(401);
                 done(res.status);
-            }).catch((res) => {
+            }).catch(() => {
                 done();
             });
         });
@@ -139,7 +141,7 @@ describe('API Test', () => {
             agent.post('/api/players').set('x-access-token', 'token').send(player).then((res) => {
                 res.should.have.status(401);
                 done(res.status);
-            }).catch((res) => {
+            }).catch(() => {
                 done();
             });
         });

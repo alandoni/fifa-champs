@@ -52,14 +52,14 @@ class AdminController {
         if (Array.isArray(adminSaved)) {
             let admins = util.copyObject(adminSaved);
             for (const admin of admins) {
-                admin.password = undefined;
-                admin.tokens = undefined;
+                Reflect.deleteProperty(admin, 'password');
+                Reflect.deleteProperty(admin, 'tokens');
             }
             return admins;
         }
         const admin = util.copyObject(adminSaved);
-        admin.password = undefined;
-        admin.tokens = undefined;
+        Reflect.deleteProperty(admin, 'password');
+        Reflect.deleteProperty(admin, 'tokens');
         return admin;
     }
 
