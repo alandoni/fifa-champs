@@ -76,7 +76,7 @@ export class NavigationBarComponent implements OnInit {
 
     createMatch() {
         const currentChamp = this.championshipService.getSelectedChampionship();
-        if (currentChamp !== undefined) {
+        if (currentChamp != null) {
             this.matchService.getFinalFromChampionship(currentChamp._id).toPromise()
             .then(response => {
                 if (response.length > 0) {
@@ -153,7 +153,7 @@ export class NavigationBarComponent implements OnInit {
     }
 
     createSeasonBasedOnCurrentSeason(currentSeason) {
-        currentSeason.date = undefined;
+        currentSeason.date = null;
         currentSeason.isCurrent = false;
 
         return this.championshipService.update(currentSeason._id, currentSeason).subscribe((current) => {

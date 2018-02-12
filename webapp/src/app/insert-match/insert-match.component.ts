@@ -71,14 +71,12 @@ export class InsertMatchComponent implements OnInit, OnChanges {
         }
 
         if (this.match.team1score == null
-            || this.match.team1score === undefined
             || this.match.team1score.length === 0) {
             this.error = { description: 'Verifique a pontuação dos times.' };
             return false;
         }
 
         if (this.match.team2score == null
-            || this.match.team2score === undefined
             || this.match.team1score.length === 0) {
             this.error = { description: 'Verifique a pontuação dos times.' };
             return false;

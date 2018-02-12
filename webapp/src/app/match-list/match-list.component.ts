@@ -54,7 +54,7 @@ export class MatchListComponent implements OnChanges {
                 matchCol.push(this.matches[matchIndex]);
 
                 if (this.matches[matchIndex].date === lastMatchDate) {
-                    this.matches[matchIndex].date = undefined;
+                    this.matches[matchIndex].date = null;
                 } else {
                     lastMatchDate = this.matches[matchIndex].date;
                 }
