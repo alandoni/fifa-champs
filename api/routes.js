@@ -3,9 +3,7 @@
 const bodyParser  = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
 const cors = require('cors');
-const sha3 = require('js-sha3').sha3_224;
 
 const errors = require('./errors');
 
@@ -23,15 +21,14 @@ const PlayerController = require('./controllers/playerController');
 const MatchController = require('./controllers/matchController');
 const AdminController = require('./controllers/adminController');
 const teamsJSON = require('./integrations/resources/teamsFifa17.json');
-
+const PassportController = require('./passport');
 exports.set = function(app, mongo, log) {
 
     const championshipController = new ChampionshipController(mongo);
     const playerController = new PlayerController(mongo);
     const matchController = new MatchController(mongo);
     const adminController = new AdminController(mongo);
-
-    require('./passport')(passport, adminController);
+    const passportController = new PassportController(adminController, log);
 
     app.use(bodyParser.urlencoded({
         extended : true
@@ -62,8 +59,8 @@ exports.set = function(app, mongo, log) {
         cookie : { httpOnly : true, maxAge : 1000 * 60 * 60 * 24, secure : false }
     }));
 
-    app.use(passport.initialize());
-    app.use(passport.session());
+    app.use(passportController.passport.initialize());
+    app.use(passportController.passport.session());
 
     adminController.getAll().then((admins) => {
         if (admins.length == 0) {
@@ -75,14 +72,9 @@ exports.set = function(app, mongo, log) {
         }
     });
 
-    function isLoggedIn(req, res, next) {
-
-        if (req.isAuthenticated()) {
-            return next();
-        }
-
-        res.status(401).send(errors.getUnauthorized());
-    }
+    function isLoggedIn(request, response, next) {
+        passportController.isLoggedIn(request, response, next);
+    } 
 
     //ADMIN
     app.post(URL_ADMIN, isLoggedIn, (request, response) => {
@@ -119,25 +111,7 @@ exports.set = function(app, mongo, log) {
 
     //LOGIN
     app.post(URL_LOGIN, (request, response, next) => {
-        passport.authenticate('local-login', (error, user) => {
-
-            if (error) {
-                log.error('error ' + JSON.stringify(error));
-                response.status(401).send(error);
-                return;
-            }
-
-            request.login(user, (error) => {
-
-                if (error) {
-                    log.error('err: ' + error);
-                    response.status(401).send(error);
-                    return;
-                }
-                response.send(user);
-                next();
-            });
-        })(request, response, next);
+        passportController.authenticate(request, response, next);
     });
 
     app.post(URL_LOGOUT, isLoggedIn, (req, res) => {
@@ -147,9 +121,7 @@ exports.set = function(app, mongo, log) {
 
     app.get(URL_SALT, (request, response) => {
         adminController.getByCriteria({ nickname : request.params.nickname }).then((users) => {
-            let user = users;
-
-            let salt = { salt : sha3(user.id + user.nickname) };
+            const salt = adminController.getSalt(users[0]);
             response.send(salt);
         }).catch((error) => {
             log.error(error);

@@ -3,7 +3,8 @@ let Schema   = Mongoose.Schema;
 
 let adminSchema = new Schema({
     nickname : String,
-    password : String
+    password : String,
+    tokens : [String]
 });
 
 let Admin = Mongoose.model('Admin', adminSchema);
