@@ -5,8 +5,6 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-const errors = require('./errors');
-
 const URL_ADMIN = '/api/admin';
 const URL_CHAMPIONSHIPS = '/api/championships';
 const URL_PLAYERS = '/api/players';
@@ -74,7 +72,7 @@ exports.set = function(app, mongo, log) {
 
     function isLoggedIn(request, response, next) {
         passportController.isLoggedIn(request, response, next);
-    } 
+    }
 
     //ADMIN
     app.post(URL_ADMIN, isLoggedIn, (request, response) => {

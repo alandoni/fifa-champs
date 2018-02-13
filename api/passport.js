@@ -13,11 +13,11 @@ class PassportController {
         this.passport = passport;
         this.log = log;
         this.log.debug('Initializing passport controller');
-        
+
         this.passport.serializeUser((user, done) => {
             done(null, user._id);
         });
-    
+
         // used to deserialize the user
         this.passport.deserializeUser((id, done) => {
             this.adminController.getById(id).then((user) => {
@@ -30,27 +30,27 @@ class PassportController {
                 done(error);
             });
         });
-    
+
         this.passport.use('local-login', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with nickname
             usernameField : 'nickname',
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         }, (req, nickname, password, done) => {
-            this.log.debug("login : " + nickname);
+            this.log.debug('login : ' + nickname);
             const loginObj = { nickname : nickname, password : password };
             let token = null;
             this.adminController.login(loginObj).then((user) => {
                 token = this.createToken(user);
-                if (user.tokens != null) {
-                    user.tokens.push(token);
-                } else {
+                if (user.tokens == null) {
                     user.tokens = [token];
+                } else {
+                    user.tokens.push(token);
                 }
-                return this.adminController.update(user._id, {tokens : user.tokens});
+                return this.adminController.update(user._id, { tokens : user.tokens });
             }).then((result) => {
                 result.token = token;
-                this.log.debug("login result: " + JSON.stringify(result));
+                this.log.debug('login result: ' + JSON.stringify(result));
                 return done(null, result);
             }).catch((error) => {
                 this.log.error(error);
@@ -61,9 +61,9 @@ class PassportController {
 
     createToken(user) {
         return jwt.sign({
-            id: user._id,
+            id : user._id,
         }, SECRET, {
-            expiresIn: 60 * 60 * 24 * 7
+            expiresIn : 60 * 60 * 24 * 7
         });
     }
 
@@ -72,11 +72,11 @@ class PassportController {
             const token = req.headers['x-access-token'];
             this.log.debug('JWT: ' + token);
             return this._getUserByToken(token, req).then((user) => {
-                if (user != null) {
-                    this.log.debug('Authenticated via header with user ' + JSON.stringify(user));
-                    next();
-                } else {
+                if (user == null) {
                     res.status(401).send(errors.getUnauthorized());
+                } else {
+                    this.log.debug('Authenticated via header with user ' + JSON.stringify(user));
+                    return next();
                 }
             }).catch((error) => {
                 this.log.error(error);
@@ -94,7 +94,7 @@ class PassportController {
     _getUserByToken(token, req) {
         return this.validateToken(token).then((decodedJwt) => {
             req.decoded = decodedJwt;
-            return this.adminController.getByCriteria({tokens : token});
+            return this.adminController.getByCriteria({ tokens : token });
         }).then((users) => {
             this.log.debug('User found: ' + JSON.stringify(users));
             if (users.length > 0) {
@@ -108,7 +108,7 @@ class PassportController {
 
     validateToken(token) {
         return new Promise((resolve, reject) => {
-            jwt.verify(token, SECRET, (err, decoded) => {      
+            jwt.verify(token, SECRET, (err, decoded) => {
                 if (err) {
                     this.log.error(err);
                     reject(err);
@@ -135,7 +135,7 @@ class PassportController {
                     return;
                 }
                 this.log.debug('login : ' + JSON.stringify(user));
-                
+
                 response.send(user);
                 next();
             });
