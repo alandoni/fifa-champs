@@ -2,7 +2,7 @@ const request = require('request-promise');
 const { FIFABOT_API_URL } = require('../variables');
 
 // adicionar partida @player1 @player2 team1score x team2score @player3 @player4
-const pattern = /^adicionar partida (.*) (.*) (\d+)\s*x\s*(\d+) (.*) (.*)$/;
+const pattern = /^adicionar partida @?(.*) @?(.*) (\d+)\s*x\s*(\d+) @?(.*) @?(.*)$/;
 const seasonsRequestOptions = {
     url : `${FIFABOT_API_URL}/api/championships`,
     method : 'GET',
@@ -16,9 +16,6 @@ const playersRequestOptions = {
 const matchesRequestOptions = {
     url : `${FIFABOT_API_URL}/api/matches`,
     method : 'POST',
-    headers : {
-        'x-access-token' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhODIxMTI0MTBjZGVjOWZjOWY3YzkzMyIsImlhdCI6MTUxODQ4NDY5MSwiZXhwIjoxNTE4NDg0ODExfQ.q22I-MEseG100i5YRD6DuuTq01HTJspHMIhYQajfLWQ'
-    },
     json : true
 };
 const adminsRequestOptions = {
@@ -38,14 +35,14 @@ function addMatch(message, isFinal = false) {
         const captureGroups = message.text.match(pattern);
         const seasonsPromise = request(seasonsRequestOptions);
         const playersPromise = request(playersRequestOptions);
-        const adminsPromise = request(adminsRequestOptions);
+        const adminsPromise = request(Object.assign(adminsRequestOptions, { headers : { 'x-access-token' : message.token } }));
 
         // resolves all requests, build the match object and then post the match on fifa-champs api
         Promise.all([seasonsPromise, playersPromise, adminsPromise])
             .then((resolvedPromises) => buildMatchObject(resolvedPromises, message.userName, captureGroups, isFinal))
-            .then((match) => request(Object.assign(matchesRequestOptions, { form : match })))
+            .then((match) => request(Object.assign(matchesRequestOptions, { form : match, headers : { 'x-access-token' : message.token } })))
             .then(() => resolve('partida adicionada.'))
-            .catch((error) => reject(`partida não adicionada (${error})`));
+            .catch((error) => reject(new Error(`partida não adicionada (${error})`)));
     });
 }
 
@@ -55,7 +52,7 @@ function buildMatchObject([seasonsBody, playersBody, adminsBody], userName, capt
         const isUserAdmin = adminsBody.find((admin) => admin.nickname === userName);
 
         if (!isUserAdmin) {
-            reject(':slack-jihad: acesso negado :slack-jihad:');
+            reject(new Error(':slack-jihad: acesso negado :slack-jihad:'));
         }
 
         const player1 = playersBody.find((player) => player.nickname === captureGroups[PLAYER1]);

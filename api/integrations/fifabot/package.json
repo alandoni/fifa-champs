@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "fifabot.js",
   "dependencies": {
+    "babel-eslint": "^8.2.1",
     "botkit": "^0.4.10",
     "eslint-plugin-node": "^4.2.2",
     "request": "^2.81.0",

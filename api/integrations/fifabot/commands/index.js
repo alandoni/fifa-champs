@@ -15,18 +15,14 @@ function parse(message) {
         }, null);
 
         if (command == null) {
-            console.log('comando invalido');
-            reject('comando invalido');
+            reject(new Error('comando invalido'));
         }
 
         // check if the stream that was sent the message is allowed to run the command
         if (!isCommandAllowed(command, message)) {
-            console.log('comando nao permitido');
-            reject('comando nao permitido neste canal');
+            reject(new Error('comando nao permitido neste canal'));
         }
 
-        console.log(command.description);
-        
         command.handler(message)
             .then(resolve)
             .catch(reject);

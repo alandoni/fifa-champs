@@ -5,21 +5,25 @@ const { FIFABOT_API_URL, FIFABOT_USER, FIFABOT_PASSWORD } = require('./variables
 
 let token = null;
 
-slack.bot.startRTM();
+slack.bot.startRTM((error) => {
+    if (error) {
+        throw new Error('bot not authenticated');
+    }
+});
 
-// request({
-//     url : `${FIFABOT_API_URL}/api/login`,
-//     form : {
-//         nickname : FIFABOT_USER,
-//         password : FIFABOT_PASSWORD
-//     },
-//     method : 'POST',
-//     json : true
-// }).then((loginBody) => {
-//     if (!token) {
-//         token = loginBody.token;
-//     }
-// });
+request({
+    url : `${FIFABOT_API_URL}/api/login`,
+    form : {
+        nickname : FIFABOT_USER,
+        password : FIFABOT_PASSWORD
+    },
+    method : 'POST',
+    json : true
+}).then((loginBody) => {
+    if (!token) {
+        token = loginBody.token;
+    }
+});
 
 // enables bot to hear from direct messages, direct mentions and mentions
 slack.controller.hears('.*', ['direct_message', 'direct_mention', 'mention'], (botInstance, botMessage) => {
@@ -57,7 +61,7 @@ slack.controller.hears('.*', ['direct_message', 'direct_mention', 'mention'], (b
 
                 commands.parse(message)
                     .then((response) => botInstance.reply(botMessage, response))
-                    .catch((error) => botInstance.reply(botMessage, error));
+                    .catch((error) => botInstance.reply(botMessage, error.toString()));
             });
         });
     });
