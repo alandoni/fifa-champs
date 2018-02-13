@@ -1,33 +1,52 @@
-"use strict"
+'use strict'
 
 const express = require('express');
+const MongooseController = require('./mongooseController');
+const path = require('path');
+const routes = require('./routes');
+const winston = require('winston');
+
+const log = new winston.Logger({
+    transports : [
+        new (winston.transports.File)({
+            name : 'info-log',
+            filename : 'log.log',
+            level : 'info',
+            json : false,
+            prettyPrint : true
+        }),
+        new (winston.transports.File)({
+            name : 'info-error',
+            filename : 'log.log',
+            level : 'error',
+            json : false,
+            prettyPrint : true
+        }),
+        new (winston.transports.Console)({
+            level : 'debug',
+            timestamp : true,
+            colorize : true,
+            json : false,
+            prettyPrint : true
+        })
+    ]
+});
+
 const app = express();
+const databaseAddress = (process.env.DB_ADDR || 'mongodb://localhost/test');
+const mongo = new MongooseController(databaseAddress, log);
 
 app.set('port', (process.env.PORT || process.env.FIFA_CHAMPS_PORT || 5001));
+app.listen(app.get('port'));
 
-const http = app.listen(app.get('port'));
+log.debug('Listening at port: ' + app.get('port'));
 
-const databaseAddress = (process.env.DB_ADDR || "mongodb://localhost/test");
-const MongooseController = require('./mongooseController');
-const mongo = new MongooseController(databaseAddress);
+routes.set(app, mongo, log);
 
-console.log("Listening at port: " + app.get("port"));
-
-const routes = require('./routes');
-routes.set(app, mongo);
-
-app.get('/', (req, res) => {
-	res.sendfile(__dirname + '/dist/index.html');
-});
-
-app.get('/:file', (req, res) => {
-	const file = req.params.file;
-	res.sendfile(__dirname + '/dist/' + file);
-});
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
-	res.sendfile(__dirname + '/dist/index.html');
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
-
 
 module.exports = app;

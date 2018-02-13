@@ -10,180 +10,182 @@ import { NavigationBarItem } from './../models/navigation-bar-item.model';
 declare var $ : any;
 
 @Component({
-	selector: 'app-navigation-bar',
-	templateUrl: './navigation-bar.component.html',
-	styleUrls: ['./navigation-bar.component.css']
+    selector: 'app-navigation-bar',
+    templateUrl: './navigation-bar.component.html',
+    styleUrls: ['./navigation-bar.component.css']
 })
 export class NavigationBarComponent implements OnInit {
 
-	@Output() onLoginSuccess: EventEmitter<any> = new EventEmitter();
-	@Output() onLogoutSuccess: EventEmitter<any> = new EventEmitter();
-	@Output() onCreateMatchSuccess: EventEmitter<Match> = new EventEmitter();
-	@Output() onCreateChampionshipSuccess: EventEmitter<Championship> = new EventEmitter();
+    @Output() onLoginSuccess : EventEmitter<any> = new EventEmitter();
+    @Output() onLogoutSuccess : EventEmitter<any> = new EventEmitter();
+    @Output() onCreateMatchSuccess : EventEmitter<Match> = new EventEmitter();
+    @Output() onCreateChampionshipSuccess : EventEmitter<Championship> = new EventEmitter();
 
-	modalActions = new EventEmitter<string|MaterializeAction>();
-	matchModalActions = new EventEmitter<string|MaterializeAction>();
-	teamPickModalActions = new EventEmitter<string|MaterializeAction>();
-	isLoggedIn = false;
-	items : Array<NavigationBarItem> = [];
+    modalActions = new EventEmitter<string|MaterializeAction>();
+    matchModalActions = new EventEmitter<string|MaterializeAction>();
+    teamPickModalActions = new EventEmitter<string|MaterializeAction>();
+    isLoggedIn = false;
+    items : Array<NavigationBarItem> = [];
 
-	constructor(private loginService : LoginService, private championshipService : ChampionshipService, private matchService : MatchService) {
-		this.loginService.addListener(this);
-		this.onLoginChange();
-	}
+    constructor(private loginService : LoginService, private championshipService : ChampionshipService,
+        private matchService : MatchService) {
 
-	getItemsNotLogged() {
-		var itemsNotLogged = [];
-		itemsNotLogged.push(new NavigationBarItem('Login', null, this.openLoginModal.bind(this)));
-		itemsNotLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
-		itemsNotLogged.push(new NavigationBarItem('Temporada', '/season/standings/current', null));
-		itemsNotLogged.push(new NavigationBarItem('Escolher times', '/team-pick', this.teamPick.bind(this)));
-		return itemsNotLogged;
-	}
+        this.loginService.addListener(this);
+        this.onLoginChange();
+    }
 
-	getItemsLogged() {
-		var itemsLogged = [];
-		itemsLogged.push(new NavigationBarItem('Logout', null, this.logout.bind(this)));
-		itemsLogged.push(new NavigationBarItem('Administradores', '/admin', null));
-		itemsLogged.push(new NavigationBarItem('Jogadores', '/players', null));
-		itemsLogged.push(new NavigationBarItem('Adicionar Jogo', '/insert-match', this.createMatch.bind(this)));
-		itemsLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
-		itemsLogged.push(new NavigationBarItem('Temporada', '/season/standings/current', null));
-		itemsLogged.push(new NavigationBarItem('Criar Nova Temporada', null, this.createSeason.bind(this)));
-		itemsLogged.push(new NavigationBarItem('Escolher times', '/team-pick', this.teamPick.bind(this)));
-		return itemsLogged;
-	}
+    getItemsNotLogged() {
+        const itemsNotLogged = [];
+        itemsNotLogged.push(new NavigationBarItem('Login', null, this.openLoginModal.bind(this)));
+        itemsNotLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
+        itemsNotLogged.push(new NavigationBarItem('Temporada', '/season/standings/current', null));
+        itemsNotLogged.push(new NavigationBarItem('Escolher times', '/team-pick', this.teamPick.bind(this)));
+        return itemsNotLogged;
+    }
 
-	reverseArray(array) {
-		var newArray = [];
-		for (var i = array.length - 1; i >= 0; i--) {
-			newArray.push(array[i]);
-		}
-		return newArray;
-	}
+    getItemsLogged() {
+        const itemsLogged = [];
+        itemsLogged.push(new NavigationBarItem('Logout', null, this.logout.bind(this)));
+        itemsLogged.push(new NavigationBarItem('Administradores', '/admin', null));
+        itemsLogged.push(new NavigationBarItem('Jogadores', '/players', null));
+        itemsLogged.push(new NavigationBarItem('Adicionar Jogo', '/insert-match', this.createMatch.bind(this)));
+        itemsLogged.push(new NavigationBarItem('Hall of fame', '/hall', null));
+        itemsLogged.push(new NavigationBarItem('Temporada', '/season/standings/current', null));
+        itemsLogged.push(new NavigationBarItem('Criar Nova Temporada', null, this.createSeason.bind(this)));
+        itemsLogged.push(new NavigationBarItem('Escolher times', '/team-pick', this.teamPick.bind(this)));
+        return itemsLogged;
+    }
 
-	ngOnInit() {
-		$(".button-collapse").sideNav({
-			closeOnClick: true
-		});
-	}
+    reverseArray(array) {
+        const newArray = [];
+        for (let i = array.length - 1; i >= 0; i--) {
+            newArray.push(array[i]);
+        }
+        return newArray;
+    }
 
-	openMatchModal() {
-		this.matchModalActions.emit({action:"modal", params:['open']});
-	}
+    ngOnInit() {
+        $('.button-collapse').sideNav({
+            closeOnClick: true
+        });
+    }
 
-	createMatch() {
-		var currentChamp = this.championshipService.getSelectedChampionship();
-		if (currentChamp) {
-			this.matchService.getFinalFromChampionship(currentChamp._id).toPromise()
-				.then(response => {
-					if (response.length > 0) {
-						window.alert("Não é possível cadastrar um jogo pois este mês já tem uma final cadastrada.");
-						return;
-					}	else {
-						this.openMatchModal();
-					}
-				})
-		} else {
-			if (!window.confirm("Este mês ainda não tem um campeonato criado. Deseja criar?")) {
-				return;
-			} else if (this.createSeason()) {
-					this.openMatchModal();
-			}
-		}
-	}
+    openMatchModal() {
+        this.matchModalActions.emit({action: 'modal', params: ['open']});
+    }
 
-	teamPick() {
-		this.teamPickModalActions.emit({action:"modal", params:['open']});
-	}
+    createMatch() {
+        const currentChamp = this.championshipService.getSelectedChampionship();
+        if (currentChamp != null) {
+            this.matchService.getFinalFromChampionship(currentChamp._id).toPromise()
+            .then(response => {
+                if (response.length > 0) {
+                    window.alert('Não é possível cadastrar um jogo pois este mês já tem uma final cadastrada.');
+                    return;
+                }	else {
+                    this.openMatchModal();
+                }
+            });
+        } else {
+            if (!window.confirm('Este mês ainda não tem um campeonato criado. Deseja criar?')) {
+                return;
+            } else if (this.createSeason()) {
+                this.openMatchModal();
+            }
+        }
+    }
 
-	closeTeamPickModal(result) {
-		this.teamPickModalActions.emit({action:"modal", params:['close']});
-	}
+    teamPick() {
+        this.teamPickModalActions.emit({action: 'modal', params: ['open']});
+    }
 
-	closeMatchModal(result) {
-		this.matchModalActions.emit({action:"modal", params:['close']});
-		this.onCreateMatchSuccess.emit(result);
-	}
+    closeTeamPickModal(result) {
+        this.teamPickModalActions.emit({action: 'modal', params: ['close']});
+    }
 
-	onLoginChange() {
-		this.isLoggedIn = this.loginService.isLoggedIn();
-		if (this.isLoggedIn) {
-			this.items = this.getItemsLogged();
-		} else {
-			this.items = this.getItemsNotLogged();
-		}
-	}
+    closeMatchModal(result) {
+        this.matchModalActions.emit({action: 'modal', params: ['close']});
+        this.onCreateMatchSuccess.emit(result);
+    }
 
-	logout() {
-		this.loginService.logout();
-		this.onLogoutSuccess.emit(true);
-	}
+    onLoginChange() {
+        this.isLoggedIn = this.loginService.isLoggedIn();
+        if (this.isLoggedIn) {
+            this.items = this.getItemsLogged();
+        } else {
+            this.items = this.getItemsNotLogged();
+        }
+    }
 
-	openLoginModal() {
-		this.modalActions.emit({action:"modal", params:['open']});
-	}
+    logout() {
+        this.loginService.logout();
+        this.onLogoutSuccess.emit(true);
+    }
 
-	closeLoginModal(result) {
-		this.modalActions.emit({action:"modal", params:['close']});
-		this.onLoginSuccess.emit(result);
-	}
+    openLoginModal() {
+        this.modalActions.emit({action: 'modal', params: ['open']});
+    }
 
-	createSeason() {
-		if (this.championshipService.getCurrentChampionship()) {
-			this.createSeasonBasedOnCurrentSeason(this.championshipService.getCurrentChampionship());
-			return true;
-		}
+    closeLoginModal(result) {
+        this.modalActions.emit({action: 'modal', params: ['close']});
+        this.onLoginSuccess.emit(result);
+    }
 
-		this.championshipService.getCurrent().subscribe((current: Championship[]) => {
-			if (current.length == 0) {
-				var date = new Date();
-				this.insertChampionship(date.getMonth() + 1, date.getFullYear());
-				return true;
-			}
-			var currentSeason = current[0];
-			this.createSeasonBasedOnCurrentSeason(currentSeason);
-			return true;
-		}, (error: any) => {
-			console.error(error);
-			return false;
-		});
-	}
+    createSeason() {
+        if (this.championshipService.getCurrentChampionship()) {
+            this.createSeasonBasedOnCurrentSeason(this.championshipService.getCurrentChampionship());
+            return true;
+        }
 
-	createSeasonBasedOnCurrentSeason(currentSeason) {
-		currentSeason.date = undefined;
-		currentSeason.isCurrent = false;
+        this.championshipService.getCurrent().subscribe((current : Championship[]) => {
+            if (current.length === 0) {
+                const date = new Date();
+                this.insertChampionship(date.getMonth() + 1, date.getFullYear());
+                return true;
+            }
+            const currentSeason = current[0];
+            this.createSeasonBasedOnCurrentSeason(currentSeason);
+            return true;
+        }, (error : any) => {
+            console.error(error);
+            return false;
+        });
+    }
 
-		return this.championshipService.update(currentSeason._id, currentSeason).subscribe((current) => {
-			if (current.month == 12) {
-				current.year++;
-				current.month = 0;
-			}
+    createSeasonBasedOnCurrentSeason(currentSeason) {
+        currentSeason.date = null;
+        currentSeason.isCurrent = false;
 
-			this.insertChampionship(current.month + 1, current.year);
-		}, (error: any) => {
-			console.error(error);
-		});
-	}
+        return this.championshipService.update(currentSeason._id, currentSeason).subscribe((current) => {
+            if (current.month === 12) {
+                current.year++;
+                current.month = 0;
+            }
 
-	insertChampionship(month, year) {
-		var newChampionship = {
-			month: month,
-			year: year,
-			players: undefined,
-			matches: undefined,
-			finalMatch: undefined,
-			_id: undefined,
-			date: new Date(),
-			isCurrent: true
-		};
+            this.insertChampionship(current.month + 1, current.year);
+        }, (error : any) => {
+            console.error(error);
+        });
+    }
 
-		this.championshipService.insert(newChampionship).subscribe((newSeason) => {
-			this.championshipService.setCurrentChampionship(newSeason);
-			alert("Novo campeonato iniciado com sucesso");
-			this.onCreateChampionshipSuccess.emit(newSeason);
-		}, (error: any) => {
-			console.error(error);
-		});
-	}
+    insertChampionship(month, year) {
+        const newChampionship = {
+            month: month,
+            year: year,
+            players: undefined,
+            matches: undefined,
+            finalMatch: undefined,
+            _id: undefined,
+            date: new Date(),
+            isCurrent: true
+        };
+
+        this.championshipService.insert(newChampionship).subscribe((newSeason) => {
+            this.championshipService.setCurrentChampionship(newSeason);
+            alert('Novo campeonato iniciado com sucesso');
+            this.onCreateChampionshipSuccess.emit(newSeason);
+        }, (error : any) => {
+            console.error(error);
+        });
+    }
 }

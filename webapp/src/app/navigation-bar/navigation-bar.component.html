@@ -1,41 +1,41 @@
 <nav class="nav-extended">
 
-	<div class="nav-wrapper hide-on-med-and-down">
-		<ul id="nav-mobile" class="right" *ngFor="let item of items">
-			<app-navigation-bar-item [item]="item"></app-navigation-bar-item>
-		</ul>
-	</div>
+    <div class="nav-wrapper hide-on-med-and-down">
+        <ul id="nav-mobile" class="right" *ngFor="let item of items">
+            <app-navigation-bar-item [item]="item"></app-navigation-bar-item>
+        </ul>
+    </div>
 
-	<div class="nav-wrapper hide-on-large-only">
-		<div id="nav-mobile" class="menu right">
-			<a data-activates="slide-out" class="button-collapse">
-				<i class="material-icons">menu</i>
-			</a>
-		</div>
-	</div>
+    <div class="nav-wrapper hide-on-large-only">
+        <div id="nav-mobile" class="menu right">
+            <a data-activates="slide-out" class="button-collapse">
+                <i class="material-icons">menu</i>
+            </a>
+        </div>
+    </div>
 
-	<ul id="slide-out" class="side-nav">
-		<app-navigation-bar-item [item]="item" *ngFor="let item of reverseArray(items)"></app-navigation-bar-item>
-	</ul>
+    <ul id="slide-out" class="side-nav">
+        <app-navigation-bar-item [item]="item" *ngFor="let item of reverseArray(items)"></app-navigation-bar-item>
+    </ul>
 </nav>
 
 <div class="row">
-	<div class="modal col s12 offset-m3 m6 offset-l4 l4" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+    <div class="modal col s12 offset-m3 m6 offset-l4 l4" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
 
-		<app-login (onLoginSuccess)="closeLoginModal($event)"></app-login>
-	</div>
+        <app-login (onLoginSuccess)="closeLoginModal($event)"></app-login>
+    </div>
 
-	<div class="modal col s12 offset-m3 m6 offset-l4 l4 insert-match-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="matchModalActions">
-		<div class="modal-content">
-		  	<h4>Inserir Jogo</h4>
-		</div>
-		<app-insert-match (onCreateMatchSuccess)="closeMatchModal($event)"></app-insert-match>
-	</div>
+    <div class="modal col s12 offset-m3 m6 offset-l4 l4 insert-match-modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="matchModalActions">
+        <div class="modal-content">
+            <h4>Inserir Jogo</h4>
+        </div>
+        <app-insert-match (onCreateMatchSuccess)="closeMatchModal($event)"></app-insert-match>
+    </div>
 </div>
 
 <div class="modal col s8" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="teamPickModalActions">
-	<div class="modal-content">
-		<h4>Escolher Times</h4>
-	</div>
-	<app-team-pick></app-team-pick>
+    <div class="modal-content">
+        <h4>Escolher Times</h4>
+    </div>
+    <app-team-pick></app-team-pick>
 </div>

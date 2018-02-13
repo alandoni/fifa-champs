@@ -1,6 +1,6 @@
 <div id="popup-content">
-	<div *ngIf="error != null"><p>{{error.description}}</p></div>
-  	<div><input type="text" name="nickname" placeholder="Apelido" [(ngModel)]="nickname" /></div>
-	<div *ngIf="salt"><input type="password" name="password" placeholder="Senha" [(ngModel)]="password" /></div>
-  	<div id="button-container"><a class="waves-effect waves-light btn blue-grey lighten-1" (click)="tryCreateAdmin();" >Salvar</a></div>
+    <div *ngIf="error != null"><p>{{error.description}}</p></div>
+    <div><input type="text" name="nickname" placeholder="Apelido" [(ngModel)]="nickname" /></div>
+    <div *ngIf="salt"><input type="password" name="password" placeholder="Senha" [(ngModel)]="password" /></div>
+    <div id="button-container"><a class="waves-effect waves-light btn blue-grey lighten-1" (click)="tryCreateAdmin();" >Salvar</a></div>
 </div>

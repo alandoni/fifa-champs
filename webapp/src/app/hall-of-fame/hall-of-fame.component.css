@@ -1,22 +1,26 @@
 .row {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .header {
-	text-align: center;
-	line-height: 32px;
-	background-color: #607D8B; 
-	color: white;
+    background-color: #607D8B;
+    color: white;
+    line-height: 32px;
+    text-align: center;
 }
 
 span {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 p {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 .error {
-	text-align: center;
+    text-align: center;
+}
+
+.trophyImg {
+    height: 15px;
 }

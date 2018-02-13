@@ -65,7 +65,7 @@ export class LoginService {
 		return this.api.post(this.url_admin, {nickname: nickname});
 	}
 
-	public update(id, nickname, password = undefined, salt = undefined) : Observable<any> {
+	public update(id, nickname, password = null, salt = null) : Observable<any> {
 		if (password && salt) {
 			password = this.getPasswordHash(password, salt);
 		}

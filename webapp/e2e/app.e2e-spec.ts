@@ -1,14 +1,14 @@
 import { FifaChampsPage } from './app.po';
 
 describe('fifa-champs App', function() {
-  let page: FifaChampsPage;
+    let page : FifaChampsPage;
 
-  beforeEach(() => {
-    page = new FifaChampsPage();
-  });
+    beforeEach(() => {
+        page = new FifaChampsPage();
+    });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
-  });
+    it('should display message saying app works', () => {
+        page.navigateTo();
+        expect(page.getParagraphText()).toEqual('app works!');
+    });
 });

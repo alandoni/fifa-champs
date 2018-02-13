@@ -1,17 +1,40 @@
 <div class="row">
 
-	<div *ngIf="error" class="error col s12">{{error.description}}</div>
+    <div *ngIf="error" class="error col s12">{{error.description}}</div>
 
-	<div *ngIf="!error" class="col m4 s12 champions">
-		<div class="header">
-			Maiores campeões
-		</div>
-		<p *ngFor="let champion of champions">
-			<span>{{ champion.name }}</span> foi campeão <span>{{ champion.times }}</span> vez(es) e vice <span>{{ champion.runnerup }}</span> vez(es).
-		</p>
-	</div>
+    <div *ngIf="!error" class="col m4 s12 champions">
+        <div class="header">
+            Sala de Troféus
+        </div>
+        <div class="header">
+            Legenda
+        </div>
+        <p>
+            <img class="trophyImg" src="https://i.imgur.com/AGJBLYR.png"/> <span>Campeão</span> /
+            <img class="trophyImg" src="https://i.imgur.com/Xw0CQVM.png"/> <span>Vice-Campeão</span> /
+            <img class="trophyImg" src="https://i.imgur.com/5uIsl50.png"/> <span>Líder</span> /
+            <img class="trophyImg" src="https://i.imgur.com/pbaGW7G.png"/> <span>Vice-Líder</span>
+        </p>
+        <div class="row" *ngFor="let champion of champions">
+            <div class="col m2">
+                <span>{{ champion.name }}</span>
+            </div>
+            <div class="col m1">
+                <img class="trophyImg" src="https://i.imgur.com/AGJBLYR.png"/> <span>{{ champion.times || 0 }}</span>
+            </div>
+            <div class="col m1">
+                <img class="trophyImg" src="https://i.imgur.com/Xw0CQVM.png"/> <span>{{ champion.runnerup || 0 }}</span>
+            </div>
+            <div class="col m1">
+                <img class="trophyImg" src="https://i.imgur.com/5uIsl50.png"/> <span>{{ champion.firstPlace || 0 }}</span>
+            </div>
+            <div class="col m1">
+                <img class="trophyImg" src="https://i.imgur.com/pbaGW7G.png"/> <span>{{ champion.secondPlace || 0 }}</span>
+            </div>
+        </div>
+    </div>
 
-	<div *ngIf="!error" class="matches col m8 s12">
-		<app-match-list [matches]="matches" [cols]="3" [minItemsPerColumn]="6"></app-match-list>
-	</div>
+    <div *ngIf="!error" class="matches col m8 s12">
+        <app-match-list [matches]="finalMatches" [cols]="3" [minItemsPerColumn]="6"></app-match-list>
+    </div>
 </div>

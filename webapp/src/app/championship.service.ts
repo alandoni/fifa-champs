@@ -17,7 +17,6 @@ export class ChampionshipService {
 	}
 
 	update(id, championship: Championship) : Observable<Championship> {
-		delete championship._id;
 		return this.api.post(this.url + '/' + id, championship);
 	}
 
