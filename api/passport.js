@@ -42,7 +42,7 @@ class PassportController {
             let token = null;
             this.adminController.login(loginObj).then((user) => {
                 token = this.createToken(user);
-                if (user.tokens != null && user.tokens.indexOf(token) < 0) {
+                if (user.tokens != null) {
                     user.tokens.push(token);
                 } else {
                     user.tokens = [token];
@@ -63,24 +63,25 @@ class PassportController {
         return jwt.sign({
             id: user._id,
         }, SECRET, {
-            expiresIn: 120
+            expiresIn: 60 * 60 * 24 * 7
         });
     }
 
     isLoggedIn(req, res, next) {
         if (req.headers != null && req.headers['x-access-token'] != null) {
             const token = req.headers['x-access-token'];
-            this._getUserByToken(token, req).then((user) => {
+            this.log.debug('JWT: ' + token);
+            return this._getUserByToken(token, req).then((user) => {
                 if (user != null) {
-                    this.log.error('Authenticated via header with user ' + JSON.stringify(user));
-                    return next();
+                    this.log.debug('Authenticated via header with user ' + JSON.stringify(user));
+                    next();
                 } else {
                     res.status(401).send(errors.getUnauthorized());
                 }
             }).catch((error) => {
+                this.log.error(error);
                 res.status(401).send(errors.getUnauthorized());
             });
-            return;
         }
 
         if (req.isAuthenticated()) {
@@ -100,6 +101,7 @@ class PassportController {
                 return users[0];
             }
         }).catch((error) => {
+            this.log.error(error);
             return null;
         });
     }
@@ -108,7 +110,7 @@ class PassportController {
         return new Promise((resolve, reject) => {
             jwt.verify(token, SECRET, (err, decoded) => {      
                 if (err) {
-                    this.log.error(error);
+                    this.log.error(err);
                     reject(err);
                 } else {
                     resolve(decoded);
