@@ -11,7 +11,7 @@ require('bluebird');
 chai.should();
 chai.use(chaiHttp);
 let agent = chai.request.agent(server);
-
+let token = null;
 describe('API Test', () => {
     after((done) => {
         Championship.remove({}, () => {
@@ -51,6 +51,10 @@ describe('API Test', () => {
         it('it should LOGIN', (done) => {
             functions.login(agent).then((res) => {
                 res.should.have.status(200);
+                res.body.should.not.have.property('password');
+                res.body.should.not.have.property('tokens');
+                res.body.should.have.property('token');
+                token = res.body.token;
                 done();
             }).catch((error) => {
                 done(error);
@@ -92,6 +96,25 @@ describe('API Test', () => {
         });
     });
 
+    describe('/POST player with token', () => {
+        it('it should POST a player ', (done) => {
+            const player = {
+                nickname : 'joao',
+                picture : 'http://i.imgur.com/61hqH6f.jpg'
+            }
+            const agent = chai.request.agent(server);
+            agent.post('/api/players').set('x-access-token', token).send(player).then((res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('nickname').eql('joao');
+                res.body.should.not.have.property('password');
+                done();
+            }).catch((error) => {
+                done(error);
+            });
+        });
+    });
+
     describe('/POST unauthorized player', () => {
         it('it should NOT POST a player ', (done) => {
             const player = {
@@ -102,8 +125,23 @@ describe('API Test', () => {
             agent.post('/api/players').send(player).then((res) => {
                 res.should.have.status(401);
                 done(res.status);
-            }).catch((res) => {
+            }).catch(() => {
+                done();
+            });
+        });
+    });
+
+    describe('/POST unauthorized player with token', () => {
+        it('it should NOT POST a player ', (done) => {
+            const player = {
+                nickname : 'alan',
+                picture : 'http://i.imgur.com/61hqH6f.jpg'
+            }
+            const agent = chai.request.agent(server);
+            agent.post('/api/players').set('x-access-token', 'token').send(player).then((res) => {
                 res.should.have.status(401);
+                done(res.status);
+            }).catch(() => {
                 done();
             });
         });
@@ -114,7 +152,7 @@ describe('API Test', () => {
             functions.get(agent, '/api/players').then((res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
-                res.body.length.should.be.eql(1);
+                res.body.length.should.be.eql(2);
                 res.body[0].should.have.property('nickname').eql('joao');
                 res.body[0].should.not.have.property('password');
                 done();

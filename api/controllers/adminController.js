@@ -1,8 +1,7 @@
 'use strict'
-
+const sha3 = require('js-sha3').sha3_224;
 const errors = require('./../errors');
 const util = require('./../utils');
-
 const document = require('./../models/admin');
 
 class AdminController {
@@ -52,13 +51,15 @@ class AdminController {
     _prepareToSend(adminSaved) {
         if (Array.isArray(adminSaved)) {
             let admins = util.copyObject(adminSaved);
-            for (const admin in admins) {
-                admins[admin].password = null;
+            for (const admin of admins) {
+                Reflect.deleteProperty(admin, 'password');
+                Reflect.deleteProperty(admin, 'tokens');
             }
             return admins;
         }
         const admin = util.copyObject(adminSaved);
-        admin.password = null;
+        Reflect.deleteProperty(admin, 'password');
+        Reflect.deleteProperty(admin, 'tokens');
         return admin;
     }
 
@@ -74,6 +75,10 @@ class AdminController {
         }).then((result) => {
             return this._prepareToSend(result);
         });
+    }
+
+    getSalt(user) {
+        return { salt : sha3(user.id + user.nickname) };
     }
 }
 
