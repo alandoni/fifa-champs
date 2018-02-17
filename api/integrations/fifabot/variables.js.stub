@@ -1,0 +1,6 @@
+module.exports = { 
+  FIFABOT_TOKEN: '', 
+  FIFABOT_API_URL: 'http://localhost:5001', 
+  FIFABOT_USER: '', 
+  FIFABOT_PASSWORD: '' 
+}; 

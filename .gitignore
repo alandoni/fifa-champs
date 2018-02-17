@@ -53,3 +53,5 @@ webapp/bower_components
 webapp/dist/
 api/dist/
 dist/
+
+api/integrations/fifabot/variables\.js

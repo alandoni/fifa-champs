@@ -1,0 +1,20 @@
+{
+  "name": "fifabot",
+  "version": "1.0.0",
+  "main": "fifabot.js",
+  "dependencies": {
+    "babel-eslint": "^8.2.1",
+    "botkit": "^0.4.10",
+    "eslint-plugin-node": "^4.2.2",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
