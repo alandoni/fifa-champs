@@ -1,7 +1,7 @@
 #!/bin/bash
 
 INSTALL=false
-MONGOPATH="/home/talesprates/workspace/mongo"
+MONGOPATH="data/db"
 FIFACHAMPS="$(echo $PWD)"
 STOP=false
 

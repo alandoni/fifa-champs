@@ -42,7 +42,7 @@ function addMatch(message, isFinal = false) {
             .then((resolvedPromises) => buildMatchObject(resolvedPromises, message.userName, captureGroups, isFinal))
             .then((match) => request(Object.assign(matchesRequestOptions, { form : match, headers : { 'x-access-token' : message.token } })))
             .then(() => resolve('partida adicionada.'))
-            .catch((error) => reject(new Error(`partida não adicionada (${error})`)));
+            .catch((error) => reject(new Error(`partida não adicionada (${error.message})`)));
     });
 }
 

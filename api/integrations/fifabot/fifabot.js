@@ -44,9 +44,9 @@ slack.controller.hears('.*', ['direct_message', 'direct_mention', 'mention'], (b
 
                     commands.parse(message)
                         .then((response) => botInstance.reply(botMessage, response))
-                        .catch((error) => botInstance.reply(botMessage, error.toString()));
+                        .catch((error) => botInstance.reply(botMessage, error.message));
                 }).catch((error) => {
-                    throw new Error(error);
+                    throw new Error(error.message);
                 });
             });
         });
