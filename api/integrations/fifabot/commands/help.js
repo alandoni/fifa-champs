@@ -21,6 +21,6 @@ module.exports = {
     pattern,
     handler : help,
     usage : '_edsonbastos ajuda (uso)_',
-    description : '*ajuda*: mostra a lista de comandos disponiveis',
+    description : '*ajuda*: mostra a lista de comandos disponiveis (digite *ajuda uso* para exemplos)',
     channels : ['fifa-champs', 'fifa-champs-dev']
 };

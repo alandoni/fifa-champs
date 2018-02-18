@@ -11,20 +11,20 @@ function getToken() {
     return new Promise((resolve, reject) => {
         if (token) {
             resolve(token);
+        } else {
+            request({
+                url : `${FIFABOT_API_URL}/api/login`,
+                form : {
+                    nickname : FIFABOT_USER,
+                    password : FIFABOT_PASSWORD
+                },
+                method : 'POST',
+                json : true
+            }).then((loginBody) => {
+                token = loginBody.token;
+                resolve(token);
+            }).catch(() => reject(new Error('invalid fifachamps user credentials')));
         }
-
-        request({
-            url : `${FIFABOT_API_URL}/api/login`,
-            form : {
-                nickname : FIFABOT_USER,
-                password : FIFABOT_PASSWORD
-            },
-            method : 'POST',
-            json : true
-        }).then((loginBody) => {
-            token = loginBody.token;
-            resolve(token);
-        }).catch(() => reject(new Error('invalid fifachamps user credentials')));
     });
 }
 
