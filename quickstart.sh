@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./bash_resources/healthcheck.sh
+
 INSTALL=false
 MONGOPATH="data/db"
 FIFACHAMPS="$(echo $PWD)"
@@ -21,9 +23,7 @@ done
 
 # kill webapp, api, and mongo processes
 if [[ ${STOP} == "true" ]]; then
-  kill $(lsof -c ng -t) > /dev/null 2>&1
-  kill $(lsof -c node -t) > /dev/null 2>&1 
-  kill $(pidof mongod) > /dev/null 2>&1 
+  stop_fifachamps
   exit 0
 fi
 
@@ -36,7 +36,7 @@ fi
 # starts mongod using the MONGOPATH
 echo '[starting mongo]'
 mongod --dbpath $MONGOPATH >> $FIFACHAMPS/logs/mongo.log &
-sleep 10
+mongo_healthcheck
 
 # goes to fifa-champs API
 cd $FIFACHAMPS/api
@@ -49,7 +49,7 @@ fi
 
 echo '[starting API]'
 npm start >> $FIFACHAMPS/logs/api.log 2>&1 &
-sleep 5
+api_healthcheck
 
 # goes to fifa-champs WEBAPP
 cd $FIFACHAMPS/webapp
@@ -62,6 +62,6 @@ fi
 
 echo '[starting WEBAPP]'
 npm start >> $FIFACHAMPS/logs/webapp.log 2>&1 &
-sleep 10
+webapp_healthcheck
 
 exit 0

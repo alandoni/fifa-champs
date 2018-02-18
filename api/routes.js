@@ -308,4 +308,8 @@ exports.set = function(app, mongo, log) {
     app.get(URL_TEAM_PICK, (request, response) => {
         response.send(JSON.stringify(teamsJSON, null, 2));
     });
+
+    app.get('/api/healthcheck', (request, response) => {
+        response.send({ status : 'OK' });
+    });
 };
