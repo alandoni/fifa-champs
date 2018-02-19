@@ -43,7 +43,9 @@ export class InsertMatchComponent implements OnInit, OnChanges {
     }
 
     onPlayersChanged() {
-        this.players = this.playerService.getPlayers();
+        this.players = this.playerService.getPlayers().sort((a, b) => {
+            return (a.nickname > b.nickname) ? 1 : ((a.nickname < b.nickname) ? -1 : 0);
+        });
         if (!this.isEditingMatch) {
             if (!this.match) {
                 this.match = new Match();
