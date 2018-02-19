@@ -17,7 +17,8 @@ do
     -m=*|--mongo=*) # mongopath flag - used to set an alternative MONGOPATH
       MONGOPATH="${i#*=}" ;;
     *)
-      throw_arg "'${i}' is not a valid argument." ;;
+      echo ${i} is an invalid parameter
+      exit 0 ;;
   esac
 done
 
