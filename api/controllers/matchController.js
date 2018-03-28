@@ -6,6 +6,8 @@ const ObjectId = Mongoose.Types.ObjectId;
 
 const document = require('./../models/match');
 
+const Promise = require('bluebird');
+
 class MatchController {
 
     constructor(mongo) {
@@ -35,7 +37,7 @@ class MatchController {
             criteria.date = { $gte : minDate, $lte : maxDate };
         }
 
-		Promise.try(() => {
+		return Promise.try(() => {
 			if (criteria.offset && criteria.limit) {
 				var limit = parseInt(criteria.limit);
 				criteria.limit = undefined;

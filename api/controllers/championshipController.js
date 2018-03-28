@@ -4,6 +4,8 @@ const util = require('./../utils');
 
 const document = require('./../models/championship');
 
+const Promise = require('bluebird');
+
 class ChampionshipController {
 
     constructor(mongo) {
@@ -44,19 +46,19 @@ class ChampionshipController {
             criteria.date = { $gte : minDate, $lte : maxDate };
         }
 
-		Promise.try(() => {
-			if (criteria.offset && criteria.limit) {
-				let limit = parseInt(criteria.limit);
-				criteria.limit = null;
-				let offset = parseInt(criteria.offset);
-				criteria.offset = null;
-	
-				return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate(populate).exec();
-			}
-			return this.mongo.selectByCriteria(document, criteria).populate(populate).exec();
-		}).then((championships) => {
-			return this._prepareToSend(championships);
-		});
+        return Promise.try(() => {
+            if (criteria.offset && criteria.limit) {
+                let limit = parseInt(criteria.limit);
+                criteria.limit = null;
+                let offset = parseInt(criteria.offset);
+                criteria.offset = null;
+
+                return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate(populate).exec();
+            }
+            return this.mongo.selectByCriteria(document, criteria).populate(populate).exec();
+        }).then((championships) => {
+            return this._prepareToSend(championships);
+        });
     }
 
     getById(id) {
