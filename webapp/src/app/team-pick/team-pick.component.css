@@ -1,39 +1,39 @@
-.star-yellow{
-  color: #fdd835;
+.star-yellow {
+    color: #fdd835;
 }
 
-.attributes-row{
-  margin-bottom:0px;
+.attributes-row {
+    margin-bottom:0;
 }
 
-.padding-x{
-  padding-left: 30%;
-  padding-top:40px;
+.padding-x {
+    padding-left: 30%;
+    padding-top:40px;
 }
 
-.padding-loader{
-  padding-top: 10px;
+.padding-loader {
+    padding-top: 10px;
 }
 
-.controller{
-  margin: 0;
-  height: 20px;
-  line-height: 20px;
-  color: #fafafa;
+.controller {
+    color: #fafafa;
+    height: 20px;
+    line-height: 20px;
+    margin: 0;
 }
 
-.controller-1{
-  background-color: #e57373;
+.controller-1 {
+    background-color: #e57373;
 }
 
-.controller-2{
-  background-color: #64b5f6;
+.controller-2 {
+    background-color: #64b5f6;
 }
 
-.controller-3{
-  background-color: #81c784;
+.controller-3 {
+    background-color: #81c784;
 }
 
-.controller-4{
-  background-color: #FFCC00;
+.controller-4 {
+    background-color: #FFCC00;
 }

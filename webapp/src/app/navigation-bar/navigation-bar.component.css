@@ -1,29 +1,29 @@
 nav {
-  background: #607D8B;
-  height: 64px;
+    background: #607D8B;
+    height: 64px;
 }
 
 a {
-  padding: 0px 25px;
+    padding: 0 25px;
 }
 
 a.button-collapse {
-  padding: 0;
+    padding: 0;
 }
 
 a:focus, active{
-  background-color: #455A64;
+    background-color: #455A64;
 }
 
 .modal.open {
-  padding: 5px 0px;
-  overflow: visible;
+    overflow: visible;
+    padding: 5px 0;
 }
 
 .insert-match-modal {
-  max-height: 100%;
+    max-height: 100%;
 }
 
 .row {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }

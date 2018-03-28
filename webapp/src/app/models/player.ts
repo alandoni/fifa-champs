@@ -1,5 +1,5 @@
 export class Player {
-	nickname;
-	picture;
-	_id;
+    nickname;
+    picture;
+    _id;
 }

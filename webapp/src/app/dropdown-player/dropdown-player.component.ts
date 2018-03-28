@@ -5,62 +5,63 @@ import * as Materialize from 'materialize-css';
 declare var $ : any;
 
 @Component({
-  selector: 'app-dropdown-player',
-  templateUrl: './dropdown-player.component.html',
-  styleUrls: ['./dropdown-player.component.css'],
+    selector: 'app-dropdown-player',
+    templateUrl: './dropdown-player.component.html',
+    styleUrls: ['./dropdown-player.component.css'],
 })
 export class DropdownPlayerComponent implements OnInit, OnChanges {
 
-	@Output() onChange = new EventEmitter();
+    @Output() onChange = new EventEmitter();
 
-	@Input() name : string;
-	@Input() label : string;
-	@Input() players : Array<Player>;
-	@Input() selected : Player;
+    @Input() name : string;
+    @Input() label : string;
+    @Input() players : Array<Player>;
+    @Input() selected : Player;
 
-	names : Array<string>;
-	ids : Array<string>;
-	selectedId : string;
-	initilized = false;
+    names : Array<string>;
+    ids : Array<string>;
+    selectedId : string;
+    initilized = false;
 
-	constructor() {
+    constructor() {
 
-	}
+    }
 
-	change(value) {
-		if (!this.initilized) {
-			return;
-		}
-		for (let player of this.players) {
-			if (player._id === value) {
-				this.selected = player;
-				this.onChange.emit({target: this.name, player: player});
-				break;
-			}
-		}
-	}
+    change(value) {
+        if (!this.initilized) {
+            return;
+        }
+        for (const player of this.players) {
+            if (player._id === value) {
+                this.selected = player;
+                this.onChange.emit({target: this.name, player: player});
+                break;
+            }
+        }
+    }
 
-	ngOnInit() {
-		this.ids = [];
-		this.names = [];
-		for (let player of this.players) {
-			this.ids.push(player._id);
-			this.names.push(player.nickname);
-		}
-		if (!this.selected) {
-			this.selected = this.players[0];
-			this.selectedId = this.selected._id;
-		} else {
-			this.selectedId = this.selected._id;
-		}
-	}
+    ngOnInit() {
+        this.ids = [];
+        this.names = [];
+        for (const player of this.players) {
+            this.ids.push(player._id);
+            this.names.push(player.nickname);
+        }
+        if (!this.selected) {
+            this.selected = this.players[0];
+            this.selectedId = this.selected._id;
+        } else {
+            this.selectedId = this.selected._id;
+        }
+    }
 
-	ngOnChanges(changes: SimpleChanges) {
-		if(this.selected != undefined)
-			this.selectedId = this.selected._id;
-	}
+    ngOnChanges(changes : SimpleChanges) {
+        if (this.selected != null) {
+            this.selectedId = this.selected._id;
+        }
+    }
 
-	ngAfterViewInit() {
-		this.initilized = true;
-	}
+    ngAfterViewInit() {
+        this.initilized = true;
+    }
 }

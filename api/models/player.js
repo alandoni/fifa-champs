@@ -1,10 +1,10 @@
-var Mongoose = require('mongoose');
-var Schema   = Mongoose.Schema;
+let Mongoose = require('mongoose');
+let Schema   = Mongoose.Schema;
 
-var playerSchema = new Schema({
-	nickname: String,
-	picture: String
+let playerSchema = new Schema({
+    nickname : String,
+    picture : String
 });
 
-var Player = Mongoose.model('Player', playerSchema);
+let Player = Mongoose.model('Player', playerSchema);
 module.exports = Player;

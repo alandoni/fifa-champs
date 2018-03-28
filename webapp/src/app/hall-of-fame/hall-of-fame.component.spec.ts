@@ -6,23 +6,23 @@ import { DebugElement } from '@angular/core';
 import { HallOfFameComponent } from './hall-of-fame.component';
 
 describe('HallOfFameComponent', () => {
-  let component: HallOfFameComponent;
-  let fixture: ComponentFixture<HallOfFameComponent>;
+    let component : HallOfFameComponent;
+    let fixture : ComponentFixture<HallOfFameComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HallOfFameComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ HallOfFameComponent ]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HallOfFameComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HallOfFameComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

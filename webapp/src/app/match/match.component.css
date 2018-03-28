@@ -1,74 +1,74 @@
 .winner {
- 	color: #4CAF50;
-  	text-align: center;
-	margin-top: 10px;
-	margin-bottom: 5px;
+    color: #4CAF50;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .final-match{
-  padding-top: 3px;
-  padding-bottom: 0px;
+    padding-bottom: 0;
+    padding-top: 3px;
 }
 
 .final-match .chip{
-  margin: 0;
-  height: 20px;
-  line-height: 20px;
-  color: #fafafa;
-  background-color: #ff5252;
+    background-color: #ff5252;
+    color: #fafafa;
+    height: 20px;
+    line-height: 20px;
+    margin: 0;
 }
 
 .loser {
-	color: #f44336;
-	text-align: center;
-	margin-top: 10px;
-	margin-bottom: 5px;
+    color: #f44336;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .tie {
-	margin-top: 10px;
-	margin-bottom: 5px;
-	text-align: center;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .results {
-	margin-top: 12px;
-	margin-bottom: 5px;
-	height:44px;
-	line-height: 44px;
-	font-size: 20px;
-	vertical-align: middle;
+    font-size: 20px;
+    height:44px;
+    line-height: 44px;
+    margin-bottom: 5px;
+    margin-top: 12px;
+    vertical-align: middle;
 }
 
 .date {
-	background: #607D8B;
-	color: #fff;
-	text-align: center;
-	line-height: 32px;
+    background: #607D8B;
+    color: #fff;
+    line-height: 32px;
+    text-align: center;
 }
 
 .row {
-	margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .penalty {
-	font-size: 14px;
-	color: #444;
+    color: #444;
+    font-size: 14px;
 }
 
 .edit-delete {
-	position: absolute;
-	right: 10px;
+    position: absolute;
+    right: 10px;
 }
 
 .edit-delete a {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .team2 {
-	position: relative;
+    position: relative;
 }
 
 .deleted {
-	display: none;
+    display: none;
 }

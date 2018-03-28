@@ -4,79 +4,77 @@ import { LoginService } from './../login.service';
 import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
-	selector: 'app-admins-list',
-	templateUrl: './admins-list.component.html',
-	styleUrls: ['./admins-list.component.css']
+    selector: 'app-admins-list',
+    templateUrl: './admins-list.component.html',
+    styleUrls: ['./admins-list.component.css']
 })
 export class AdminsListComponent implements OnInit {
 
-	modalActions = new EventEmitter<string|MaterializeAction>();
-	admins: Array<any>;
-	selectedAdmin: any;
-	selectedIndex: number;
-  	url: String = null;
+    modalActions = new EventEmitter<string|MaterializeAction>();
+    admins : Array<any>;
+    selectedAdmin : any;
+    selectedIndex : number;
+    url : String = null;
 
-	constructor(private router: Router, private loginService: LoginService) { }
+    constructor(private router : Router, private loginService : LoginService) { }
 
-	ngOnInit() {
-		if (!this.loginService.isLoggedIn()) {
-			this.router.navigateByUrl('/');
-			return;
-		}
+    ngOnInit() {
+        if (!this.loginService.isLoggedIn()) {
+            this.router.navigateByUrl('/');
+            return;
+        }
 
-		this.loginService.getAll().subscribe(
-			(admins: Array<any>) => {
-				this.admins = admins;
-			},
-			(error) => console.log(error)
-		);
-	}
+        this.loginService.getAll().subscribe((admins : Array<any>) => {
+            this.admins = admins;
+        }, (error) => {
+            console.log(error);
+        });
+    }
 
-	updateUser(event, index) {
-		event.preventDefault();
-		this.selectedAdmin = this.admins[index];
-		this.selectedIndex = index;
-		this.openModal();
-	}
+    updateUser(event, index) {
+        event.preventDefault();
+        this.selectedAdmin = this.admins[index];
+        this.selectedIndex = index;
+        this.openModal();
+    }
 
-	deleteUser(event, index) {
-		event.preventDefault();
-		this.selectedIndex = index;
-		if (window.confirm('Tem certeza que quer excluir o ' + this.admins[index].nickname + '?')) {
-			this.loginService.delete(this.admins[index]._id).subscribe(
-				(result) => {
-					this.admins = this.admins.filter((el) => {
-					    return el._id !== this.admins[this.selectedIndex]._id;
-					});
-				},
-				(error) => console.log(error)
-			);
-		}
-	}
+    deleteUser(event, index) {
+        event.preventDefault();
+        this.selectedIndex = index;
+        if (window.confirm('Tem certeza que quer excluir o ' + this.admins[index].nickname + '?')) {
+            this.loginService.delete(this.admins[index]._id).subscribe((result) => {
+                this.admins = this.admins.filter((el) => {
+                    return el._id !== this.admins[this.selectedIndex]._id;
+                });
+            }, (error) => {
+                console.log(error);
+            });
+        }
+    }
 
-	addUser() {
-		this.selectedAdmin = null;
-		this.selectedIndex = -1;
-		this.openModal();
-	}
+    addUser() {
+        this.selectedAdmin = null;
+        this.selectedIndex = -1;
+        this.openModal();
+    }
 
-	openModal() {
-		this.modalActions.emit({action:'modal', params:['open']});
-	}
+    openModal() {
+        this.modalActions.emit({action: 'modal', params: ['open']});
+    }
 
-	closeModal(result) {
-		if (this.selectedIndex == -1) {
-			this.admins.push(result);
-		} else {
-			this.admins[this.selectedIndex] = result;
-		}
-		this.modalActions.emit({action:'modal', params:['close']});
-    this.loginService.getSalt(result.nickname).subscribe((salt) => {
-      this.url = window.location.host + '/admin/create/' + result._id + '/' + result.nickname + '/' + salt.salt;
-    });
-	}
+    closeModal(result) {
+        if (this.selectedIndex === -1) {
+            this.admins.push(result);
+        } else {
+            this.admins[this.selectedIndex] = result;
+        }
+        this.modalActions.emit({action: 'modal', params: ['close']});
+        this.loginService.getSalt(result.nickname).subscribe((salt) => {
+            this.url = window.location.host + '/admin/create/' + result._id + '/' + result.nickname + '/' + salt.salt;
+        });
+    }
 
-	public get hasAdmins() {
-		return this.admins != null && this.admins.length > 0;
-	}
+    public get hasAdmins() {
+        return this.admins != null && this.admins.length > 0;
+    }
 }
