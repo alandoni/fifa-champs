@@ -46,16 +46,21 @@ class ChampionshipController {
 			criteria.date = {$gte: minDate, $lte: maxDate};
 		}
 
-		if (criteria.offset && criteria.limit) {
-			var limit = parseInt(criteria.limit);
-			criteria.limit = undefined;
-			var offset = parseInt(criteria.offset);
-			criteria.offset = undefined;
-			
-			return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate(populate).exec();
-		} else {
-			return this.mongo.selectByCriteria(document, criteria).populate(populate).exec();
-		}
+		Promise.try(() => {
+			if (criteria.offset && criteria.limit) {
+				var limit = parseInt(criteria.limit);
+				criteria.limit = undefined;
+				var offset = parseInt(criteria.offset);
+				criteria.offset = undefined;
+				
+				return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset).populate(populate).exec();
+			} else {
+				return this.mongo.selectByCriteria(document, criteria).populate(populate).exec();
+			}
+		}).then((championships) => {
+			return this._prepareToSend(championships);
+		});
+		
 	}
 
 	getById(id) {
