@@ -1,4 +1,328 @@
 {
+  "5.0": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/21.png",
+      "name": "FC Bayern",
+      "league": "Bundesliga",
+      "country": "Germany",
+      "attack": "91",
+      "midfield": "86",
+      "defense": "85",
+      "overall": "86"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/243.png",
+      "name": "Real Madrid",
+      "league": "Liga BBVA",
+      "country": "Spain",
+      "attack": "87",
+      "midfield": "86",
+      "defense": "86",
+      "overall": "86"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/45.png",
+      "name": "Juventus",
+      "league": "Serie A TIM",
+      "country": "Italy",
+      "attack": "90",
+      "midfield": "84",
+      "defense": "85",
+      "overall": "85"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/241.png",
+      "name": "FC Barcelona",
+      "league": "Liga BBVA",
+      "country": "Spain",
+      "attack": "89",
+      "midfield": "84",
+      "defense": "83",
+      "overall": "84"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/5.png",
+      "name": "Chelsea",
+      "league": "Barclays PL",
+      "country": "England",
+      "attack": "85",
+      "midfield": "85",
+      "defense": "82",
+      "overall": "84"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/11.png",
+      "name": "Manchester Utd",
+      "league": "Barclays PL",
+      "country": "England",
+      "attack": "86",
+      "midfield": "83",
+      "defense": "81",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/73.png",
+      "name": "PSG",
+      "league": "Ligue 1",
+      "country": "France",
+      "attack": "86",
+      "midfield": "82",
+      "defense": "83",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/1.png",
+      "name": "Arsenal",
+      "league": "Barclays PL",
+      "country": "England",
+      "attack": "86",
+      "midfield": "82",
+      "defense": "80",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/10.png",
+      "name": "Manchester City",
+      "league": "Barclays PL",
+      "country": "England",
+      "attack": "84",
+      "midfield": "85",
+      "defense": "81",
+      "overall": "83"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/240.png",
+      "name": "Atlético Madrid",
+      "league": "Liga BBVA",
+      "country": "Spain",
+      "attack": "84",
+      "midfield": "82",
+      "defense": "84",
+      "overall": "83"
+    }
+  ],
+  "4.5": [
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/18.png",
+      "name": "Spurs",
+      "league": "Barclays PL",
+      "country": "England",
+      "attack": "86",
+      "midfield": "82",
+      "defense": "81",
+      "overall": "82"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/9.png",
+      "name": "Liverpool",
+      "league": "Barclays PL",
+      "country": "England",
+      "attack": "83",
+      "midfield": "82",
+      "defense": "80",
+      "overall": "82"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/22.png",
+      "name": "Bor. Dortmund",
+      "league": "Bundesliga",
+      "country": "Germany",
+      "attack": "81",
+      "midfield": "82",
+      "defense": "82",
+      "overall": "82"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/48.png",
+      "name": "Napoli",
+      "league": "Serie A TIM",
+      "country": "Italy",
+      "attack": "83",
+      "midfield": "82",
+      "defense": "80",
+      "overall": "81"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/52.png",
+      "name": "Roma",
+      "league": "Serie A TIM",
+      "country": "Italy",
+      "attack": "80",
+      "midfield": "83",
+      "defense": "80",
+      "overall": "81"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/69.png",
+      "name": "AS Monaco",
+      "league": "Ligue 1",
+      "country": "France",
+      "attack": "83",
+      "midfield": "80",
+      "defense": "78",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/44.png",
+      "name": "Inter",
+      "league": "Serie A TIM",
+      "country": "Italy",
+      "attack": "81",
+      "midfield": "81",
+      "defense": "78",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/483.png",
+      "name": "Villarreal CF",
+      "league": "Liga BBVA",
+      "country": "Spain",
+      "attack": "80",
+      "midfield": "80",
+      "defense": "79",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/481.png",
+      "name": "Sevilla FC",
+      "league": "Liga BBVA",
+      "country": "Spain",
+      "attack": "80",
+      "midfield": "80",
+      "defense": "79",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/7.png",
+      "name": "Everton",
+      "league": "Barclays PL",
+      "country": "England",
+      "attack": "79",
+      "midfield": "82",
+      "defense": "79",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/47.png",
+      "name": "Milan",
+      "league": "Serie A TIM",
+      "country": "Italy",
+      "attack": "79",
+      "midfield": "79",
+      "defense": "81",
+      "overall": "80"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/457.png",
+      "name": "Real Sociedad",
+      "league": "Liga BBVA",
+      "country": "Spain",
+      "attack": "81",
+      "midfield": "79",
+      "defense": "77",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/448.png",
+      "name": "Athletic Bilbao",
+      "league": "Liga BBVA",
+      "country": "Spain",
+      "attack": "80",
+      "midfield": "81",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/19.png",
+      "name": "West Ham",
+      "league": "Barclays PL",
+      "country": "England",
+      "attack": "80",
+      "midfield": "79",
+      "defense": "78",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/23.png",
+      "name": "Bor. M'gladbach",
+      "league": "Bundesliga",
+      "country": "Germany",
+      "attack": "80",
+      "midfield": "78",
+      "defense": "77",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/237.png",
+      "name": "Sporting CP",
+      "league": "Liga NOS",
+      "country": "Portugal",
+      "attack": "79",
+      "midfield": "80",
+      "defense": "78",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/46.png",
+      "name": "Lazio",
+      "league": "Serie A TIM",
+      "country": "Italy",
+      "attack": "79",
+      "midfield": "79",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/236.png",
+      "name": "FC Porto",
+      "league": "Liga NOS",
+      "country": "Portugal",
+      "attack": "78",
+      "midfield": "80",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/234.png",
+      "name": "SL Benfica",
+      "league": "Liga NOS",
+      "country": "Portugal",
+      "attack": "78",
+      "midfield": "80",
+      "defense": "78",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/327.png",
+      "name": "Beşiktaş",
+      "league": "Süper Lig",
+      "country": "Turkey",
+      "attack": "78",
+      "midfield": "79",
+      "defense": "79",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/32.png",
+      "name": "Bayer 04",
+      "league": "Bundesliga",
+      "country": "Germany",
+      "attack": "76",
+      "midfield": "80",
+      "defense": "78",
+      "overall": "79"
+    },
+    {
+      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/34.png",
+      "name": "FC Schalke 04",
+      "league": "Bundesliga",
+      "country": "Germany",
+      "attack": "76",
+      "midfield": "78",
+      "defense": "81",
+      "overall": "79"
+    }
+  ],
   "WMN 4.5": [
     {
       "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/113009.png",
@@ -601,330 +925,6 @@
       "midfield": "73",
       "defense": "72",
       "overall": "71"
-    }
-  ],
-  "5.0": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/21.png",
-      "name": "FC Bayern",
-      "league": "Bundesliga",
-      "country": "Germany",
-      "attack": "91",
-      "midfield": "86",
-      "defense": "85",
-      "overall": "86"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/243.png",
-      "name": "Real Madrid",
-      "league": "Liga BBVA",
-      "country": "Spain",
-      "attack": "87",
-      "midfield": "86",
-      "defense": "86",
-      "overall": "86"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/45.png",
-      "name": "Juventus",
-      "league": "Serie A TIM",
-      "country": "Italy",
-      "attack": "90",
-      "midfield": "84",
-      "defense": "85",
-      "overall": "85"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/241.png",
-      "name": "FC Barcelona",
-      "league": "Liga BBVA",
-      "country": "Spain",
-      "attack": "89",
-      "midfield": "84",
-      "defense": "83",
-      "overall": "84"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/5.png",
-      "name": "Chelsea",
-      "league": "Barclays PL",
-      "country": "England",
-      "attack": "85",
-      "midfield": "85",
-      "defense": "82",
-      "overall": "84"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/11.png",
-      "name": "Manchester Utd",
-      "league": "Barclays PL",
-      "country": "England",
-      "attack": "86",
-      "midfield": "83",
-      "defense": "81",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/73.png",
-      "name": "PSG",
-      "league": "Ligue 1",
-      "country": "France",
-      "attack": "86",
-      "midfield": "82",
-      "defense": "83",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/1.png",
-      "name": "Arsenal",
-      "league": "Barclays PL",
-      "country": "England",
-      "attack": "86",
-      "midfield": "82",
-      "defense": "80",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/10.png",
-      "name": "Manchester City",
-      "league": "Barclays PL",
-      "country": "England",
-      "attack": "84",
-      "midfield": "85",
-      "defense": "81",
-      "overall": "83"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/240.png",
-      "name": "Atlético Madrid",
-      "league": "Liga BBVA",
-      "country": "Spain",
-      "attack": "84",
-      "midfield": "82",
-      "defense": "84",
-      "overall": "83"
-    }
-  ],
-  "4.5": [
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/18.png",
-      "name": "Spurs",
-      "league": "Barclays PL",
-      "country": "England",
-      "attack": "86",
-      "midfield": "82",
-      "defense": "81",
-      "overall": "82"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/9.png",
-      "name": "Liverpool",
-      "league": "Barclays PL",
-      "country": "England",
-      "attack": "83",
-      "midfield": "82",
-      "defense": "80",
-      "overall": "82"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/22.png",
-      "name": "Bor. Dortmund",
-      "league": "Bundesliga",
-      "country": "Germany",
-      "attack": "81",
-      "midfield": "82",
-      "defense": "82",
-      "overall": "82"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/48.png",
-      "name": "Napoli",
-      "league": "Serie A TIM",
-      "country": "Italy",
-      "attack": "83",
-      "midfield": "82",
-      "defense": "80",
-      "overall": "81"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/52.png",
-      "name": "Roma",
-      "league": "Serie A TIM",
-      "country": "Italy",
-      "attack": "80",
-      "midfield": "83",
-      "defense": "80",
-      "overall": "81"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/69.png",
-      "name": "AS Monaco",
-      "league": "Ligue 1",
-      "country": "France",
-      "attack": "83",
-      "midfield": "80",
-      "defense": "78",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/44.png",
-      "name": "Inter",
-      "league": "Serie A TIM",
-      "country": "Italy",
-      "attack": "81",
-      "midfield": "81",
-      "defense": "78",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/483.png",
-      "name": "Villarreal CF",
-      "league": "Liga BBVA",
-      "country": "Spain",
-      "attack": "80",
-      "midfield": "80",
-      "defense": "79",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/481.png",
-      "name": "Sevilla FC",
-      "league": "Liga BBVA",
-      "country": "Spain",
-      "attack": "80",
-      "midfield": "80",
-      "defense": "79",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/7.png",
-      "name": "Everton",
-      "league": "Barclays PL",
-      "country": "England",
-      "attack": "79",
-      "midfield": "82",
-      "defense": "79",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/47.png",
-      "name": "Milan",
-      "league": "Serie A TIM",
-      "country": "Italy",
-      "attack": "79",
-      "midfield": "79",
-      "defense": "81",
-      "overall": "80"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/457.png",
-      "name": "Real Sociedad",
-      "league": "Liga BBVA",
-      "country": "Spain",
-      "attack": "81",
-      "midfield": "79",
-      "defense": "77",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/448.png",
-      "name": "Athletic Bilbao",
-      "league": "Liga BBVA",
-      "country": "Spain",
-      "attack": "80",
-      "midfield": "81",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/19.png",
-      "name": "West Ham",
-      "league": "Barclays PL",
-      "country": "England",
-      "attack": "80",
-      "midfield": "79",
-      "defense": "78",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/23.png",
-      "name": "Bor. M'gladbach",
-      "league": "Bundesliga",
-      "country": "Germany",
-      "attack": "80",
-      "midfield": "78",
-      "defense": "77",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/237.png",
-      "name": "Sporting CP",
-      "league": "Liga NOS",
-      "country": "Portugal",
-      "attack": "79",
-      "midfield": "80",
-      "defense": "78",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/46.png",
-      "name": "Lazio",
-      "league": "Serie A TIM",
-      "country": "Italy",
-      "attack": "79",
-      "midfield": "79",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/236.png",
-      "name": "FC Porto",
-      "league": "Liga NOS",
-      "country": "Portugal",
-      "attack": "78",
-      "midfield": "80",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/234.png",
-      "name": "SL Benfica",
-      "league": "Liga NOS",
-      "country": "Portugal",
-      "attack": "78",
-      "midfield": "80",
-      "defense": "78",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/327.png",
-      "name": "Beşiktaş",
-      "league": "Süper Lig",
-      "country": "Turkey",
-      "attack": "78",
-      "midfield": "79",
-      "defense": "79",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/32.png",
-      "name": "Bayer 04",
-      "league": "Bundesliga",
-      "country": "Germany",
-      "attack": "76",
-      "midfield": "80",
-      "defense": "78",
-      "overall": "79"
-    },
-    {
-      "badgeImage": "https://www.fifaindex.com/static/FIFA18/images/crest/50/light/34.png",
-      "name": "FC Schalke 04",
-      "league": "Bundesliga",
-      "country": "Germany",
-      "attack": "76",
-      "midfield": "78",
-      "defense": "81",
-      "overall": "79"
     }
   ],
   "INT 3.0": [

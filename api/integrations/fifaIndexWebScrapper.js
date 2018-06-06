@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const https = require('https');
 const cheerioDOMLoader = require('cheerio');
 const fs = require('fs');
@@ -8,18 +10,6 @@ const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.co
 const PARAMS = '&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=';
 
 let jsonFile = {};
-
-/* This allows to replace {0}, {1}, etc type of
-placeholders with strings I want them to be replaced with */
-const formatString = function () {
-    let args = Array.prototype.slice.call(arguments).slice(1);
-    return arguments[0].replace(/{(\d+)}/g, function (match, number) {
-        return typeof args[number] != 'undefined'
-        ? args[number]
-        : match
-        ;
-    });
-}
 
 const LEAGUES_COUNTRY =  {
     'ALJ League' : 'Saudi Arabia',
@@ -68,6 +58,10 @@ const TYPE_OF_TEAMS = {
     WOMEN_INTERNATIONAL : 2
 }
 
+/* Since this is a support script,
+we should not be so hard on the no-console rule.*/
+const Console = console;
+
 /* Organize the number of asynchronous calls being executed at the same time
 It will save the file only when all calls were requested, and finished */
 let countDownAsynchronousCalls = {
@@ -106,7 +100,7 @@ let countDownAsynchronousCalls = {
                 'WMN 4.0', '4.5', 'INT 4.5', '1.0', 'INT 5.0', 'INT 4.0', '1.5', '5.0', '1.0', '4.5', '2.0', '5.0', '4.0'];
             fs.writeFile('resources/teamsFifa18.json', JSON.stringify(jsonFile, null, 2), function (err) {
                 if (err) {
-                    return console.log(err);
+                    return Console.log(err);
                 }
             });
         }
@@ -126,7 +120,6 @@ function getTeamRatingParam($collumn) {
 }
 
 function getTeamStars($collumn) {
-    /* Self-explained, but the class of the element inside span determine how many stars a team has */
     let wholeStar = $collumn.children('span.star').find('.fa-star').length * 1.0;
     let halfStar = $collumn.children('span.star').find('.fa-star-half-o').length / 2.0;
     return wholeStar + halfStar;
@@ -144,39 +137,48 @@ function getStringPerTeamType(typeOfTeam) {
     }
 }
 
-function getAttributesFromTeam($, teamElem, jsonFile, typeOfTeams) {
+function getAttributesFromTeam($context, teamElem, jsonFile, typeOfTeams) {
     /* The variable "$" is passed here and on other functions in order to be able to use the cheerio context properly */
     let team = {};
     let teamsAttributes = teamElem.children('td');
-    team.badgeImage = getImageFromTeam($(teamsAttributes.get(0)));
-    team.name = getTeamGeneralParam($(teamsAttributes.get(1)));
-    team.league = getTeamGeneralParam($(teamsAttributes.get(2)));
+    team.badgeImage = getImageFromTeam($context(teamsAttributes.get(0)));
+    team.name = getTeamGeneralParam($context(teamsAttributes.get(1)));
+    team.league = getTeamGeneralParam($context(teamsAttributes.get(2)));
     team.country = LEAGUES_COUNTRY[team.league];
-    team.attack = getTeamRatingParam($(teamsAttributes.get(3)));
-    team.midfield = getTeamRatingParam($(teamsAttributes.get(4)));
-    team.defense = getTeamRatingParam($(teamsAttributes.get(5)));
-    team.overall = getTeamRatingParam($(teamsAttributes.get(6)));
+    team.attack = getTeamRatingParam($context(teamsAttributes.get(3)));
+    team.midfield = getTeamRatingParam($context(teamsAttributes.get(4)));
+    team.defense = getTeamRatingParam($context(teamsAttributes.get(5)));
+    team.overall = getTeamRatingParam($context(teamsAttributes.get(6)));
 
-    let stars = getStringPerTeamType(typeOfTeams) + getTeamStars($(teamsAttributes.get(7))).toFixed(1);
+    Console.info('Processing ' + team.name + '...');
+
+    let stars = getStringPerTeamType(typeOfTeams) + getTeamStars($context(teamsAttributes.get(7))).toFixed(1);
 
     if (jsonFile[stars] == null) {
         jsonFile[stars] = [];
     }
 
-    if (team.league != 'Free Agents') {
+    if (team.name != 'Free Agents') {
         jsonFile[stars].push(team);
     }
 }
 
-function getTeams($, jsonFile, typeOfTeams) {
-    let $teamsTable = $('table tbody');
+function getTeams($context, jsonFile, typeOfTeams) {
+    let $teamsTable = $context('table tbody');
     $teamsTable.children('tr').each(function (i, elem) {
-        getAttributesFromTeam($, $(elem), jsonFile, typeOfTeams);
+        getAttributesFromTeam($context, $context(elem), jsonFile, typeOfTeams);
+    });
+}
+
+function formatString(...args) {
+    const params = Reflect.apply(Array.prototype.slice, args, []);
+    return BASE_QUERY.replace(/{(\d+)}/g, function (match, number) {
+        return typeof params[number] == 'undefined' ? match : params[number];
     });
 }
 
 function requestTeamPage(version, page, typeOfTeams) {
-    let formattedQuery = formatString(BASE_QUERY, version, page, typeOfTeams);
+    let formattedQuery = formatString(version, page, typeOfTeams);
     let url = 'https://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(formattedQuery) + PARAMS;
     let data = [];
     https.get(url, function (res) {
@@ -192,16 +194,16 @@ function requestTeamPage(version, page, typeOfTeams) {
                 data = Buffer.concat(data).toString().replace(/\\n/g, '').replace(/\\/g, '');
 
                 // Get Current Page From HTML inside Cheerio's context.
-                let $ = cheerioDOMLoader.load(data);
+                let $context = cheerioDOMLoader.load(data);
 
                 // Where the magic happens
-                getTeams($, jsonFile, typeOfTeams);
+                getTeams($context, jsonFile, typeOfTeams);
 
                 /* If this element exists, then has a next page for the current type of team.
                 Condition to stop the recursive algorithm is here.
                 Mainly "When it does not have more pages".
                 */
-                let $hasNextPage = ($('li.next').not('.disabled').children('a').text().localeCompare('Next Page') == 0);
+                let $hasNextPage = ($context('li.next').not('.disabled').children('a').text().localeCompare('Next Page') == 0);
                 if ($hasNextPage) {
                     requestTeamPage(FIFA_VERSION, ++page, typeOfTeams);
                 } else {
@@ -212,9 +214,8 @@ function requestTeamPage(version, page, typeOfTeams) {
             });
         }
 
-    }).on('error', function (e) {
-        console.log('Got error: ' + e.message);
-
+    }).on('error', function (err) {
+        Console.log('Got error: ' + err.message);
     });
 }
 
