@@ -20,6 +20,9 @@ const MatchController = require('./controllers/matchController');
 const AdminController = require('./controllers/adminController');
 const teamsJSON = require('./integrations/resources/teamsFifa18.json');
 const PassportController = require('./passport');
+
+const Promise = require('bluebird');
+
 exports.set = function(app, mongo, log) {
 
     const championshipController = new ChampionshipController(mongo);
@@ -129,15 +132,12 @@ exports.set = function(app, mongo, log) {
 
     //Championships
     app.get(URL_CHAMPIONSHIPS, (request, response) => {
-
-        let promise = null;
-        if ((request.query) && (Object.keys(request.query).length)) {
-            promise = championshipController.getByCriteria(request.query);
-        } else {
-            promise = championshipController.getAll()
-        }
-
-        promise.then((championshipsList) => {
+        Promise.try(() => {
+            if ((request.query) && (Object.keys(request.query).length)) {
+                return championshipController.getByCriteria(request.query);
+            }
+            return championshipController.getAll();
+        }).then((championshipsList) => {
             response.send(championshipsList);
         }).catch((error) => {
             response.status(500).send(error);
@@ -217,14 +217,12 @@ exports.set = function(app, mongo, log) {
 
     //Matches
     app.get(URL_MATCHES, (request, response) => {
-        let promise = null;
-        if (request.query) {
-            promise = matchController.getByCriteria(request.query);
-        } else {
-            promise = matchController.getAll()
-        }
-
-        promise.then((matchesList) => {
+        Promise.try(() => {
+            if (request.query) {
+                return matchController.getByCriteria(request.query);
+            }
+            return matchController.getAll();
+        }).then((matchesList) => {
             response.send(matchesList);
         }).catch((error) => {
             response.status(500).send(error);

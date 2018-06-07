@@ -6,6 +6,8 @@ const ObjectId = Mongoose.Types.ObjectId;
 
 const document = require('./../models/match');
 
+const Promise = require('bluebird');
+
 class MatchController {
 
     constructor(mongo) {
@@ -35,21 +37,19 @@ class MatchController {
             criteria.date = { $gte : minDate, $lte : maxDate };
         }
 
-        if (criteria.offset && criteria.limit) {
-            let limit = parseInt(criteria.limit);
-            criteria.limit = null;
-            let offset = parseInt(criteria.offset);
-            criteria.offset = null;
-            return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset,  { date : -1 }).populate('player1 player2 player3 player4 championship').exec()
-            .then((matches) => {
-                return this._prepareToSend(matches);
-            });
-        }
-        return this.mongo.selectByCriteria(document, criteria, { date : -1 }).populate('player1 player2 player3 player4 championship').exec()
-            .then((matches) => {
-                return this._prepareToSend(matches);
-            });
-
+		return Promise.try(() => {
+			if (criteria.offset && criteria.limit) {
+				var limit = parseInt(criteria.limit);
+				criteria.limit = undefined;
+				var offset = parseInt(criteria.offset);
+				criteria.offset = undefined;
+				return this.mongo.selectByCriteriaLimitOffset(document, criteria, limit, offset,  { date: -1 }).populate("player1 player2 player3 player4 championship").exec();
+			} else {
+				return this.mongo.selectByCriteria(document, criteria, { date: -1 }).populate("player1 player2 player3 player4 championship").exec();
+			}
+		}).then((matches) => {
+			return this._prepareToSend(matches);
+		});
     }
 
     getByChampionship(championshipId, criteria) {
