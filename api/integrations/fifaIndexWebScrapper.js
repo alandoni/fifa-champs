@@ -5,7 +5,7 @@ const cheerioDOMLoader = require('cheerio');
 const fs = require('fs');
 
 const BASE_URL = 'https://www.fifaindex.com'
-const FIFA_VERSION = 'fifa17_173';
+const FIFA_VERSION = 'fifa18_174';
 const BASE_QUERY = 'SELECT * FROM htmlstring WHERE url="https://www.fifaindex.com/teams/{0}/{1}/?type={2}"';
 const PARAMS = '&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback=';
 
@@ -98,7 +98,7 @@ let countDownAsynchronousCalls = {
             */
             jsonFile['oddsForTypesAvailable'] = ['2.5', '4.0', '5.0', '3.0', '3.5', '4.5', '4.0', '0.5', 'WMN 4.5',
                 'WMN 4.0', '4.5', 'INT 4.5', '1.0', 'INT 5.0', 'INT 4.0', '1.5', '5.0', '1.0', '4.5', '2.0', '5.0', '4.0'];
-            fs.writeFile('resources/teamsFifa17.json', JSON.stringify(jsonFile, null, 2), function (err) {
+            fs.writeFile('resources/teamsFifa18.json', JSON.stringify(jsonFile, null, 2), function (err) {
                 if (err) {
                     return Console.log(err);
                 }

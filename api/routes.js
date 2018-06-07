@@ -18,7 +18,7 @@ const ChampionshipController = require('./controllers/championshipController');
 const PlayerController = require('./controllers/playerController');
 const MatchController = require('./controllers/matchController');
 const AdminController = require('./controllers/adminController');
-const teamsJSON = require('./integrations/resources/teamsFifa17.json');
+const teamsJSON = require('./integrations/resources/teamsFifa18.json');
 const PassportController = require('./passport');
 exports.set = function(app, mongo, log) {
 
